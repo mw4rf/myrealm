@@ -1,0 +1,36 @@
+#{extends 'Realm/template.html' /}
+
+*{ ********** PRODUCTION ********** }*
+<div class="container-fluid">
+	
+	
+	*{ Production totals }*
+	<div class="row-fluid">
+		
+		*{ Total: Produced goods }*
+		<div class="span6">
+			<div class="label label-info">&{'realm.index.goodsbalance.produced'}</div>
+   			<table>
+   	    	#{list items:pgoods, as:'good'}
+               	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+               	</tr>
+   	    	#{/list}
+   	    	</table>
+		</div>
+		
+		*{ Total: Needed goods }*
+		<div class="span6">
+		    <div class="label label-warning">&{'realm.index.goodsbalance.needed'}</div>
+   			<table>
+   	    	#{list items:ngoods, as:'good'}
+               	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+               	</tr>
+   	    	#{/list}
+   	    	</table>
+		</div>
+	
+	</div>
+
+</div>

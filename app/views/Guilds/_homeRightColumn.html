@@ -1,0 +1,42 @@
+*{ ********** Members Of the Day ********** }*
+#{if odaymember != null}
+	<div class="guildSideSectionHeader">&{'guild.members.oday'}</div>
+	<div id="guildODayMember" class="guildSideContainer">
+		<img src="/public/images/${odaymember.preferences.getAvatar()}" />
+		<br />#{a @Application.home(odaymember.name)}<b>${odaymember.name}#{/a}</b>
+		<br /><span class="guildInfo">
+			&{'guild.members.oday.stats', odaymember.name, odaymember.buildings.size(), odaymember.adventures.size() + odaymember.participations.size(), odaymember.lastVisit.format()}
+		</span>
+	</div>
+#{/if}
+
+*{ ********** Guild Event (next) ********** }*
+#{if events.size() > 0}
+	<div class="guildSideSectionHeader">&{'guild.events.header'}</div>
+	<div class="guildSideContainer">
+	#{list events, as: 'lastEvent'}
+		#{include 'Guilds/_event.html' /}
+	#{/list}
+	</div>
+#{/if}
+
+*{ ********** Members' list ********** }*
+<div class="guildSideSectionHeader">&{'guild.members.list', guild.members.size()}</div>
+<div class="guildSideContainer">
+	<div>
+		&{'sort.by'}
+		<select guildId="${guild.id}" id="guildMembersSort">
+			<option value="1">&{'guild.sorting.rank'}</option>
+			<option value="2">&{'guild.sorting.alpha'}</option>
+			<option value="3">&{'guild.sorting.last.connection'}</option>
+			<option value="4">&{'guild.sorting.join.date'}</option>
+		</select>
+		<select guildId="${guild.id}" id="guildMembersOrder">
+			<option value="1">&{'sort.asc'}</option>
+			<option value="0">&{'sort.desc'}</option>
+		</select>
+	</div>
+	<div id="id="guildMembersList">
+		#{include 'Guilds/_membersList.html' /}
+	</div>
+</div>

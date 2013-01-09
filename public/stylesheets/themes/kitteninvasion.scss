@@ -1,0 +1,172 @@
+/** Generic containers **/
+$generic-bg-color: #F6F; // Generic color for all kind of backgrounds and borders
+$generic-border: 1px solid $generic-bg-color; // Generic border for all kind of containers
+
+/** Page style (html,body) **/
+$page-bg-color: #FECFEE; // html,body background color
+$page-fg-color: #8000FF; // html,body foreground color
+$page-bg-image: url('kitteninvasion/bgimage.png'); // Page background image
+$page-bg-repeat: no-repeat; // Page background image vertical/horizontal mosaic or no repeat
+$page-bg-attachment: fixed; // Page background image behavior when scrolling
+$page-bg-position: center; // Page background image position
+
+
+$page-font: 'Comic Sans MS', cursive;
+$page-font-size: 0.96em;
+
+/** Page header **/
+$page-header-bg-color: $generic-bg-color; // Top banner (header) background color
+$page-header-fg-color: #8000FF; // Top banner (header) foreground color
+$page-header-font-size: 2em; // Top banner (header) font size
+$page-header-font-variant: small-caps; // // Top banner (header) font variant (e.g. small-caps)
+$page-header-font-shadow: #8000FF 1pt 1pt 0.1e; // // Top banner (header) (could be 'none')
+
+/** Navigation menu **/
+$navigation-fg-color: #8000FF; // Foreground color -- however, this is often overriden by $link colors
+$navigation-bg-color: #CCCCFF; // Background color
+$navigation-font: monospace; // Font style (e.g. monospace, serif, etc.)
+$navigation-main-bg-color: silver; // Main navigation menu (with login/logout links)
+
+/** Links (a tag) **/
+$link-fg-color: #0080FF; // links, active links, visited links foreground color
+$link-bg-color: transparent; // links, active links, visited links background color
+$link-decoration: none; // links, active links, visited links text decoration
+$link-hover-fg-color: #FECFEE; // mouse over links foreground color
+$link-hover-bg-color: #FF0080; // mouse over links background color
+$link-hover-decoration: none; // mouse over links text decoration (could be: underline)
+
+/** Logic: Colors **/
+$negative-color: #D8000C; // Color for NEGATIVE quantities and things going wrong (usually some kind of red)
+$positive-color: #4F8A10; // Color for POSITIVE quantities and things going well (usually some kind of green)
+$highlight-color: #FFFF99; // Color for highlighted containers ('Stabilo!' -- usually some kind of yellow)
+
+$color-light-good: #DFF2BF; // Light color for good/active things
+$color-light-bad: #FFBABA; // Light color for bad/broken things
+$color-light-average: #FEEFB3; // Light color for normal things
+$color-dark-good: #4F8A10; // Dark color for good/active things
+$color-dark-bad: #D8000C; // Dark color for bad/broken things
+$color-dark-average: #9F6000; // Dark color for normal things
+
+$color-me: #FEEFF9; // Color for the current player
+$color-others: #D7D9FF; // Color for other players
+$color-involved: #F0FECD; // Color used when the current player is involved
+
+/** Special containers **/
+$meta-font-size: 0.7em; // Font size for meta-informations, e.g. dates of log entries
+$meta-font: sans-serif; // Font for meta-informations
+$meta-fg-color: grey; // Font color for meta informations
+
+$summary-font-size: 0.9em; // Font size for summary text, e.g. for forum posts excerpts
+$summary-font: monospace; // Font for summary text
+$summary-fg-color: grey; // Font color for summary text
+
+/** Containers: Headers **/
+$header-bg-color: $generic-bg-color; // Background color for header (should be overriden when necessary)
+
+$header-1-fg-color: #8000FF; // Level 1 header foreground color
+$header-1-bg-color: $generic-bg-color; // Level 1 header background color
+$header-1-font-size: 1.3em; // Level 1 header font size
+$header-1-font-weight: normal; // Font weight: normal, bold, bolder...
+$header-1-font-variant: small-caps; // Level 1 header font variant (e.g. small caps)
+$header-1-font-shadow: gray 1pt 1pt 0.1em; // Level 1 header font shadow
+$header-1-border: 1px white solid; // Level 1 header container border
+$header-1-border-radius: 0.3em; // Level 1 header container border radius (round corners)
+
+$header-1-text-align: left; // Level 1 header text align: left, center, right
+$header-2-fg-color: #8000FF; // Level 2 headers foreground color
+$header-2-bg-color: transparent; // Level 2 headers background color
+$header-2-font-size: 1.3em; // Level 2 header font size
+$header-2-font-weight: normal; // Level 2 header Font weight: normal, bold, bolder...
+$header-2-font-variant: none; // Level 2 header font variant (e.g. small caps)
+$header-2-font-shadow: none; // Level 2 header font shadow
+$header-2-border: none; // Level 2 header container border
+$header-2-border-radius: none; // Level 2 header container border radius (round corners)
+$header-2-text-align: left; // Level 2 header text align: left, center, right
+
+$header-3-fg-color: #8000FF; // Level 3 headers foreground color
+$header-3-bg-color: none; // Level 3 headers background color
+$header-3-font-size: 1em; // Level 2 header font size
+$header-3-font-weight: bold; // Level 2 header Font weight: normal, bold, bolder...
+$header-3-font-variant: none; // Level 2 header font variant (e.g. small caps)
+$header-3-font-shadow: none; // Level 2 header font shadow
+$header-3-border: none; // Level 2 header container border
+$header-3-border-radius: none; // Level 2 header container border radius (round corners)
+$header-3-text-align: center; // Level 2 header text align: left, center, right
+
+/** Containers: Forms **/
+$form-font-size: 1em; // Font size for common form elements (input, select, etc.)
+$form-container-fg-color: #8000FF; // Forms container foreground color
+$form-container-bg-color: $generic-bg-color; // Forms container background color
+$form-container-border: 1px solid; // Forms container border
+
+/** Containers: Sorting and Building list headers **/
+$sort-container-fg-color: #8000FF; // Sorting container foreground color -- mostly overriden by $link
+$sort-container-bg-color: #FEEFB3; // Sorting container background color
+$sort-container-border: 2px solid #ffffff; // Sorting container border
+
+/** Tables **/
+$table-header-bg-color: $generic-bg-color;
+$table-header-fg-color: #8000FF;
+
+/** Tags **/
+$tag-border: 1px solid $generic-bg-color; // Border (with color)
+$tag-bg-color: #FFFF99; // Background color
+$tag-border-radius: 0.4em; // Border radius for round corners
+
+/** Flash messages (notifications on top of screen) **/
+$flash-border: 1px solid; // Border for ALL flash containers -- the color is the text foreground color (e.g. $flash-xxx-fg-color)
+
+$flash-error-fg-color: $color-dark-bad; // Foreground color for ERROR flash messages
+$flash-error-bg-color: $color-light-bad; // Background color for ERROR flash messages
+
+$flash-info-fg-color: $color-dark-average; // Foreground color for INFO and ADMIN flash messages
+$flash-info-bg-color: $color-light-average; // Background color for INFO and ADMIN flash messages
+
+$flash-success-fg-color: $color-dark-good; // Foreground color for SUCCESS flash messages
+$flash-success-bg-color: $color-light-good; // Background color for SUCCESS flash messages
+
+/** Page: Home **/
+$home-bigmenu-font: monospace; // Homepage public & private big menu font
+$home-bigmenu-font-size: 1.3em; // Homepage public & private big menu font size
+$home-bigmenu-border: 1px solid $generic-bg-color; // Homepage public & private big menu border
+$home-bigmenu-private-fg-color: #8000FF; // Homepage private big menu foreground color
+$home-bigmenu-private-bg-color: #CCCCFF; // Homepage private big menu background color
+$home-bigmenu-public-fg-color: #9F6000; // Homepage public big menu foreground color
+$home-bigmenu-public-bg-color: #FEEFB3; // Homepage public big menu background color
+
+$home-stats-border: 1px solid $generic-bg-color; // Border for the statistics container
+
+$home-log-item-border: 1px dotted $generic-bg-color; // Log line border
+$home-log-item-font-size: 0.9em; // Log line font size
+
+/** Page: Realm **/
+
+$building-line-fg-color: #8000FF; // Building line foreground (font) color
+$building-line-bg-color: transparent; // Building line background color -- will be overriden according to building status
+$building-line-border: 1px dotted $generic-bg-color; // Building line border
+$building-line-font: inherit; // Building line font
+$building-line-font-size: 1em; // Building line font size
+$building-line-margins: 0.2em 0 0 0; // Building line outer margins : top, right, bottom, left
+$building-line-padding: 0.2em 0.5em 0.2em 0.5em; // Building line inner margins : top, right, bottom, left
+$building-line-image-size: 18px; // Building line image size (height==width)
+
+// CAUTION: people got used to thoses colors, you shouldn't change them.
+$building-disabled-fg-color: #D8000C; // Disabled/stopped building line foreground color
+$building-disabled-bg-color: #FFBABA; // Disabled/stopped building line background color
+$building-boosted-fg-color: #4F8A10; // Boosted building line foreground color
+$building-boosted-bg-color: #DFF2BF; // Boosted building line background color
+$building-simulated-fg-color: #9F6000; // Simulated building line foreground color
+$building-simulated-bg-color: #FEEFB3; // Simulated building line background color
+
+$goods-font: monospace; // Font for displaying amounts of resources
+$goods-font-size: 1.2em; // Font size for displaying amouts of resources
+
+$area-cell-border: 2px solid #999999; // Realm areas cell border
+$area-cell-fg-color: #8000FF; // Realm areas cell foreground color
+$area-cell-bg-color: #ffffff; // Realm areas cell background color
+$area-cell-hover-fg-color: #ffffff; // Realm area mouse over & selected foreground color
+$area-cell-hover-bg-color: #8000FF; // Realm area mouse over & selected background color
+
+
+/** DO NOT EDIT BELOW !! **/
+@import "includes.scss";

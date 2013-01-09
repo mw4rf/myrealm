@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title: 'Guilds' /}
+
+
+#{list guilds, as:'guild'}
+	<h2>#{a @Guilds.home(guild.tag)}${guild.name}#{/a}</h2>
+	<ul>
+		#{list guild.members, as: 'membership'}
+			<li>${membership.player.name}</li>
+		#{/list}
+	</ul>	
+#{/list}

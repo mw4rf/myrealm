@@ -1,0 +1,14 @@
+#{extends 'Home/template.html' /}
+
+	<h2>&{'guild'}</h2>
+	
+	*{ ** First case : player doesn't have a guild : offer to create or join ** }*
+	#{if !player.hasGuild()}
+		#{include 'Home/guild/forms/_join.html' /}	
+		#{include 'Home/guild/forms/_create.html' /}
+	#{/if}
+	
+	*{ ** Second case : player has guild ** }*
+	#{else}
+		#{include 'Home/guild/_membership.html' /}
+	#{/else}

@@ -1,0 +1,16 @@
+#{extends 'Realm/template.html' /}
+
+<div id="buildings_list_area">
+
+	#{include "Realm/lists/area/_areaMap.html" /}
+		
+	*{ *** Buildings GROUP *** }*
+	<div id="buildings_area_group"></div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/area/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

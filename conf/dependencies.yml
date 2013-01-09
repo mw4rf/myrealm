@@ -1,0 +1,13 @@
+# Application dependencies
+
+# DON'T FORGET TO RUN THIS COMMAND AFTER UPDATING THIS FILE :
+# play dependencies --sync
+
+require:
+    - play
+    - play -> paginate 0.11
+    - play -> betterlogs 1.0
+    - play -> log4play 0.5
+    - play -> sass 1.1
+    - joda-time 2.1
+    - pircbot 1.5.0

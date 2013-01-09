@@ -1,0 +1,46 @@
+%{ int countNotAssigned = player.countBuildingsByArea(0); }%
+
+#{if player != null && player.preferences != null && player.preferences.AREAS_IMAGE_MAP}
+	<table id="realmAreaImagesTable" cellpadding=0 cellspacing=0>
+	<tr>
+		<td class="realmAreaCell realmAreaImageCell" align="right" area="7" player="${player.name}"><img src="/public/images/map/area-7.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="center" area="8" player="${player.name}"><img src="/public/images/map/area-8.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="left" area="8" player="${player.name}"><img src="/public/images/map/area-9.png" /></td>
+	</tr>
+	<tr>
+		<td class="realmAreaCell realmAreaImageCell" align="right" area="4" player="${player.name}"><img src="/public/images/map/area-4.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="center" area="5" player="${player.name}"><img src="/public/images/map/area-5.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="left" area="6" player="${player.name}"><img src="/public/images/map/area-6.png" /></td>
+	</tr>
+	<tr>
+		<td class="realmAreaCell realmAreaImageCell" align="right" area="1" player="${player.name}"><img src="/public/images/map/area-1.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="center" area="2" player="${player.name}"><img src="/public/images/map/area-2.png" /></td>
+		<td class="realmAreaCell realmAreaImageCell" align="left" area="3" player="${player.name}"><img src="/public/images/map/area-3.png" /></td>
+	</tr>
+	#{if countNotAssigned > 0}
+		<tr><td class="realmAreaCell realmAreaImageCell" area="0" player="${player.name}" colspan="3">${countNotAssigned} &{'realm.building.area.none'}</td></tr>
+	#{/if}
+	</table>
+#{/if}
+#{else}
+	<table id="realmAreaTable">
+	<tr>
+		<td class="realmAreaCell realmAreaTextCell" area="7" player="${player.name}">&{'realm.area.7'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="8" player="${player.name}">&{'realm.area.8'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="9" player="${player.name}">&{'realm.area.9'}</td>
+	</tr>
+	<tr>
+		<td class="realmAreaCell realmAreaTextCell" area="4" player="${player.name}">&{'realm.area.4'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="5" player="${player.name}">&{'realm.area.5'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="6" player="${player.name}">&{'realm.area.6'}</td>
+	</tr>
+	<tr>
+		<td class="realmAreaCell realmAreaTextCell" area="1" player="${player.name}">&{'realm.area.1'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="2" player="${player.name}">&{'realm.area.2'}</td>
+		<td class="realmAreaCell realmAreaTextCell" area="3" player="${player.name}">&{'realm.area.3'}</td>
+	</tr>
+	#{if countNotAssigned > 0}
+		<tr><td class="realmAreaCell realmAreaTextCell" area="0" player="${player.name}" colspan="3">${countNotAssigned} &{'realm.building.area.none'}</td></tr>
+	#{/if}
+</table>
+#{/else}

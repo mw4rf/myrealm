@@ -1,0 +1,2 @@
+Hello ${to},
+this is a simple test of your SMTP server and mail configuration.

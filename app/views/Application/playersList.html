@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title: "SettlersHelper Online" /}
+
+<div class="container">
+	
+	%{ String letter = ""; }%
+	
+	<ul style="list-style-type:none;">
+	#{list players, as: 'player'}
+		
+		%{
+			if(player.name.length() > 0 && !player.name.charAt(0).toString().equalsIgnoreCase(letter)) {
+				
+				letter = player.name.charAt(0).toUpperCase();
+				}%
+				<p class="header2 headerbg">${letter}</p>
+				%{
+			}
+					
+		}%
+		
+		<li>#{a @Realm.index(player.name)}${player.name}#{/a}</li>
+			
+	#{/list}
+	</ul>
+	
+</div>

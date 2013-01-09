@@ -1,0 +1,39 @@
+<Guilds>
+	<guild id="00" name="Anarchy" />
+	<guild id="01" name="Gaullois" />
+	<guild id="02" name="Bird" />
+	<guild id="03" name="Chess" />
+	<guild id="04" name="Beer" />
+	<guild id="05" name="Tree" />
+	<guild id="06" name="Key" />
+	<guild id="07" name="Seahorse" />
+	<guild id="08" name="Dragon" />
+	<guild id="09" name="Death" />
+	<guild id="10" name="Lys" />
+	<guild id="11" name="Wings" />
+	<guild id="12" name="Woodcutter" />
+	<guild id="13" name="Comedy" />
+	<guild id="14" name="Mine" />
+	<guild id="15" name="Farmers" />
+	<guild id="16" name="Realm" />
+	<guild id="17" name="Wurst" />
+	<guild id="18" name="Heaume" />
+	<guild id="19" name="Armes" />
+	<guild id="20" name="Cereals" />
+	<guild id="21" name="Leaf" />
+	<guild id="22" name="Treasure" />
+	<guild id="23" name="Bird 2" />
+	<guild id="24" name="Tree 2" />
+	<guild id="25" name="Seahorse 2" />
+	<guild id="26" name="Sheep" />
+	<guild id="27" name="Bouffon" />
+	<guild id="28" name="Wheel" />
+	<guild id="29" name="Fer" />
+	<guild id="30" name="Courtisane" />
+	<guild id="31" name="Love" />
+	<guild id="32" name="Circle" />
+	<guild id="33" name="Flower" />
+	<guild id="34" name="Flower 2" />
+	<guild id="35" name="Cloud" />
+	<guild id="36" name="Rabbit" />
+</Guilds>

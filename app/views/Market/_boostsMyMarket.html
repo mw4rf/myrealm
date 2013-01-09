@@ -1,0 +1,137 @@
+*{ ********** Boosts TO RECEIVE ********** }*
+#{if boostsToReceive != null && boostsToReceive.size() > 0}
+<table>
+	*{ ***** Table Title ***** }*
+	<tr><th colspan="9" class="ownSale">&{'market.boosts.my.requests'}</th></tr>
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<td>&nbsp;</td>
+		<th>&{'market.boost.status'}</th>
+		<th>&{'market.boost.giver'}</th>
+		<th>&{'market.boost.comments'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+	*{ ***** Records ***** }*
+	#{list boostsToReceive, as: 'request'}
+		<tr class="highlightable">
+			<td class="middle">#{a @Market.boost(request.id)}&{'market.boost.details'}#{/a}</td>
+			<td class="middle">
+				#{if request.done}
+					<span class="offerStatusAccepted">&{'market.boost.status.done'}</span>
+				#{/if}
+				#{elseif request.accepted}
+					<span class="offerStatusWaiting">&{'market.boost.status.accepted'}</span>
+				#{/elseif}
+				#{elseif request.hasExpired()}
+					<span class="offerStatusRejected">&{'market.boost.status.expired'}</span>
+				#{/elseif}
+				#{else}
+					&{'market.boost.status.published'}
+				#{/else}
+			</td>
+			<td class="middle">
+				#{if request.giver != null}
+					#{a @Application.home(request.giver.name)}${request.giver.name}#{/a}
+				#{/if}
+				#{else}
+					&nbsp;
+				#{/else}
+			</td>
+			<td class="middle">${request.comments.size()}</td>
+			<td class="middle">${request.quantity}</td>
+			<td class="middle">${request.boostName}</td>
+			<td class="middle">${request.buildingName}</td>
+			<td class="middle">#{if request.boostAt != null}${request.boostAt.format()}#{/if}</td>
+			<td class="middle">
+				#{if !request.accepted && !request.done}
+					#{a @Market.removeBoostExchange(request.id)}&{'form.remove'}#{/a}
+				#{/if}
+				#{elseif !request.done}
+					#{a @Market.setBoostExchangeDone(request.id)}&{'market.boost.submit.done'}#{/a}
+				#{/elseif}
+			</td>
+		</tr>
+	#{/list}
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<td>&nbsp;</td>
+		<th>&{'market.boost.status'}</th>
+		<th>&{'market.boost.giver'}</th>
+		<th>&{'market.boost.comments'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+</table>
+#{/if}
+
+*{ ********** Boosts TO GIVE ********** }*
+#{if boostsToGive != null && boostsToGive.size() > 0}
+<table>
+	*{ ***** Table Title ***** }*
+	<tr><th colspan="8" class="ownPurchase">&{'market.boosts.my.offers'}</th></tr>
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<td>&nbsp;</td>
+		<th>&{'market.boost.status'}</th>
+		<th>&{'market.boost.receiver'}</th>
+		<th>&{'market.boost.comments'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+	*{ ***** Records ***** }*
+	#{list boostsToGive, as: 'request'}
+		<tr class="highlightable">
+			<td class="middle">#{a @Market.boost(request.id)}&{'market.boost.details'}#{/a}</td>
+			<td class="middle">
+				#{if request.done}
+					<span class="offerStatusAccepted">&{'market.boost.status.done'}</span>
+				#{/if}
+				#{elseif request.accepted}
+					<span class="offerStatusWaiting">&{'market.boost.status.accepted'}</span>
+				#{/elseif}
+				#{elseif request.hasExpired()}
+					<span class="offerStatusRejected">&{'market.boost.status.expired'}</span>
+				#{/elseif}
+				#{else}
+					&{'market.boost.status.published'}
+				#{/else}
+			</td>
+			<td class="middle">#{a @Application.home(request.receiver.name)}${request.receiver.name}#{/a}</td>
+			<td class="middle">${request.comments.size()}</td>
+			<td class="middle">${request.quantity}</td>
+			<td class="middle">${request.boostName}</td>
+			<td class="middle">${request.buildingName}</td>
+			<td class="middle">#{if request.boostAt != null}${request.boostAt.format()}#{/if}</td>
+			<td class="middle">
+				#{if !request.done}
+					#{a @Market.withdrawBoostExchange(request.id)}&{'market.boosts.submit.withdraw'}#{/a}
+					&nbsp;|&nbsp;
+					#{a @Market.setBoostExchangeDone(request.id)}&{'market.boost.submit.done'}#{/a}
+				#{/if}
+			</td>
+		</tr>
+	#{/list}
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<td>&nbsp;</td>
+		<th>&{'market.boost.status'}</th>
+		<th>&{'market.boost.receiver'}</th>
+		<th>&{'market.boost.comments'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+</table>
+#{/if}

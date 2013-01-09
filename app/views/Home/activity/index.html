@@ -1,0 +1,31 @@
+#{extends 'Home/template.html' /}
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+	
+		<div class="span1"></div>
+		
+		<div class="span10">
+		
+			<div class="headerbg header3">
+				&{'home.log'}
+				#{if player.preferences != null && player.preferences.ENABLE_ACTIVITY_FEED}
+					(<a href="${play.Play.configuration.get('application.address').toString()}@{Application.rss(player.name)}">
+						<img src="/public/images/app/rss.png" /> RSS 2.0
+					</a>)
+				#{/if}
+			</div>
+			<span class="pagination_summary">#{paginate.summary items:actions /}</span>
+			#{paginate.controls items:actions /}
+			#{paginate.list items:actions, as: 'action'}
+					<div class="logItem"><span class="homeDate">[${action.at.format()}]</span> <b>#{a @Home.index(action.player.name)}${action.player.name}#{/a}</b> - ${messages.get("${action.name.raw()}", "${action.formatAction().raw()}").raw()}</div>
+			#{/paginate.list}
+			#{paginate.controls items:actions /}
+		</div>
+		
+		<div class="span1"></div>
+	
+	</div>
+
+</div>

@@ -1,0 +1,306 @@
+html,body {
+    margin: 0;
+    background-color: #F5F5F5;
+
+    @import url("http://fonts.googleapis.com/css?family=Cantarell");
+   	font-family: 'Cantarell', sans-serif;
+   	font-size: 0.96em;
+}
+
+a, a:visited, a:active {
+	color: #0080FF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #F5F5F5;
+	background-color: #0080FF;
+}
+
+.mono {
+	font-family: monospace;
+}
+
+.imgLink:hover {
+	background-color: transparent;
+}
+
+#profileHeader {
+	background-color: #DBDBDB;
+	padding: 1px 2px 1px 2px;
+	font-size: 2em;
+	font-variant: small-caps;
+	text-shadow: gray 1pt 1pt 0.1em;
+}
+
+#navigation {
+    background-color: #CCCCFF;
+    font-family: monospace;
+}
+
+#navigationMain {
+
+	background-color: silver;
+	font-family: monospace;
+	text-align: right;
+
+	position: absolute;
+	top:0px;
+	right:0px;
+	width: auto;
+
+}
+
+#avatar_image {
+	height:50.25px;
+	width:49.50px;
+	display: inline;
+	position: relative;
+	float: left;
+}
+
+.avatarbg {
+	background-repeat: no-repeat;
+}
+
+.container {
+    margin: 0.5em 1em 0.5em 1em;
+    padding: 0.1em 1em 0.3em 1em;
+}
+
+.formContainer {
+    margin: 0.5em 1em 0.5em 1em;
+    padding: 0.1em 1em 0.3em 1em;
+    border: 1px solid;
+    background-color: #DBDBDB;
+}
+
+.sortContainer {
+	margin : 0.5em 0 0 0;
+	padding : 0.1em 1em 0.1em 1em;
+	background-color: #FEEFB3;
+	border: 2px solid #ffffff;
+	font-variant: small-caps;
+}
+
+.sortActive {
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+.nomargin {
+	margin: 0;
+}
+
+.spinner {
+	display:none;
+}
+
+.hand {
+	cursor:pointer;
+}
+
+linefeed {
+	display:block;
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+
+.headerbg {
+    background-color: #DBDBDB;
+}
+
+.negativeQuantity {
+    color: #D8000C;
+}
+
+.positiveQuantity {
+    color: #4F8A10;
+}
+
+.no {
+    color: #D8000C;
+}
+
+.yes {
+    color: #4F8A10;
+}
+
+h2 {
+    background-color: #CCCCFF;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+}
+
+h3 {
+}
+
+th {
+    background-color: #DBDBDB;
+    padding: 2px 1em 2px 1em;
+}
+
+.middle {
+    text-align: center;
+    vertical-align: middle;
+    margin:auto;
+}
+
+.topBorder {
+    border-top-width: medium;
+    border-top-style: solid;
+    border-top-color: white;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.header1 {
+    font-size: 1.3em;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    background-color: #DBDBDB;
+	font-variant: small-caps;
+	text-shadow: gray 1pt 1pt 0.1em;
+	border: 1px white solid;
+}
+
+.header2 {
+    font-size: 1.3em;
+}
+
+.header3 {
+	font-family: 'Cantarell', sans-serif;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+    margin-bottom: 0.3em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlight {
+    background-color: #FFFF99;
+}
+
+.highlightable:hover {
+	background-color: #FFFF99;
+}
+
+.tagItem {
+	border: 1px solid #DBDBDB;
+	background-color: #FFFF99;
+	padding: 1px 0.4em 1px 0.4em;
+
+	border-radius: 0.4em;
+}
+
+.info {
+	cursor: help;
+}
+
+/* FLASH MESSAGES */
+
+#flash {
+
+}
+
+.flash_error, .flash_info, .flash_success, .flash_admin {
+	border: 1px solid;
+	padding: 15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	margin-bottom: 2px;
+}
+
+/* red */
+.flash_error {
+	border-color: #D8000C;
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('../images/app/flash_error.png');
+}
+
+/* yellow */
+.flash_info {
+	border-color: #9F6000;
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../images/app/flash_info.png');
+}
+
+/* green */
+.flash_success {
+	border-color: #4F8A10;
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image: url('../images/app/flash_success.png');
+}
+
+.flash_admin {
+	border-color: #9F6000;
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../images/app/flash_info.png');
+}
+
+/* STATS CHARTS */
+
+.chart {
+	margin: auto;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	width: 100%;
+	height: 400px;
+}
+
+
+/* FORM ELEMENTS */
+
+
+
+.formContainer input[type=text], .formContainer input[type=submit], .formContainer select {
+    font-size: 1em;
+}
+
+
+
+/** JQuery UI */
+
+.ajax_players_list {
+		max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+	}
+
+
+
+
+/** ADMIN */
+
+.adminCell {
+	text-align: center;
+	font-family: monospace;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+#{extends 'Realm/template.html' /}
+
+*{ Buildings : SIMULATED }*
+
+<div class="container-fluid"  id="buildings-list-by-status">
+
+	<div class="row-fluid">
+	
+		*{ Goods produced }*
+		<div class="span3">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.produced'}</div>
+			<table>
+			#{list pGoodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		
+		*{ Goods spent }*
+		<div class="span3">
+			<div class="negativeQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.needed'}</div>
+			<table>
+			#{list nGoodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() < 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		
+		*{ Goods in excess }*
+		<div class="span3">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.excess'}</div>
+			<table>
+			#{list goodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		
+		*{ Goods in deficit }*
+		<div class="span3">
+			<div class="negativeQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.deficit'}</div>
+			<table>
+			#{list goodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() < 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+	
+	</div>
+	
+	*{ List of buildings here, with sorting ability }*
+	<div id="buildings-list-by-status-ajax">
+		#{include 'Realm/lists/manage/_list.html' /}
+	</div>
+	
+	#{if buildings.size() > 0}
+	<p>&nbsp;</p>
+	<div class="row-fluid">
+		<div class="span6 alert alert-error" style="text-align:center;">
+			<a href="@{Realm.deleteSimulation(player.name)}" message="&{'realm.index.simulations.deleteall.confirmation'}" class="confirmationLink">&{'realm.index.simulations.deleteall'}</a>
+		</div>
+	</div>
+	#{/if}
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

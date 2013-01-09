@@ -1,0 +1,50 @@
+#{extends 'Home/template.html' /}
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+		
+		<div class="span3">
+			*{ ***** Avatar ***** }*
+			#{if player != null && player.preferences != null && player.preferences.AVATARID != null && !player.preferences.AVATARID.isEmpty()}
+				<img src="/public/images/${player.preferences.getAvatar()}" />
+				#{if player.preferences.AVATARID.equals("00")}
+					<p>#{a @Preferences.avatar(player.name)}&{'preferences.avatar.pick'}#{/a}</p>
+				#{/if}
+			#{/if}#{else}
+				<img src="/public/images/avatars/Avatar00.png" />
+				<p>#{a @Preferences.avatar(player.name)}&{'preferences.avatar.pick'}#{/a}</p>
+			#{/else}
+		</div>
+		
+		<div class="span9">
+			<div style="font-size:2em;margin-top:0.3em;" class="middle">
+				&{'header.realm', player.name}
+			</div>
+			<hr />
+			*{ ***** Links ***** }*
+			#{a @Realm.index(player.name), class:'btn btn-large'}&{'header.realm', player.name}#{/a} 
+			#{a @Timers.index(player.name), class:'btn btn-large'}&{'header.timers', player.name}#{/a} 
+			#{a @Adventures.index(player.name), class:'btn btn-large'}&{'header.adventures', player.name}#{/a} 
+			*{ *** Guild *** }*
+			#{if player.hasGuild()}
+				#{a @Guilds.home(player.membership.guild.tag), class:'btn btn-large'}&{'guild'} ${player.membership.guild.name}#{/a}</div>
+			#{/if}
+		</div>
+			
+	</div>
+
+	*{ ***** Tips ***** }*
+	#{if player.preferences.HOME_SHOW_TIPS}
+		<br />
+		<p class="alert alert-info">
+			<strong>&{'application.tip'}</strong>
+			${tip.getTipValue().raw()}
+		</p>
+	#{/if}
+	
+	#{list items:greetings, as:'greeting'}
+		${greeting.raw()}
+	#{/list}
+
+</div>

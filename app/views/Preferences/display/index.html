@@ -1,0 +1,9 @@
+#{extends 'Preferences/template.html' /}
+
+<h2>&{'preferences.display.flash'}</h2>
+<div class="form well">
+	<label class="checkbox">
+		<input type="checkbox" name="home_show_tips" #{if player.preferences.HOME_SHOW_TIPS}checked#{/if}/>
+		&{'preferences.display.show.tips'}
+	</label>
+</div>

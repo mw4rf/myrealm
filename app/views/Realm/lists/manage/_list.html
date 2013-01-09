@@ -1,0 +1,22 @@
+	*{ *** Buildings SORTING *** }*
+	#{if sorting != null && order != null}
+	<div class="row-fluid">
+		<div class="span12 sortContainer">
+			#{include 'Realm/lists/_buildingsSorting.html' /}
+		</div>
+	</div>
+	#{/if}
+	
+	*{ *** Buildings GLOBAL ACTIONS *** }*
+	#{include 'Realm/lists/_buildingsActions.html' /}
+	
+	*{ *** Buildings List *** }*
+	<div class="row-fluid">
+	
+		<div class="span12">
+				#{list items:buildings, as: 'building'}
+					#{include "Realm/lists/_buildingLine.html" /}
+				#{/list}
+		</div>
+	
+	</div>

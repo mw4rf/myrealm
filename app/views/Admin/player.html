@@ -1,0 +1,66 @@
+#{extends 'Admin/template.html' /}
+<div class="header1">Player: ${player.name}</div>
+
+<div class="container formContainer">
+	<table>
+		<tr>
+		#{form @Admin.playerSetLogin()}
+			<input type="hidden" name="playerId" value="${player.id}" />
+			<th>Login</th>
+			<td><input type="text" name="login" value="${player.name}" /></td>
+			<td><input type="submit" value="&{'form.save'}" /></td>
+		#{/form}
+		</tr>
+		<tr>
+		#{form @Admin.playerSetPassword()}
+			<input type="hidden" name="playerId" value="${player.id}" />
+			<th>Passwd</th>
+			<td><input type="text" name="password" value="" /></td>
+			<td><input type="submit" value="&{'form.save'}" /></td>
+		#{/form}
+		</tr>
+	</table>
+</div>
+
+<div class="container">
+	<table>
+		<tr>
+			<th>Id</th>
+			<td>${player.id}</td>
+		</tr>
+		<tr>
+			<th>Last Connection</th>
+			<td>${player.lastConnection.format()}</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<th>Actions</th>
+			<td>${player.actions.size()}</td>
+		</tr>
+		<tr>
+			<th>Buildings</th>
+			<td>${player.buildings.size()}</td>
+		</tr>
+		<tr>
+			<th>Adventures (self)</th>
+			<td>${player.adventures.size()}</td>
+		</tr>
+		<tr>
+			<th>Adventures (participations)</th>
+			<td>${player.participations.size()}</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.playerTimersList(player.id)}Timers#{/a}</th>
+			<td>${player.timers.size()}</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp</td>
+		</tr>
+		<tr>
+			<th>Guild</th>
+			<td>#{if player.membership != null}[${player.membership.guild.tag}] ${player.membership.guild.name}#{/if}</td>
+		</tr>
+	</table>
+</div>

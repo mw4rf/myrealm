@@ -1,0 +1,26 @@
+#{extends 'Realm/template.html' /}
+
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th>&{'help.link.small', "http://settlers.valhalla.fr/wiki/myrealm/realm/niveaux"}</th>
+			<th class="label-info">&{'realm.levels.total'}</th>
+			<th class="label-info">&{'realm.levels.all'}</th>
+			<th class="label-important">&{'realm.levels.stopped'}</th>
+			<th class="label-success">&{'realm.levels.boosted'}</th>
+			<th class="label-warning">&{'realm.levels.simulated'}</th>
+		</tr>
+	</thead>
+	<tbody>
+		#{list levels, as:'l'}
+		<tr>
+			<td width="25%"><img src="/public/${l.getGoodImage()}" />${l.getGoodName()}</td>
+			<td width="12.5%">${l.getTotalLevels()}</td>
+			<td width="12.5%">${l.getTotalLevels() - l.getStoppedLevels() + l.getBoostedLevels()}</td>
+			<td width="12.5%" class="alert-danger">#{if l.getStoppedLevels() > 0}${l.getStoppedLevels()}#{/if}</td>
+			<td width="12.5%" class="alert-success">#{if l.getBoostedLevels() > 0}${l.getBoostedLevels()}#{/if}</td>
+			<td width="12.5%" class="alert">#{if l.getSimulatedLevels() > 0}${l.getSimulatedLevels()}#{/if}</td>
+		</tr>
+		#{/list}
+	</tbody>
+</table>

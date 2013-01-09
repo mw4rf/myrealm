@@ -1,0 +1,99 @@
+#{extends 'Adventures/template.html' /} #{set title: 'Adventure' /}
+
+*{ Edit Adventure }*
+<div id="adventureEdit" style="display:none;">
+    #{form @Adventures.editAdventure(player.name, adventure.id), class:'form-vertical well'}
+    <label>&{'adventure.edit'}</label>
+    <select name="name" id="addAdventure_name" onchange="selectAdventureChange(this)">
+                 #{list items:worldAdventures, as:'wadventure'}
+                     <option value="${wadventure.name}" imgid="${wadventure.getImage()}" #{if wadventure.name.equals(adventure.name)} selected #{/if}>
+                         ${wadventure.name}
+                     </option>
+                 #{/list}
+    </select>
+    <div id="adventureImage" rowspan="3"><img src="/public/${wadventure.getImage()}" /></div>
+    
+    <label>&{'adventure.dateStart'}</label>
+    <input type="text" size="25" name="dateStart" value="${adventure.dateStart.format()}"" />
+    
+    <label>&{'adventure.dateEnd'}</label>
+    <input type="text" size="25" name="dateEnd" value="${adventure.dateEnd.format()}" />
+    
+    
+    <label>&{'adventure.notes'}</label>
+    <textarea class="span10" rows="5" name="notes">${adventure.notes.raw()}</textarea>
+    
+    <br />
+    <input type="submit" class="btn btn-large btn-success span2" value="&{'form.save'}" />
+#{/form}
+</div>
+
+*{ Add participants }*
+<div id="participantsEdit" class="form-vertical well" style="display:none;">
+		<label>&{'adventure.participant.add'}</label>
+		<input type="text" id="adventure_participant_field" value="" class="span3 ajax_players_list" />
+		<input type="submit" class="btn btn-success btn-small span2" value="&{'form.save'}" onclick="adventures_addParticipant('${player.name}','${adventure.id}');"/>
+		<label for="adventure_removeParticipantSelect">&{'adventure.participant.remove'}</label>
+		<select id="adventure_removeParticipantSelect" class="span3">
+		#{list adventure.participants, as: 'participant'}
+			<option value="${participant.name}">${participant.name}</option>
+		#{/list}
+		</select>
+		<input type="submit" class="btn btn-danger btn-small span2" value="&{'form.remove'}" onclick="adventures_removeParticipant('${player.name}','${adventure.id}')" />
+</div>
+
+*{ Show Adventure }*
+<div class="container" id="adventureDetails">
+	<table width="100%">
+		<tr>
+			<td rowspan="3" width="10%"><img
+				src="/public/${adventure.getImage()}" />
+			</td>
+			<td class="headerbg header2" colspan="2">${adventure.name}</td>
+		</tr>
+		<tr>
+			<td colspan="2">&{'adventure.dates', adventure.dateStart.format(),
+				adventure.dateEnd.format()}</td>
+		</tr>
+		<tr>
+			<td id="participants_list" colspan="2">
+				#{include 'Adventures/_participants.html' /}
+			</td>
+        </tr>
+	</table>
+</div>
+
+*{ Adventure Notes }*
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span11 well">
+			${adventure.notes.raw().nl2br()}
+		</div>
+	</div>
+</div>
+
+*{ Adventure Comments }*
+<div class="container-fluid" id="comments_list">
+		#{list adventure.comments, as: 'comment'}
+			#{include "Adventures/_comment.html" /}
+		#{/list}
+</div>
+
+
+*{ Adventure Add Comment Form }*
+<div class="well form-vertical">
+#{if canWrite == true}
+	&{'adventure.comments.newas', userName, userName} => #{a @Application.index()}&{'login'}#{/a}
+	<br /><textarea style="width:100%;" rows="8" name="text" id="comment_area"></textarea>
+	<br /><input type="hidden" id="comment_author" value="${userName}" />
+	<br /><input type="submit" class="btn btn-success btn-large span4" value="&{'adventure.comments.save'}" onclick="adventures_addcomment('${adventure.id}')" />
+	&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+#{/if}
+#{else}
+    #{if controllers.Application.isAnonymous()}
+	    &{'adventure.comments.mustlogin'}<br />
+	    #{include 'Application/_ajaxLoginForm.html' /}
+	#{/if}
+#{/else}
+</div>
+

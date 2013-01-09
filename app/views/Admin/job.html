@@ -1,0 +1,16 @@
+#{extends 'Admin/template.html' /}
+
+<div class="header1">Job</div>
+
+<p><strong>Job: ${request.action}</strong></p>
+
+#{if done}
+	<div class="flash_success">JOB SUCCESSFULLY COMPLETED</div>
+#{/if}
+#{else}
+	<div class="flash_error">JOB FAILED!</div>
+#{/else}
+
+<p><strong>Result: </strong>
+<br />${result.raw()}
+</p>

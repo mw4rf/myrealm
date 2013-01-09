@@ -1,0 +1,286 @@
+
+/*** GENERAL CONTAINERS ***/
+html,body {
+    background-color:#FECFEE;
+    color: #8000FF;
+    
+    font-family: 'Comic Sans MS', cursive;
+    
+    background-image: url('kitteninvasion/bgimage.png');
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+}
+
+a, a:visited, a:active {
+	color: #FF0080;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FECFEE;
+	background-color: #FF0080;
+}
+
+.imgLink:hover {
+	background-color: transparent;
+}
+
+#profileHeader {
+	background-color: #F6F;
+	font-size: 2em;
+	font-variant: small-caps;
+	text-shadow: #8000FF 1pt 1pt 0.1em;
+}
+
+#navigation {
+    background-color: #C6F;
+    font-family: monospace;
+}
+
+#navigation a {
+    color: #FFFFFF;
+}
+
+#navigationMain {
+	background-color: #C6F;
+	font-family: monospace;
+	text-align: right;
+}
+
+#navigationMain a {
+    color: #FFFFFF;
+}
+
+#avatar_image {
+}
+
+.avatarbg {
+	background-repeat: no-repeat;
+}
+
+.container {
+}
+
+.formContainer {
+    border: 1px solid #FFFFFF;
+    background-color: #F6F;
+}
+
+.headerbg {
+    background-color: #F6F;
+}
+
+.negativeQuantity {
+    color: #D8000C;
+}
+
+.positiveQuantity {
+    color: #4F8A10;
+}
+
+h2 {
+    background-color: #F6F;
+}
+
+h3 {
+}
+
+th {
+    background-color: #F6F;
+}
+
+.topBorder {
+    border-top-color: #F6F;
+}
+
+.header1 {
+    background-color: #F6F;
+	font-variant: small-caps;
+	color: #FFFFFF;
+	text-shadow: #8000FF 1pt 1pt 0.1em;
+	border: 1px #8000FF solid;
+}
+
+.header1 a {
+    color: #FFFFFF;
+}
+
+.header2 {
+    font-size: 1.3em;
+}
+
+.header3 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlight {
+    background-color: #FFFF99;
+}
+
+.tagItem {
+	border: 1px solid #8000FF;
+	background-color: #FFFF99;
+}
+
+/* FLASH MESSAGES */
+
+#flash {
+
+}
+
+.flash_error, .flash_info, .flash_success {
+}
+
+/* red */
+.flash_error {
+	border-color: #8000FF;
+	color: #8000FF;
+	background-color: #FECFEE;
+}
+
+/* yellow */
+.flash_info {
+	border-color: #8000FF;
+	color: #8000FF;
+	background-color: #FECFEE;
+}
+
+/* green */
+.flash_success {
+	border-color: #8000FF;
+	color: #8000FF;
+	background-color: #FECFEE;
+}
+
+
+/*** FORM ELEMENTS ***/
+
+
+
+input[type=text], input[type=submit], select, textarea {
+    font-size: 1em;
+    background-color: #FECFEE;
+    border: 1px solid #FFFFFF;
+}
+
+/*** HOME ***/
+
+.bigMenu {
+	font-family: monospace;
+	border: 1px solid #8000FF;
+	background-color: #F6F;
+	color: #FFFFFF;
+}
+
+.bigMenu a {
+    color: #FFFFFF;
+}
+
+.homestats {
+	border: 1px solid #8000FF;
+}
+
+.logItem {
+	border: 1px dotted #8000FF;
+}
+
+.homeCommentSummary {
+	font-family: monospace;
+	font-size: 0.9em;
+	color: #8000FF;
+}
+
+.homeDate {
+	font-family: sans-serif;
+	font-size: 0.7em;
+	color: #8000FF;
+}
+
+.homeListItem {
+}
+
+/*** REALM ***/
+
+/* BUILDINGS */
+
+.buildingListHeader {
+    background-color: #C6F;
+}
+
+.buildingListHeaderName {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.buildingListItem {
+    background-color: transparent;
+    border:1px dotted #8000FF;
+}
+
+.buildingListItem img {
+}
+
+.buildingListItem:hover {
+    background-color: #FFFEBE;
+}
+
+.buildingDisabled {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.buildingBoosted {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+.buildingSimulated {
+	color: #9F6000;
+	background-color: #FEEFB3;
+}
+
+.goodItem {
+	font-family: monospace;
+	font-size: 1.2em;
+}
+
+/*** ADVENTURES ***/
+
+/* ADVENTURES */
+
+.comment {
+	border: 1px solid #8000FF;
+}
+
+.adventure_self {
+	background-color: transparent;	
+	border: 3px solid #FFFFFF;
+}
+
+.adventure_participation {
+	background-color: transparent;
+	border: 1px solid #8000FF;
+}
+
+.adventure_next {
+	background-color: #FECFEE;
+	border: 1px solid #8000FF;
+}
+
+.comment_meta {
+	font-weight: bold;
+}
+
+.comment_text {
+	font-family: monospace;
+}
+
+.comment_avatar {
+}

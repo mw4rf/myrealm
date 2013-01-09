@@ -1,0 +1,6 @@
+#{if good.getRealQuantity() < 0}
+	<span class="negativeQuantity goodItem"><img valign="middle" src="/public/${good.getImage()}" />${good.getRealQuantity()}</span> 
+#{/if}
+#{else}
+	<span class="positiveQuantity goodItem"><img valign="middle" src="/public/${good.getImage()}" />${good.getRealQuantity()}</span> 
+#{/else}

@@ -1,0 +1,35 @@
+#{if player.groups.size() > 0}
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<td></td>
+				<th>&{'realm.index.groups.name'}</th>
+				<th>&{'realm.index.groups.size'}</th>
+				<th>&{'realm.index.groups.createdAt'}</th>
+				<th>&{'realm.index.groups.updatedAt'}</th>
+			</tr>
+		</thead>
+		<tbody>
+			#{list player.groups, as: 'group'}
+			<tr>
+				<td class="buildingGroupLine">
+					<a class="btn btn-mini" href="@{Realm.showGroup(player.name, group.id)}"><i class="icon-cog"></i> &{'form.change'}</a>
+					<button class="btn btn-mini realmGroupCell" groupId="${group.id}" player="${player.name}"><i class="icon-eye-open"></i> &{'form.show'}</button>
+				</td>
+				%{
+					String fgc = "";
+					if(group.fgcolor != null && !group.fgcolor.isEmpty())
+						fgc = "color:#" + group.fgcolor + ";"
+					String bgc = "";
+					if(group.bgcolor != null && !group.bgcolor.isEmpty())
+						bgc = "background-color:#" + group.bgcolor + ";"
+				}%
+				<td class="realmGroupCell buildingGroupLine" groupId="${group.id}" player="${player.name}"><span class="buildingGroupLabel" style="${fgc}${bgc}">${group.name}</span></td>
+				<td class="buildingGroupLine mono">${group.buildings.size()}</td>
+				<td class="buildingGroupLine mono">${group.createdAt.format()}</td>
+				<td class="buildingGroupLine mono">${group.updatedAt.format()}</td>
+			</tr>
+			#{/list}
+		</tbody>
+	</table>
+#{/if}

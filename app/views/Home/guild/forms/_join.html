@@ -1,0 +1,12 @@
+#{form @Guilds.joinGuild(), class:'form form-inline well'}
+	<label>&{'guild.join'}</label>
+	<select name="guildId" id="joinGuild" />
+		#{if guilds.size() > 0}
+			#{list guilds, as: 'guild'}
+				<option value="${guild.id}">[${guild.tag}] ${guild.name}</option>
+			#{/list}
+		#{/if}
+	</select>
+	<input type="hidden" name="playerName" value="${player.name}" />
+	<input type="submit" class="btn btn-success" value="&{'form.join'}" />
+#{/form}

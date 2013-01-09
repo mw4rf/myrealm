@@ -1,0 +1,47 @@
+#{extends 'main.html' /}
+#{set title: 'Boosts Market' /}
+
+*{ ********** FORM : new boost exchange ********** }*
+<div id="addBoostExchangeForm" class="container formContainer" style="display:none;">
+#{if buildingTypes.size() < 1}
+	&{'market.boost.must.build.before'}
+#{/if}
+#{else}
+	#{form @Market.addBoostExchange()}
+		<b>&{'market.boosts.add.ask'}</b><br />
+		&{'market.boosts.new'}
+		<input name="quantity" type="text" size="2" value="1" />
+		<select name="boostName">
+			#{list worldBoosts, as:'boost'}
+				<option value="${boost.getName()}">${boost.getName()}</option>
+			#{/list}
+		</select>
+		&{'market.boosts.on'}
+		<select name="buildingName">
+			#{list buildingTypes, as:'buildingName'}
+				<option value="${buildingName}">${buildingName}</option>
+			#{/list}
+		</select>
+		&{'market.boosts.at'}
+		<input type="text" name="boostAt" value="${new Date().format()}" />
+		<input type="submit" value="&{'market.boosts.submit.ask'}" />
+	#{/form}
+#{/else}
+</div>
+
+*{ ********** Public / Own Markets ********** }*
+<div class="container" style="overflow:hidden;">
+
+	*{ ***** OWN market ***** }*
+	<div class="header1"><a href="#" onclick="toggleshow('#boostsOwnMarket', true); return false;">&{'market.own'}</a></div>
+	<div id="boostsOwnMarket">
+		#{include 'Market/_boostsMyMarket.html' /}
+	</div>
+
+	*{ ***** PUBLIC market ***** }*
+	<div class="header1"><a href="#" onclick="toggleshow('#boostsPublicMarket', true); return false;">&{'market.public'}</a></div>
+	<div id="boostsPublicMarket">
+		#{include 'Market/_boostsPublicMarket.html' /}
+	</div>
+
+</div>

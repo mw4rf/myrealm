@@ -1,0 +1,52 @@
+#{extends 'Admin/template.html' /}
+
+<div class="header1">IRC Bots</div>
+
+*{ ********** ADD Bot *********** }*
+<div class="formContainer">
+#{form @Admin.addBot()}
+	Nick: <input type="text" name="nick" value="" size="10" />
+	Host: <input type="text" name="hostname" value="" size="10" />
+	Pwd: <input type="text" name="password" value="" size="10" />
+	Channel: <input type="text" name="channel" value="" size="10" />
+	Type: <select name="type">
+		<option value="TimerBot">TimerBot</option>
+		<option value="MessageBot">MessageBot</option>
+		<option value="RandomBot">RandomBot</option>
+	</select>
+	<input type="submit" value="Add Bot" />
+#{/form}
+</div>
+
+*{ ********** BOTS LIST *********** }*
+<table>
+	<tr>
+		<th>Status</th>
+		<th>Nick</th>
+		<th>Pwd</th>
+		<th>Server</th>
+		<th>Channel</th>
+		<th>Type</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+	#{list bots, as: 'bot'}
+	#{form @Admin.updateBot(bot.id)}
+	<tr>
+		#{if bot.isStarted()}
+			<td class="flash_success"><strong>RUNNING</strong><br />#{a @Admin.switchBot(bot.id)}Stop it#{/a}</td>
+		#{/if}
+		#{else}
+			<td class="flash_error"><strong>STOPPED</strong><br />#{a @Admin.switchBot(bot.id)}Start it#{/a}</td>
+		#{/else}
+		<td><input type="text" name="nick" value="${bot.nick}" size="8" /></td>
+		<td><input type="text" name="password" value="#{if bot.password != null}${bot.password}#{/if}" size="8" /></td>
+		<td><input type="text" name="hostname" value="${bot.hostname}" size="8" /></td>
+		<td><input type="text" name="channel" value="${bot.channel}" size="8" /></td>
+		<td>${bot.type}</td>
+		<td><input type="submit" value="Update" /></td>
+		<td>#{a @Admin.deleteBot(bot.id)}Delete#{/a}</td>
+	</tr>		
+	#{/form}
+#{/list}
+</div>

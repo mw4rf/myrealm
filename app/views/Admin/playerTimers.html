@@ -1,0 +1,36 @@
+#{extends 'Admin/template.html' /}
+<div class="header1">PlayerTimers</div>
+
+<div class="container">
+	<span class="pagination_summary">#{paginate.summary items:timers /}</span>
+	#{paginate.controls items:timers /}
+	<table>
+	<tr>
+		<th>id</th>
+		<th>Player</th>
+		<th>Type</th>
+		<th>Start</th>
+		<th>End</th>
+		<th>Reminder</th>
+		<th>Name</th>
+		<th>Building Id</th>
+		<th>&nbsp;</th>
+	</tr>
+	#{paginate.list items:timers, as: 't'}
+	<tr class="highlightable">
+		<td>${t.id}</td>
+		<td>${t.player.name}</td>
+		<td>${t.type}</td>
+		<td>${t.startAt.format()}</td>
+		<td>${t.endAt.format()}</td>
+		<td>${t.remind}</td>
+		<td>${t.name}</td>
+		<td>#{if t.building != null}${t.building.id}#{/if}#{else}-#{/else}</td>
+		<th>
+			<a rel="#" href="@{Admin.playerTimerDelete(t.id)}" title="Delete PlayerTimer" message="Delete ${t.id} [${t.name} - ${t.player.name}] ?" class="confirmationLink">
+				<img src="/public/images/app/delete.png" title="Delete PlayerTimer" />
+			</a>
+		</th>
+	</tr>
+	#{/paginate.list}
+	</table>

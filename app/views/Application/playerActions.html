@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+
+<div class="container">
+	<span class="pagination_summary">#{paginate.summary items:actions /}</span>
+	#{paginate.controls items:actions /}
+	#{paginate.list items:actions, as: 'action'}
+			<div class="logItem"><span class="homeDate">[${action.at.format()}]</span> <b>#{a @Application.home(action.player.name)}${action.player.name}#{/a}</b> - ${messages.get("${action.name.raw()}", "${action.formatAction().raw()}").raw()}</div>
+	#{/paginate.list}
+	#{paginate.controls items:actions /}
+</div>

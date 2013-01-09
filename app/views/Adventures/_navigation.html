@@ -1,0 +1,19 @@
+#{if request.action.equals('Adventures.index')}
+	<a href="@{Application.home(player.name)}"><< &{'profile.home', player.name}</a>
+	&nbsp;~~~&nbsp;
+	<b>{&{'realm.index.create'}:</b>
+    <a href="#" onclick="toggleshow('#addAdventureFormContainer');return false;">&{'adventures.index.addadventure'}</a>
+    &nbsp;|&nbsp;#{a @Application.nextAdventuresList()}&{'adventures.next.list'}#{/a}<b>}</b>
+#{/if}
+#{elseif request.action.equals('Adventures.showAdventure')}
+	<a href="@{Adventures.index(player.name)}"><< &{'navigation.adventures.index'}</a>
+	&nbsp;|&nbsp;<a href="@{Application.home(player.name)}">&{'profile.home', player.name}</a>
+	&nbsp;|&nbsp;<a href="@{Realm.index(player.name)}">&{'navigation.realm', player.name}</a>
+	&nbsp;|&nbsp;<a href="@{Adventures.index(player.name)}">&{'navigation.adventures', player.name}</a>
+	#{if canWrite == true && adventure != null}
+	&nbsp;~~~&nbsp;&nbsp;<b>${adventure.name}</b>:
+	<a href="#" onclick="toggleshow('#participantsEdit');">&{'adventure.participant.addremove'}</a>
+	&nbsp;|&nbsp;<a href="#" onclick="toggleshow('#adventureEdit');">&{'adventure.edit'}</a>
+	&nbsp;|&nbsp;<a href="@{Adventures.deleteAdventure(player.name, adventure.id)}" class="confirmationLink" message="&{'adventure.delete.confirmation', adventure.name}">&{'adventure.delete'}</a>
+	#{/if}
+#{/elseif}

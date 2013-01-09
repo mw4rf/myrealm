@@ -1,0 +1,107 @@
+    	*{ ********** NAVIGATION MENU ********** }*
+    	<div id="navigationMain">
+			&nbsp;
+    		#{if !controllers.Application.getSessionLogin().equalsIgnoreCase("anonymous")}
+    			&{'you.are'}
+    			#{if controllers.Guilds.hasGuild(controllers.Application.getSessionLogin())}
+    				[#{a @Guilds.home(controllers.Guilds.getPlayerGuild(controllers.Application.getSessionLogin()).tag)}${controllers.Guilds.getPlayerGuild(controllers.Application.getSessionLogin()).tag}#{/a}]&nbsp;#{a @Application.home(controllers.Application.getSessionLogin())}${controllers.Application.getSessionLogin()}#{/a}
+    			#{/if}#{else}
+    				#{a @Application.home(controllers.Application.getSessionLogin())}${controllers.Application.getSessionLogin()}#{/a}
+    			#{/else}
+    		#{/if}
+    		#{if player != null && player.name.equals(controllers.Application.getSessionLogin()) && controllers.Application.isAuth(player.name)}
+    			&nbsp;|&nbsp;
+    			&{'can.write'}
+    		#{/if}
+
+    		#{if player != null && player.preferences != null}
+    		&nbsp;|&nbsp;
+    		<a href="@{Application.preferences(player.name)}">&{'preferences'}</a>
+    		#{/if}
+
+    		#{if controllers.Application.isAdmin(controllers.Application.getSessionLogin())}
+    		<a href="/@admin"><span style="color:red;">Admin</span></a>
+    		&nbsp;|&nbsp;
+    		#{/if}
+
+    		<a href="http://settlers.valhalla.fr/wiki/myrealm/" target="_blank">&{'help'}</a>
+    		&nbsp;|&nbsp;
+
+    		#{if controllers.Application.isAuth(controllers.Application.getSessionLogin()) && !controllers.Application.getSessionLogin().equals("Anonymous")}
+        		<a href="@{Application.logout}">&{'logout'}</a>&nbsp;&nbsp;&nbsp;
+    		#{/if}
+    		#{else}
+    			<a href="@{Application.index}">&{'login'}</a>&nbsp;&nbsp;&nbsp;
+    		#{/else}
+    	</div>
+
+    	*{ ********** BIG HEADER TITLE ********** }*
+    	<div id="profileHeader">
+	    	#{if request.controller.equals("Application")}
+	    		#{if request.action.equals("Application.home")}#{include 'Application/_avatar.html' /}&{'header.home', player.name}#{/if}
+	    		#{elseif request.action.equals("Application.preferences")}#{include 'Application/_avatar.html' /}&{player.name} &{'preferences'}#{/elseif}
+	    		#{elseif request.action.equals("Application.index")}&{'app.name'}#{/elseif}
+	    		#{elseif request.action.equals("Application.playersList")}&{'app.name'} - &{'players.list'}#{/elseif}
+	    		#{elseif request.action.equals("Application.actionsList")}&{'app.name'} - &{'actions.list'}#{/elseif}
+	    		#{elseif request.action.equals("Application.adventuresList")}&{'app.name'} - &{'adventures.list'}#{/elseif}
+	    		#{elseif request.action.equals("Application.nextAdventuresList")}&{'app.name'} - &{'adventures.next.list'}#{/elseif}
+	    		#{elseif request.action.equals("Application.playerActions")}&{'app.name'} - &{'home.log.title', player.name}#{/elseif}
+	    		#{else}&{'header.app'}#{/else}
+	    	#{/if}
+	    	#{elseif request.controller.equals("Adventures")}
+	    		#{include 'Application/_avatar.html' /}
+	    		&{'header.adventures', player.name}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Realm")}
+	    		#{include 'Application/_avatar.html' /}
+	    		&{'header.realm', player.name}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Guilds")}
+	    		#{if request.action.equals("Guilds.index")}&{'app.name'} - &{'guilds.list'}#{/if}
+	    		#{else}&{'guild'} [${guild.tag}] - ${guild.name}#{/else}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Timers")}
+	    		#{include 'Application/_avatar.html' /}
+	    		&{'header.timers', player.name}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Market")}
+	    		&{'app.name'} - &{'header.market'}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Stats")}
+	    		&{'stats.of', player.name}
+	    	#{/elseif}
+	    	#{elseif request.controller.equals("Snapshots")}
+	    		&{'snapshots.of', player.name}
+	    	#{/elseif}
+	    	#{else}
+	    		&{'header.app'}
+	    	#{/else}
+    	</div>
+
+    	*{ ********** PAGES SUB-MENUS ********** }*
+    	<div id="navigation">
+			#{if request.controller.equals("Application")}
+				#{include 'Application/_navigation.html' /}
+			#{/if}
+			#{elseif request.controller.equals("Realm")}
+				#{include 'Realm/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Adventures")}
+				#{include 'Adventures/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Guilds")}
+				#{include 'Guilds/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Timers")}
+				#{include 'Timers/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Market")}
+				#{include 'Market/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Stats")}
+				#{include 'Stats/_navigation.html' /}
+			#{/elseif}
+			#{elseif request.controller.equals("Snapshots")}
+				#{include 'Snapshots/_navigation.html' /}
+			#{/elseif}
+		</div>

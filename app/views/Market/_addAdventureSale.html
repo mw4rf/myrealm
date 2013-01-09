@@ -1,0 +1,45 @@
+<div class="container formContainer">
+	#{form @Market.addSale()}
+	<table>
+		<tr>
+			<td align="right">
+				&{'market.adventure.I.sell'} <input type="text" name="itemQuantity" size="2" value="10" />
+			</td>
+			<td align="left">
+				&{'market.adventure.item'}
+				<select name="itemName">
+				#{list items:worldAdventures, as:'wadventure'}
+					<option value="${wadventure.name}" imgid="${wadventure.getImage()}">
+						${wadventure.name}
+					</option>
+				#{/list}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="topBorder" align="right">
+				&{'market.adventure.dates'}
+			</td>
+			<td class="topBorder" align="left">
+				&{'market.adventure.from'} <input type="text" name="startAt" value="${new Date().format()}" />
+				&{'market.adventure.to'} <input type="text" name="endAt" value="${new Date().format()}" />
+			</td>
+		</tr>
+		<tr>
+			<td class="topBorder" align="right">
+				&{'market.adventure.comments'}
+			</td>
+			<td class="topBorder" align="left">
+				<textarea name="description" cols="85" rows="3"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td class="topBorder" align="right">&nbsp;</td>
+			<td class="topBorder" align="left">
+				<input type="hidden" name="playerName" value="${playerName}" />
+				<input type="submit" value="&{'market.form.sale.add'}" />
+			</td>
+		</tr>
+	</table>
+	#{/form}
+</div>

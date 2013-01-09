@@ -1,0 +1,25 @@
+#{extends 'Realm/template.html' /}
+
+*{ Soldiers }*
+<div class="headerbg header3">&{'realm.index.items.armies', player.formatCycleTime()}</div>
+<ul style="list-style-type:none;padding-left:0;margin:0;">
+	#{list soldiersRatio, as: 'soldier'}
+		#{if soldier.getRealQuantity() > 0}
+			<li>
+				<img src="/public/${soldier.getImage()}" />
+				<span class="goodItem">
+					<b>${soldier.getRealQuantity()} ${soldier.getName()}</b>
+					(&{'realm.index.items.ratios'}:
+					#{list soldier.getGoods(), as: 'good'}
+						#{if good.getRealQuantity() == soldier.getRealQuantity()}
+							<span class="negativeQuantity">
+						#{/if}#{else}
+							<span class="positiveQuantity">
+						#{/else}
+						<img src="/public/${good.getImage()}" />${good.getRealQuantity()}</span>
+					#{/list})
+				</span>
+			</li>
+		#{/if}
+	#{/list}
+</ul>

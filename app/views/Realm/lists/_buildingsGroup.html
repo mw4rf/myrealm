@@ -1,0 +1,54 @@
+<div style="display: none">
+
+	*{ *** Buildings SORTING *** }*
+	#{if sorting != null && order != null}
+		<div class="sortContainer">
+			#{include 'Realm/lists/_buildingsSorting.html' /}
+		</div>
+	#{/if}
+	
+	*{ *** Buildings GLOBAL ACTIONS *** }*
+	#{include 'Realm/lists/_buildingsActions.html' /}
+
+
+	*{ Header }*
+	#{if request.action.equals('Realm.loadBuildings')}
+	<div class="buildingListHeader">
+		<table style="width: 100%">
+			<tr>
+				<a name="${building.name}"></a>
+				<td width="10%"><img valign="middle"
+					src="/public/${building.image}" />
+				</td>
+				<td width="40%" class="buildingListHeaderName">(${player.getBuildingsByName(building.name).size()})
+					${building.name}</td>
+				<td width="50%" style="text-align: right;">
+				#{list items:player.getGoodsRatioForBuildingType(building.name), as:'wgood'}
+					#{if wgood.getRealQuantity() < 0}
+						<span class="negativeQuantity goodItem">
+					#{/if}
+					#{if wgood.getRealQuantity() >= 0}
+						<span class="positiveQuantity goodItem">
+					#{/if}
+					<img src="/public/${wgood.getImage()}" />
+					${wgood.getRealQuantity()} ${wgood.name} &nbsp; </span>
+				#{/list}
+				</td>
+			</tr>
+		</table>
+	</div>
+	#{/if}
+
+	#{if request.action.equals("Realm.loadGroup")}
+		<div class="buildingListHeader"><span class="buildingListHeaderName">${group.name} (#{a @Realm.showGroup(player.name, group.id)}&{'realm.index.building.details'}#{/a})</span></div>
+		*{ ********** ratios ********** }*
+		<div id="ratiosForGroup" player="${group.player.name}" page="group" groupId="${group.id}" style="overflow:hidden;" class="container">
+			#{include 'Realm/production/_list.html' /}
+		</div>
+	#{/if}
+
+	*{ *** Buildings List : for all groups *** }*
+	#{list buildings, as: 'building'}
+		#{include "Realm/lists/_buildingLine.html" /}
+	#{/list}
+</div>

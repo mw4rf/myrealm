@@ -1,0 +1,82 @@
+#{extends 'Realm/template.html' /}
+
+*{ How much time for X goods ? }*
+&{'realm.index.calculations.how_much_time'}
+<input id="HMgoodQuantity" type="text" value="10" size="4" />
+<select id="HMgoodName">
+        #{list items:goods, as:'good'}
+        #{if good.getRealQuantity() > 0}
+<option value="${good.getName()}">${good.getName()}</option>
+#{/if}
+#{/list}
+</select> ?
+<input type="submit" value="&{'form.calc'}" onclick="calcHMT('${player.name}'); return false;" />
+<div id="HMresult"></div>
+<br />
+
+*{ When will I lack resource X ? }*
+&{'realm.index.calculations.how_much_time_spend'}
+<input id="HMSpendGoodQuantity" type="text" value="10" size="4" />
+<select id="HMSpendGoodName">
+	#{list items:goods, as:'good'}
+	#{if good.getRealQuantity() < 0}
+		<option value="${good.getName()}">${good.getName()}</option>
+	#{/if}
+	#{/list}
+</select> ?
+<input type="submit" value="&{'form.calc'}" onclick="calcHMTSpend('${player.name}'); return false;" />
+<div id="HMSpendResult"></div>
+<br />
+
+*{ How much time to make X boosts ? }*
+&{'realm.index.calculations.boosts'}
+<input id="boostsQuantity" type="text" value="10" size="4" />
+<select id="boostsName">
+	#{list items:boosts, as:'boost'}
+		<option value="${boost.getName()}">
+			${boost.getName()}
+			#{if boost.hasProduct() == true}
+				(+${boost.getProductQuantity()} ${boost.getProductName()})
+			#{/if}
+		</option>
+	#{/list}
+</select> ?
+<input type="submit" value="&{'form.calc'}" onclick="calcBoosts('${player.name}'); return false;" />
+<div id="boostsResult"></div>
+
+*{ ***** Javascript inclusion for AJAX requests ***** }*
+<script type="text/javascript">
+	
+	<!-- How much time to GET X resources ? -->
+	var hmtAction = #{jsAction @Realm.howMuchTime(':playerName', ':goodName', ':goodQuantity') /}
+	function calcHMT(playerName) {
+		var goodQuantity = $('#HMgoodQuantity').val()
+		var goodName = $('#HMgoodName').val()
+
+		$.get(hmtAction({playerName: playerName, goodName: goodName, goodQuantity: goodQuantity}), function(data) {
+			  $('#HMresult').html(data)
+			});
+	}
+	
+	<!-- How much time to SPEND X resources ? -->
+	var hmtSpendAction = #{jsAction @Realm.howMuchTimeSpend(':playerName', ':goodName', ':goodQuantity') /}
+	function calcHMTSpend(playerName) {
+		var goodQuantity = $('#HMSpendGoodQuantity').val()
+		var goodName = $('#HMSpendGoodName').val()
+
+		$.get(hmtSpendAction({playerName: playerName, goodName: goodName, goodQuantity: goodQuantity}), function(data) {
+			  $('#HMSpendResult').html(data)
+			});
+	}
+	
+	<!-- How much time to GET X boosts/objects ? -->
+	var boostsCalculationAction = #{jsAction @Realm.howMuchTimeForBoost(':playerName', ':boostName', ':boostQuantity') /}
+	function calcBoosts(playerName) {
+		var boostName = $("#boostsName").val()
+		var boostQuantity = $("#boostsQuantity").val()
+
+		$.get(boostsCalculationAction({playerName: playerName, boostName: boostName, boostQuantity: boostQuantity}), function(data) {
+			  $('#boostsResult').html(data)
+			});
+	}
+</script>

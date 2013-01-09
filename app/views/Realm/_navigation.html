@@ -1,0 +1,27 @@
+#{if request.action.equals('Realm.index')}
+	<a href="@{Application.home(player.name)}"><< &{'profile.home', player.name}</a>
+	#{if player.snapshots != null && player.snapshots.size() > 0}
+		&nbsp;|&nbsp;#{a @Stats.realm(player.name)}&{'stats'}#{/a}
+		- #{a @Snapshots.index(player.name)}&{'snapshots'}#{/a}
+	#{/if}
+	&nbsp;~~~&nbsp;
+	<b>{&{'realm.index.create'}:</b>
+	<a href="#" onclick="toggleshow('#addBuildingFormContainer');return false;">&{'realm.index.addbuilding'}</a>
+	#{if player.preferences != null && player.preferences.SHOW_GROUPS}
+		&nbsp;|&nbsp;
+		<a href="#" onclick="toggleshow('#addGroupFormContainer');return false;">&{'realm.index.addgroup'}</a>
+	#{/if}
+	<b>}</b>
+	<b>{&{'realm.index.set'}:</b>
+	<a href="#" onclick="toggleshow('#setCycleTimeFormContainer'); return false;">&{'realm.index.cycletime'}</a>
+	&nbsp;|&nbsp;<a href="#" onclick="toggleshow('#setBoostCycleFormContainer'); return false;">&{'realm.index.boostcycle'}</a><b>}</b>
+	<b>{&{'realm.index.display'}:</b>
+	&nbsp;<a href="#" onclick="realmToggleSections(true); return false;">&{'realm.index.display.unfold'}</a>
+	|&nbsp;<a href="#" onclick="realmToggleSections(false); return false;">&{'realm.index.display.fold'}</a><b>}</b>
+#{/if}
+#{elseif request.action.equals('Realm.showBuilding') || request.action.equals('Realm.showGroup')}
+    <a href="@{Realm.index(player.name)}"><< &{'navigation.realm.index'}</a>
+    &nbsp;|&nbsp;<a href="@{Application.home(player.name)}">&{'profile.home', player.name}</a>
+	&nbsp;|&nbsp;<a href="@{Realm.index(player.name)}">&{'navigation.realm', player.name}</a>
+	&nbsp;|&nbsp;<a href="@{Adventures.index(player.name)}">&{'navigation.adventures', player.name}</a>
+#{/elseif}

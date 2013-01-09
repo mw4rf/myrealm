@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+	<title>&{'app.name'} &{'preferences.section.export'}: &{'export.buildings'}</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>Id.</th>
+				<th>&{'realm.building.name.field'}</th>
+				<th>&{'realm.building.level'}</th>
+				<th>&{'realm.building.productionTime'}</th>
+				<th>&{'realm.building.area'}</th>
+				<th>&{'realm.building.enabled'}</th>
+				<th>&{'realm.building.boosted'}</th>
+				<th>&{'realm.building.simulated'}</th>
+				<th>&{'realm.index.building.deposit.quantity'}</th>
+				<th>&{'realm.building.groups'}</th>
+				<th>&{'realm.building.built.at'}</th>
+				<th>&{'realm.building.desc'}</th>
+			</tr>
+			#{list items:buildings,	as:'b'}
+			
+			<tr>
+				<td>${b.id}</td>
+				<td>${b.name}</td>
+				<td>${b.level}</td>
+				<td>${b.productionTime}</td>
+				<td>${b.area}</td>
+				<td>${b.enabled}</td>
+				<td>${b.boosted}</td>
+				<td>${b.simulated}</td>
+				<td>${b.depositQuantity}</td>
+				<td>#{list b.groups, as:'g'}${g.name} #{/list}</td>
+				<td>${b.builtAt}</td>
+				<td>${b.description}</td>
+			</tr>
+			#{/list}
+		</table>
+	</body>
+</html>

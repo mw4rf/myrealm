@@ -1,0 +1,265 @@
+<World>
+
+	<building imgid="31" name="Bûcheron (sapin)" basetime="90" expires="false">
+		<good name="Sapin" imgid="01" quantity="-1" />
+		<good name="Bois de sapin" imgid="02" quantity="1" />
+	</building>
+
+	<building imgid="24" name="Scierie (sapin)" basetime="180" expires="false">
+		<good name="Bois de sapin" imgid="02" quantity="-1" />
+		<good name="Planches de sapin" imgid="03" quantity="1" />
+	</building>
+
+	<building imgid="13" name="Forestier (sapin)" basetime="135" expires="false">
+		<good name="Sapin" imgid="01" quantity="1" />
+	</building>
+
+	<building imgid="04" name="Carrière" basetime="300" expires="false">
+	  <good name="Pierres" imgid="04" quantity="1" />
+	</building>
+
+	<building imgid="14" name="Pêcherie" basetime="180" expires="false">
+	  <good name="Poisson" imgid="05" quantity="1" />
+	</building>
+
+	<building imgid="39" name="Mine de cuivre" basetime="180" expires="true">
+	  <good name="Minerai de cuivre" imgid="06" quantity="1" />
+	</building>
+
+	<building imgid="28" name="Cokerie" basetime="180" expires="false">
+	  <good name="Bois de sapin" imgid="02" quantity="-2" />
+	  <good name="Houille" imgid="07" quantity="1" />
+	</building>
+
+	<building imgid="07" name="Fonderie de cuivre" basetime="360" expires="false">
+	  <good name="Minerai de cuivre" imgid="06" quantity="-1" />
+	  <good name="Houille" imgid="07" quantity="-1" />
+	  <good name="Bronze" imgid="08" quantity="1" />
+	</building>
+
+	<building imgid="37" name="Atelier d'outilleur" basetime="360" expires="false">
+	  <good name="Bronze" imgid="08" quantity="-1" />
+	  <good name="Outils" imgid="09" quantity="1" />
+	</building>
+
+	<building imgid="12" name="Brasserie" basetime="360" expires="false">
+	  <good name="Céréales" imgid="11" quantity="-1" />
+	  <good name="Eau" imgid="13" quantity="-2" />
+	  <good name="Bière" imgid="12" quantity="1" />
+	</building>
+
+	<building imgid="05" name="Ferme" basetime="720" expires="false">
+	  <good name="Céréales (champs)" imgid="44" quantity="-1" />
+	  <good name="Céréales" imgid="11" quantity="1" />
+	</building>
+
+	<building imgid="21" name="Puits" basetime="180" expires="true">
+	  <good name="Eau" imgid="13" quantity="1" />
+	</building>
+
+	<building imgid="17" name="Forge d'armement de bronze" basetime="360" expires="false">
+	  <good name="Bronze" imgid="08" quantity="-1" />
+	  <good name="Houille" imgid="07" quantity="-2" />
+	  <good name="Épées de bronze" imgid="10" quantity="1" />
+	</building>
+
+	<building imgid="02" name="Meunier" basetime="360" expires="false">
+	  <good name="Céréales" imgid="11" quantity="-1" />
+	  <good name="Farine" imgid="16" quantity="1" />
+	</building>
+
+	<building imgid="35" name="Boulangerie" basetime="180" expires="false">
+	  <good name="Farine" imgid="16" quantity="-1" />
+	  <good name="Eau" imgid="13" quantity="-2" />
+	  <good name="Pain" imgid="14" quantity="1" />
+	</building>
+
+	<building imgid="36" name="Fabricant d'arcs" basetime="720" expires="false">
+	  <good name="Bois de sapin" imgid="02" quantity="-8" />
+	  <good name="Arcs" imgid="15" quantity="1" />
+	</building>
+
+	<building imgid="11" name="Scierie (feuillu)" basetime="540" expires="false">
+	  <good name="Bois de feuillu" imgid="17" quantity="-1" />
+	  <good name="Planches de feuillu" imgid="19" quantity="1" />
+	</building>
+
+	<building imgid="16" name="Carrière de marbre" basetime="540" expires="false">
+	  <good name="Marbre" imgid="18" quantity="1" />
+	</building>
+
+	<building imgid="25" name="Forestier (feuillu)" basetime="405" expires="false">
+	  <good name="Feuillu" imgid="01" quantity="1" />
+	</building>
+
+	<building imgid="27" name="Bûcheron (feuillu)" basetime="270" expires="false">
+	  <good name="Feuillu" imgid="01" quantity="-1" />
+	  <good name="Bois de feuillu" imgid="17" quantity="1" />
+	</building>
+
+	<building imgid="06" name="Mine de fer" basetime="360" expires="true">
+	  <good name="Minerai de fer" imgid="20" quantity="1" />
+	</building>
+
+	<building imgid="42" name="Fonderie de fer" basetime="720" expires="false">
+	  <good name="Minerai de fer" imgid="20" quantity="-4" />
+	  <good name="Houille" imgid="07" quantity="-6" />
+	  <good name="Fer" imgid="21" quantity="1" />
+	</building>
+
+	<building imgid="08" name="Forge d'armement de fer" basetime="720" expires="false">
+	  <good name="Fer" imgid="21" quantity="-2" />
+	  <good name="Houille" imgid="07" quantity="-8" />
+	  <good name="Épées de fer" imgid="22" quantity="1" />
+	</building>
+
+	<building imgid="47" name="Puits profond" basetime="180" expires="true">
+	  <good name="Eau" imgid="13" quantity="1" />
+	</building>
+
+	<building imgid="22" name="Écurie" basetime="360" expires="false">
+	  <good name="Céréales" imgid="11" quantity="-2" />
+	  <good name="Eau" imgid="13" quantity="-4" />
+	  <good name="Cheval" imgid="25" quantity="1" />
+	</building>
+
+	<building imgid="20" name="Boucherie" basetime="720" expires="false">
+	  <good name="Viande" imgid="23" quantity="-4" />
+	  <good name="Saucisses" imgid="24" quantity="1" />
+	</building>
+
+	<building imgid="15" name="Cabane de chasseur" basetime="360" expires="false">
+	  <good name="Viande" imgid="23" quantity="1" />
+	</building>
+
+	<building imgid="40" name="Mine de houille" basetime="90" expires="true">
+	  <good name="Houille" imgid="07" quantity="1" />
+	</building>
+
+	<building imgid="38" name="Fabricant d'arcs longs" basetime="1440" expires="false">
+	  <good name="Bois de feuillu" imgid="17" quantity="-16" />
+	  <good name="Arcs longs" imgid="26" quantity="1" />
+	</building>
+
+	<building imgid="19" name="Mine d'or" basetime="720" expires="true">
+	  <good name="Minerai d'or" imgid="27" quantity="1" />
+	</building>
+
+	<building imgid="34" name="Fonderie d'or" basetime="720" expires="false">
+	  <good name="Minerai d'or" imgid="27" quantity="-2" />
+	  <good name="Houille" imgid="07" quantity="-8" />
+	  <good name="Or" imgid="29" quantity="1" />
+	</building>
+
+	<building imgid="10" name="Atelier de monnayage" basetime="1440" expires="false">
+	  <good name="Or" imgid="29" quantity="-4" />
+	  <good name="Pièces" imgid="28" quantity="1" />
+	</building>
+
+	<building imgid="23" name="Fonderie d'acier" basetime="720" expires="false">
+	  <good name="Fer" imgid="21" quantity="-2" />
+	  <good name="Houille" imgid="07" quantity="-6" />
+	  <good name="Acier" imgid="30" quantity="1" />
+	</building>
+
+	<building imgid="46" name="Forge d'armement d'acier" basetime="1440" expires="false">
+	  <good name="Acier" imgid="30" quantity="-2" />
+	  <good name="Houille" imgid="07" quantity="-16" />
+	  <good name="Épées d'acier" imgid="31" quantity="1" />
+	</building>
+
+	<building imgid="48" name="Puits sans fond" basetime="180" expires="true">
+     <good name="Eau" imgid="13" quantity="1" />
+  </building>
+
+  <building imgid="51" name="Scierie (bois exotique)" basetime="720" expires="false">
+     <good name="Bois exotique" imgid="32" quantity="-1" />
+     <good name="Planches de bois exotique" imgid="33" quantity="1" />
+  </building>
+
+  <building imgid="30" name="Fonderie de titane" basetime="960" expires="false">
+      <good name="Minerai de titane" imgid="37" quantity="-2" />
+      <good name="Houille" imgid="07" quantity="-16" />
+      <good name="Titane" imgid="38" quantity="1" />
+  </building>
+
+  <building imgid="03" name="Fabricant d'arbalètes" basetime="1920" expires="false">
+      <good name="Titane" imgid="38" quantity="-6" />
+      <good name="Bois exotique" imgid="32" quantity="-16" />
+      <good name="Arbalètes" imgid="40" quantity="1" />
+  </building>
+
+  <building imgid="29" name="Forge d'armement de Damas" basetime="4320" expires="false">
+      <good name="Acier" imgid="30" quantity="-6" />
+      <good name="Titane" imgid="38" quantity="-4" />
+      <good name="Épée de Damas" imgid="39" quantity="1" />
+  </building>
+
+  <building imgid="32" name="Charronnerie" basetime="1080" expires="false">
+  		<good name="Bois exotique" imgid="32" quantity="-3" />
+  		<good name="Fer" imgid="21" quantity="-6" />
+  		<good name="Roues" imgid="35" quantity="1" />
+  </building>
+
+  <building imgid="44" name="Charpenterie" basetime="2160" expires="false">
+  		<good name="Roues" imgid="35" quantity="-2" />
+  		<good name="Planches de bois exotique" imgid="33" quantity="-3" />
+  		<good name="Carrioles" imgid="36" quantity="1" />
+  </building>
+
+  <building imgid="18" name="Poudrière" basetime="1200" expires="false">
+		<good name="Salpêtre" imgid="41" quantity="-6" />
+		<good name="Poudre à canon" imgid="42" quantity="1" />
+  </building>
+
+  <building imgid="26" name="Forge de canons" basetime="3600" expires="false">
+  		<good name="Carrioles" imgid="36" quantity="-5" />
+  		<good name="Poudre à canon" imgid="42" quantity="-6" />
+  		<good name="Canons" imgid="43" quantity="1" />
+  </building>
+
+	<!--  SPECIAL -->
+	 <building imgid="50" name="Moulin à eau" basetime="180" expires="false">
+       <good name="Eau" imgid="13" quantity="1" />
+    </building>
+
+    <building imgid="49" name="Puits artésien" basetime="180" expires="true">
+       <good name="Eau" imgid="13" quantity="1" />
+    </building>
+
+    <building imgid="s1" name="Petit cimetière aux citrouilles [Halloween 2011]" basetime="28800" expires="false">
+    	<good name="Citrouilles" imgid="s1" quantity="1" />
+    </building>
+
+    <building imgid="s2" name="Cimetière aux citrouilles normal [Halloween 2011]" basetime="14400" expires="false">
+    	<good name="Citrouilles" imgid="s1" quantity="1" />
+    </building>
+
+    <building imgid="s3" name="Cimetière aux citrouilles raffiné [Halloween 2011]" basetime="3600" expires="false">
+    	<good name="Citrouilles" imgid="s1" quantity="1" />
+    </building>
+
+    <building imgid="s4" name="Silo" basetime="720" expires="false">
+    	<good name="Céréales (champs)" imgid="44" quantity="1" />
+    </building>
+
+    <building imgid="s5" name="Usine de recyclage" basetime="204" expires="false">
+    	<good name="Houille" imgid="07" quantity="1" />
+    </building>
+    
+    <building imgid="friar" name="Confrérie" basetime="360" expires="false">
+  	  <good name="Céréales" imgid="11" quantity="-4" />
+  	  <good name="Eau" imgid="13" quantity="-8" />
+  	  <good name="Bière" imgid="12" quantity="4" />
+  	</building>
+  	
+  	<building imgid="endless_copper_mine" name="Mine de cuivre infinie" basetime="180" expires="true">
+  	  <good name="Minerai de cuivre" imgid="06" quantity="1" />
+  	</building>
+  	
+  	<building imgid="gem_pit" name="Puits aux gemmes" basetime="600" expires="true">
+  	  <good name="Pierre précieuse" imgid="gem" quantity="1" />
+  	</building>
+
+
+</World>

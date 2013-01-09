@@ -1,0 +1,24 @@
+#{extends 'Realm/template.html' /}
+
+<div id="buildings_list">
+
+	*{ *** Buildings header *** }*
+	#{if player.buildings.size() > 0}
+	    *{ *** Buildings LIST *** }*
+	    #{list items:types, as:'bn'}
+	            <a href="#" class="imgLink loadBuildingsLink" player="${player.name}" building="${bn}" title="${bn}"><img src="/public/${world.World.BUILDINGS.get(bn).getImage()}" /></a>
+	    #{/list}
+	#{/if}
+	
+	*{ *** Search Buildings *** }*
+	<input type="text" value="" player="${player.name}" class="ajax_buildings_list loadBuildingsField focusOnLoad" placeholder="&{'quick.search'} (&{'realm.building.name'})" />
+
+	*{ *** Buildings GROUP *** }*
+	<div id="buildings_group"></div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

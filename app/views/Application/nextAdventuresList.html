@@ -1,0 +1,95 @@
+#{extends 'main.html' /}
+#{set title: "SettlersHelper Online" /}
+
+*{ New Adventure }*
+<div id="addNextAdventure" class="container formContainer" style="display:none;">
+    #{form @Adventures.addNextAdventure(player.name)}
+    <table>
+        <tr>
+            <td>&{'adventures.index.addadventure'}</td>
+            <td>
+                <select name="name" id="addAdventure_name" onchange="selectAdventureChange(this)">
+                    #{list items:worldAdventures, as:'wadventure'}
+                        <option value="${wadventure.name}" imgid="${wadventure.getImage()}">
+                            ${wadventure.name}
+                        </option>
+                    #{/list}
+                </select>
+            </td>
+            <td id="adventureImage" rowspan="3"><img src="/public/${wadventure.getImage()}" /></td>
+        </tr>
+        <tr>
+            <td>&{'adventure.dateStart'}</td>
+            <td><input type="text" size="25" name="dateStart" value="${today.format()}" /></td>
+        </tr>
+        <tr>
+            <td>&{'adventure.dateEnd'}</td>
+            <td><input type="text" size="25" name="dateEnd" value="${today.format()}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p>&{'adventure.notes'}<br />
+                <textarea cols="60" rows="5" name="notes"></textarea>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="&{'form.save'}" /></td>
+        </tr>
+    </table>
+#{/form}
+</div>
+
+#{if adventures.size() > 0}
+#{list adventures, as:'adventure'}
+
+	%{
+		// Single-player adventures can't be proposed
+		if(adventure.getMaxPlayers() < 2)
+			continue;
+			
+		// Max participants reached : adventure can't be proposed anymore
+		if(adventure.getMaxPlayers() <= adventure.participants.size() + 1)
+			continue;
+	}%
+
+	<div class="container adventure_next">
+        <table width="100%">
+            <tr>
+                <td rowspan="3" width="10%"><img src="/public/${adventure.getImage()}" /></td>
+                <td class="header2">
+                	#{a @Adventures.showAdventure(adventure.player.name, adventure.id)}${adventure.name}#{/a}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">&{'adventure.next.dates', adventure.dateStart.format(), adventure.dateEnd.format()}</td> 
+            </tr>
+            <tr>
+            	<td colspan="2">
+            		*{ *** Max players *** }*
+            		&{'adventure.players.max', adventure.getMaxPlayers()}
+            		&nbsp;-&nbsp;
+            		*{ *** Adventure owner *** }*
+            		&{'adventure.next.owner'} 
+            		<span class="tagItem">#{a @Adventures.index(adventure.player.name)}${adventure.player.name}#{/a}</span>
+            	
+            		*{ *** Participants *** }*
+            		#{if adventure.participants.size() > 0}
+            		    &nbsp;-&nbsp;
+            			&{'adventure.next.participants'} : 
+            			#{list adventure.participants, as: 'participant'}
+							<span class="tagItem">#{a @Adventures.index(participant.name)}${participant.name}#{/a}</span>&nbsp;
+						#{/list}
+            		#{/if}
+            	</td>
+            </tr>
+            <tr>
+            	<td colspan="2">${adventure.notes.raw()}</td>
+            </tr>
+        </table>
+    </div>
+#{/list}
+#{/if}
+#{else}
+	&{'adventures.next.none'}
+#{/else}

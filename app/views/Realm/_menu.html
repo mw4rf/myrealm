@@ -1,0 +1,142 @@
+*{ ***** REALM menu ***** }*
+
+<ul class="nav nav-list">
+
+	*{ ***** New ***** }*
+	<li class="nav-header">&{'nav.realm.add'}</li>
+	<li #{if request.action.equals("Realm.addBuildingForm")} class="active"#{/if}>
+		#{a @Realm.addBuildingForm(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Realm.addBuildingForm")} icon-white#{/if}"></i> &{'nav.realm.add.new.building'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.addGroupForm")} class="active"#{/if}>
+		#{a @Realm.addGroupForm(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Realm.addGroupForm")} icon-white#{/if}"></i> &{'nav.realm.add.new.group'}
+		#{/a}
+	</li>
+	
+	*{ ***** Lists ***** }*
+	<li class="nav-header">&{'nav.realm.show'}</li>
+	<li #{if request.action.equals("Realm.listByType")} class="active"#{/if}>
+		#{a @Realm.listByType(player.name)}
+			<i class="icon-list#{if request.action.equals("Realm.listByType")} icon-white#{/if}"></i> &{'nav.realm.show.by.type'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.listByArea")} class="active"#{/if}>
+		#{a @Realm.listByArea(player.name)}
+			<i class="icon-list#{if request.action.equals("Realm.listByArea")} icon-white#{/if}"></i> &{'nav.realm.show.by.area'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.listByGroup")} class="active"#{/if}>
+		#{a @Realm.listByGroup(player.name)}
+			<i class="icon-list#{if request.action.equals("Realm.listByGroup")} icon-white#{/if}"></i> &{'nav.realm.show.by.group'}
+		#{/a}
+	</li>
+	
+	*{ ***** Manage ***** }*
+	<li class="nav-header">&{'nav.realm.manage'}</li>
+	<li #{if request.action.equals("Realm.listStopped")} class="active"#{/if}>
+		#{a @Realm.listStopped(player.name)}
+			<span class="badge badge-important">${player.countDisabledBuildings()}</span> &{'nav.realm.manage.stopped'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.listBoosted")} class="active"#{/if}>
+		#{a @Realm.listBoosted(player.name)}
+			<span class="badge badge-success">${player.countBoostedBuildings()}</span>  &{'nav.realm.manage.boosted'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.listSimulated")} class="active"#{/if}>
+		#{a @Realm.listSimulated(player.name)}
+			<span class="badge badge-warning">${player.countSimulatedBuildings()}</span>  &{'nav.realm.manage.simulated'}
+		#{/a}
+	</li>
+	
+	*{ ***** Production/Goods ***** }*
+	<li class="nav-header">&{'nav.realm.production.goods'}</li>
+	<li class="label middle">&{'realm.index.cycletime.short'}=${player.formatCycleTime()}</li>
+	<li #{if request.action.equals("Realm.showAbsoluteProduction")} class="active"#{/if}>
+		#{a @Realm.showAbsoluteProduction(player.name)}
+			<i class="icon-list-alt#{if request.action.equals("Realm.showAbsoluteProduction")} icon-white#{/if}"></i> &{'nav.realm.production.absolute'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.showRelativeProduction")} class="active"#{/if}>
+		#{a @Realm.showRelativeProduction(player.name)}
+			<i class="icon-list-alt#{if request.action.equals("Realm.showRelativeProduction")} icon-white#{/if}"></i> &{'nav.realm.production.relative'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.showRelativeNeeds")} class="active"#{/if}>
+		#{a @Realm.showRelativeNeeds(player.name)}
+			<i class="icon-list-alt#{if request.action.equals("Realm.showRelativeNeeds")} icon-white#{/if}"></i> &{'nav.realm.production.needs'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.showGoodsLevels")} class="active"#{/if}>
+		#{a @Realm.showGoodsLevels(player.name)}
+			<i class="icon-chevron-up#{if request.action.equals("Realm.showGoodsLevels")} icon-white#{/if}"></i> &{'nav.realm.production.levels'}
+		#{/a}
+	</li> 
+	
+	*{ ***** Production/Units ***** }*
+	<li class="nav-header">&{'nav.realm.production.units'}</li>
+	<li #{if request.action.equals("Realm.showBoostsProduction")} class="active"#{/if}>
+		#{a @Realm.showBoostsProduction(player.name)}
+			<i class="icon-fire#{if request.action.equals("Realm.showBoostsProduction")} icon-white#{/if}"></i> &{'nav.realm.production.boosts'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.showSoldiersProduction")} class="active"#{/if}>
+		#{a @Realm.showSoldiersProduction(player.name)}
+			<i class="icon-user#{if request.action.equals("Realm.showSoldiersProduction")} icon-white#{/if}"></i> &{'nav.realm.production.soldiers'}
+		#{/a}
+	</li>
+	
+	*{ ***** Advises ***** }*
+	<li class="nav-header">&{'nav.realm.advices'}</li>
+	<li #{if request.action.equals("Realm.advicesProduction")} class="active"#{/if}>
+		#{a @Realm.advicesProduction(player.name)}
+			<i class="icon-fire#{if request.action.equals("Realm.advicesProduction")} icon-white#{/if}"></i> &{'nav.realm.advices.production'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Realm.advicesBoosts")} class="active"#{/if}>
+		#{a @Realm.advicesBoosts(player.name)}
+			<i class="icon-fire#{if request.action.equals("Realm.advicesBoosts")} icon-white#{/if}"></i> &{'nav.realm.advices.boosts'}
+		#{/a}
+	</li>
+	
+	*{ ***** Calculations ***** }*
+	<li class="nav-header">&{'nav.realm.calculations'}</li>
+	<li #{if request.action.equals("Realm.showTimeCalculations")} class="active"#{/if}>
+		#{a @Realm.showTimeCalculations(player.name)}
+			<i class="icon-time#{if request.action.equals("Realm.showTimeCalculations")} icon-white#{/if}"></i> &{'nav.realm.calculations.time'}
+		#{/a}
+	</li>	
+	<li #{if request.action.equals("Realm.showInfluenceCalculations")} class="active"#{/if}>
+		#{a @Realm.showInfluenceCalculations(player.name)}
+			<i class="icon-retweet#{if request.action.equals("Realm.showInfluenceCalculations")} icon-white#{/if}"></i> &{'nav.realm.calculations.influence'}
+		#{/a}
+	</li>	
+	
+	*{ ***** Stats ***** }*
+	<li class="nav-header">&{'nav.realm.stats'}</li>
+	<li #{if request.action.equals("Stats.buildingsHistory")} class="active"#{/if}>
+		#{a @Stats.buildingsHistory(player.name)}
+			<i class="icon-signal#{if request.action.equals("Stats.buildingsHistory")} icon-white#{/if}"></i> &{'nav.realm.stats.buildings.count'}
+		#{/a}
+	</li>	
+	<li #{if request.action.equals("Stats.buildingsStatus")} class="active"#{/if}>
+		#{a @Stats.buildingsStatus(player.name)}
+			<i class="icon-signal#{if request.action.equals("Stats.buildingsStatus")} icon-white#{/if}"></i> &{'nav.realm.stats.buildings.status'}
+		#{/a}
+	</li>	
+	<li #{if request.action.equals("Stats.goodsProduction")} class="active"#{/if}>
+		#{a @Stats.goodsProduction(player.name)}
+			<i class="icon-signal#{if request.action.equals("Stats.goodsProduction")} icon-white#{/if}"></i> &{'nav.realm.stats.production'}
+		#{/a}
+	</li>	
+	
+	*{ ***** Snapshots ***** }*
+	<li class="nav-header">&{'nav.realm.snapshots'}</li>
+	<li #{if request.action.equals("Snapshots.index")} class="active"#{/if}>
+		#{a @Snapshots.index(player.name)}
+			<i class="icon-signal#{if request.action.equals("Snapshots.index")} icon-white#{/if}"></i> &{'nav.realm.snapshots.list'}
+		#{/a}
+	</li>	
+</ul>

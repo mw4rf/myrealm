@@ -1,0 +1,85 @@
+#{extends 'main.html' /}
+#{set title: 'Market' /}
+
+<div class="container">
+<div class="header1">&{'market.details.exchange'}</div>
+<table>
+	<tr>
+		<th>&{'market.boost.status'}</th>
+		<th>&{'market.boost.receiver'}</th>
+		<th>&{'market.boost.giver'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+	</tr>
+	<tr>
+		<td class="middle">
+			#{if exchange.done}
+				&{'market.boost.status.done'}
+			#{/if}
+			#{elseif exchange.accepted}
+				&{'market.boost.status.accepted'}
+			#{/elseif}
+			#{elseif exchange.hasExpired()}
+				&{'market.boost.status.expired'}
+			#{/elseif}
+			#{else}
+				&{'market.boost.status.published'}
+			#{/else}
+		</td>
+		<td class="middle">#{a @Application.home(exchange.receiver.name)}${exchange.receiver.name}#{/a}</td>
+		<td class="middle">#{if exchange.giver != null}#{a @Application.home(exchange.giver.name)}${exchange.giver.name}#{/a}#{/if}#{else}&nbsp;#{/else}</td>
+		<td class="middle">${exchange.quantity}</td>
+		<td class="middle">${exchange.boostName}</td>
+		<td class="middle">${exchange.buildingName}</td>
+		<td class="middle">#{if exchange.boostAt != null}${exchange.boostAt.format()}#{/if}</td>
+	</tr>
+</table>
+</div>
+
+*{ ********** FORM : add counterpart ********** }*
+#{if isGiver && !exchange.hasCounterpart}
+	<div class="container formContainer">
+		#{if buildingTypes.size() < 1}
+			&{'market.boost.must.build.before'}
+		#{/if}
+		#{else}
+			#{form @Market.addBoostExchangeCounterpart()}
+				<b>&{'market.boosts.add.counterpart', exchange.receiver.name} </b>
+				<input name="quantity" type="text" readonly size="2" value="${exchange.quantity}" />
+				<input name="boostName" type="text" readonly value="${exchange.boostName}" />
+				&{'market.boosts.on'}
+				<select name="buildingName">
+					#{list buildingTypes, as:'buildingName'}
+						<option value="${buildingName}">${buildingName}</option>
+					#{/list}
+				</select>
+				&{'market.boosts.at'}
+				<input type="text" name="boostAt" value="${new Date().format()}" size="25" />
+				<input type="hidden" name="exchangeId" value="${exchange.id}" />
+				<input type="submit" value="&{'market.boosts.submit.ask'}" />
+			#{/form}
+		#{/else}
+	</div>
+#{/if}
+
+*{ ********** FORUM ********** }*
+<div class="container">
+<div class="header1">&{'market.forum'}</div>
+
+<div id="guildWall" class="guildContainer">
+	#{list comments, as: 'message'}
+		#{include "Market/_comment.html" /}
+	#{/list}
+</div>
+<div id="commentsForm" class="formContainer">
+	#{form @Market.addBoostExchangeComment()}
+		&{'guild.wall.newas', controllers.Application.getSessionLogin(), controllers.Application.getSessionLogin()} => #{a @Application.index()}&{'login'}#{/a}
+		<br /><textarea name="comment" style="width:100%;" rows="5"></textarea>
+		<input type="hidden" name="exchangeId" value="${exchange.id}" />
+		<br /><input type="submit" value="&{'form.add'}" />
+		&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+	#{/form}
+</div>
+</div>

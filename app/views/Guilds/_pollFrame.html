@@ -1,0 +1,51 @@
+#{if poll != null}
+	#{if voter == null}
+		&{'guild.poll.must.connect'}
+	#{/if}
+	#{else}
+
+		<div class="guildPollQuestion">${poll.question}</div>
+
+		*{ *** Player has voted = show results *** }*
+		#{if poll.hasVoted(controllers.Application.getSessionLogin())}
+			<div id="pollResults">
+			#{list poll.options, as: 'option'}
+				<div class="guildPollLine">
+					<span class="guildPollOption">${option.answer}</span>
+					<br />
+					%{
+						String barclass = "";
+						if(option.hasVotedFor(voter))
+							barclass = "guildPollMyVote";
+						else
+							barclass = "guildPollOthersVote";
+					}%
+					<div class="guildPollBar ${barclass}" style="width:${option.getPercentage()}%;">
+						<span class="guildPollPercent">(${option.getPercentage()}%)</span>
+					</div>
+					#{list option.votes, as:'vote'}
+						<span class="guildPollVoter">${vote.player.name} </span>
+					#{/list}
+				</div>
+			#{/list}
+			</div>
+			<div class="guildPollTotal">&{'guild.poll.total', poll.countVotes()}</div>
+		#{/if}
+
+		*{ *** Player has not voted yet *** }*
+		#{else}
+			<ul id="pollOptions" pollId="${poll.id}" guildId='${guild.id}' style="list-style-type:none;">
+			#{list poll.options, as: 'option'}
+				<li class="guildPollOption"><input type="radio" name="polloptions[]" value="${option.id}" />${option.answer}</li>
+			#{/list}
+				<li>&nbsp;</li>
+				<li><input type="submit" id="pollSubmit" value="&{'form.vote'}" /></li>
+			</ul>
+		#{/else}
+
+	#{/else}
+
+#{/if}
+#{else}
+	&{'guild.poll.none'}
+#{/else}

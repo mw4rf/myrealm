@@ -1,0 +1,6 @@
+		#{if building.timer.hasExpired()}
+			(&{'timer.has.expired.at'} ${building.timer.endAt.format()}, &{'timer.has.expired.ago'} ${building.timer.getTimeAfterExpiration().get("h")} &{'time.hours'} ${building.timer.getTimeAfterExpiration().get("m")} &{'time.minutes'} ${building.timer.getTimeAfterExpiration().get("s")} &{'time.seconds'})
+		#{/if}
+		#{else}
+			(&{'timer.expires.at'} ${building.timer.endAt.format()}, &{'timer.expires.in'} ${building.timer.getTimeBeforeExpiration().get("h")} &{'time.hours'} ${building.timer.getTimeBeforeExpiration().get("m")} &{'time.minutes'} ${building.timer.getTimeBeforeExpiration().get("s")} &{'time.seconds'})
+		#{/else}

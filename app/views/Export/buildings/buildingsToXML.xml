@@ -1,0 +1,25 @@
+<Buildings>
+	#{list items:buildings, as:'b'}
+	<building id="${b.id}">
+		<properties>
+			<property name="name" value="${b.name}"></property>
+			<property name="level" value="${b.level}"></property>
+			<property name="productionTime" value="${b.productionTime}"></property>
+			<property name="mapArea" value="${b.area}"></property>
+			<property name="depositQuantity" value="${b.depositQuantity}"></property>
+		</properties>
+		<status>
+			<property name="enabled" value="${b.enabled}"></boolean>
+			<property name=boosted value="${b.boosted}"></boolean>
+			<property name="simulated" value="${b.simulated}"></boolean>
+		</status>
+		<groups>
+			#{list b.groups, as:'g'}
+			<group name="${g.name}"></group> 
+			#{/list}
+		</groups>
+		<builtAt>${b.builtAt}</builtAt>
+		<description><![CDATA[${b.description}]]></description>
+	</building>
+	#{/list}
+</Buildings>

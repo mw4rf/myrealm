@@ -1,0 +1,55 @@
+#{extends 'Admin/template.html' /}
+<div class="header1">Players</div>
+
+<div class="container formContainer">
+	#{form @Admin.playerName()}
+		<input type="text" name="playerName" class="ajax_players_list" />
+		<input type="submit" value="&{'form.search'}" />
+	#{/form}
+</div>
+
+<div class="container">
+	<span class="pagination_summary">#{paginate.summary items:players /}</span>
+	#{paginate.controls items:players /}
+	<table>
+	<tr>
+		<th>Player Name</th>
+		<th>Last Login</th>
+		<th>Actions</th>
+		<th>Buildings</th>
+		<th>Adventures</th>
+		<th>Sales/Offers</th>
+		<th>&nbsp;</th>
+	</tr>
+	#{paginate.list items:players, as: 'player'}
+	<tr  class="highlightable">
+		<th><a href="@{Application.home(player.name)}" target="_blank">${player.name}</a></th>
+		<td class="adminCell">${player.lastConnection.format()}</td>
+		<td class="adminCell">${player.actions.size()}</td>
+		<td class="adminCell">${player.buildings.size()}</td>
+		<td class="adminCell">${player.adventures.size()}</td>
+		<td class="adminCell">${player.adventureSales.size()} / ${player.adventureOffers.size()}</td>
+		<th>
+			#{a @Admin.player(player.id)}<img src="/public/images/app/details.png" title="Edit Player" />#{/a}
+			<a rel="#" href="@{Admin.playerDelete(player.id)}" title="Delete Player" message="Delete ${player.name} ?" class="confirmationLink">
+				<img src="/public/images/app/delete.png" title="Delete Player" />
+			</a>
+		</th>
+	</tr>
+	#{/paginate.list}
+	<tr>
+		<th>Player Name</th>
+		<th>Last Login</th>
+		<th>Actions</th>
+		<th>Buildings</th>
+		<th>Adventures</th>
+		<th>Sales/Offers</th>
+		<th>&nbsp;</th>
+	</tr>
+	</table>
+	#{paginate.controls items:players /}
+</div>
+
+<script type="text/javascript">
+	var playerSuggestionsAction = #{jsAction @Application.searchPlayer(':query') /}
+</script>

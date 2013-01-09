@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title: 'Market' /}
+
+<!-- Page container -->
+<div class="container-fluid">
+	<div class="row-fluid">
+	
+		<!-- Menu -->
+		<div class="span3">
+			<div class="well sidebar-nav">
+				#{include 'Market/_menu.html' /}
+			</div>
+		</div>
+		
+		<!-- Content -->
+		<div class="span9">
+			#{doLayout /}
+		</div>
+	
+	</div>
+</div>

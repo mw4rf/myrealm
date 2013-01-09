@@ -1,0 +1,47 @@
+/* ADVENTURES */
+
+.adventure_self {
+  background-color: $color-me;  
+  border: $generic-border;
+}
+
+.adventure_participation {
+  background-color: $color-involved;
+  border: $generic-border;
+}
+
+.adventure_next {
+  background-color: $color-others;
+  border: $generic-border;
+}
+
+.comment {
+  border: $generic-border;
+  margin-bottom: 0.3em;
+}
+
+.comment_meta {
+  font-weight: bold;
+  margin: 0;
+  padding: 1em 1em 0.5em 1em;
+}
+
+.comment_text {
+  font-family: monospace;
+  margin: 0;
+  padding: 0.5em 1em 1em 1em;
+}
+
+.comment_avatar {
+  
+  position: relative;
+  display:inline-block;
+  float:left;
+  
+  margin:0;
+  padding:0;
+  padding-right: 0.5em;
+  
+  width:66px;
+  height:67px;
+}

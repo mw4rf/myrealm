@@ -1,0 +1,58 @@
+#{extends 'Realm/template.html' /}
+#{set title: 'Snapshots' /}
+
+#{if history != null && history.size() > 0}
+<div class="container">
+	<table class="table table-condensed">
+		<tr>
+			<td>&{'help.link.small', "http://settlers.valhalla.fr/wiki/myrealm/stats/snapshots_management"}</td>
+			<th width="20%">&{'realm.snapshot.takenAt'}</th>
+			<th>
+				<span class="badge">&{'realm.snapshot.buildings.count'}</span> 
+				<br />
+				<span class="badge badge-info">&{'realm.snapshot.buildings.enabled.count'}</span> 
+				<span class="badge badge-important">&{'realm.snapshot.buildings.stopped.count'}</span> 
+				<span class="badge badge-success">&{'realm.snapshot.buildings.boosted.count'}</span> 
+				<span class="badge badge-warning">&{'realm.snapshot.buildings.simulated.count'}</span> 
+			</th>
+			<th>
+				<span class="badge">&{'realm.snapshot.goods.count'}</span> 
+				<br />
+				<span class="badge badge-info">&{'realm.snapshot.goods.produced.count'}</span>
+				<span class="badge badge-warning">&{'realm.snapshot.goods.needed.count'}</span> 
+				<span class="badge badge-success">&{'realm.snapshot.goods.excess.count'}</span> 
+				<span class="badge badge-important">&{'realm.snapshot.goods.deficit.count'}</span>  
+			</th>
+			<td></td>
+		</tr>
+	#{list history, as:'snap'}
+		<tr class="highlightable">
+			<td>#{if snap.locked}<span title="&{'realm.snapshot.locked'}" my="top right" at="middle right">
+				<img src="/public/images/app/lock.png" /></span>#{/if}
+			</td>
+			<th>&{snap.takenAt.format()}</th>
+			<td>
+				<span class="badge">${snap.buildingsCount}</span>
+				<span class="badge badge-info">${snap.buildingsCountEnabled}</span>
+				<span class="badge badge-important">${snap.buildingsCountStopped}</span>
+				<span class="badge badge-success">${snap.buildingsCountBoosted}</span>
+				<span class="badge badge-warning">${snap.buildingsCountSimulated}</span>
+			</td>
+			<td class="middle">
+				<span class="badge">${snap.goodsCount}</span>
+				<span class="badge badge-info">${snap.goodsProducedCount}</span>
+				<span class="badge badge-important">${snap.goodsNeededCount}</span>
+				<span class="badge badge-success">${snap.goodsExcessCount}</span>
+				<span class="badge badge-warning">${snap.goodsDeficitCount}</span>
+			</td>
+			<td class="middle">
+				#{a @Snapshots.toggleLock(snap.id)}
+					#{if snap.locked}&{'realm.snapshot.unlock'}#{/if}
+					#{else}&{'realm.snapshot.lock'}#{/else}
+				#{/a}
+			</td> 
+		</tr>
+	#{/list}
+	</table>
+</div>
+#{/if}

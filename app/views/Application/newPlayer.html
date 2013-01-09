@@ -1,0 +1,31 @@
+#{extends 'main.html' /}
+#{set title:'New Player' /}
+
+<div class="container">
+	<h1>&{'application.player.new', playerName}</h1>
+	<br />&{'application.player.new.info', playerName}
+</div>
+
+<div class="container formContainer">
+#{form @Application.addPlayer()}
+
+    *{ Security }*
+
+    <p class="flash_error">
+    	&{'application.player.new.pass.warning'}
+    </p>
+
+    <p class="flash_info">
+    	&{'application.player.new.pass.info'}
+    </p>
+
+    <p>
+        &{'preferences.password'}: <input type="text" name="password" />
+        <input type="checkbox" name="remember" checked /><label for="remember">&{'application.player.new.pass.remember'}</label>
+    </p>
+
+	<p>&nbsp;</p>
+	<input type="hidden" name="playerName" value="${playerName}" />
+    <p><input type="submit" value="&{'form.save.and.continue'}" /></p>
+#{/form}
+</div>

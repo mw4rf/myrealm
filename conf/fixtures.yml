@@ -1,0 +1,20 @@
+Building(B_sapin):
+    name: Bûcheron (sapin)
+    level: 1
+    productionTime: 3600
+    
+Building(F_sapin):
+    name: Forestier (sapin)
+    level: 1
+    productionTime: 3600
+    
+Building(S_sapin):
+    name: Scierie (sapin)
+    level: 1
+    productionTime: 3600
+    
+Player(tux):
+    name: tux
+    password: pwd
+    cycleTime: 3600
+    buildings: {B_sapin, F_sapin, S_sapin}

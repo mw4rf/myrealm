@@ -1,0 +1,365 @@
+/************ BOOTSTRAP *********************/
+
+body {
+	/** Padding needed so that the body content doesn't go behind the navbar **/
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+/** Change foreground color for links inside labels **/
+.label > a:link, .label > a:hover, .label > a:visited {
+	color: #ffffff;
+	background-color: transparent;
+}
+
+.rounded {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/****************************************/
+
+html,body {
+  margin: 0;
+  color: $page-fg-color;
+  font-family: $page-font;
+  font-size: $page-font-size;
+    
+  background-color: $page-bg-color;
+  background-image: $page-bg-image;
+  background-repeat: $page-bg-repeat;
+  background-attachment: $page-bg-attachment;
+  background-position: $page-bg-position;
+}
+
+a, a:visited, a:active {
+  color: $link-fg-color;
+  background-color: $link-bg-color;
+  text-decoration: $link-decoration;
+}
+
+a:hover {
+  color: $link-hover-fg-color;
+  background-color: $link-hover-bg-color;
+  text-decoration: $link-hover-decoration;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+.imgLink:hover {
+  background-color: transparent;
+}
+
+#profileHeader {
+  background-color: $page-header-bg-color;
+  color: $page-header-fg-color;
+  font-size: $page-header-font-size;
+  font-variant: $page-header-font-variant;
+  text-shadow: $page-header-font-shadow;
+  padding: 1px 2px 1px 2px;
+}
+
+#navigation {
+    background-color: $navigation-bg-color;
+    color: $navigation-fg-color;
+    font-family: $navigation-font;
+}
+
+#navigationMain {
+  background-color: $navigation-main-bg-color;
+  font-family: monospace;
+  text-align: right;
+  position: absolute;
+  top:0px;
+  right:0px;
+  width: auto;
+}
+
+#avatar_image {
+  height:50.25px;
+  width:49.50px;
+  display: inline;
+  position: relative;
+  float: left;
+}
+
+.avatarbg {
+  background-repeat: no-repeat;
+}
+
+.formContainer {
+    margin: 0.5em 1em 0.5em 1em;
+    padding: 0.1em 1em 0.3em 1em;
+    border: $form-container-border;
+    background-color: $form-container-bg-color;
+    color: $form-container-fg-color;
+}
+
+.sortContainer {
+  margin : 0.3em 0 0.3em 0;
+  padding : 0.15em 1em 0.15em 1em;
+  background-color: $sort-container-bg-color;
+  color: $sort-container-fg-color;
+  border: $sort-container-border;
+  font-variant: small-caps;
+}
+
+.sortActive {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.nomargin {
+  margin: 0;
+}
+
+.spinner {
+  display:none;
+}
+
+.hand {
+  cursor:pointer;
+}
+
+linefeed {
+  display:block;
+  margin-top:0.5em;
+  margin-bottom:0.5em;
+}
+
+.headerbg {
+    background-color: $header-bg-color;
+}
+
+.negativeQuantity {
+    color: $negative-color;
+}
+
+.positiveQuantity {
+    color: $positive-color;
+}
+
+.no {
+    color: $negative-color;
+}
+
+.yes {
+    color: $positive-color;
+}
+
+.middle {
+    text-align: center;
+    vertical-align: middle;
+    margin:auto;
+}
+
+.right {
+	text-align: right;
+}
+
+.left {
+	text-align: left;
+}
+
+.topBorder {
+    border-top-width: medium;
+    border-top-style: solid;
+    border-top-color: white;
+}
+
+.leftAlign {
+    text-align: left;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.header1 {
+  color: $header-1-fg-color;
+  background-color: $header-1-bg-color;
+  font-size: $header-1-font-size;
+  font-variant: $header-1-font-variant;
+  font-weight: $header-1-font-weight;
+  text-shadow: $header-1-font-shadow;
+  border-radius: $header-1-border-radius;
+  border: $header-1-border;
+  padding: 0.2em;
+}
+
+.header2 {
+  color: $header-2-fg-color;
+  background-color: $header-2-bg-color;
+  font-size: $header-2-font-size;
+  font-variant: $header-2-font-variant;
+  font-weight: $header-2-font-weight;
+  text-shadow: $header-2-font-shadow;
+  border-radius: $header-2-border-radius;
+  border: $header-2-border;
+}
+
+.header3 {
+  color: $header-3-fg-color;
+  background-color: $header-3-bg-color;
+  font-size: $header-3-font-size;
+  font-variant: $header-3-font-variant;
+  font-weight: $header-3-font-weight;
+  text-shadow: $header-3-font-shadow;
+  border-radius: $header-3-border-radius;
+  border: $header-3-border;
+  margin-bottom: 0.3em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.highlight {
+    background-color: $highlight-color;
+}
+
+.highlightable:hover {
+  background-color: $highlight-color;
+}
+
+.tagItem {
+  border: $tag-border;
+  background-color: $tag-bg-color;
+  border-radius: $tag-border-radius;
+  padding: 1px 0.4em 1px 0.4em;
+}
+
+.info {
+  cursor: help;
+}
+
+/* FLASH MESSAGES */
+
+#flash {
+
+}
+
+.flash_error, .flash_info, .flash_success, .flash_admin {
+  border: $flash-border;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  margin-bottom: 2px;
+}
+
+/* red */
+.flash_error {
+  border-color: $flash-error-fg-color;
+  color: $flash-error-fg-color;
+  background-color: $flash-error-bg-color;
+  background-image: url('../images/app/flash_error.png');
+}
+
+/* yellow */
+.flash_info {
+  border-color: $flash-info-fg-color;
+  color: $flash-info-fg-color;
+  background-color: $flash-info-bg-color;
+  background-image: url('../images/app/flash_info.png');
+}
+
+/* green */
+.flash_success {
+  border-color: $flash-success-fg-color;
+  color: $flash-success-fg-color;
+  background-color: $flash-success-bg-color;
+  background-image: url('../images/app/flash_success.png');
+}
+
+.flash_admin {
+  border-color: $flash-info-fg-color;
+  color: $flash-info-fg-color;
+  background-color: $flash-info-bg-color;
+  background-image: url('../images/app/flash_info.png');
+}
+
+/* STATS CHARTS */
+
+.chart {
+  margin: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  width: 100%;
+  height: 400px;
+}
+
+.chart-small {
+	margin: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  width: 100%;
+  height: 250px;
+}
+
+
+/* FORM ELEMENTS */
+
+
+
+.formContainer input[type=text], .formContainer input[type=submit], .formContainer select {
+    font-size: $form-font-size;
+}
+
+
+
+/** JQuery UI */
+
+.ajax_players_list {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+  }
+
+/** ADMIN */
+
+.adminCell {
+  text-align: center;
+  font-family: monospace;
+}
+
+/** Loading Screen **/
+
+#loading {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+
+	text-align:center;
+	padding-top: 20%;
+
+	opacity: .6;	
+	color: white;
+	background-color: black;
+	
+}
+
+.loading-hidden {
+	display: none;
+}
+
+.loading-shown {
+	display: block;
+}
+
+
+
+
+
+

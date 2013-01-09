@@ -1,0 +1,74 @@
+<div id="chart_bhist" class="chart-small"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+/**
+ * bhist : building history (count & average level)
+ */
+var doChart = (function () {
+	var options = {
+			grid: {
+				hoverable: true, clickable: true
+			},
+	        series: {
+	            lines: { show: true },
+	            points: { show: true }
+	        },
+	        legend: { noColumns: 2, position: "se" },
+	        xaxis: { mode: "time", timeformat: "%d/%m" },
+	        yaxes: [ { min: 1, max: 5, position: "right" }, { min: 0, max: 600, position: "left" } ]
+	    };
+    
+    var placeholder = $("#chart_bhist"); 
+    var dataCount = [];
+    var dataAverageLevel = [];
+    $.getJSON("@{Stats.getJSONBuildingsHistory(player.name)}", function(map){
+    	// Fill BUILDINGS COUNT data
+        $.each(map.count, function(index, count){
+            dataCount.push([count.name,count.value]);
+    	});
+    	// Fill BUILDINGS AVERAGE LEVEL data
+        $.each(map.averageLevel, function(index, avglvl){
+            dataAverageLevel.push([avglvl.name,avglvl.value]);
+    	});
+    	// Draw Plot
+        $.plot(placeholder, [ { label: "&{'stats.plot.buildings.legend.average.level'}", data: dataAverageLevel },
+                              { label: "&{'stats.plot.buildings.legend.count'}", data: dataCount, yaxis: 2}
+        					], options);
+    	// Add tooltip to the plot
+    	function showTooltip(x, y, contents) {
+        	$('<div id="tooltip">' + contents + '</div>').css( {
+            	position: 'absolute',
+            	display: 'none',
+            	top: y + 5,
+            	left: x + 5,
+            	border: '1px solid #fdd',
+            	padding: '2px',
+            	'background-color': '#fee',
+            	opacity: 0.80
+        	}).appendTo("body").fadeIn(200);
+    	}
+    	var previousPoint = null;
+        placeholder.bind("plothover", function (event, pos, item) {
+            //$("#x").text(pos.x.toFixed(2));
+            //$("#y").text(pos.y.toFixed(2));
+
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex; 
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2);
+                    var y = item.datapoint[1].toFixed(2);
+                    var d = new Date();
+                    d.setTime(x);
+                    showTooltip(item.pageX, item.pageY, item.series.label + " : " + y + " (" + d.toDateString() + ")");
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+        });
+    });
+});
+// Draw the chart
+doChart()
+</script>

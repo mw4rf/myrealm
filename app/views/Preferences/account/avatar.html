@@ -1,0 +1,34 @@
+#{extends "Preferences/template.html" /}
+<h2>&{'nav.preferences.avatar'}</h2>
+
+<p class="form form-inline">
+    <select name="avatarId">
+    	#{list avatars, as: 'avatar'}
+    		#{if avatar.getId().equals(player.preferences.AVATARID)}
+    			<option imgid="${avatar.getImage()}" value="${avatar.getId()}" selected>${avatar.getName()}</option>
+    		#{/if}#{else}
+    			<option imgid="${avatar.getImage()}" value="${avatar.getId()}">${avatar.getName()}</option>
+    		#{/else}
+    	#{/list}
+    </select>
+    <input type="submit" target="avatarId" value="&{'form.save'}" class="btn btn-success" />
+</p>
+
+<div id="avatar">
+	<img src="/public/images/${player.preferences.getAvatar()}" />
+</div>
+
+<script type="text/javascript">
+
+/**
+ * Avatar change
+ */
+
+$('select[name=avatarId]').live('change', function() {
+	var imgid = "/public/images/" + $('select[name=avatarId] option:selected').attr("imgid")
+	$('#avatar').html("<img align=\"middle\" src=\"" + imgid + "\" />")
+})
+
+</script>
+    
+    

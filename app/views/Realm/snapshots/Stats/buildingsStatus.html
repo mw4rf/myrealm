@@ -1,0 +1,76 @@
+#{extends 'Realm/template.html' /}
+
+<div id="chart_bstatus" class="chart"></div>
+
+<script id="source" language="javascript" type="text/javascript">
+/**
+ * bstatus : boosted & stopped buildings evolution in time
+ */
+var doChart = (function () {
+	var options = {
+			grid: {
+				hoverable: true, clickable: true
+			},
+	        series: {
+	            lines: { show: true },
+	            points: { show: true }
+	        },
+	        legend: { noColumns: 2, position: "ne" },
+	        xaxis: { mode: "time", timeformat: "%d/%m" },
+	        yaxes: [ { min: 0, max: 100, position: "right" }, { min: 0, max: 100, position: "left" } ]
+	    };
+    
+    var placeholder = $("#chart_bstatus"); 
+    var dataBoosted = [];
+    var dataStopped = [];
+    $.getJSON("@{Stats.getJSONBuildingsStatus(player.name)}", function(map){
+    	// Fill stopped buildings data
+        $.each(map.stopped, function(index, stopped){
+            dataStopped.push([stopped.name,stopped.value]);
+    	});
+    	// Fill boosted buildings data
+        $.each(map.boosted, function(index, boosted){
+            dataBoosted.push([boosted.name,boosted.value]);
+    	});
+    	// Draw Plot
+        $.plot(placeholder, [ { label: "&{'stats.plot.buildings.legend.stopped'}", data: dataStopped },
+                              { label: "&{'stats.plot.buildings.legend.boosted'}", data: dataBoosted, yaxis: 2}
+        					], options);
+    	// Add tooltip to the plot
+    	function showTooltip(x, y, contents) {
+        	$('<div id="tooltip">' + contents + '</div>').css( {
+            	position: 'absolute',
+            	display: 'none',
+            	top: y + 5,
+            	left: x + 5,
+            	border: '1px solid #fdd',
+            	padding: '2px',
+            	'background-color': '#fee',
+            	opacity: 0.80
+        	}).appendTo("body").fadeIn(200);
+    	}
+    	var previousPoint = null;
+        placeholder.bind("plothover", function (event, pos, item) {
+            //$("#x").text(pos.x.toFixed(2));
+            //$("#y").text(pos.y.toFixed(2));
+
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex; 
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2);
+                    var y = item.datapoint[1].toFixed(2);
+                    var d = new Date();
+                    d.setTime(x);
+                    showTooltip(item.pageX, item.pageY, item.series.label + " : " + y + " (" + d.toDateString() + ")");
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+        });
+    });
+});
+//Draw the chart
+doChart()
+</script>

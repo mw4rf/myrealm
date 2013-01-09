@@ -1,0 +1,11 @@
+*{ ***** ADVENTURES MARKET PUBLIC INDEX PAGE ***** }*
+#{extends 'Market/template.html' /}
+
+*{ ********** LIST CURRENT SALES ********** }*
+#{if sales != null && sales.size() > 0}
+	<div class="container-fluid">
+	#{list sales, as: 'sale'}
+		#{include 'Market/adventures/public/_adventureSale.html' /}
+	#{/list}
+	</div>
+#{/if}

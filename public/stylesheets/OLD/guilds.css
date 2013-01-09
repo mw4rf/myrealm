@@ -1,0 +1,259 @@
+
+/** GENERIC CONTAINERS **/
+
+.guildSectionHeader {
+	font-size: 1.3em;
+	font-variant: small-caps;
+	border-top: 2px solid #FFF;
+	border-bottom: 2px solid #FFF;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+.guildContainer {
+	margin-bottom: 1em;
+}
+
+.guildSideSectionHeader {
+	font-size: 1.1em;
+	font-weight: bold;
+	border-top: 2px solid #FFF;
+	border-bottom: 2px solid #FFF;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+.guildSideContainer {
+	margin-bottom: 1.5em;
+}
+
+.guildInfo {
+	font-family: monospace;
+	color: gray;
+	font-size: 0.9em;
+}
+
+/**  Polls **/
+
+.guildPollLine {
+	padding-left: 1em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
+
+.guildPollVoter {
+	font-family: monospace;
+	color: gray;
+	font-size: 0.9em;
+}
+
+.guildPollQuestion {
+	font-variant: small-caps;
+	margin-bottom: 1.2em;
+}
+
+.guildPollOption {
+	font-weight: bold;
+}
+
+.guildPollBar {
+	background-color: red;
+	text-align: right;
+}
+
+.guildPollPercent {
+	font-family: monospace;
+	color: gray;
+	font-size: 0.9em;
+}
+
+.guildPollMyVote {
+	background-color: #FEEFF9;
+	border: 1px solid #DBDBDB;
+}
+
+.guildPollOthersVote {
+	background-color: #F0FECD;
+	border: 1px solid #DBDBDB;
+}
+
+.guildPollTotal {
+	margin-top:1.2em;
+	font-family: monospace;
+	color: gray;
+}
+
+/** Wall message types **/
+
+.guildWallMessage_stranger {
+	background-color: transparent;
+	border: 1px solid #DBDBDB;
+}
+
+.guildWallMessage_member {
+	background-color: #BFE0FF;
+	border: 1px solid #DBDBDB;
+}
+
+.guildWallMessage_officer {
+	background-color: #FEEFF9;
+	border: 1px solid #DBDBDB;
+}
+
+/** Links **/
+
+.guildLinkName {
+	font-variant:  small-caps;
+}
+
+.guildLinkDescription {
+	margin-bottom:1.2em;
+	font-family: monospace;
+	color: gray;
+}
+
+/** Events **/
+
+.guildEvent {
+	margin-bottom: 1em;
+}
+
+.guildEventName {
+	font-variant: small-caps;
+	margin-bottom: 1.2em;
+}
+
+/** Officer notes types **/
+
+.officernote_self {
+	background-color: #FEEFF9;
+	border: 1px solid #DBDBDB;
+}
+
+.officernote_other {
+	background-color: #F0FECD;
+	border: 1px solid #DBDBDB;
+}
+
+/** Admin **/
+
+.guildAdminMemberContainer {
+	border: 1px solid #DBDBDB;
+	margin: 0.3em 0 0.3em 0;
+	padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.guildAdminMemberName {
+
+}
+
+.guildAdminMemberDates {
+
+}
+
+.guildAdminMemberRank {
+
+}
+
+.guildAdminMemberKicked {
+	background-color: #FEEFF9;
+}
+
+.guildAdminMemberLeft {
+	background-color: #F0FECD;
+}
+
+.guildRank1 {
+	background-color: #F0FECD;
+	font-family: monospace;
+}
+
+.guildRank2 {
+	background-color: #F0FECD;
+	font-weight: bold;
+	font-family: monospace;
+	color: green;
+}
+
+.guildRank3 {
+	background-color: #FEEFF9;
+	font-family: monospace;
+}
+
+.guildRank4 {
+	background-color: #FEEFF9;
+	font-weight: bold;
+	font-family: monospace;
+	color: red;
+}
+
+/** SPECIAL CONTAINERS **/
+
+#guildMembersList {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+#guildODayMember {
+	text-align: center;
+}
+
+
+
+/** BELOW : COLUMNS LAYOUT **/
+
+/* column container */
+.colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+	float:left;
+	width:100%;			/* width of page */
+	position:relative;
+}
+.col1,
+.col2,
+.col3 {
+	float:left;
+	position:relative;
+	padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead
+					only padding top and bottom is included here, make it whatever value you need */
+	overflow:hidden;
+}
+/* 3 Column settings */
+.threecol {
+	background-color:#EEEFEE;		/* right column background colour */
+}
+.threecol .colmid {
+	right:25%;			/* width of the right column */
+	 background-color:#F5F5F5;		/* center column background colour */
+}
+.threecol .colleft {
+	right:50%;			/* width of the middle column */
+	background-color:#EEEFEE;	/* left column background colour */
+}
+.threecol .col1 {
+	width:46%;			/* width of center column content (column width minus padding on either side) */
+	left:102%;			/* 100% plus left padding of center column */
+	border-radius: 1em; /* center block / right border radius */
+}
+.threecol .col2 {
+	width:21%;			/* Width of left column content (column width minus padding on either side) */
+	left:31%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+.threecol .col3 {
+	width:21%;			/* Width of right column content (column width minus padding on either side) */
+	left:85%;			/* Please make note of the brackets here:
+					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+}

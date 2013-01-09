@@ -1,0 +1,47 @@
+
+
+# temporary files
+\.tmp$
+\.temp$
+^tmp/.*$
+~$
+
+# OS X
+.DS_Store$
+
+# build artifacts
+\.pyc$
+^dist/.*$
+
+# libraries
+# ^lib/.*$
+
+# dumps
+^pg_dumps/.*$
+
+# logs
+^logs/.*$
+
+# IntelliJ IDEA
+\.iml$
+\.ipr$
+\.iws$
+^\.idea/$
+
+# NetBeans
+/nbproject/.*$
+/profiles.xml$
+
+# Eclipse
+\.classpath$
+\.project$
+\.settings$
+eclipse$
+
+##############
+syntax: glob
+
+server.pid
+db/*
+application.conf
+TODO

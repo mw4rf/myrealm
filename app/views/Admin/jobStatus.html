@@ -1,0 +1,36 @@
+#{extends 'Admin/template.html' /}
+
+<div class="header1">Job Status</div>
+
+<p><strong>Job: ${request.action}</strong></p>
+
+#{if done}
+	<div class="flash_success">JOB SUCCESSFULLY COMPLETED</div>
+#{/if}
+#{else}
+	<div class="flash_info">JOB RUNNING</div>
+#{/else}
+
+	<div style="width:100%; border: 1px solid black;">
+		<div style="width:${percent}%; background-color:#{if done}#DFF2BF#{/if}#{else}#FEEFB3#{/else};text-align:right;">
+			${percent}%
+		</div>
+	</div>
+
+<br />
+
+#{if !done}
+	<b>Current:</b> ${current.raw()}
+#{/if}
+
+<p>
+	${message.raw()}
+</p>
+
+
+
+#{if !done}
+	<script>
+		window.setTimeout('location.reload()', 3000); //reloads after 3 second
+	</script>
+#{/if}

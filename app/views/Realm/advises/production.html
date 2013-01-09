@@ -1,0 +1,12 @@
+#{extends 'Realm/template.html' /}
+
+<ul class="unstyled">
+#{list advices, as: 'suggestion'}
+	#{if suggestion.hasLackingGood()}
+		<li class="negativeQuantity">&{'realm.index.suggestion.mustbuild.lack', suggestion.getLackingGoodQuantity(), suggestion.getLackingGoodName(), suggestion.getQuantity(), suggestion.getBuildingName()}</li>
+	#{/if}
+	#{if suggestion.hasExcessGood()}
+		<li class="positiveQuantity">&{'realm.index.suggestion.mustbuild.excess', suggestion.getExcessGoodQuantity(), suggestion.getExcessGoodName(), suggestion.getQuantity(), suggestion.getBuildingName()}</li>
+	#{/if}
+#{/list}
+</ul>

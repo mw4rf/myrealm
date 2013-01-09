@@ -1,0 +1,21 @@
+%{ world.BuildingGoodMap bgm = good.getBuildingMap(); }%
+
+<b>${good.name}</b>
+
+#{if bgm.getProducedBy().size() > 0}
+<p class='positiveQuantity'>
+	<u>&{'realm.good.produced.by'}</u>
+	#{list bgm.getProducedBy().keySet(), as: 'gm'}
+		<br />&nbsp;&nbsp;&nbsp;&raquo;&nbsp;${gm}
+	#{/list}
+</p>
+#{/if}
+
+#{if bgm.getNeededBy().size() > 0}
+<p class='negativeQuantity'>
+	<u>&{'realm.good.needed.by'}</u>
+	#{list bgm.getNeededBy().keySet(), as: 'gm'}
+		<br />&nbsp;&nbsp;&nbsp;&laquo;&nbsp;${gm}
+	#{/list}
+</p>
+#{/if}
