@@ -1,0 +1,50 @@
+<div class="container-fluid">
+
+		#{ifErrors}
+		<div class="row-fluid">
+			<div class="span1"></div>
+			<div class="alert alert-error span10">
+				<a class="close" data-dismiss="alert">×</a>
+				<h4 class="alert-heading">&{'flash.error'}</h4>
+				#{errors}
+		       		<li>${error}</li>
+		   		#{/errors}
+		   	</div>
+		   	<div class="span1"></div>
+		</div>
+		#{/ifErrors}
+		
+		#{if flash.info}
+		<div class="row-fluid">
+			<div class="span1"></div>
+			<div class="alert alert-info span10">
+				<a class="close" data-dismiss="alert">×</a>
+				${flash.info.raw()}
+			</div>
+			<div class="span1"></div>
+		</div>
+		#{/if}
+		
+		#{if flash.error}
+		<div class="row-fluid">
+			<div class="span1"></div>
+			<div class="alert alert-error span10">
+				<a class="close" data-dismiss="alert">×</a>
+				${flash.error.raw()}
+			</div>
+			<div class="span1"></div>
+		</div>
+		#{/if}
+		
+		#{if flash.success}
+		<div class="row-fluid">
+			<div class="span1"></div>
+			<div class="alert alert-success span10">
+				<a class="close" data-dismiss="alert">×</a>
+				${flash.success.raw()}
+			</div>
+			<div class="span1"></div>
+		</div>
+		#{/if}
+
+</div>

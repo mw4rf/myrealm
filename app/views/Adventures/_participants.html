@@ -1,0 +1,12 @@
+#{if adventure.participants.size() > 0}
+				#{if !adventure.player.name.equals(player.name)}
+            		&{'adventure.owner'} 
+            		<span class="tagItem">#{a @Adventures.index(adventure.player.name)}${adventure.player.name}#{/a}</span>
+            		&nbsp;
+            	#{/if}
+            			
+				&{'adventure.participants'}
+				#{list adventure.participants, as: 'participant'}
+					<span class="tagItem">#{a @Adventures.index(participant.name)}${participant.name}#{/a}</span>&nbsp;
+				#{/list}
+#{/if}

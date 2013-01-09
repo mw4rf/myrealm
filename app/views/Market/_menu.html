@@ -1,0 +1,35 @@
+<ul class="nav nav-list">
+
+	*{ ***** Index ***** }*
+	<li #{if request.action.equals("Market.index")} class="active"#{/if}>
+		#{a @Market.index()}
+			<i class="icon-plus-sign#{if request.action.equals("Market.index")} icon-white#{/if}"></i> &{'nav.market.index'}
+		#{/a}
+	</li>
+	
+	*{ ***** Adventures ***** }*
+	<li #{if request.action.equals("Market.adventuresPublic")} class="active"#{/if}>
+		#{a @Market.adventuresPublic()}
+			<i class="icon-plus-sign#{if request.action.equals("Market.adventuresPublic")} icon-white#{/if}"></i> &{'nav.market.public'}
+		#{/a}
+	</li>
+	#{if player != null}
+	<li class="nav-header">&{'nav.market.adventures'}</li>
+	<li #{if request.action.equals("Market.adventuresPrivateSales")} class="active"#{/if}>
+		#{a @Market.adventuresPrivateSales(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Market.adventuresPrivateSales")} icon-white#{/if}"></i> &{'nav.market.private.sales'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Market.adventuresPrivatePurchases")} class="active"#{/if}>
+		#{a @Market.adventuresPrivatePurchases(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Market.adventuresPrivatePurchases")} icon-white#{/if}"></i> &{'nav.market.private.purchases'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Market.adventuresSale")} class="active"#{/if}>
+		#{a @Market.adventuresSale(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Market.adventuresSale")} icon-white#{/if}"></i> &{'nav.market.new'}
+		#{/a}
+	</li>
+	#{/if}
+	
+</ul>

@@ -1,0 +1,32 @@
+%{
+
+	String bgclass = "";
+	if(message != null) {
+		if(message.officer.name.equals(controllers.Application.getSessionLogin())) {
+			bgclass = "officernote_self";
+		} else {
+			bgclass = "officernote_other";
+		}
+	}
+
+	// Display div ?
+	if(display == null || display.isEmpty())
+		String display = "block";
+}%
+
+#{if message != null && message.content != null && !message.content.isEmpty()}
+<div id="guildWallMessage_${message.id}" class="container comment ${bgclass}" style="display:${display};">
+	<a name="${message.id}"></a>
+	#{if message.getOfficer().preferences != null}
+		<img class="comment_avatar" src="/public/images/${message.getOfficer().preferences.getAvatar()}" />
+	#{/if}#{else}
+		<img class="comment_avatar" src="/public/images/avatars/Avatar00.png" />
+	#{/else}
+	<div class="comment_meta">
+		&{'guild.members.officer.notes.note.by', message.officer}
+		#{a @Guilds.officerNotes(guild.tag, message.member.player.name)}&{'guild.members.officer.notes.note.about', message.member.player.name}#{/a},
+		&{'guild.members.officer.notes.note.time', message.publishedAt.format()}
+	</div>
+	<div class="comment_text" id="comment_text_${message.id}">${message.content.raw().nl2br()}</div>
+</div>
+#{/if}

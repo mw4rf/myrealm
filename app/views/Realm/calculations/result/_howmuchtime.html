@@ -1,0 +1,29 @@
+#{if action.equals("Realm.howMuchTime")}
+	<linefeed />
+	<div class="flash_info">&{'realm.index.calculations.how_much_time_result', h, m, s, goodQuantity, goodName}</div>
+#{/if}
+#{elseif action.equals("Realm.howMuchTimeSpend")}
+	<linefeed />
+	<div class="flash_info">&{'realm.index.calculations.how_much_time_spend_result', h, m, s, goodQuantity, goodName}</div>
+#{/elseif}
+#{elseif action.equals("Realm.howMuchTimeForBoost")}
+	<linefeed />
+	#{if canMake}
+		<div class="flash_success">
+			&{'realm.index.calculations.boosts_result', h, m, s, boostQuantity, boostName}
+			#{if hasProduct}
+				<br />
+				&{'realm.index.calculations.boosts_product', productQuantity, productName}
+			#{/if}
+		</div>
+	#{/if}#{else}
+		<div class="flash_error">&{'realm.index.calculations.boosts_fail', boostName}</div>
+	#{/else}
+	<ul>
+	#{list goodstime, as: 'msg'}
+		<li>${msg.raw()}</li>
+	#{/list}
+	</ul>
+#{/elseif}
+#{else}
+#{/else}

@@ -1,0 +1,16 @@
+<div class="container-fluid well">
+	<div class="row-fluid">
+		<div class="span7">
+			<label>&{'timers.autoreload'}</label>
+			<input type="submit" class="btn btn-large btn-danger" id="switchAutoreload" started="0" altvalue="&{'timers.autoreload.on'}" value="&{'timers.autoreload.off'}" />
+		</div>
+		<div class="span5 right">
+			<label>&{'timers.autoreload.next'}</label>
+			<span id="nextReload" style="font-weight: bolder;">?</span> &{'time.seconds'}
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	#{include 'Timers/_reload.js' /}
+</script>

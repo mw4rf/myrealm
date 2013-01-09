@@ -1,0 +1,73 @@
+*{ ***** Home menu ***** }*
+
+<ul class="nav nav-list">
+	<li class="nav-header">&{'nav.home.header', player.name}</li>
+	
+	*{ ***** Index ***** }*
+	<li #{if request.action.equals("Home.index")} class="active"#{/if}>
+		#{a @Home.index(player.name)}
+			<i class="icon-home#{if request.action.equals("Home.index")} icon-white#{/if}"></i> &{'nav.home.index'}
+		#{/a}
+	</li>
+	
+	*{ ***** Nota Bene ***** }*
+	<li #{if request.action.equals("Home.notabene")} class="active"#{/if}>
+		#{a @Home.notabene(player.name)}
+			<i class="icon-pencil#{if request.action.equals("Home.notabene")} icon-white#{/if}"></i> &{'nav.home.notabene'}
+		#{/a}
+	</li>
+	
+	*{ ***** Stats ***** }*
+	<li #{if request.action.equals("Home.stats")} class="active"#{/if}>
+		#{a @Home.stats(player.name)}
+			<i class="icon-signal#{if request.action.equals("Home.stats")} icon-white#{/if}"></i> &{'nav.home.stats'}
+		#{/a}
+	</li>
+	
+	*{ ***** Activity ***** }*
+	<li #{if request.action.equals("Home.activity")} class="active"#{/if}>
+		#{a @Home.activity(player.name)}
+			<i class="icon-list-alt#{if request.action.equals("Home.activity")} icon-white#{/if}"></i> &{'nav.home.activity'}
+		#{/a}
+	</li>
+	
+	*{ ***** Social (Friends & Guild) ***** }*
+	<li class="nav-header">&{'nav.home.social'}</li>
+	<li #{if request.action.equals("Home.friends")} class="active"#{/if}>
+		#{a @Home.friends(player.name)}
+			<i class="icon-user#{if request.action.equals("Home.friends")} icon-white#{/if}"></i> &{'nav.home.friends'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Home.guild")} class="active"#{/if}>
+		#{a @Home.guild(player.name)}
+			<i class="icon-adjust#{if request.action.equals("Home.guild")} icon-white#{/if}"></i> &{'nav.home.guild'}
+		#{/a}
+	</li>
+	
+	*{ ***** Public Pages ***** }*
+	<li class="nav-header">&{'nav.home.public'}</li>
+	<li>
+		#{a @Application.playersList()}
+			<i class="icon-list"></i> &{'nav.home.public.players'}
+		#{/a}
+	</li>
+	<li>
+		#{a @Application.adventuresList()}
+			<i class="icon-list"></i> &{'nav.home.public.adventures'}
+		#{/a}
+	</li>
+	<li>
+		#{a @Application.actionsList()}
+			<i class="icon-list"></i> &{'nav.home.public.actions'}
+		#{/a}
+	</li>
+	
+	*{ ***** Changelog ***** }*
+	<li class="nav-header">&{'app.name'}</li>
+	<li #{if request.action.equals("Home.changelog")} class="active"#{/if}>
+		#{a @Home.changelog(player.name)}
+			<i class="icon-fire#{if request.action.equals("Home.changelog")} icon-white#{/if}"></i> &{'nav.home.changelog'}
+		#{/a}
+	</li>
+
+</ul>

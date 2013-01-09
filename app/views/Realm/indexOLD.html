@@ -1,0 +1,387 @@
+#{extends 'main.html' /}
+#{set title: 'Realm' /}
+
+*{ ********** Production cycle duration ********** }*
+<div id="setCycleTimeFormContainer" class="container formContainer" style="display:none">
+    #{form @Realm.setCycleTime(player.name)}
+    &{'realm.index.cycletime'} :
+    <input type="text" size="2" name="productionTimeDays" />&{'time.days'}
+    <input type="text" size="2" name="productionTimeHours" />&{'time.hours'}
+    <input type="text" size="2" name="productionTimeMinutes" />&{'time.minutes'}
+    <input type="text" size="2" name="productionTimeSeconds" />&{'time.seconds'}
+    <input type="submit" value="&{'form.save'}" />
+#{/form}
+</div>
+
+*{ ********** Boost cycle ********** }*
+<div id="setBoostCycleFormContainer" class="container formContainer" style="display:none">
+    #{form @Realm.setBoostCycle(player.name)}
+    &{'realm.index.boostcycle'} :
+    <select name="hours">
+    	<option value="1" #{if player.boostCycle == 3600}selected#{/if}>1 &{'time.hours'}</option>
+    	<option value="2" #{if player.boostCycle == 2*3600}selected#{/if}>2 &{'time.hours'}</option>
+    	<option value="3" #{if player.boostCycle == 3*3600}selected#{/if}>3 &{'time.hours'}</option>
+    	<option value="6" #{if player.boostCycle == 6*3600}selected#{/if}>6 &{'time.hours'}</option>
+    	<option value="12" #{if player.boostCycle == 12*3600}selected#{/if}>12 &{'time.hours'}</option>
+    	<option value="24" #{if player.boostCycle == 24*3600}selected#{/if}>24 &{'time.hours'}</option>
+    	<option value="48" #{if player.boostCycle == 48*3600}selected#{/if}>48 &{'time.hours'}</option>
+    	<option value="72" #{if player.boostCycle == 72*3600}selected#{/if}>72 &{'time.hours'}</option>
+    </select>
+    &{'realm.index.boostpower'} :
+    <select name="multiplier">
+    	<option value="2" #{if player.boostMultiplier == 2}selected#{/if}>x2</option>
+    	<option value="3" #{if player.boostMultiplier == 3}selected#{/if}>x3</option>
+    	<option value="4" #{if player.boostMultiplier == 4}selected#{/if}>x4</option>
+    </select>
+    <input type="submit" value="&{'form.save'}" />
+#{/form}
+</div>
+
+*{ Add new Building }*
+#{include 'Realm/_formNewBuilding.html' /}
+
+*{ Add new Group }*
+#{include 'Realm/_formNewGroup.html' /}
+
+*{ ********** PRODUCTION ********** }*
+<div id="productionratios_container" class="container" style="overflow:hidden;">
+    <div class="header1"><a href="#" onclick="toggleshow('#productionratios', true); return false;">&{'realm.index.production'}</a> &{'realm.index.goodsbalance', player.formatCycleTime()}</div>
+	<div id="productionratios" player="${player.name}" page="index" style="overflow:hidden;#{if player.preferences != null && player.preferences.UNFOLD_PRODUCTION}display:block;#{/if}#{else}display:none;#{/else}">
+		#{if goods.size() > 0 || pgoods.size() > 0 || ngoods.size() > 0}
+    		#{include 'Realm/_productionRatios.html' /}
+    	#{/if}
+	</div>
+	<div class="spinner"><img src="/public/images/app/spinner.gif" /><br />&{'spinner'}</div>
+</div>
+
+#{if player != null && player.preferences != null && player.preferences.SHOW_PRODUCTION_RELATIVE}
+<div id="productionrelative_container" class="container" style="overflow:hidden;">
+	<div class="header1"><a href="#" onclick="toggleshow('#productionrelative_inner', true); return false;">&{'realm.index.production.stats'}</a></div>
+	<div id="productionrelative_inner" style="#{if player.preferences != null && player.preferences.UNFOLD_PRODUCTION_RELATIVE}display:block;#{/if}#{else}display:none;#{/else}">
+		#{list ngoods, as:'good'}
+			<span title="#{include 'Realm/_buildingGoodMap.html' /}" class="statslink good hand" good="${good.name}" player="${player.name}"><img src="/public/${good.getImage()}" /></span>&nbsp;
+		#{/list}
+		<div id="productionrelative"></div>
+	</div>
+</div>
+#{/if}
+
+*{ ********** Suggestions ********** }*
+#{if player != null && player.preferences != null && player.preferences.SHOW_ADVISES}
+<div class="container">
+	<div class="header1"><a href="#" onclick="togglesuggestions('${player.name}'); return false;">&{'realm.index.suggestions'}</a></div>
+	<div id="suggestions" style="#{if player.preferences != null && player.preferences.UNFOLD_ADVISES}display:block;#{/if}#{else}display:none;#{/else}">
+		#{if suggestions.size() > 0}
+			#{include 'Realm/_suggestions.html' /}
+		#{/if}
+		#{elseif player.preferences != null && player.preferences.UNFOLD_ADVISES}
+			<div id="suggestions_button">
+				<input type="submit" value="&{'realm.index.suggestions.make'}" onclick="makeSuggestions('${player.name}'); return false;" />
+			</div>
+		#{/elseif}
+		<div class="container" id="suggestions_container">
+			<div id="suggestions_result"></div>
+			<div class="spinner"><img src="/public/images/app/spinner.gif" /><br />&{'spinner'}</div>
+		</div>
+	</div>
+</div>
+#{/if}
+
+*{ ********** Boosts/Soldiers production ********** }*
+#{if (boostsRatio.size() > 0 || soldiersRatio.size > 0) && (player.preferences != null && player.preferences.SHOW_UNITS)}
+<div class="container">
+	<div class="header1"><a href="#" onclick="toggleshow('#itemsratios', true); return false;">&{'realm.index.items'}</a></div>
+	<div id="itemsratios" style="overflow:hidden;#{if player.preferences != null && player.preferences.UNFOLD_UNITS}display:block;#{/if}#{else}display:none;#{/else}">
+		<br />
+
+		*{ Boosts }*
+		<div style="position:relative;float:left;width:49%;">
+			<div class="headerbg header3">&{'realm.index.items.boosts', player.formatCycleTime()}</div>
+			<ul style="list-style-type:none;padding-left:0;margin:0;">
+				#{list boostsRatio, as: 'boost'}
+					#{if boost.getRealQuantity() > 0}
+						<li>
+							<img src="/public/${boost.getImage()}" />
+							<span class="goodItem">
+								<b>${boost.getRealQuantity()} ${boost.getName()}</b>
+								#{if boost.getProductQuantity() > 0}
+									<i>(${boost.getRealProductQuantity()} ${boost.getProductName()})</i>
+								#{/if}
+								(&{'realm.index.items.ratios'}:
+								#{list boost.getGoods(), as: 'good'}
+									#{if good.getRealQuantity() == boost.getRealQuantity()}
+										<span class="negativeQuantity">
+									#{/if}#{else}
+										<span class="positiveQuantity">
+									#{/else}
+									<img src="/public/${good.getImage()}" />${good.getRealQuantity()}</span>
+								#{/list})
+							</span>
+						</li>
+					#{/if}
+				#{/list}
+			</ul>
+		</div>
+
+		*{ Soldiers }*
+		<div style="position:relative;float:right;width:49%;">
+			<div class="headerbg header3">&{'realm.index.items.armies', player.formatCycleTime()}</div>
+			<ul style="list-style-type:none;padding-left:0;margin:0;">
+				#{list soldiersRatio, as: 'soldier'}
+					#{if soldier.getRealQuantity() > 0}
+						<li>
+							<img src="/public/${soldier.getImage()}" />
+							<span class="goodItem">
+								<b>${soldier.getRealQuantity()} ${soldier.getName()}</b>
+								(&{'realm.index.items.ratios'}:
+								#{list soldier.getGoods(), as: 'good'}
+									#{if good.getRealQuantity() == soldier.getRealQuantity()}
+										<span class="negativeQuantity">
+									#{/if}#{else}
+										<span class="positiveQuantity">
+									#{/else}
+									<img src="/public/${good.getImage()}" />${good.getRealQuantity()}</span>
+								#{/list})
+							</span>
+						</li>
+					#{/if}
+				#{/list}
+			</ul>
+		</div>
+
+	</div>
+</div>
+#{/if}
+
+*{ ********** Calculations ********** }*
+#{if player.preferences == null || player.preferences.SHOW_CALCULATIONS}
+<div class="container">
+	<div class="header1"><a href="#" onclick="toggleshow('#calculations', false); return false;">&{'realm.index.calculations'}</a></div>
+	<div id="calculations" style="#{if player.preferences != null && player.preferences.UNFOLD_CALCULATIONS}display:block;#{/if}#{else}display:none;#{/else}">
+		<br />
+		*{ How much time for X goods ? }*
+    	&{'realm.index.calculations.how_much_time'}
+        <input id="HMgoodQuantity" type="text" value="10" size="4" />
+        <select id="HMgoodName">
+            #{list items:goods, as:'good'}
+            #{if good.getRealQuantity() > 0}
+				<option value="${good.getName()}">${good.getName()}</option>
+			#{/if}
+			#{/list}
+			</select> ?
+			<input type="submit" value="&{'form.calc'}" onclick="calcHMT('${player.name}'); return false;" />
+			<div id="HMresult"></div>
+			<br />
+
+		*{ When will I lack resource X ? }*
+		&{'realm.index.calculations.how_much_time_spend'}
+		<input id="HMSpendGoodQuantity" type="text" value="10" size="4" />
+		<select id="HMSpendGoodName">
+			#{list items:goods, as:'good'}
+			#{if good.getRealQuantity() < 0}
+				<option value="${good.getName()}">${good.getName()}</option>
+			#{/if}
+			#{/list}
+		</select> ?
+		<input type="submit" value="&{'form.calc'}" onclick="calcHMTSpend('${player.name}'); return false;" />
+		<div id="HMSpendResult"></div>
+		<br />
+
+		*{ What would change X buildings ? }*
+		&{'realm.index.ratio_simulation'}
+		<input id="RSbuildingQuantity" type="text" value="1" size="4" />
+        <select id="RSbuildingName">
+            #{list items:worldBuildings, as:'wbuilding'}
+            	#{if player.hasBuilding(wbuilding.name)}
+				<option value="${wbuilding.name}">${wbuilding.name}</option>
+				#{/if}
+			#{/list}
+		</select>
+		&{'realm.building.level'}
+		<select id="RSbuildingLevel">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		?
+		<input type="submit" value="&{'form.calc'}" onclick="calcRS('${player.name}'); return false;" />
+		<div id="RSresult"></div>
+		<br />
+
+		*{ How much time to make X boosts ? }*
+		&{'realm.index.calculations.boosts'}
+		<input id="boostsQuantity" type="text" value="10" size="4" />
+		<select id="boostsName">
+			#{list items:boosts, as:'boost'}
+				<option value="${boost.getName()}">
+					${boost.getName()}
+					#{if boost.hasProduct() == true}
+						(+${boost.getProductQuantity()} ${boost.getProductName()})
+					#{/if}
+				</option>
+			#{/list}
+		</select> ?
+		<input type="submit" value="&{'form.calc'}" onclick="calcBoosts('${player.name}'); return false;" />
+		<div id="boostsResult"></div>
+	</div>
+</div>
+#{/if}
+
+*{ Buildings : SIMULATED }*
+#{if player.buildings.size() > 0 && player.countSimulatedBuildings() > 0 && (player.preferences == null || player.preferences.SHOW_BUILDINGS_SIMULATED)}
+<div class="container">
+	<div class="header1"><a href="#" onclick="toggleshow('#simulations', true); return false;">&{'realm.index.buildings.simulated'}</a> (${player.countSimulatedBuildings()})</div>
+	<div id="simulations" style="#{if player.preferences != null && player.preferences.UNFOLD_BUILDINGS_SIMULATED}display:block;#{/if}#{else}display:none;#{/else}">
+
+	*{ *** Buildings List *** }*
+	%{ String ntemp = ""; }%
+	#{list player.buildings, as: 'building'}
+		#{if building.simulated}
+			#{if !ntemp.equals(building.name)}
+				%{ ntemp = building.name; }%
+				<linefeed />
+			#{/if}
+			#{include "Realm/_buildingLine.html" /}
+		#{/if}
+	#{/list}
+
+
+	*{ *** Menu *** }*
+	<linefeed />
+	<div class="flash_error">
+		<a href="@{Realm.deleteSimulation(player.name)}" message="&{'realm.index.simulations.deleteall.confirmation'}" class="confirmationLink">&{'realm.index.simulations.deleteall'}</a>
+	</div>
+
+	*{ *** Ratio for simulated buildings *** }*
+	<linefeed />
+	<div style="overflow:hidden;">
+
+	*{ ** Produced/Needed Goods ** }*
+	<div style="position:relative;float:left;width:45%;margin:auto;">
+		*{ Good Produced }*
+		<div style="position:relative;float:left;width:45%;margin:auto;">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.produced'}</div>
+			<table>
+			#{list pGoodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		*{ Good Needed }*
+		<div style="position:relative;float:right;width:45%;margin:auto;">
+			<div class="negativeQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.needed'}</div>
+			<table>
+			#{list nGoodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() < 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+	</div>
+
+	*{ ** Goods Ratio ** }*
+	<div style="position:relative;float:right;width:45%;margin:auto;">
+		*{ Good excess }*
+		<div style="position:relative;float:left;width:45%;margin:auto;">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.excess'}</div>
+			<table>
+			#{list goodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		*{ Good deficit }*
+		<div style="position:relative;float:right;width:45%;margin:auto;">
+			<div class="negativeQuantity headerbg header3">&{'realm.index.buildings.simulated.ratio.deficit'}</div>
+			<table>
+			#{list goodsForSimulated, as: 'good'}
+				#{if good.getRealQuantity() < 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+	</div>
+
+	</div>
+	</div>
+</div>
+#{/if}
+
+*{ Buildings : BOOSTED }*
+#{if player.buildings.size() > 0 && player.countBoostedBuildings() > 0 && (player.preferences == null || player.preferences.SHOW_BUILDINGS_BOOSTED)}
+<div class="container">
+	<div class="header1"><a href="#" onclick="toggleshow('#boostsbuildings', true); return false;">&{'realm.index.buildings.boosted'}</a> (${player.countBoostedBuildings()})</div>
+	<div id="boostsbuildings" style="#{if player.preferences != null && player.preferences.UNFOLD_BUILDINGS_BOOSTED}display:block;#{/if}#{else}display:none;#{/else}">
+	*{ *** Buildings List *** }*
+	%{ String ntemp = ""; }%
+	#{list player.buildings, as: 'building'}
+		#{if building.boosted}
+			#{if !ntemp.equals(building.name)}
+				%{ ntemp = building.name; }%
+				<linefeed />
+			#{/if}
+			#{include "Realm/_buildingLine.html" /}
+		#{/if}
+	#{/list}
+
+	*{ *** Ratio for boosted buildings (what do we gain with those boosts ?) *** }*
+	<linefeed />
+	<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.boosted.gain', player.boostMultiplier}</div>
+	<table>
+	#{list goodsFromBoost, as: 'good'}
+		#{if good.getRealQuantity() > 0}
+			<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+		#{/if}
+	#{/list}
+	</table>
+	</div>
+</div>
+#{/if}
+
+*{ ********** BUILDINGS LIST ********** }*
+#{if player.buildings.size() > 0}
+	*{ ***** BY TYPE ***** }*
+	<div class="container">
+		<div class="header1"><a href="#" onclick="toggleshow('#buildings_list', true); return false;">&{'realm.index.buildings'}</a> (${player.buildings.size()})</div>
+		<div id="buildings_list" style="#{if player.preferences != null && player.preferences.UNFOLD_BUILDINGS}display:block;#{/if}#{else}display:none;#{/else}">
+			#{if player.preferences == null || !player.preferences.SHOW_ALL_BUILDINGS}
+				#{include "Realm/_dynamicBuildingList.html" /}
+			#{/if}
+			#{else}
+				#{include "Realm/_fullBuildingList.html" /}
+			#{/else}
+		</div>
+	</div>
+	*{ ***** BY AREA ***** }*
+	#{if player.preferences != null && player.preferences.SHOW_AREAS}
+		<div class="container">
+			<div class="header1"><a href="#" onclick="toggleshow('#buildings_list_area', true); return false;">&{'realm.index.buildings.area'}</a></div>
+			<div id="buildings_list_area" style="#{if player.preferences != null && player.preferences.UNFOLD_AREAS}display:block;#{/if}#{else}display:none;#{/else}">
+				#{include "Realm/_areaMap.html" /}
+				<div id="buildings_area_group"></div>
+			</div>
+		</div>
+	#{/if}
+	*{ ***** BY GROUP ***** }*
+	#{if player.groups.size() > 0 && player.preferences != null && player.preferences.SHOW_GROUPS}
+		<div class="container">
+			<div class="header1"><a href="#" onclick="toggleshow('#buildings_list_group', true); return false;">&{'realm.index.buildings.group'}</a></div>
+			<div id="buildings_list_group" style="#{if player.preferences != null && player.preferences.UNFOLD_GROUPS}display:block;#{/if}#{else}display:none;#{/else}">
+				#{include 'Realm/_groupsList.html' /}
+				<div id="buildings_group_group"></div>
+			</div>
+		</div>
+	#{/if}
+#{/if}
+
+<script type="text/javascript">
+	#{include 'Realm/_ajaxActions.js' /}
+</script>

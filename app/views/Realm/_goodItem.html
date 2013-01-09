@@ -1,0 +1,6 @@
+#{if good.getRealQuantity() < 0}
+	<span class="negativeQuantity goodItem" title="#{include 'Realm/_buildingGoodMap.html' /}" my="top left" at="bottom left"><img valign="middle" src="/public/${good.getImage()}" /> ${good.getRealQuantity()} ${good.getName()}</span>
+#{/if}
+#{else}
+	<span class="positiveQuantity goodItem" title="#{include 'Realm/_buildingGoodMap.html' /}"  my="top left" at="bottom left"><img valign="middle" src="/public/${good.getImage()}" /> ${good.getRealQuantity()} ${good.getName()}</span>
+#{/else}

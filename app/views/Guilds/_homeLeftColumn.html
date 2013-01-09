@@ -1,0 +1,51 @@
+*{ ********** Banner ********** }*
+<div class="guildSideContainer" style="text-align:center;padding-top:1em;">
+	<img src="/public/images/${guild.getBanner()}" />
+</div>
+
+*{ ********** Guild Admin ********** }*
+#{if isGuildMaster}
+	<div class="guildSideSectionHeader">
+		<span style="color:red;">#{a @Guilds.admin(guild.tag)}&{'guild.admin'}#{/a}</span>
+	</div>
+#{/if}
+
+*{ ********** Recruitment status ********** }*
+#{if contenteditable}
+	<div id="guildRecruitmentStatusEditable" guildId="${guild.id}" class="guildSideSectionHeader">
+#{/if}#{else}
+	<div id="guildRecruitmentStatus" class="guildSideSectionHeader">
+#{/else}
+		<div id="guildRecruitmentStatusResponse">
+			#{include "Guilds/_guildRecruitmentStatus.html" /}
+		</div>
+	</div>
+
+*{ ********** Recruitment policy ********** }*
+<div class="guildSideSectionHeader">&{'guild.recruitment.policy'}</div>
+<div id="guildRecruitmentPolicy" class="guildSideContainer" guildId="${guild.id}" contenteditable="${contenteditable}">
+	#{if guild.recruitmentPolicy == null || guild.recruitmentPolicy.isEmpty()}
+		&{'contenteditable.empty'}
+	#{/if}#{else}
+		${guild.recruitmentPolicy}
+	#{/else}
+</div>
+
+*{ ********** Poll ********** }*
+<div class="guildSideSectionHeader">&{'guild.poll'}</div>
+<div id="guildPoll" class="guildSideContainer">
+	#{include "Guilds/_pollFrame.html" /}
+</div>
+
+*{ ********** Guild Links ********** }*
+#{if guild.links.size() > 0}
+	<div class="guildSideSectionHeader">&{'guild.links'}</div>
+	<div id="guildLinks" class="guildSideContainer">
+		#{list guild.links, as:'link'}
+			<div>
+				<div class="guildLinkName"><a href="${link.link}">${link.name}</a></div>
+				<div class="guildLinkDescription">${link.description}</div>
+			</div>
+		#{/list}
+	</div>
+#{/if}

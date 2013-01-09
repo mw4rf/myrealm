@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span10">
+			Bienvenue !
+			<p><i>&{'app.name'}</i> est un logiciel en ligne qui a pour but de vous aider à gérer votre royaume.
+			Son utilisation est libre et gratuite. Il est actuellement en version <i>bêta</i>.
+			Si vous rencontrez des bugs, n'hésitez pas à les signaler <a href="http://settlers.valhalla.fr/forum/viewforum.php?f=12">sur notre forum</a>.</p>
+		</div>
+		<div class="span1"></div>
+	</div>
+	
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span10">
+			*{ Login form }*
+			<div class="well form form-inline">
+			#{form @Application.login()}
+				<input type="text" class="btn-large" name="playerName" id="playerName" placeholder="Login" />
+				<input type="submit" class="btn btn-large btn-success" value="&{'form.connect'}" />
+			#{/form}
+			<p>&{'profile.signin'}</p>
+			</div>
+		</div>
+		<div class="span1"></div>
+	</div>
+	
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span10">
+				&{'index.stats.tables', models.players.Player.count(), models.realm.Building.count(), models.players.PlayerTimer.count(), models.adventures.Adventure.count(), models.players.PlayerAction.count(), models.guilds.Guild.count(), models.guilds.Membership.count()}
+		</div>
+		<div class="span1"></div>
+	</div>
+
+
+</div>

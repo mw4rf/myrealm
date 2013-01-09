@@ -1,0 +1,37 @@
+*{ ***** REALM menu ***** }*
+
+<ul class="nav nav-list">
+	*{ ***** Index/List ***** }*
+	<li #{if request.action.equals("Timers.index")} class="active"#{/if}>
+		#{a @Timers.index(player.name)}
+			<i class="icon-list#{if request.action.equals("Timers.index")} icon-white#{/if}"></i> &{'nav.timers.index'}
+		#{/a}
+	</li>
+	
+	*{ ***** New ***** }*
+	<li class="nav-header">&{'nav.timers.add'}</li>
+	<li #{if request.action.equals("Timers.addOnDurationForm")} class="active"#{/if}>
+		#{a @Timers.addOnDurationForm(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Timers.addOnDurationForm")} icon-white#{/if}"></i> &{'nav.timers.add.on.duration'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Timers.addOnDateForm")} class="active"#{/if}>
+		#{a @Timers.addOnDateForm(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Timers.addOnDateForm")} icon-white#{/if}"></i> &{'nav.timers.add.on.date'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Timers.addOnBuildingForm")} class="active"#{/if}>
+		#{a @Timers.addOnBuildingForm(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Timers.addOnBuildingForm")} icon-white#{/if}"></i> &{'nav.timers.add.on.building'}
+		#{/a}
+	</li>
+	
+	*{ ***** Delete Expired ***** }*
+	<li class="nav-header">&{'nav.timers.clean'}</li>
+	<li>
+		#{a @Timers.deleteExpired(player.name)}
+			<i class="icon-minus-sign"></i> &{'nav.timers.clean.expired'}
+		#{/a}
+	</li>
+
+</ul>

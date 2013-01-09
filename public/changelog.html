@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SettlersHelper Online - Changelog</title>
+</head>
+<body>
+
+	<br /><br /><b><u>Version 1.3.7 (23/02/2012)</u></b>
+	<br />MyRealm utilise <i>Google Analytics</i> pour générer des statistiques sur son utilisation.
+	<br />Il est possible de désactiver la prise en charge de <i>Google Analytics</i> pour son profil depuis les préférences.
+	<br />Pour plus d'informations à ce sujet, v. la page <a href="http://settlers.valhalla.fr/wiki/myrealm/preferences/mode_invisible">Mode Invisible</a> sur le wiki.
+	
+	<br /><br /><b><u>Version 1.3.6 (22/02/2012)</u></b>
+	<br />Mécanisme d'envoi de rapports d'erreur personnalisés lors de l'affichage des messages "Oops...".
+	<br />Diverses améliorations internes de l'interface d'administration.
+	<br />Validation du <i>nom</i> et du <i>tag</i> lors de la création de guilde: ils ne doivent pas être vides ou déjà exister.
+	<br />Les échanges sur le marché aux fortifiants sont désormais nettoyés s'ils ont été marqués comme terminés, même si la date d'expiration de l'offre est encore dans le futur.
+
+
+	<br /><br /><b><u>Version 1.3.5 (21/02/2012)</u></b>
+	<br />Ajout de astuces aléatoires <b>Le saviez-vous ?</b> sur la page d'accueil du profil (possibilité de les désactiver dans les préférences).
+	<br />Amélioration du temps de chargement de la page d'accueil du profil.
+	<br />Modification du système de chargement des données du monde <i>(classe World)</i> et introduction de la possibilité de recharger "à chaud" sans redémarrage du serveur.
+	<br />Changement du texte du popup d'efficacité sur la ligne des bâtiments : <i>Indice d'efficacité X</i> remplace <i>Efficacité X/100</i>, qui pouvait induire en erreur (v. <a href="http://settlers.valhalla.fr/wiki/myrealm/faq/efficacite_non_optimale">FAQ sur le Wiki</a>)
+
+	<br /><br /><b><u>Version 1.3.4 (20/02/2012)</u></b>
+	<br /><b>Nouvelles préférences</b> : choix d'afficher ou non les différentes sections de la page d'accueil du royaume.
+	<br />Le titre des listes <i>Dernières aventures</i>, <i>Aventures futures</i>, <i>Derniers bâtiments construits</i>, <i>Derniers commentaires</i>, ne sont plus affichés sur la page d'accueil du profil lorsque ces listes sont vides.
+	<br />Correction d'un bug qui, à cause de la latence du réseau, permettait l'association de plusieurs alarmes sur un bâtiment unique.
+	<br />Correction d'un bug qui empêchait l'enregistrement de la date de dernière connexion lors de l'utilisation d'un <i>cookie</i> pour mémoriser l'identification.
+
+	<br /><br /><b><u>Version 1.3.3 (15/02/2012)</u></b>
+	<br />Nouveau thème graphique: <b>Igloo</b> (vu les températures actuelles !)
+	<br />Nouveau thème graphique: <b>Spring's Here</b> (avec et sans image de fond)
+	<br />Publication de l'activité des joueurs dans un flux RSS
+	<br />Pour activer le flux et connaître son adresse, rendez-vous dans les préférences (en haut à droite de l'écran).
+	
+	
+	<br /><br /><b><u>Version 1.3.2 (18/01/2012)</u></b>
+	<br />Modifications internes du système de gestion des thèmes graphiques.
+	<br />Le thème "DarkVador" est provisoirement retiré.
+	<br />Nouveau thème graphique: <b>Zenburn</b>
+	<br />Le lien "Aide" renvoie désormais vers le Wiki.
+	
+	<br /><br /><b><u>Version 1.3.1 (17/01/2012)</u></b>
+	<br />Nouvelle option dans les préférences : <b>adresse e-mail</b>
+	<br />En cas de perte du mot de passe, un lien sur la page d'identification propose de générer un nouveau mot de passe.
+	<br />Cette possibilité n'est offerte que si une adresse e-mail a été fournie, et le nouveau mot de passe est envoyé à cette adresse.
+	<br /><b>Notifications par e-mail</b> des alarmes arrivant à expiration ou expirées.
+	<br />Les alarmes bénéficiant d'une telle notification sont celles "avec rappel".
+	<br />La notification d'expiration des alarmes par e-mail peut être activée/désactivée depuis les préférences.
+	<br />Au maximum 2 notifications //par alarme// sont envoyées: dans les 15 minutes avant son expiration, et dans les 15 minutes suivant son expiration. 
+
+	
+	<br /><br /><b><u>Version 1.2.2 (16/01/2012)</u></b>
+	<br />Les <i>snapshots</i> sont désormais appelés <i>"instantanés"</i> dans la version française de MyRealm.
+	<br />Mise en place du système de nettoyage des <i>snapshots</i>.
+	<br />Liste des <i>snapshots</i> : /snapshots/PSEUDO
+	<br />Possibilité de verrouiller/déverrouiller les <i>snapshots</i> (les snapshots verrouillés ne seront pas supprimés lors du nettoyage mensuel).
+	<br />Historique des bâtiments (niveau, temps de production, activé/fortifié/simulé), sur la page des détails de chaque bâtiment.
+	<br />Journalisation des actions relatives aux <i>snapshots</i>.
+	<br />Correction d'un bug d'affichage des graphiques dû à un tri non chronologique des <i>snapshots</i>.
+	
+	<br /><br /><b><u>Version 1.2.1 (16/12/2011)</u></b>
+	<br /><b>Statistiques du royaume</b>
+	<br />Les statistiques indiquent la progression dans la construction du royaume.
+	<br />Les statistiques sont calculées tous les jours à minuit, pour les joueurs qui se sont connectés à MyRealm dans la journée. 
+	<br />Les statistiques quotidiennes sont conservées pendant 1 mois. Puis elles sont supprimées et transformées en statistiques mensuelles le 1er jour du mois suivant.
+	<br />Statistique: évolution dans le temps du nombre de bâtiments du royaume
+	<br />Statistique: évolution dans le temps du niveau moyen des bâtiments du royaume
+	<br />Statistique: évolution dans le temps du nombre de bâtiments fortifiés et arrêtés
+	<br />Statistique: production et consommation moyennes de chaque ressource
+	<br />Statistique: évolution dans le temps de la production et de la consommation de chaque ressource
+	
+	<br /><br /><b><u>Version 1.2.0 (16/12/2011)</u></b>
+	<br />Système de <b>snapshots</b> du royaume.
+	<br />Cette version prépare le terrain pour des fonctionnalités futures. Les changements ne sont pas directement visibles.
+	
+	<br /><br /><b><u>Version 1.1.3 (08/12/2011)</u></b>
+	<br />Ajout du bâtiment <b>Usine de recyclage</b>
+	<br />Ajout de l'aventure <b>Sauvez Noël</b>
+	<br />Bug corrigé: affichage défectueux des détails d'une demande d'échange de fortifiants.
+	<br />Bug corrigé: Les contreparties aux demandes de fortifiant ne sont plus affichées sur le marché public.
+	<br />Les bâtiments à fortifier, dans le marché aux fortifiants, sont désormais triés par ordre alphabétique.
+	
+	<br /><br /><b><u>Version 1.1.2 (30/11/2011)</u></b>
+	<br />Correction d'un bug dans les conseils de fortification, qui survenait lorsque (O < production - consommation < 0.1)
+	<br />La section "Bâtiments par groupe" est désormais affectée par les commandes d'affichage "Tout Déplier/Tout replier"
+	<br />La section "Bâtiments par groupe" contient désormais les ratios de production du groupe
+	<br />La section "Bâtiments par groupe" contient désormais un lien direct vers la page des détails du groupe, à côté du nom du groupe.
+
+	<br /><br /><b><u>Version 1.1.1 (28/11/2011)</u></b>
+	<br />Ajout des <b>Canonniers</b> et des canons
+	<br />Nouveaux bâtiments : <b>Charronnerie</b>, <b>Charpenterie</b>, <b>Poudrière</b>, <b>Forge de canons</b>
+	<br />Le bâtiment <b><i>Silo [Halloween 2011]</i></b>, désormais disponible dans la boutique, est nommé <b><i>Silo</i></b>
+	<br />Lors de la création d'une guilde, le chef de guilde est désormais automatiquement confirmé.
+	<br />Les officiers peuvent ajouter manuellement des membres de guilde.
+
+	<br /><br /><b><u>Version 1.1.0 (24/11/2011)</u></b>
+	<br /><b>Marché: Échanges de fortifiants</b> (EXPERIMENTAL)
+	<br />Création de <i>demandes</i> d'échange de X fortifiants sur le bâtiment Y, tel jour à telle heure
+	<br />Acceptation par l'autre partie d'une demande de fortification, et création d'une demande en contrepartie
+	<br />État des demandes de fortification : publiée / acceptée / fortification effectuée / expirée
+	<br />Page individuelle pour chaque échange de fortifiant, avec forum de discussion intégré
+	<br />Nettoyage automatiques des offres d'échange de fortifiant expirées depuis 48h ou plus, chaque jour à 5h
+	<br />Mise en avant des <b>Propositions d'aventures futures</b>
+	<br />Création & validation de propositions d'aventures sur la page publique
+	<br />Modification de la page d'accueil du profil (avec liens vers le marché)
+
+	<br /><br /><b><u>Version 1.0.2 (21/11/2011)</u></b>
+	<br />Rajout de l'aventure <b>Vieux Amis</b>
+	<br />Affichage des aventures futures sur la page d'accueil du profil
+	<br />Le chef de guilde peut ouvrir l'interface d'administration de la guilde aux officiers
+	<br />Formulaire CRUD pour les sondages de guilde dans l'interface d'administration de la guilde
+	<br />Tri manuel des liens de guilde pour définir leur ordre d'affichage
+	<br />Tri des membres de guilde par nom et des anciens membres par date de départ, dans l'interface d'administration de la guilde
+	<br />Correction d'un bug d'affichage du lien connexion/déconnexion sur la page de guilde
+	<br />Brèves statistiques sur la page d'accueil publique
+	<br /><b>Confirmation des membres de guilde</b>
+	<br />Lorsqu'un joueur rejoint une guilde, depuis les préférences, il est identifié comme un membre "non confirmé".
+	<br />Le chef de guilde ou les officiers, par l'interface d'administration, confirment ou excluent les membres "non confirmés".
+	<br />Seuls les membres confirmés apparaîssent dans la liste des membres, sur la page d'accueil de la guilde.
+
+
+	<br /><br /><b><u>Version 1.0.1 (20/11/2011)</u></b>
+	<br />Réécriture complète de la page d'administration de la guilde
+	<br />Correction d'un bug dans le système de renvoi des membres d'une guilde
+	<br />Motif de renvoi à préciser lors du renvoi d'un membres d'une guilde
+	<br />Liste des anciens membres d'une guilde, avec la date et le motif de leur départ ou renvoi
+
+	<br /><br /><b><u>Version 1.0.0 (18/11/2011)</u></b>
+	<br /><b>Groupes de bâtiments</b>
+	<br />Nouvelle liste : bâtiments par groupe
+	<br />Préférences d'affichage des groupes de bâtiments
+	<br />Création, modification et suppression des groupes de bâtiments
+	<br />Assignation et retrait de bâtiments dans les groupes
+	<br />Les rappels des alarmes ne s'affichent désormais que si l'utilisateur est identifié
+
+	<br /><br /><b><u>Version 0.9d (14/11/2011)</u></b>
+	<br />Correction d'un bug qui empêchait l'exclusions des membres d'une guilde
+	<br />Affichage du rang/grade des membres de la guilde dans une info-bulle au survol de la souris
+	<br />Planification d'une sauvegarde et d'une maintenance automatiques de la base de données, chaque jour à 5h
+	<br />Changements internes de l'interface d'administration
+
+	<br /><br /><b><u>Version 0.9c (12/11/2011)</u></b>
+	<br />Correction d'un bug qui empêchait le retrait de la ligne d'un bâtiment immédiatement après sa suppression (il fallait recharger la page)
+	<br />Correction d'un bug qui générait une erreur lorsque l'option d'affichage de la description des bâtiment était activée
+	<br />Amélioration du temps de chargement de la page d'accueil du profil
+
+	<br /><br /><b><u>Version 0.9b (10/11/2011)</u></b>
+	<br />Remplissage du temps de production, dans le formulaire d'ajout des bâtiments, avec le temps de production moyen
+	<br />Possibilité de créer des bâtiment <i>simulés</i> en dupliquant des bâtiments réels
+	<br />Correction d'un bug dans la traduction anglaise, qui empêchait l'affichage correct de la page du royaume
+	<br />Amélioration du temps de chargement de la page d'accueil du profil
+
+	<br /><br /><b><u>Version 0.9a (09/11/2011)</u></b>
+	<br /><b>Consommation relative</b>, où la part occupée par chaque bâtiment dans la consommation d'une ressource
+	<br />Protection contre la création de profils en double
+
+	<br /><br /><b><u>Version 0.8f (08/11/2011)</u></b>
+	<br />Nouvelle option des préférences : augmenter de niveau un bâtiment niveau 5 le fait redescendre au niveau 1.
+	<br />Prise en charge du coefficient multiplicateur des fortifiants (par défaut x2) dans les calculs de production.
+	<br /><b>Implémentation d'un système de pagination</b>
+	<br />Pagination de la page publique montrant l'historique de l'activité
+	<br />Page affichant l'historique de l'activité de l'utilisateur, avec pagination
+	<br />Tooltips sur les différentes ressources, indiquant quels bâtiments les produisent et les dépensent.
+
+	<br /><br /><b><u>Version 0.8e (07/11/2011)</u></b>
+	<br /><b>Indicateur d'<i>efficacité</i> des bâtiments</b> en fonction de leur temps de production.
+	<br />Tri des bâtiments par efficacité.
+	<br /><b>Conseils sur le temps de fortification nécessaire pour combler le déficit de production</b>
+
+	<br /><br /><b><u>Version 0.8d (05/11/2011)</u></b>
+	<br />Rafraîchissement automatique toutes les 5 minutes de la page des alarmes
+	<br />Amélioration drastique du temps de chargement de la page publique des événements récents
+
+	<br /><br /><b><u>Version 0.8c (04/11/2011)</u></b>
+	<br /><b>Définition des critères de tri par défaut des bâtiments dans les préférences.</b>
+	<br />Possibilité de transformer chaque bâtiment simulé en bâtiment réel
+	<br />Tri des bâtiments dans la liste des bâtiments par secteur
+
+	<br /><br /><b><u>Version 0.8b (03/11/2011)</u></b>
+	<br /><b>Tri des bâtiments</b> selon divers critères <i>(liste dynamique <u>uniquement</u>)</i>
+	<br /><b>Les calculs des ratios de production sont désormais mis en jour à temps réel</b> lorsqu'on modifie un bâtiment (il n'est plus nécessaire de recharger la page).
+	<br />La date d'expiration d'une alarme attachée à un bâtiment est désormais recalculée lorsqu'on modifie la quantité de ressources du dépôt.
+	<br />Amélioration des performances des conseils de construction.
+	<br />Validation des formulaires d'ajout d'alarmes, afin d'éviter notamment les erreurs de syntaxe des dates.
+
+	<br /><br /><b><u>Version 0.8a (28/10/2011)</u></b>
+	<br />Prise en compte des <b>secteurs de l'île</b> sur lesquels les bâtiments sont construits, lors de l'ajout des bâtiments.
+	<br />Affichage du secteur sur la ligne de chaque bâtiment, dans la liste, avec possibilité de modification directe sur la ligne.
+	<br />Affichage de la <b>liste des bâtiments par secteur</b> sur la page du royaume.
+	<br />Possibilité de choisir, dans les préférence, entre une image et du texte pour représenter les secteurs.
+	<br />Possibilité de choisir, dans les préférences, d'afficher ou non, de déplier ou non, la liste des bâtiments par secteur.
+	<br />Ajout de <b>descriptions</b> aux bâtiments.
+	<br />Correction du bug de la liste des bâtiments qui empêchait l'affichage des formulaires de modification du temps de production et de quantité de ressources dans le dépôt lorsque le bâtiment se trouvait présent plusieurs fois sur la page (p. ex. dans la liste des bâtiments fortifiés et dans la liste normale de tous les bâtiments).
+
+	<br /><br /><b><u>Version 0.7e (27/10/2011)</u></b>
+	<br />Réduction du temps de chargement de la page du royaume.
+	<br />Les conseils de construction sont désormais générés sur demande, et non plus au chargement de la page.
+	<br /><b>Événements de guilde</b>, avec possibilité pour les membres de s'inscrire
+	<br />Tri selon divers critères de la liste des membres, sur la page d'accueil des guildes.
+
+	<br /><br /><b><u>Version 0.7d (26/10/2011)</u></b>
+	<br /><b>Prise en charge des dépôts pour les mines et les puits</b>
+	<br /><b>Affichage de la quantité restante dans le dépôt sur la ligne du bâtiment correspondant</b>
+	<br /><b>Association d'une alarme sur expiration du dépôt depuis la page du royaume</b>
+	<br />Définition de la quantité restante dans le dépôt depuis la page du royaume, avec AJAX
+	<br />Préférences : activation des Rappels d'alarmes par défaut, en fonction du type d'alarme
+	<br />Préférences : choix de l'affichage des alarmes sur la page du profil, en fonction du type d'alarme
+	<br />Il n'est plus possible d'ajouter plusieurs alarmes sur le même bâtiment (ce qui évite les erreurs)
+	<br />Amélioration de la présentation de la page des alarmes (formulaire d'ajout sous chaque catégorie)
+	<br />Suppression des alarmes, de manière individuelle
+	<br />Le lien de renouvellement d'une alarme se trouve désormais à côté du lien de suppression (et non plus à droite du nom)
+	<br />Pour les alarmes sur les bâtiments, le niveau et le temps de production du bâtiment sont indiqués.
+
+	<br /><br /><b><u>Version 0.7c (25/10/2011)</u></b>
+	<br /><b>Changement de nom ! <i>SettlersHelperOnline</i> devient <i>MyRealm</i> !</b>
+	<br /><b>Prise en compte des Arbalétriers et des Soldats d'élite dans les calculs de production unitaire</b>
+	<br /><b>Ajout du bâtiment : Forge d'armement de Damas</b>
+	<br />Affichage de la durée pour laquelle une alarme sera renouvelée (sur le lien de renouvellement)
+	<br />Affichage du niveau de la mine ou du puits lors de la création d'une Alarme sur bâtiment
+	<br />Le Bot IRC ne flood plus les canaux, il répond en message privé.
+	<br />Le Bot IRC comprend la commande "expire XX" et renvoie en privé les Alarmes expirant dans moins de XX minutes.
+	<br />Le Bot IRC revient automatiquement lorsqu'on le kick.
+
+	<br /><br /><b><u>Version 0.7b (22/10/2011)</u></b>
+	<br />Tri des alarmes par type
+	<br />Tri des alarmes, au sein de chaque type, par date d'expiration (en haut de la liste la prochaine à expirer)
+	<br />Possibilité de renouveler les alarmes <i>sur la durée</i> expirées
+	<br />Sécurisation de l'accès aux alarmes (création, renouvellement)
+	<br />Messages flash sur la création, le renouvellement et la suppression des alarmes
+	<br />Changement du message d'information des alarmes expirés, avec indication du temps qui s'est écoulé depuis l'expiration
+	<br />Rappels avec les messages <i>flash</i> (en haut de l'écran) dans les derniers 10% du temps de vie de l'alarme
+	<br />Rappels par message privé, sur IRC, toutes les 15 minutes durant les derniers 10% du temps de vie de l'alarme
+	<br />Le bot IRC répond désormais à la fois aux messages privées et aux messages publics sur channel
+
+	<br /><br /><b><u>Version 0.7a (22/10/2011)</u></b>
+	<br /><b>Alarmes !</b>
+	<br />Création d'alarmes expirant après une certaine durée (ex. 6 heures)
+	<br />Création d'alarmes expirant à une certaine date / heure
+	<br />Création d'alarmes attaquées à un dépôt, et expirant lorsque le dépôt est vide
+	<br />Interface Alarmes&lt;=&gt;IRC par la truchment d'un Bot
+
+	<br /><br /><b><u>Version 0.6f (20/10/2011)</u></b>
+	<br />Halloween: ajout du <b>Silo</b> et des <b>Cimetières à citrouilles</b> dans la liste des bâtiments
+
+	<br /><br /><b><u>Version 0.6e (13/10/2011)</u></b>
+	<br />- Lien vers la page d'accueil du profil, depuis les messages sur le "Mur" des guildes
+	<br />- Liens de Guilde (page de guilde, colonne de gauche)
+	<br />- Page d'administration des guildes (gestion des données de la guilde ; promouvoir/rétrograder/renvoyer des membres ; gestion des liens de guilde)
+	<br />- Journalisation de l'ajout de messages sur le "Mur" de guilde.
+	<br />- Correction d'un bug sur la page de guilde : les sauts de ligne sont désormais pris en compte dans les champs "contenteditable".
+	<br />- Correction d'un bug relatif au "Mur" des guildes : les messages ne sont plus ajoutés en double
+
+	<br /><br /><b><u>Version 0.6d (12/10/2011)</u></b>
+	<br />- Sondages sur la page des guildes (EXPÉRIMENTAL)
+	<br />- Correction d'un bug important qui, en permettant à un joueur de rejoindre plusieurs fois la même guilde, entraînait une indisponibilité de la base de données.
+
+	<br /><br /><b><u>Version 0.6c (11/10/2011)</u></b>
+	<br />- <b>Modification de la procédure d'inscription</b> : il est désormais demandé de fournir un mot de passe. Celui-ci peut être omis, auquel cas le nouveau profil ne sera pas protégé.
+	<br />- <b>Notes des officiers</b>, pour les guildes (création et affichage)
+	<br />- Bâtiments : ajout de la <i>Fonderie de titane</i> et de la <b>Fabrique d'arbalètes</b>
+
+	<br /><br /><b><u>Version 0.6b (05/10/2011)</u></b>
+	<br />- Création de guilde, rejoindre/quitter une guilde, depuis les préférences.
+	<br />- Correction d'un bug qui empêchait l'affichage du niveau 5 sur la page des détails des bâtiments.
+
+	<br /><br /><b><u>Version 0.6a (05/10/2011)</u></b>
+	<br />- <b>Système de Guildes !</b>
+	<br />- Wall (comme sur Fa*****k)
+	<br />- Bannières de guilde
+	<br />- Page d'accueil de la guilde
+	<br />- Gestion des rôle (member / senior member / officer / guildmaster)
+	<br />- Faceroll: sélection aléatoire d'un membre mis en lumière, chaque jour
+	<br />- Liste des membres
+	<br />- Message de bienvenue, site Web, politique de recrutement, état du recrutement : édition <i>inline</i> sur la page d'accueil de la guilde, pour les officiers
+
+	<br /><br /><b><u>Version 0.5d (03/10/2011)</u></b>
+	<br />- Compteur du nombre de visites (1 visite par heure et par utilisateur maximum ; pages prises en compte : profil, royaume, aventures)
+	<br />- Décompte du nombre de commentaires d'aventure sur la page d'accueil du profil
+	<br />- La liste globale des joueurs ne distingue plus selon la casse ('pseudo' et 'Pseudo' sont tous deux sous la lettre "P")
+	<br />- Nouveau critères d'affichage de la liste des aventures : par nom, par participation, nombre total à afficher
+
+	<br /><br /><b><u>Version 0.5c (01/10/2011)</u></b>
+	<br />- <b>Thèmes graphiques !</b> Choix du thème dans les préférences du profil.
+	<br />- Thème: Darth Vader
+	<br />- Thème: Kitten Invasion
+	<br />- Suppression des bâtiments avec AJAX (sans rechargement de la page)
+	<br />- Suggestion pour compléter le nom des joueurs lors de l'ajout d'amis et de participants aux aventures
+	<br />- Validation syntaxique du nom des nouveaux joueurs par mesure de sécurité
+	<br />- Correction d'un bug empêchant parfois l'affichage de la page des détails d'un bâtiment
+
+	<br /><br /><b><u>Version 0.5b (30/09/2011)</u></b>
+	<br />- <b>Nouvelles préférences</b>: déplier/replier par défaut les sections de la page royaume
+	<br />- <b>Désactivation optionnelle des sections de la page royaume pour améliorer la vitesse de chargement</b>
+	<br />- Possibilité de retirer des participants aux aventures
+	<br />- Amélioration de l'affichage sur les pages publiques: liste des aventures et liste des actions
+	<br />- Correction d'un bug dans le pliage/dépliage des sections de la page royaume
+	<br />- Correction d'un bug dans l'enregistrement des préférences
+	<br />- Correction d'un bug dans le calcul du ratio d'entraînement des unités (avec du pain)
+	<br />- Correction d'un bug qui rendait possible l'ajout de participants sans pseudo aux aventures
+	<br />- Correction d'un bug faisant apparaître le message par défaut des boîtes de dialogue modales pendant quelques instants après le chargement d'une page
+
+	<br /><br /><b><u>Version 0.5a (29/09/2011)</u></b>
+	<br />- <b>Ratio de fabrication de fortifiants et de production de soldats</b>
+
+	<br /><br /><b><u>Version 0.4c (28/09/2011)</u></b>
+	<br />- <b>Avatars !</b>
+	<br />- Choix de l'avatar dans les préférences, affichage sur la page d'accueil du joueur et en en-tête des autres pages
+	<br />- Améliorations cosmétiques
+
+	<br /><br /><b><u>Version 0.4b (27/09/2011)</u></b>
+	<br />- Correction d'un bug de validation qui empêchait la modification des bâtiments
+	<br />- Le calcul du temps de production des fortifiants avertit désormais si l'une des ressources nécessaires n'est pas produite
+	<br />- Mise à jour de la liste des fortifiants avec les recharges et les conversions de ressources
+	<br />- La simulation de l'influence des nouveaux bâtiments arrondit désormais les valeurs à la deuxième décimale
+	<br />- L'affichage de la production d'un bâtiment individuel sur la page dédiée à ce bâtiment est désormais précis à la deuxième décimale
+	<br />- Affichage de la production individuelle d'un bâtiment sur la ligne de ce bâtiment, sur la page du royaume
+	<br />- Améliorations cosmétiques (sections pliables/dépliables sur la page du royaume, aspect des titres 1)
+
+	<br /><br /><b><u>Version 0.4a (26/09/2011)</u></b>
+	<br />- <b>Ouverture publique (bêta)</b>
+	<br />- Bilan d'influence de la simulation de bâtiments : ressources produites/dépensées/en excédent/en déficit
+	<br />- Bilan du surplus de production gagné grâce aux bâtiments fortitiés
+	<br />- Bilan des ressources non-dépensées (gagnées) et non-produites (perdues) par les bâtiments désactivés
+	<br />- <b>Calcul du temps de production des ressources nécessaires à la confection de fortifiants</b>
+
+	<br /><br /><b><u>Version 0.3i (25/09/2011)</u></b>
+	<br />- Nouveau calcul de production: le temps nécessaire pour venir à bout du stock d'une ressource dont la production est déficitaire.
+	<br />- Nouvelles préférences permettant de paramétrer l'affichage de la page du royaume (bâtiments/production)
+	<br />- Ajout d'un message d'aide au formatage des messages, sur le forum des pages d'aventure.
+	<br />- Améliorations cosmétique (couleur des lignes de bâtiment)
+	<br />- Les bâtiments simulés sont désormais identifiés par une ligne orange
+	<br />- Confirmation de la suppression des bâtiments simulés
+	<br />- Correction d'un bug dans la suppression des bâtiment simulés
+
+	<br /><br /><b><u>Version 0.3h (24/09/2011)</u></b>
+	<br />- La suppression des aventures est désormais possible
+	<br />- Le menu d'édition/suppression/ajout de participant des aventures est désormais placé en haut de l'écran (et non plus sur la droite)
+	<br />- Ajout de <b>dialogues de confirmation</b> pour la suppression des bâtiments et des aventures
+	<br />- Les messages flash sont désormais dotés d'une icône indiquant leur nature (succès/info/erreur)
+	<br />- Correction d'un bug qui empêchait l'affichage des infobulles dans la liste dynamique des bâtiments
+	<br />- Mise à jour vers jQuery 1.6.2 & JQuery UI 1.8.16
+
+	<br /><br /><b><u>Version 0.3g (23/09/2011)</u></b>
+	<br />- <b>Messages d'information</b> (succès/info/erreur), afin d'indiquer à l'utilisateur le résultat de certaines actions
+	<br />- Affichage d'un message (info) sur la page du royaume lorsque les données des bâtiments ont changé et qu'il est nécessaire de recharger la page pour actualiser les calculs.
+	<br />- Améliorations diverses dans le système de navigation
+	<br />- Validation des formulaires d'ajout de bâtiments et d'aventures
+	<br />- Correction d'un bug dans le calcul du nombre de bâtiment à construire affiché par les suggestions pour les ressources en excès
+	<br />- Correction d'un bug qui pouvait survenir lors de la création d'aventures
+
+	<br /><br /><b><u>Version 0.3f (21/09/2011)</u></b>
+	<br />- <b>Nouvelle page publique dédié aux propositions d'aventures</b>
+	<br />- Les aventures dont la date de début se situe dans le futur sont considérées comme des aventures proposées (sauf aventures 1 joueur)
+	<br />- Les champ de formulaire pour les dates de début et de fin des aventures sont désormais plus larges
+	<br />- <b>Suggestions de construction pour les ressources en excédent</b>
+	<br />- Amlioration de la présentation des résultats du calcul "quelle influence aurait tel bâtiment" (avec affichage de la production future)
+
+	<br /><br /><b><u>Version 0.3e (20/09/2011)</u></b>
+	<br />- <b>Système d'Amis</b>
+	<br />- Ajout/suppression d'amis depuis la page des préférences
+	<br />- Affichage de ses amis et des personnes de qui l'on est l'ami sur la page d'accueil du profil
+	<br />- Affichage des dernières actions des amis sur la page d'accueil du profil
+	<br />- La page d'accueil du logiciel redirige automatiquement vers la page d'accueil du profil si l'utilisateur est identifié (avec les cookies).
+	<br />- Le champ des commentaires des aventures est désormais plus large et plus haut.
+	<br />- Lien direct vers tel ou tel commentaire (click-droit, copier l'adresse du lien)
+	<br />- Liste globale des événements (accessible depuis la page d'accueil).
+	<br />- Liens vers les listes globales sur la page d'accueil du profil.
+	<br />- Correction d'un bug de journalisation dans l'ajout des commentaires aux aventures.
+	<br />- Correction d'un bug qui empêchait l'affichage, sur la page d'accueil du profil, des commentaires émis sur les aventures d'autres joueurs.
+
+	<br /><br /><b><u>Version 0.3d (19/09/2011)</u></b>
+	<br />- <b>Conseil de construction pour combler les déficits de ressources</b>
+	<br />- Le formulaire des commentaires sur la page des aventures est remplacé par
+	<br />un formulaire de connexion si l'utilisateur n'est pas identifié.
+	<br />- Les commentaires anonymes dans les aventures ne sont plus autorisés
+
+		<br /><br /><b><u>Version 0.3c (18/09/2011)</u></b>
+	<br />- <b>NotaBene ajouté sur la page d'accueil du profil (cliquer pour éditer le contenu)</b>
+	<br />- Infobulle dans la liste des bâtiments, lorsqu'on laisse le curseur sur l'image d'un bâtiment.
+	<br />- Après l'ajout d'une nouvelle aventure, l'utilisateur est désormais redirigé vers la page des détails de cette aventure.
+	<br />- Bug corrigé: le logiciel interdisait les modifications de contenus alors que l'utilisateur était bien connecté et identifié.
+	<br />- Bug corrigé: l'activation/désactivation des bâtiments depuis la liste n'était plus prise en compte.
+	<br />- Bug corrigé: problème d'affichage sur la page des préférences et des détails d'un bâtiment.
+
+	<br /><br /><b><u>Version 0.3b (17/09/2011)</u></b>
+	<br />- <b>Journal d'activité</b>
+	<br />- Dernières aventures et derniers bâtiments et commentaires sur la page d'accueil du profil
+	<br />- Améliorations cosmétiques
+
+	<br /><br /><b><u>Version 0.3a (16/09/2011)</u></b>
+	<br />- <b>Nouvelle page d'accueil du joueur, qui résume son royaume et ses aventures</b>
+	<br />- <b>La liste des bâtiments devient dynamique (affichage par type de bâtiment)</b>
+	<br />- Possibilité, dans les préférences, de revenir à l'ancienne liste de tous les bâtiments
+
+	<br /><br /><b><u>Version 0.2e (15/09/2011)</u></b>
+	<br />- <b>Simulation de bâtiments</b>
+	<br />- <b>Calcul rapide de ce que changera l'ajout d'un bâtiment</b>
+	<br />- Ajout et édition des commentaires des aventures avec Ajax
+	<br />- Séparation de la barre de menu en deux parties (login et préférences / actions)
+	<br />- <b>Précision des calculs des ratios de production définie à 2 chiffres après la virgule (contre 0 précédemment)</b>
+
+  <br /><br /><b><u>Version 0.2d (13/09/2011)</u></b>
+  <br />- <b>Commentaires (de type blog) pour les aventures</b>
+  <br />- Liste des joueurs inscrits et des aventures
+  <br />- Correction de divers bugs mineurs
+
+  <br /><br /><b><u>Version 0.2c (12/09/2011)</u></b>
+  <br />- <b>Ajout de participants aux aventures</b>
+  <br />- Seuls le joueur auquel l'aventure est rattachés et les participants à cette aventure peuvent en modifier les détails.
+
+  <br /><br /><b><u>Version 0.2b (09/09/2011)</u></b>
+  <br />- Tri de la liste des aventures.
+  <br />- Correction d'un bug dans l'enregistrement des aventures qui coupait les textes trop longs.
+
+  <br /><br /><b><u>Version 0.2a (02/09/2011)</u></b>
+  <br />- <b>Aventures !</b>
+
+  <br /><br /><b><u>Version 0.1f (01/09/2011)</u></b>
+  <br />- <b>Possibilité de mettre la production des bâtiments en pause</b>
+  <br />- <b>Possibilité de booster (x2) la production des bâtiments</b>
+  <br />- Des images remplacent le texte dans la liste des bâtiments
+
+  <br /><br /><b><u>Version 0.1e (31/08/2011)</u></b>
+  <br />- <b>Duplication de bâtiments avec AJAX</b>
+  <br />- Mise à jour du temps de production depuis la liste des bâtiments, avec AJAX
+
+  <br /><br /><b><u>Version 0.1d (30/08/2011)</u></b>
+  <br />- <b>Liens dans la liste des bâtiments (détails, supprimer, dupliquer, lvlup)</b>
+  <br />- Bug: les ressources qui ne sont ni en excédent ni en déficit (bilan = 0) sont désormais correctement affichées dans la liste.
+
+  <br /><br /><b><u>Version 0.1c (26/08/2011)</u></b>
+  <br />- <b>Préférences du profil</b>
+  <br />- <b>Protection des changements par mot de passe</b>
+
+  <br /><br /><b><u>Version 0.1b (24/08/2011)</u></b>
+  <br />- <b>Traductions en français et en anglais</b>
+  <br />- Ajout des images des bâtiments et des ressources
+
+  <br /><br /><b><u>Version 0.1a (23/08/2011)</u></b>
+  <br />- Ajout de bâtiments
+  <br />- Calcul du bilan des ressources gagnées/dépensées
+
+</body>
+</html>

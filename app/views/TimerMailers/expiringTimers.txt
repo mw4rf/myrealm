@@ -1,0 +1,1 @@
+&{'mail.body.timer.expiring', timer.name, timer.endAt.format()}

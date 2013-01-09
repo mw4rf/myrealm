@@ -1,0 +1,61 @@
+#{extends 'Home/template.html' /}
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+	
+		*{ ***** Realm Stats ***** }*
+		<span class="span6">
+			*{ ***** Buildings Count ***** }*
+			&{'home.stats.realm.buildings_count', buildingsCount}
+			*{ ***** Last Buildings List ***** }*
+			<div class="headerbg header3 homecategory">&{'home.last.buildings'}</div>
+			<div class="homeList">
+				#{list lastBuildings, as: 'building'}
+					<div class="homeListItem">
+					#{a @Realm.showBuilding(player.name, building.id)}${building.name}#{/a} <span class="homeDate">(&{'realm.building.level'} ${building.level}, &{'realm.building.productionTime'} ${building.formatProductionTime().get("m")} &{'time.minutes'} ${building.formatProductionTime().get("s")} &{'time.seconds'})</span>
+					</div>
+				#{/list}
+			</div>
+		</span>
+		
+		*{ ***** Adventures Stats ***** }*
+		<span class="span6">
+			*{ ***** Adventures Counts ***** }*
+			&{'home.stats.adventures.adventures_count', player.name, adventuresCount, adventuresCountInvited}
+			<br />
+			&{'home.stats.adventures.comments_count', player.name, commentsCount}
+			*{ ***** Next adventures ***** }*
+			<div class="headerbg header3 homecategory">&{'home.next.adventures'}</div>
+			<div class="homeList">
+				#{list nextAdventures, as: 'adventure'}
+					<div class="homeListItem">
+					#{a @Adventures.showAdventure(player.name, adventure.id)}${adventure.name}#{/a} <span class="homeDate">(&{'adventure.next.dates', adventure.dateStart.format(), adventure.dateEnd.format()})</span>
+					</div>
+				#{/list}
+			</div>
+			*{ ***** Last adventures ***** }*
+			<div class="headerbg header3 homecategory">&{'home.last.adventures'}</div>
+			<div class="homeList">
+				#{list lastAdventures, as: 'adventure'}
+					<div class="homeListItem">
+					#{a @Adventures.showAdventure(player.name, adventure.id)}${adventure.name}#{/a} <span class="homeDate">(&{'adventure.dates', adventure.dateStart.format(), adventure.dateEnd.format()})</span>
+					</div>
+				#{/list}
+			</div>
+			*{ ***** Last comments ***** }*
+			<div class="headerbg header3 homecategory">&{'home.last.comments'}</div>
+			<div class="homeList">
+				#{list lastComments, as: 'comment'}
+					<div class="homeListItem">
+						<div>#{a @Adventures.showAdventure(comment.adventure.player.name, comment.adventure.id)}${comment.adventure.name}#{/a} <span class="homeDate">(${comment.adventure.player.name}) ${comment.publishedAt.format()}</span></div>
+						<div class="homeCommentSummary">${comment.summary(20)}</div>
+					</div>
+				#{/list}
+			</div>
+			
+		</span>
+	
+	</div>
+
+</div>

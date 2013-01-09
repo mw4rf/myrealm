@@ -1,0 +1,39 @@
+%{
+	String paramVars = "player=\"" + player.name + "\"";
+	if(area != null)
+		paramVars += " area=\"" + area + "\"";
+	if(building != null)
+		paramVars += " building=\"" + building.name + "\"";
+	if(groupId != null)
+		paramVars += " groupId=\"" + groupId + "\"";
+	if(status != null)
+		paramVars += " status=\"" + status + "\" ";
+}%
+
+<div style="width:100%;overflow:hidden;">
+	<div style="position: relative; float: right; width: 29%; text-align: right;">
+		<input type="radio" name="sort-order" value="ASC" #{if order == null || !order.equalsIgnoreCase("DESC")}checked#{/if} />&{'sort.asc'}
+		<input type="radio" name="sort-order" value="DESC" #{if order != null && order.equalsIgnoreCase("DESC")}checked#{/if} />&{'sort.desc'}
+	</div>
+	<div style="position: relative; float: left; width: 70%;">
+		&{'sort.by'}
+		<a href="#" sorting="ID" ${paramVars.raw()} class="sortBuildings #{if sorting == null || sorting.equals("ID")}sortActive#{/if}">&{'realm.building.id'}</a>
+
+		#{if !request.action.equals('Realm.loadBuildings')}
+			| <a href="#" sorting="NAME" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("NAME")}sortActive#{/if}">&{'realm.building.name.field'}</a>
+		#{/if}
+
+		| <a href="#" sorting="LEVEL" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("LEVEL")}sortActive#{/if}">&{'realm.building.level'}</a>
+		| <a href="#" sorting="PRODUCTIONTIME" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("PRODUCTIONTIME")}sortActive#{/if}">&{'realm.building.productionTime'}</a>
+
+		#{if !request.action.equals('Realm.loadArea')}
+		| <a href="#" sorting="AREA" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("AREA")}sortActive#{/if}">&{'realm.building.area'}</a>
+		#{/if}
+
+		#{if building != null && building.doesExpire()}
+			| <a href="#" sorting="DEPOSIT" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("DEPOSIT")}sortActive#{/if}">&{'realm.index.building.deposit.quantity'}</a>
+		#{/if}
+
+		| <a href="#" sorting="EFFICIENCY" ${paramVars.raw()} class="sortBuildings #{if sorting != null && sorting.equals("EFFICIENCY")}sortActive#{/if}">&{'realm.index.building.efficiency'}</a>
+	</div>
+</div>

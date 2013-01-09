@@ -1,0 +1,23 @@
+#{extends 'Realm/template.html' /}
+
+&{'realm.index.suggestion.boost.data', dres, player.boostMultiplier}
+<ul class="unstyled">
+#{list advices.keySet(), as: 'goodName'}
+	#{if advices.get(goodName) < 0}
+		<li class="negativeQuantity">&{'realm.index.suggestion.boost.cannot', goodName}</li>
+	#{/if}
+	#{else}
+		%{
+		HashMap<String,Integer> ft = player.formatTime((int)advices.get(goodName));
+		String res = "";
+		if(ft.get("h") > 0)
+			res += ft.get("h") + " " + messages.get("time.hours") + " ";
+		if(ft.get("m") > 0)
+			res += ft.get("m") + " " + messages.get("time.minutes") + " ";
+		if(ft.get("s") > 0)
+			res += ft.get("s") + " " + messages.get("time.seconds");
+		}%
+		<li class="positiveQuantity">&{'realm.index.suggestion.boost.line', goodName, res}</li>
+	#{/else}
+#{/list}
+</ul>

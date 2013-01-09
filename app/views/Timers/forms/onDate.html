@@ -1,0 +1,30 @@
+#{extends 'Timers/template.html' /}
+
+*{ ********** FORM: ADD NEW TIMER ********** }*
+<div class="container-fluid">
+	<div class="row-fluid">
+	#{form @Timers.addTimerWithExpiration(player.name), class:'form-vertical well'}
+		<input type="text" name="name" class="span3" placeholder="&{'timer.name'}" />
+		
+		<label>&{'timer.startAt'}</label>
+		<input type="text" name="startAt" value="${new Date().format()}" class="span3" />
+		
+		<label>&{'timer.endAt'}</label>
+		<input type="text" name="endAt" value="${new Date().format()}" class="span3" />
+		
+		<label class="checkbox">
+			<input type="checkbox" name="remind" #{if player.preferences != null && player.preferences.TIMERS_DEFAULT_REMIND_TYPE1}checked#{/if} />
+			&{'timer.remind'}
+		</label>
+		
+		<input type="submit" class="btn btn-success btn-large" value="&{'form.save'}" />
+	#{/form}
+	</div>
+</div>
+
+*{ ********** TIMERS LIST ********** }*
+<div id="dateTimersList">
+	#{list dateTimers, as: 'timer'}
+		#{include "Timers/_timer.html" /}
+	#{/list}
+</div>

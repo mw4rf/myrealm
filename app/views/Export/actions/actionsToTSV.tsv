@@ -1,0 +1,4 @@
+Id.	Date	Action
+#{list items:actions, as:'a'}
+${a.id}	${a.at}	${messages.get("${a.name.raw()}", "${a.formatAction().raw()}").raw()}
+#{/list}	

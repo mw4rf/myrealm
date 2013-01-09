@@ -1,0 +1,326 @@
+%{
+// Line CSS classes
+    String classes = "";
+    String btnclasses = "btn btn-mini";
+    if(!building.enabled) {
+        classes += "buildingDisabled";
+        btnclasses += " btn-danger";
+    }
+    if(building.boosted) {
+        classes += "buildingBoosted";
+        btnclasses += " btn-success";
+    }
+    if(building.simulated) {
+    	classes += "buildingSimulated";
+    	btnclasses += " btn-warning";
+    }
+
+// Building efficiency CSS classes
+	int efficiency = building.getEfficiency();
+    String effclass = "";
+    String effmsg = "";
+    if(efficiency == -1) {
+    	effclass = "errorEfficiency";
+        effmsg = messages.get("realm.index.building.efficiency.error");
+    } else if(efficiency < 50) {
+    	effclass = "badEfficiency";
+        effmsg = messages.get("realm.index.building.efficiency.bad", efficiency);
+   	} else if(efficiency < 75) {
+    	effclass = "averageEfficiency";
+    	effmsg = messages.get("realm.index.building.efficiency.average", efficiency);
+    } else {
+    	effclass = "goodEfficiency";
+    	effmsg = messages.get("realm.index.building.efficiency.good", efficiency);
+    }
+// AJAX UPDATE
+String update = "none";
+if(request.action.equals("Realm.loadGroup") || request.action.equals("Realm.showGroup"))
+	update = "groups";
+}%
+
+<div class="building_${building.id} buildingLine" buildingId="${building.id}" update="${update}">
+
+	<div class="container-fluid buildingListItem ${classes}">
+
+		*{***** 1ST ROW : BUILDING LINE : SHOWN DATA *****}*
+		<div class="row-fluid">
+
+			*{***** TOOLS & DETAILS *****}*
+			<div class="span1">
+				<a class='toggle sibling ${btnclasses}' toggle=".buildingMetaFormContainer" parent=".buildingLine"><i class="icon-cog"></i></a>
+				<a href="@{Realm.showBuilding(player.name, building.id)}" class='${btnclasses}'><i class="icon-eye-open"></i></a>
+			</div>
+
+			*{***** BUILDING NAME *****}*
+			<div class="span2">
+				${building.name}
+			</div>
+
+			*{***** BUILDING CORE DATA *****}*
+			<div class="span5">
+
+				<div class="row-fluid">
+
+					*{***** AREA *****}*
+					<div class="span4">
+	            		<a href="#" class="toggle sibling ${btnclasses} selectNext" selectNext="buildingAreaSelect_${building.id}" toggle=".buildingAreaFormContainer" parent=".buildingLine" title="&{'realm.building.area'}">
+							<i class="icon-th-large"></i>
+						</a>
+						&{'realm.building.area'}
+	            		<span class="bold buildingAreaValue">${building.area}</span>
+					</div>
+
+					*{***** LEVEL *****}*
+					<div class="span4">
+						#{if building.level < 5 || (player.preferences != null && player.preferences.BUILDING_LEVEL_LOOP)}
+	                	<a href="#" class="buildingAction lvlup ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.lvlup'}">
+	                		<i class="icon-arrow-up"></i>
+	                	</a>
+	            		#{/if}
+	            		&{'realm.building.level'} <b>${building.level}</b>
+					</div>
+
+					 *{***** PRODUCTION TIME *****}*
+					 <div class="span4">
+					 	<a href="#" class="toggle sibling ${btnclasses} selectNext" selectNext="productionTimeMinutes_${building.id}" toggle=".buildingPTFormContainer" parent=".buildingLine" title="&{'realm.building.productionTime'}">
+	            			<i class="icon-time"></i>
+	            		</a>
+	            		<span class="bold buildingPTValue">
+	             			${building.formatProductionTime().get("m")}'
+	               			${building.formatProductionTime().get("s")}''
+	            		</span>
+					 </div>
+
+				</div>
+
+			</div>
+
+			*{***** BUILDING PRODUCTION *****}*
+			<div class="span3 right">
+				*{ *** Needs *** }*
+            	#{list building.getNeeds(player.name), as:'good'}
+            		#{include 'Realm/goods/_goodItemSmall.html' /}
+            	#{/list}
+            	*{ *** Production *** }*
+            	#{list building.getProds(player.name), as:'good'}
+            		#{include 'Realm/goods/_goodItemSmall.html' /}
+            	#{/list}
+			</div>
+
+			*{***** BUILDING EFFICIENCY *****}*
+			<div class="span1 offset11 right">
+				<span title="${effmsg}"  my="top right" at="bottom right" class="buildingEfficiency goodItem ${effclass}">
+	           		#{if efficiency == -1}
+	           			&{'error'}
+	           		#{/if}
+	           		#{else}
+	           			${efficiency}
+	           		#{/else}
+	           		<img style="vertical-align: baseline;" src="/public/images/app/efficiency.png" />
+	           	</span>
+			</div>
+
+		</div>
+
+		*{***** HIDDEN ROW : FORM ACTIONS (BOOST, DISABLE, DUPLICATE, DUPLICATE SIMULATED, DELETE) *****}*
+		<div class="row-fluid buildingMetaFormContainer" style="display:none;">
+
+			<div class="span6">
+				*{** BOOST **}*
+				#{if building.boosted}
+                    <a class="buildingAction switchBoost ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.switch.unboost'}">
+                    	<i class="icon-tint"></i>
+                    </a>
+                #{/if}
+                #{else}
+                    <a class="buildingAction switchBoost ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.switch.boost'}">
+                    	<i class="icon-fire"></i>
+                    </a>
+                #{/else}
+
+                *{** DISABLE **}*
+                #{if building.enabled}
+                    <a class="buildingAction switchEnable ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.switch.disable'}">
+                    	<i class="icon-pause"></i>
+                    </a>
+                #{/if}
+                #{else}
+                    <a class="buildingAction switchEnable ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.switch.enable'}">
+                    	<i class="icon-play"></i>
+                    </a>
+                #{/else}
+
+                *{** DUPLICATE **}*
+                <a class="buildingAction duplicate ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.duplicate'}">
+                	<i class="icon-eye-open"></i>
+                </a>
+
+                *{** DUPLICATE SIMULATED **}*
+                <a class="buildingAction duplicate-simulated ${btnclasses}" playerName="${player.name}" buildingId="${building.id}" title="&{'realm.index.building.duplicate.simulated'}">
+                	<i class="icon-eye-close"></i>
+                </a>
+
+                *{** Toggle GROUPS FORM (if no group assigned) **}*
+                #{if building.groups.size() < 1}
+                	<a class="toggle sibling ${btnclasses}" toggle=".buildingGroupFormContainer" parent=".buildingLine" title="&{'realm.building.group'}">
+                		<i class="icon-tags"></i>
+                	</a>
+                #{/if}
+
+                *{ *** Validate Simulation *** }*
+            	#{if building.simulated}
+            		<a class="${btnclasses} btn-mini buildingAction validateSimulation" playerName="${player.name}" buildingId="${building.id}">
+            			&{'realm.index.buildings.simulated.validate'}
+            		</a>
+            	#{/if}
+            	
+            	*{ *** Id. & Creation Date *** }*
+           		<span class="label">Id.: <i>${building.id}</i></span> 
+           		#{if building.builtAt != null}
+           			<span class="label">&{'realm.building.built.at'}: <i>${building.builtAt.format()}</i></span>
+           		#{/if}
+
+			</div>
+
+			*{** DELETE **}*
+			<div class="span6 right">
+				<span title="&{'realm.index.building.delete'}" my="top right" at="bottom right">
+				<a rel="#" href="@{Realm.deleteBuilding(player.name, building.id)}"  message="&{'realm.index.building.delete.confirmation', building.name}" onConfirmation="building_delete('${player.name}', '${building.id}');" class="ajaxConfirmationLink btn btn-danger btn-mini">
+					<i class="icon-trash"></i>
+				</a>
+				</span>
+			</div>
+		</div>
+
+		*{***** OPTIONAL ROW : BUILDING GROUPS (if any) *****}*
+		*{** Groups list **}*
+		#{if building.groups.size() > 0}
+		<div class="row-fluid#{if !player.preferences.LINE_SHOW_GROUPS} buildingMetaFormContainer#{/if}" style="display:#{if player.preferences.LINE_SHOW_GROUPS}block#{/if}#{else}none#{/else};">
+			*{** Toggle ADD/REMOVE FORMS **}*
+			<div class="span1">
+                <a class="toggle sibling ${btnclasses} selectNext" selectNext="assign-group_${building.id}" toggle=".buildingGroupFormContainer" parent=".buildingLine" title="&{'realm.building.group'}">
+                	<i class="icon-tags"></i>
+                </a>
+			</div>
+			*{** GROUPS LIST **}*
+			<div class="span11">
+				#{if building.groups.size() > 0 && player != null && player.preferences != null && player.preferences.SHOW_GROUPS}
+            		#{list building.groups, as: 'group'}
+            			%{
+							String fgc = "";
+							if(group.fgcolor != null && !group.fgcolor.isEmpty())
+								fgc = "color:#" + group.fgcolor + ";border: 1px solid #" + group.fgcolor + ";";
+							String bgc = "";
+							if(group.bgcolor != null && !group.bgcolor.isEmpty())
+								bgc = "background-color:#" + group.bgcolor + ";"
+						}%
+						<span class="buildingGroupLabel realmGroupCell" groupId="${group.id}" player="${group.player.name}" #{if !fgc.isEmpty() || !bgc.isEmpty()}style="${fgc}${bgc}"#{/if}>
+							${group.name}
+						</span>
+					#{/list}
+            	#{/if}
+			</div>
+		</div>
+		#{/if}
+		*{** Add/remove groups form **}*
+		<div class="row-fluid buildingGroupFormContainer" style="display:none">
+			<div class="span12 form form-inline">
+			<br />
+	           	*{ ** Assign to group ** }*
+	           	#{if player.groups.size() > 0 && building.groups.size() < player.groups.size()}
+	           		<label class="select">&{'realm.building.group.assign'}</label>
+	           		<select class="group assign" id="assign-group_${building.id}" name="assign-group">
+	           			#{list player.groups, as: 'group'}
+	           				#{if !group.hasBuilding(building)}
+	           					<option value="${group.id}">${group.name}</option>
+	           				#{/if}
+	           			#{/list}
+	           		</select>
+	           		<input type="submit" class="buildingGroupSubmit assign btn btn-success" value="&{'form.add'}" buildingId="${building.id}" playerName="${player.name}" />
+	           	#{/if}
+	           	*{ ** Remove from group ** }*
+	           	#{if player.groups.size() > 0 && building.groups.size() > 0}
+	           		<label class="select">&{'realm.building.group.remove'}</label>
+	           		<select class="group remove" name="remove-group">
+	           			#{list player.groups, as: 'group'}
+	           				#{if group.hasBuilding(building)}
+	           					<option value="${group.id}">${group.name}</option>
+	           				#{/if}
+	           			#{/list}
+	           		</select>
+	           		<input type="submit" class="buildingGroupSubmit remove btn btn-success" value="&{'form.remove'}" buildingId="${building.id}" playerName="${player.name}" />
+	           	#{/if}
+           	</div>
+		</div>
+
+		*{***** OPTIONAL ROW : DEPOSIT (if any) *****}*
+		#{if building.doesExpire()}
+		<div class="row-fluid#{if !player.preferences.LINE_SHOW_DEPOSIT} buildingMetaFormContainer#{/if}" style="display:#{if player.preferences.LINE_SHOW_DEPOSIT}block#{/if}#{else}none#{/else};">
+			*{** Toggle DEPOSIT FORM **}*
+            <a class="toggle sibling ${btnclasses}" toggle=".buildingDQFormContainer" parent=".buildingLine" title="&{'realm.index.building.deposit.quantity'}">
+            	<i class="icon-cog"></i>
+            </a>
+            &{'realm.index.building.deposit.quantity'}
+            <span class="bold buildingDQValue">${building.calcDepositQuantity()}</span>
+        	<span class="homeDate">
+       			#{if building.timer != null}
+       				#{include 'Realm/_buildingTimer.html' /}
+       			#{/if}
+       			#{else}
+       				#{a @Timers.addTimerWithDeposit(player.name, building.id, building.calcDepositQuantity())}&{'realm.index.building.deposit.add.timer'}#{/a}
+       			#{/else}
+        	</span>
+        </div>
+        #{/if}
+
+        *{***** OPTIONAL ROW : BUILDING DESCRIPTION *****}*
+		<div class="row-fluid#{if !player.preferences.LINE_SHOW_DESCRIPTION} buildingMetaFormContainer#{/if}" style="display:#{if player.preferences.LINE_SHOW_DESCRIPTION}block#{/if}#{else}none#{/else};">
+			<div class="span12 buildingDescription" contenteditable="true" buildingId="${building.id}">
+            	#{if building.description != null && !building.description.isEmpty()}
+            		${building.description.raw()}
+            	#{/if}
+			</div>
+		</div>
+
+		*{***** HIDDEN ROW : FORM : BUILDING PRODUCTION TIME *****}*
+		<div class="row-fluid buildingPTFormContainer" style="display:none;">
+			<div class="span12 form form-inline">
+				<br />
+                <label>&{'realm.building.productionTime'}</label>
+                <input type="text" id="productionTimeMinutes_${building.id}" name="productionTimeMinutes" size="4" value="${building.formatProductionTime().get("m")}" /><label>&{'time.minutes'}</label>
+                <input type="text" id="productionTimeSeconds_${building.id}" name="productionTimeSeconds" size="4" value="${building.formatProductionTime().get("s")}" /><label>&{'time.seconds'}</label>
+                <input type="submit" value="&{'form.update'}" class="buildingPTSubmit btn btn-success" playerName="${player.name}" buildingId="${building.id}" />
+			</div>
+		</div>
+
+		*{***** HIDDEN ROW : FORM : BUILDING AREA *****}*
+		<div class="row-fluid buildingAreaFormContainer" style="display:none;">
+            <div class="span12 form form-inline">
+            	<br />
+                <label class="select">&{'realm.building.area'}</label>
+                <select name="area" id="buildingAreaSelect_${building.id}">
+        		%{
+                	for(int i = 0 ; i <= 9 ; i++) {
+                    	if(i == building.area) {
+                        	out.print("<option value=\"" + i + "\" selected>" + messages.get('realm.area.' + i) +"</option>");
+                    	} else {
+                        	out.print("<option value=\"" + i + "\">" + messages.get('realm.area.' + i) +"</option>");
+                    	}
+                	}
+            	}%
+        		</select>
+                <input type="submit" value="&{'form.update'}" class="buildingAreaSubmit btn btn-success" playerName="${player.name}" buildingId="${building.id}" />
+            </div>
+		</div>
+
+		*{***** HIDDEN ROW : FORM : DEPOSIT ***** }*
+        #{if building.doesExpire()}
+          	<div class="row-fluid buildingDQFormContainer form-inline" style="display:none">
+              	<label for="depositQuantity">&{'realm.index.building.deposit.quantity'}</label>
+              	<input type="text" name="depositQuantity" value="${building.calcDepositQuantity()}" size="6" />
+              	<input type="submit" value="&{'form.update'}" class="buildingDQSubmit btn btn-success" playerName="${player.name}" buildingId="${building.id}" />
+          	</div>
+        #{/if}
+
+	</div>
+</div>

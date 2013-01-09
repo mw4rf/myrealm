@@ -1,0 +1,40 @@
+#{extends 'Realm/template.html' /}
+
+*{ ********** PRODUCTION ********** }*
+<div class="container-fluid">
+	
+	*{ Production Ratio }*
+	<div class="row-fluid">
+	
+		*{ Ratio: Positive quantities }*
+		<div class="span6">
+			<div class="label label-success">&{'realm.index.goodsbalance.positive'}</div>
+   	    	<table>
+   	        #{list items:goods, as:'good'}
+   	        	#{if good.getRealQuantity() >= 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+		
+		*{ Ratio: Negative quantities }*
+		<div class="span6">
+		   	<div class="label label-important">&{'realm.index.goodsbalance.negative'}</div>
+   	    	<table>
+   	        #{list items:goods, as:'good'}
+   	        	#{if good.getRealQuantity() < 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+	
+	</div>
+
+
+</div>

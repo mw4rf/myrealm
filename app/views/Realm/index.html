@@ -1,0 +1,74 @@
+#{extends 'Realm/template.html' /}
+
+<div class="row-fluid">
+
+
+	*{ ***** LEFT ***** }*
+	<div class="span5 container-fluid">
+		
+		<div class="row-fluid">
+			
+			*{ ***** Count Goods ***** }*
+			<div class="span12 well">
+				<ul class="unstyled">
+					<li><b>${countPrcd}</b>/${countGoods} &{'realm.index.goodsbalance.produced'}
+					<li><b>${countNeed}</b>/${countGoods} &{'realm.index.goodsbalance.needed'}
+					<li><b>${countDfct}</b>/${countGoods} &{'realm.index.goodsbalance.negative'}
+					<li><b>${countExcs}</b>/${countGoods} &{'realm.index.goodsbalance.positive'}
+				</ul>
+			</div>
+			
+			*{ ***** Count Buildings ***** }*
+			<div class="span12 well">
+				<ul class="unstyled">
+					<li><b>${countAll} &{'realm.index.building.count.all'}</b></li>
+					<li><b>${countStpd}</b> &{'realm.index.building.count.stopped'}</li>
+					<li><b>${countBstd}</b> &{'realm.index.building.count.boosted'}</li>
+					<li><b>${countSmtd}</b> &{'realm.index.building.count.simulated'}</li>
+					<li><b>${countNoAr}</b> &{'realm.index.building.count.no.area'}</li>
+					<li><b>${countDpst}</b> &{'realm.index.building.count.deposit'}</li>
+				</ul>
+			</div>
+			
+			*{ ***** Goods in deficit ***** }*
+			<div class="span12 well">
+				<h3>&{'realm.index.goodsbalance.negative'}</h3>
+				<ul class="unstyled">
+					#{list items:goods,as:'good'}
+						#{if good.getRealQuantity() <= 0}
+							#{include 'Realm/goods/_goodItemSmall.html' /}
+						#{/if}
+					#{/list}
+				</ul>
+			</div>
+		
+		</div>
+		
+	</div>
+	
+	*{ ***** RIGHT ***** }*
+	<div class="span7 container-fluid">
+		
+		<div class="row-fluid">
+			
+			*{ ***** Buildings Chart ***** }*
+			<div class="span12 well">
+				#{include 'Realm/snapshots/stats/smallBuildingsHistory.html' /}
+			</div>
+			
+			*{ ***** Last 5 Buildings ***** }*
+			<div class="span12 well">
+				<h3>&{'home.last.buildings'}</h3>
+				<ul class="unstyled">
+				#{list items:last5buildings, as:'b'}
+					<li>#{a @Realm.showBuilding(player.name, b.id)}${b.name}#{/a} (${b.builtAt.format()})</li>
+				#{/list}
+				</ul>
+			</div>
+		
+		</div>
+		
+	</div>
+
+
+</div>

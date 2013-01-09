@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title: "MyRealm" /}
+
+<div class="container">
+	
+	<ul style="list-style-type:none;margin:0;padding:0;">
+	#{list adventures, as: 'adventure'}
+		<li>
+			#{a @Adventures.showAdventure(adventure.player.name, adventure.id)}${adventure.name}#{/a}
+			#{if adventure.dateStart != null && adventure.dateEnd != null}
+				(${adventure.dateStart.format("dd MMM yyyy")})
+			#{/if}
+			<b>#{a @Application.home(adventure.player.name)}${adventure.player.name}#{/a}</b> 
+			#{list adventure.participants, as: 'participant'} 
+				#{if participant != null}
+					#{a @Application.home(participant.name)}${participant.name}#{/a}
+				#{/if}
+			#{/list} 
+		</li>
+			
+	#{/list}
+	</ul>
+	
+</div>

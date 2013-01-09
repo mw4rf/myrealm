@@ -1,0 +1,45 @@
+#{extends 'Realm/template.html' /}
+
+*{ Buildings : DISABLED }*
+
+<div class="container-fluid"  id="buildings-list-by-status">
+
+	<div class="row-fluid">
+	
+		*{ Good loss }*
+		<div class="span6">
+			<div class="negativeQuantity headerbg header3">&{'realm.index.buildings.disabled.gain'}</div>
+			<table>
+			#{list goodsForDisabled, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td><span class="negativeQuantity goodItem"><img valign="middle" src="/public/${good.getImage()}" /> ${good.getRealQuantity()} ${good.getName()}</span></td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+		
+		*{ Good saving }*
+		<div class="span6">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.disabled.loss'}</div>
+			<table>
+			#{list goodsForDisabled, as: 'good'}
+				#{if good.getRealQuantity() < 0}
+					<tr><td><span class="positiveQuantity goodItem"><img valign="middle" src="/public/${good.getImage()}" /> ${-good.getRealQuantity()} ${good.getName()}</span></td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+	
+	</div>
+	
+	*{ List of buildings here, with sorting ability }*
+	<div id="buildings-list-by-status-ajax">
+		#{include 'Realm/lists/manage/_list.html' /}
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

@@ -1,0 +1,11 @@
+*{ ***** ADVENTURES MARKET PRIVATE INDEX PAGE ***** }*
+#{extends 'Market/template.html' /}
+
+*{ ********** LIST CURRENT SALES (player sells) ********** }*
+#{if offers != null && offers.size() > 0}
+	<div class="container-fluid">
+	#{list items:offers, as: 'offer'}
+		#{include 'Market/adventures/private/_adventureOffer.html' /}
+	#{/list}
+	</div>
+#{/if}

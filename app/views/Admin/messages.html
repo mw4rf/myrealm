@@ -1,0 +1,25 @@
+#{extends 'Admin/template.html' /}
+
+<div class="header1">Admin Messages</div>
+
+*{ ********** ADD MESSAGE *********** }*
+<div class="formContainer">
+#{form @Admin.addMessage()}
+	<textarea name="message" cols="85" rows="3"></textarea>
+	<br />Start: <input type="text" name="dateStart" value="${new Date().format()}" />
+	End: <input type="text" name="dateEnd" value="${new Date().format()}" />
+	<input type="submit" value="Add Message" />
+#{/form}
+</div>
+
+*{ ********** MESSAGES LIST *********** }*
+#{list adminMessages, as: 'msg'}
+	<div class="flash_admin">
+		#{form @Admin.updateMessage(msg.id)}
+			<textarea name="message" cols="85" rows="3">${msg.message.raw()}</textarea>
+			<br />Start: <input type="text" name="dateStart" value="${msg.dateStart.format()}" />
+			End: <input type="text" name="dateEnd" value="${msg.dateEnd.format()}" />
+			<p><input type="submit" value="Update Message" /> #{a @Admin.deleteMessage(msg.id)}Delete#{/a}</p>
+		#{/form}
+	</div>
+#{/list}

@@ -1,0 +1,16 @@
+<h3>${buildingName}</h3>
+
+<p>&{'realm.index.building.subtotal'}: ${buildings.size()}</p>
+
+#{list items:ratios, as:'wgood'}
+					#{if wgood.getRealQuantity() < 0}
+						<span class="negativeQuantity goodItem">
+					#{/if}
+					#{if wgood.getRealQuantity() >= 0}
+						<span class="positiveQuantity goodItem">
+					#{/if}
+					<img src="/public/${wgood.getImage()}" />
+					${wgood.getRealQuantity()} ${wgood.name} &nbsp;
+					</span>
+					<br />
+#{/list}

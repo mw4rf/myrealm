@@ -1,0 +1,58 @@
+#{extends 'Preferences/template.html' /}
+
+<h2>&{'nav.preferences.purge'}</h2>
+
+*{ *** Purge Realm (delete buildings) *** }*
+<p>
+<button class="btn btn-danger ajaxConfirmationLink" onConfirmation="doPurge('realm')" message="&{'dialog.final'}" 
+		player="${player.name}"#{if player.buildings.size() < 1} disabled="disabled"#{/if}>
+	&{'preferences.purge.realm', player.buildings.size()}
+</button>
+</p>
+
+*{ *** Purge Snapshots *** }*
+<p>
+<button class="btn btn-danger ajaxConfirmationLink" onConfirmation="doPurge('snapshots')" message="&{'dialog.final'}" 
+		player="${player.name}"#{if player.snapshots.size() < 1} disabled="disabled"#{/if}>
+	&{'preferences.purge.snapshots', player.snapshots.size()}
+</button>
+</p>
+
+*{ *** Purge Adventures *** }*
+<p>
+<button class="btn btn-danger ajaxConfirmationLink" onConfirmation="doPurge('adventures')" message="&{'dialog.final'}" 
+		player="${player.name}"#{if player.adventures.size() < 1} disabled="disabled"#{/if}>
+	&{'preferences.purge.adventures', player.adventures.size()}
+</button>
+</p>
+
+<script type="text/javascript">
+var purgeRealmAction = #{jsAction @Preferences.purgeRealm(':playerName') /}
+var purgeSnapshotsAction = #{jsAction @Preferences.purgeSnapshots(':playerName') /}
+var purgeAdventuresAction = #{jsAction @Preferences.purgeAdventures(':playerName') /}
+
+function doPurge(action) {
+	var player = "${player.name}"
+	loading(true)
+	// REALM
+	if(action == "realm") {
+		$.post(purgeRealmAction({playerName:player}), function(data) {
+			loading(false)
+			location.reload() // reload page
+		})
+	}
+	else if(action == "snapshots") {
+		$.post(purgeSnapshotsAction({playerName:player}), function(data) {
+			loading(false)
+			location.reload() // reload page
+		})
+	}
+	else if(action == "adventures") {
+		$.post(purgeAdventuresAction({playerName:player}), function(data) {
+			loading(false)
+			location.reload() // reload page
+		})
+	}
+}
+
+</script>

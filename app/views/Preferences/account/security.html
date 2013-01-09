@@ -1,0 +1,45 @@
+#{extends "Preferences/template.html" /}
+
+<h2>&{'nav.preferences.account'}</h2>
+*{ ********** PROFILE/SECURITY ********** }*
+    <p class="form form-inline">
+        *{ ****** e-mail ***** }*
+		<label>&{'preferences.mail'}</label>
+		<input type="text" name="email" value="${player.preferences.EMAIL}" />
+		<input type="submit" target="email" value="&{'form.save'}" class="btn btn-success" />
+		<br />
+	</p>
+	
+	<p class="form form-inline">
+        *{ ***** Enable security & Password ***** }*
+        <label class="checkbox">
+        	<input type="checkbox" name="enable_security" #{if player.preferences.ENABLE_SECURITY}checked#{/if}/>
+        	&{'preferences.enable_security'}
+        </label>&nbsp;&nbsp;
+			<input type="text" name="password" placeholder="&{'password'}" />
+        	<input type="submit" target="password" value="&{'form.save'}" class="btn btn-success" />
+   </p>
+   
+   <p> 
+        *{ ***** Auth cookie ***** }*
+        <label class="checkbox">
+        	<input type="checkbox" name="auth_cookie" #{if player.preferences.AUTH_COOKIE}checked#{/if}/>
+        	&{'preferences.authcookie'}
+        </label>
+   
+        *{ ***** do not track ***** }*
+    	<label class="checkbox">
+    		<input type="checkbox" name="do_not_track" #{if player.preferences.DO_NOT_TRACK}checked#{/if} />
+    		&{'preferences.do.not.track'} &{'help.link.small', "http://settlers.valhalla.fr/wiki/myrealm/preferences/mode_invisible"}
+    	</label>
+    </p>
+    
+    <p>
+    	*{ ****** Enable RSS feed ***** }*
+    	<label class="checkbox">
+			<input type="checkbox" name="enable_activity_feed" #{if player.preferences.ENABLE_ACTIVITY_FEED}checked#{/if} />
+			&{'preferences.enable.activity.feed'} : <b>${play.Play.configuration.get("application.address").toString()}@{Application.rss(player.name)}</b>	    	
+    	</label>
+    	
+    </p>
+

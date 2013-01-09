@@ -1,0 +1,4 @@
+%{ String adminMessage = controllers.Application.getLastAdminMessage(); }%
+#{if adminMessage != null && !adminMessage.isEmpty()}
+	<div class="flash_admin container">&{'admin.message'} ${adminMessage.raw()}</div>
+#{/if}

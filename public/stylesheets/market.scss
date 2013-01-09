@@ -1,0 +1,79 @@
+
+
+/** ADVENTURES **/
+
+.adventureSaleContainer {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.adventureSaleTable {
+}
+
+.adventureSaleTableHeader {
+  font-size: 1.1em;
+  border-top: 2px solid #FFF;
+  border-bottom: 2px solid #FFF;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin-bottom: 1em;
+  text-align: center;
+  background-color: #DBDBDB;
+}
+
+.adventureSaleTableContent {
+  font-family: monospace;
+  padding: 0.3em 0.3em 0.3em 1em;
+  text-align: left;
+}
+
+.adventureSaleImageCell {
+  text-align: center;
+}
+
+.adventureOfferCell {
+  text-align: center;
+}
+
+/** BOOSTS **/
+
+#boostsPublicMarket {
+}
+
+#boostsOwnMarket {
+}
+
+/** COMMON **/
+
+.offerStatusWaiting {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+
+.offerStatusAccepted {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}
+
+.offerStatusRejected {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+
+.ownSale {
+  background-color: #CCCCFF;
+}
+
+.ownPurchase {
+  background-color: #FEEFB3;
+}
+
+.messageSeller {
+  background-color: #FEEFF9;
+  border: 1px solid #DBDBDB;
+}
+
+.messageBuyer {
+  background-color: #F0FECD;
+  border: 1px solid #DBDBDB;
+}

@@ -1,0 +1,66 @@
+#{extends 'main.html' /}
+#{set title: 'Market' /}
+
+*{ *********** SALE OFFER ********** }*
+<div class="container">
+		<table class="adventureSaleTable" width="100%">
+			<tr>
+				<td class="adventureSaleTableContent" rowspan="5"><img src="/public/${sale.getWorldAdventure().getImage()}" /></td>
+			</tr>
+			<tr>
+				<td class="adventureSaleTableHeader">${sale.itemQuantity} ${sale.itemName}</td>
+				<td class="adventureSaleTableHeader">&{'market.adventure.comments'}</td>
+			</tr>
+			<tr>
+				<td class="adventureSaleTableHeader">&{'market.adventure.seller', sale.seller.name}</td>
+				<td class="adventureSaleTableContent" rowspan="4" width="70%">${sale.description.raw()}</td>
+			</tr>
+			<tr>
+				<td class="adventureSaleTableContent">&{'market.adventure.from'} ${sale.startAt.format()} &{'market.adventure.to'} ${sale.endAt.format()}</td>
+			</tr>
+			<tr>
+				<td class="adventureSaleTableContent">
+					#{if canBuyAndSell && !sale.seller.name.equals(controllers.Application.getSessionLogin())}
+						#{a @Market.buy(sale.id)}&{'market.buy'}#{/a}
+					#{/if}
+				</td>
+			</tr>
+		</table>
+</div>
+
+*{ *********** SALE ACCEPTATIONS ********** }*
+#{if sale.offers.size() > 0}
+	<div class="container">
+		<table>
+			<tr>
+				<th class="adventureOfferCell">&nbsp;</th>
+				<th class="adventureOfferCell">&{'market.adventure.offer.status'}</th>
+				<th class="adventureOfferCell">&{'market.adventure.offer.buyer'}</th>
+				<th class="adventureOfferCell">&{'market.adventure.offer.date'}</th>
+				<th class="adventureOfferCell">&{'market.adventure.offer.sold.date'}</th>
+			</tr>
+			#{list sale.offers, as: 'offer'}
+				#{include 'Market/_adventureSalePurchase.html' /}
+			#{/list}
+		</table>
+	</div>
+#{/if}
+
+*{ ********** MESSAGES ********** }*
+<div class="guildSectionHeader">&{'market.comments'}</div>
+#{if comments != null && comments.size() > 0}
+<div id="guildWall" class="guildContainer">
+	#{list comments, as: 'message'}
+		#{include "Market/_comment.html" /}
+	#{/list}
+</div>
+#{/if}
+<div id="commentsForm" class="formContainer">
+	#{form @Market.addComment()}
+		&{'guild.wall.newas', controllers.Application.getSessionLogin(), controllers.Application.getSessionLogin()} => #{a @Application.index()}&{'login'}#{/a}
+		<br /><textarea name="comment" style="width:100%;" rows="5"></textarea>
+		<input type="hidden" name="saleId" value="${sale.id}" />
+		<br /><input type="submit" value="&{'form.add'}" />
+		&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+	#{/form}
+</div>

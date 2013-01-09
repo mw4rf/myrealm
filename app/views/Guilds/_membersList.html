@@ -1,0 +1,11 @@
+	<ul id="guildMembersList">
+		#{list members, as: 'membership'}
+			<li>
+				<span title="${messages.get('guild.rank.' + membership.rank)}"><img align="absmiddle" src="/public/images/guilds/rank_${membership.rank}.png" /></span>
+				#{a @Application.home(membership.player.name)}${membership.player.name}#{/a}
+				#{if isOfficer}
+					<span class="guildInfo">(${membership.officernotes.size()} #{a @Guilds.officerNotes(guild.tag, membership.player.name)}&{'guild.members.officer.page'}#{/a})</span>
+				#{/if}
+			</li>
+		#{/list}
+	</ul>

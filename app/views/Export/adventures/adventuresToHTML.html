@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+	<title>&{'app.name'} &{'preferences.section.export'}: &{'export.adventures'}</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>Id.</th>
+				<th>&{'adventure.name'}</th>
+				<th>&{'adventure.dateStart'}</th>
+				<th>&{'adventure.dateEnd'}</th>
+				<th>&{'adventure.next.owner'}</th>
+				<th>&{'adventure.participants'}</th>
+				<th>&{'adventure.notes'}</th>
+			</tr>
+			#{list items:adventures, as:'a'}
+			<tr>
+				<td>${a.id}</td>
+				<td>${a.name}</td>
+				<td>${a.dateStart.format()}</td>
+				<td>${a.dateEnd.format()}</td>
+				<td>${a.player.name}</td>
+				<td>#{list items:a.participants, as:'p'}${p.name} #{/list}</td>
+				<td>${a.notes}</td>
+			</tr>
+			#{/list} 
+		</table>
+	</body>
+</html>

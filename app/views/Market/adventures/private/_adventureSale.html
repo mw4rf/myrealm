@@ -1,0 +1,78 @@
+*{ *********** SALE OFFER ********** }*
+#{if sale.isAdventure()}
+<div class="container-fluid well">
+	%{
+		String tdclass = "";
+		if(sale.isSeller(controllers.Application.getSessionLogin()))
+			tdclass = "ownSale";
+		else if(sale.isBuyer(controllers.Application.getSessionLogin()))
+			if(!sale.getOffer(controllers.Application.getSessionLogin()).hasAnswer())
+				tdclass = "offerStatusWaiting";
+			else if(sale.getOffer(controllers.Application.getSessionLogin()).sold)
+				tdclass = "offerStatusAccepted";
+			else
+				tdclass = "offerStatusRejected";
+	}%
+	
+	<div class="row-fluid">
+		
+		*{ ***** Adventure Image ***** }*
+		<div class="span2 ${tdclass} middle">
+			<img src="/public/${sale.getWorldAdventure().getImage()}" />
+			<p>#{a @Market.adventureDetails(sale.id), class:'btn btn-mini'}<i class="icon-eye-open"></i> &{'market.details'}#{/a}</p>
+		</div>
+		
+		*{ ***** Adventure Details ***** }*
+		<div class="span10">
+		
+			*{***** Seller *****}*
+			<div class="row-fluid">
+			
+				<div class="span6">
+					<b>${sale.itemOriginalQuantity} <i>${sale.itemName}</i></b>
+					(${sale.itemQuantity} &{'market.adventure.offer.remaining'})
+				</div>
+				
+				<div class="span6 right">
+					&{'market.adventure.from'} ${sale.startAt.format()} &{'market.adventure.to'} ${sale.endAt.format()}
+				</div>
+			
+			</div>
+			
+			*{***** Comments/Price *****}*
+			<div class="row-fluid">
+				
+				<p class="span12">
+					${sale.description.raw()}
+				</p>
+				
+			</div>
+			
+			*{***** Status *****}*
+			<div class="row-fluid">
+				
+				<div class="span12">
+					#{if sale.offers.size() == 0}
+						<span class="offerStatusWaiting">&{'market.adventure.offer.no.buyer'}</span>
+					#{/if}
+					#{else}
+						#{if sale.offers.size() == 1}
+							<span class="offerStatusAccepted">1 &{'market.adventure.offer.buyer'}</span>
+						#{/if}
+						#{else}
+							<span class="offerStatusAccepted">${sale.offers.size()} &{'market.adventure.offer.buyers'}</span>
+						#{/else}
+						#{list items:sale.offers, as:'offer'}
+							#{a @Home.index(offer.buyer.name)}${offer.buyer.name}#{/a} 
+						#{/list}
+					#{/else}
+				</div>
+				
+			</div>
+		
+		</div>
+		
+	</div>
+	
+</div>
+#{/if}

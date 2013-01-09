@@ -1,0 +1,8 @@
+<Actions>
+	#{list items:actions, as:'a'}
+	<action id="${a.id}">
+		<date>${a.at}</date>
+		<object><![CDATA[${messages.get("${a.name.raw()}", "${a.formatAction().raw()}").raw()}]]></object>
+	</action>
+	#{/list}
+</Actions>

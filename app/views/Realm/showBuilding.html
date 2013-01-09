@@ -1,0 +1,180 @@
+#{extends 'Realm/template.html' /}
+#{set title: 'Realm' /}
+
+<div class="container-fluid hero-class formBuilding">
+    <table cellpadding=2 cellspacing=0>
+        <tr>
+            <td rowspan="4"><img src="/public/${building.getImage()}" /></td>
+            <td class="header1">${building.name}</td>
+        </tr>
+        <tr>
+            <td class="header2">&{'realm.building.level'} ${building.level}</td>
+        </tr>
+        <tr>
+            <td class="header2">
+                &{'realm.building.productionTime'}
+                ${building.productionTime}
+                (${building.formatProductionTime().get("m")}&{'time.minutes'}
+                ${building.formatProductionTime().get("s")}&{'time.seconds'})
+            </td>
+        </tr>
+        <tr>
+        	<td>
+    	    *{ *** Id. & Creation Date *** }*
+       		<span class="label">Id.: <i>${building.id}</i></span> 
+       		#{if building.builtAt != null}
+       			<span class="label">&{'realm.building.built.at'}: <i>${building.builtAt.format()}</i></span>
+       		#{/if}
+       		</td>
+        </tr>
+    </table>
+</div>
+<p>&nbsp;</p>
+*{ Edit building }*
+<div class="container-fluid">
+<div class="row-fluid">
+<div class="span1"></div>
+<div class="span10 well">
+	<h3>
+    	&{'realm.showbuilding.editbuilding'}
+    	| <a href="@{Realm.deleteBuilding(player.name, building.id)}">&{'realm.showbuilding.deletebuilding'}</a>
+	</h3>
+	
+	#{form @Realm.editBuilding(player.name), class:'form-vertical'}
+		<p>
+			<label for="name">&{'realm.building.name'}</label>
+			<select name="name" id="name">
+	        #{list items:worldBuildings, as:'wbuilding'}
+	            %{if( wbuilding.name.equals(building.name) ) { }%
+	                <option value="${wbuilding.name}" selected>${wbuilding.name}</option>
+	            %{ } else { }%
+	              <option value="${wbuilding.name}">${wbuilding.name}</option>
+	            %{ } }%
+	        #{/list}
+	        </select>
+	
+			<label for="level">&{'realm.building.level'}</label>
+			<select name="level">
+	            %{
+	                for(int i = 1 ; i <= 5 ; i++) {
+	                    if(i == building.level) {
+	                        out.print("<option value=\"" + i + "\" selected>" + i +"</option>");
+	                    } else {
+	                        out.print("<option value=\"" + i + "\">" + i +"</option>");
+	                    }
+	                }
+	            }%
+	        </select>
+	
+	        <label for="area">&{'realm.building.area'}</label>
+	        <select name="area">
+	        	%{
+	                for(int i = 0 ; i <= 9 ; i++) {
+	                    if(i == building.area) {
+	                        out.print("<option value=\"" + i + "\" selected>" + messages.get('realm.area.' + i) +"</option>");
+	                    } else {
+	                        out.print("<option value=\"" + i + "\">" + messages.get('realm.area.' + i) +"</option>");
+	                    }
+	                }
+	            }%
+	        </select>
+	
+			<label for="productionTimeMinutes">&{'realm.building.productionTime'}</label>
+			<input class="span1" type="text" name="productionTimeMinutes" id="productionTimeMinutes" value="${building.formatProductionTime().get("m")}" size="3" /> &{'time.minutes'}
+	        <input class="span1" type="text" name="productionTimeSeconds" id="productionTimeSeconds" value="${building.formatProductionTime().get("s")}" size="2" /> &{'time.seconds'}
+	
+			<input type="hidden" name="buildingId" value="${building.id}" />
+	
+			<br />&{'realm.building.desc'}
+			<textarea name="description" style="width:100%;">${building.description}</textarea>
+
+			<input type="submit" class="btn btn-large btn-success" value="&{'form.update'}"/>
+		</p>
+	#{/form}
+</div>
+<div class="span1"></div>
+</div>
+</div>
+
+*{ Needs }*
+#{if building.getNeeds(player.name).size() > 0}
+    <div class="container">
+	<h2>&{'realm.showbuilding.needs'}</h2>
+	<ul style="list-style-type:none;">
+	 #{list items:building.getNeeds(player.name), as:'good'}
+	 	<li>
+	 	     <img valign="middle" src="/public/${good.getImage()}" />
+	 		${good.getQuantity()} ${good.getName()} (&{'realm.showbuilding.bycycle'} ${good.getRealQuantity()})
+	 	</li>
+	 #{/list}
+	</ul>
+	</div>
+#{/if}
+
+*{ Production }*
+#{if building.getProds(player.name).size() > 0}
+    <div class="container">
+	<h2>&{'realm.showbuilding.production'}</h2>
+	<ul style="list-style-type:none;">
+	 #{list items:building.getProds(player.name), as:'good'}
+	 	<li>
+	 	     <img valign="middle" src="/public/${good.getImage()}" />
+	 		${good.getQuantity()} ${good.getName()} (&{'realm.showbuilding.bycycle'} ${good.getRealQuantity()})
+	 	</li>
+	 #{/list}
+	</ul>
+	</div>
+#{/if}
+
+*{ Other buildings of that kind }*
+#{if player.getBuildingsByName(building.name).size() > 0}
+    <div class="container">
+    <h2>&{'realm.showbuilding.otherbuildings'}</h2>
+    <ol>
+    #{list items:player.getBuildingsByName(building.name), as:'altbuilding'}
+        <li>
+            #{if altbuilding.id == building.id}
+                ${altbuilding.name}
+            #{/if}
+            #{else}
+                <a href="@{Realm.showBuilding(player.name, altbuilding.id)}">${altbuilding.name}</a>
+            #{/else}
+                | &{'realm.building.level'} <b>${altbuilding.level}</b>
+                | &{'realm.building.productionTime'} <b>${altbuilding.formatProductionTime().get("m")} &{'time.minutes'}
+                ${altbuilding.formatProductionTime().get("s")} &{'time.seconds'}</b>
+        </li>
+    #{/list}
+    </ol>
+    </div>
+#{/if}
+
+
+*{ Building history }*
+#{if history != null && history.size() > 0}
+    <div class="container">
+    <h2>&{'realm.showbuilding.snapshots'}</h2>
+	<table>
+	#{list history, as:'bsnap'}
+		<tr>
+			<td>#{if bsnap.snapshot.locked}<span title="&{'realm.snapshot.locked'}" my="top right" at="middle right"><img src="/public/images/app/lock.png" /></span>#{/if}</td>
+			<td>${bsnap.snapshot.takenAt.format()}</td>
+			<td>#{if bsnap.enabled}<img src="/public/images/app/enable.png" />#{/if}#{else}<img src="/public/images/app/disable.png" />#{/else}</td>
+			<td>#{if bsnap.boosted}<img src="/public/images/app/boost.png" />#{/if}#{else}<img src="/public/images/app/unboost.png" />#{/else}</td>
+			<td>#{if bsnap.simulated}<img src="/public/images/app/duplicate_simulated.png" />#{/if}</td>
+			<td>&{'realm.building.level'} <b>${bsnap.level}</b></td>
+			<td>&{'realm.building.productionTime'} <b>${bsnap.formatProductionTime().get("m")} &{'time.minutes'}
+                ${bsnap.formatProductionTime().get("s")} &{'time.seconds'}</b></td>
+		</tr>
+	#{/list}
+	</table>
+	</div>
+#{/if}
+
+
+
+
+
+
+
+
+

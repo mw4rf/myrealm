@@ -1,0 +1,37 @@
+<table>
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<th>&{'market.boost.receiver'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+	*{ ***** Records ***** }*
+	#{list publicRequests, as: 'request'}
+		#{if player.name.equals(request.receiver.name)}
+		<tr class="highlightable ownSale">
+		#{/if}#{else}
+		<tr class="highlightable">
+		#{/else}
+			<td class="middle">#{a @Application.home(request.receiver.name)}${request.receiver.name}#{/a}</td>
+			<td class="middle">${request.quantity}</td>
+			<td class="middle">${request.boostName}</td>
+			<td class="middle">${request.buildingName}</td>
+			<td class="middle">#{if request.boostAt != null}${request.boostAt.format()}#{/if}</td>
+			#{if !player.name.equals(request.receiver.name)}
+				<td class="middle">#{a @Market.acceptBoostExchange(request.id)}&{'market.boosts.submit.do'}#{/a}</td>
+			#{/if}
+		</tr>
+	#{/list}
+	*{ ***** Table Headers ***** }*
+	<tr>
+		<th>&{'market.boost.receiver'}</th>
+		<th>&{'market.boost.quantity'}</th>
+		<th>&{'market.boost.name'}</th>
+		<th>&{'market.boost.building'}</th>
+		<th>&{'market.boost.date'}</th>
+		<td class="middle">&nbsp;</td>
+	</tr>
+</table>

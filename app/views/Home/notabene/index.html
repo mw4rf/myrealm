@@ -1,0 +1,26 @@
+#{extends 'Home/template.html' /}
+
+<div class="headerbg header3">&{'home.playernote'}</div>
+<div id="playernote" class="well" playerName="${player.name}" contenteditable="${contenteditable}">
+	#{if player.note != null}
+		${player.note.content.raw()}
+	#{/if}#{else}
+		&{'home.playernote.null'}
+	#{/else}
+</div>
+
+<script type="text/javascript">
+
+/**
+ * Contenteditable items
+ */
+var playerNoteAction = #{jsAction @Home.updatePlayerNote(':playerName') /} 
+$('#playernote').live('blur', function(){
+    var content = $(this).html();
+    var playerName = $(this).attr("playerName")
+    $.post(playerNoteAction({playerName: playerName}), {content: content}, function(data) {
+    	// no callback needed
+    })
+})
+
+</script>

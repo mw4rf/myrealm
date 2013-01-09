@@ -1,0 +1,22 @@
+*{ ***** Adventures menu ***** }*
+
+<ul class="nav nav-list">
+	*{ ***** New ***** }*
+	<li #{if request.action.equals("Adventures.add")} class="active"#{/if}>
+		#{a @Adventures.add(player.name)}
+			<i class="icon-plus-sign#{if request.action.equals("Adventures.add")} icon-white#{/if}"></i> &{'nav.adventures.add'}
+		#{/a}
+	</li>
+	*{ ***** List/Index ***** }*
+	<li #{if request.action.equals("Adventures.index")} class="active"#{/if}>
+		#{a @Adventures.index(player.name)}
+			<i class="icon-list#{if request.action.equals("Adventures.index")} icon-white#{/if}"></i> &{'nav.adventures.list'}
+		#{/a}
+	</li>
+	*{ ***** List/Index ***** }*
+	<li #{if request.action.equals("Adventures.nextAdventuresList")} class="active"#{/if}>
+		#{a @Adventures.nextAdventuresList()}
+			<i class="icon-list#{if request.action.equals("Adventures.nextAdventuresList")} icon-white#{/if}"></i> &{'nav.adventures.next'}
+		#{/a}
+	</li>
+</ul>

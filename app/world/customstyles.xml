@@ -1,0 +1,11 @@
+<CustomStyles>
+
+	<style name="default" css="default.scss" />
+	<style name="Darth Vader" css="darthvader.scss" />
+	<style name="Kitten Invasion" css="kitteninvasion.scss" />
+	<style name="Zenburn" css="zenburn.scss" />
+	<style name="Igloo" css="igloo.scss" />
+	<style name="Spring's Here" css="springshere.scss" />
+	<style name="Spring's Here (NoBG)" css="springshere-nobg.scss" />
+	
+</CustomStyles>

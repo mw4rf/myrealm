@@ -1,0 +1,33 @@
+%{
+	String bgclass = "";
+	if(message.getAuthorRank() == 0) {
+		bgclass = "guildWallMessage_stranger";
+	} else if(message.getAuthorRank() == 1 || message.getAuthorRank() == 2) {
+		bgclass = "guildWallMessage_member";
+	} else if(message.getAuthorRank() == 3 || message.getAuthorRank() == 4) {
+		bgclass = "guildWallMessage_officer";
+	} else {
+		bgclass = "";
+	}
+
+		// Display div ?
+		if(display == null || display.isEmpty())
+			String display = "block";
+}%
+
+#{if message != null && message.content != null && !message.content.isEmpty()}
+<div id="guildWallMessage_${message.id}" class="container comment ${bgclass}" style="display:${display};">
+	<a name="${message.id}"></a>
+	#{a @Application.home(message.author)}
+		#{if message.getAuthorAsPlayer().preferences != null}
+			<img class="comment_avatar" src="/public/images/${message.getAuthorAsPlayer().preferences.getAvatar()}" />
+		#{/if}#{else}
+			<img class="comment_avatar" src="/public/images/avatars/Avatar00.png" />
+		#{/else}
+	#{/a}
+	<div class="comment_meta">
+		&{'adventure.comments.meta', message.author, message.publishedAt.format()}
+	</div>
+	<div class="comment_text" id="comment_text_${message.id}">${message.content.raw().nl2br()}</div>
+</div>
+#{/if}

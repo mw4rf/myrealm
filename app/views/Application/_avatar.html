@@ -1,0 +1,5 @@
+#{if player != null && player.preferences != null && player.preferences.AVATARID != null && !player.preferences.AVATARID.isEmpty()}
+	<img id="avatar_image" src="/public/images/${player.preferences.getAvatar()}" />
+#{/if}#{else}
+	<img id="avatar_image" src="/public/images/avatars/Avatar00.png" />
+#{/else}

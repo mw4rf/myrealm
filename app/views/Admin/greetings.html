@@ -1,0 +1,32 @@
+#{extends 'Admin/template.html' /}
+
+<div class="header1">Greeting</div>
+
+*{ ********** ADD GREETING *********** }*
+<div class="well form-vertical">
+#{form @Admin.addGreeting()}
+	<textarea name="message" class="span10"></textarea>
+	<p>
+		<label class="checkbox">
+    		<input type="checkbox" name="enable"> Enable
+ 		 </label>
+	</p>
+	<p><input class="btn btn-success" type="submit" value="Add Greeting" /></p>
+#{/form}
+</div>
+
+*{ ********** GREETINGS LIST *********** }*
+#{list greetings, as: 'msg'}
+	<div class="flash_admin">
+		#{form @Admin.updateGreeting(msg.id)}
+			<textarea name="message" class="span10">${msg.message.raw()}</textarea>
+			<p>
+				<label class="checkbox">
+    				<input type="checkbox" name="enable" #{if msg.enable}checked#{/if}> Enable
+ 		 		</label>
+			</p>
+			<p><input class="btn btn-warning" type="submit" value="Update Greeting" /> 
+			#{a @Admin.deleteGreeting(msg.id), class:'btn btn-danger'}Delete#{/a}</p>
+		#{/form}
+	</div>
+#{/list}

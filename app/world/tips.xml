@@ -1,0 +1,9 @@
+<Tips>
+	<tip id="1" value="MyRealm est totalement gratuit, et il ne vous sera jamais rien demandé en échange de son utilisation." link=""></tip>
+	<tip id="2" value="L'aide de MyRealm est disponible en ligne à cette adresse : %s" link="http://settlers.valhalla.fr/wiki/myrealm/"></tip>
+	<tip id="3" value="Vous pouvez poser vos questions à propos de MyRealm et suggérer des améliorations sur le forum dédié : %s" link="http://settlers.valhalla.fr/forum/viewforum.php?f=12"></tip>
+	<tip id="4" value="MyRealm est social ! Vous pouvez ajouter vos amis depuis les préférences, et suivre leur activité depuis la page d'accueil de votre profil, ou vous abonner à leur flux RSS s'ils l'ont activé." link=""></tip>
+	<tip id="5" value="Vous pouvez rechercher des partenaires pour vous aventures sur MyRealm. Il suffit pour cela de créer une nouvelle aventure avec une date de début dans le futur : elle sera affichée sur la page publique des propositions d'aventures : %s" link="http://myrealm.valhalla.fr:9000/list/nextadventures"></tip>
+	<tip id="6" value="Ajouter tous vos bâtiments manuellement, un par un, c'est long et pénible ! Heureusement, il existe une astuce pour aller un peu plus vite ! Il s'agit de la duplication de bâtiments, qui est expliquée ici : %s" link="http://settlers.valhalla.fr/wiki/myrealm/tips/duplication"></tip>
+	<tip id="7" value="Des didacticiels vidéo (screencast) pour vous montrer le fonctionnement de certaines fonctions mal connues de MyRealm sont disponibles à l'adresse suivante : %s" link="http://settlers.valhalla.fr/wiki/myrealm/videos"></tip>
+</Tips>

@@ -1,0 +1,32 @@
+#{extends 'Realm/template.html' /}
+
+*{ Buildings : BOOSTED }*
+
+<div class="container-fluid" id="buildings-list-by-status">
+
+	<div class="row-fluid">
+	
+		<div class="span12">
+			<div class="positiveQuantity headerbg header3">&{'realm.index.buildings.boosted.gain', player.boostMultiplier}</div>
+			<table>
+			#{list goodsFromBoost, as: 'good'}
+				#{if good.getRealQuantity() > 0}
+					<tr><td>#{include 'Realm/_goodItem.html' /}</td></tr>
+				#{/if}
+			#{/list}
+			</table>
+		</div>
+	
+	</div>
+	
+	*{ List of buildings here, with sorting ability }*
+	<div id="buildings-list-by-status-ajax">
+		#{include 'Realm/lists/manage/_list.html' /}
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

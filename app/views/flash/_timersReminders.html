@@ -1,0 +1,46 @@
+#{if player != null && controllers.Application.getSessionLogin().equals(player.name)}
+<div class="container-fluid">
+	<div class="row-fluid">
+	<div class="span1">&nbsp;</div>
+	<div class="span10">	
+	%{
+		List<models.players.PlayerTimer> rmdlist = player.timers;
+	}%
+
+	#{if rmdlist.size() > 0}
+		#{list rmdlist, as: 'rmtimer'}
+			*{* Timers that will expire soon *}*
+			#{if rmtimer.remind && rmtimer.doesExpireSoon()}
+				%{
+					HashMap<String, Integer> rmexp = rmtimer.getTimeBeforeExpiration();
+					int rmh = rmexp.get("h");
+					int rmm = rmexp.get("m");
+					int rms = rmexp.get("s");
+				}%
+				<div class="alert alert-info">
+					<a class="close" data-dismiss="alert">×</a>
+					&{'timer.will.expire', rmtimer.name, rmh, rmm, rms}
+				</div>
+			#{/if}
+			
+			*{* Timers that has already expired *}*
+			#{if rmtimer.remind && rmtimer.hasExpired()}
+				%{
+					HashMap<String, Integer> rmexp = rmtimer.getTimeAfterExpiration();
+					int rmh = rmexp.get("h");
+					int rmm = rmexp.get("m");
+					int rms = rmexp.get("s");
+				}%
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert">×</a>
+					&{'timer.has.expired', rmtimer.name, rmh, rmm, rms}
+				</div>
+			#{/if}
+		#{/list}
+
+	#{/if}
+	</div>
+	<div class="span1">&nbsp;</div>
+	</div>
+</div>
+#{/if}

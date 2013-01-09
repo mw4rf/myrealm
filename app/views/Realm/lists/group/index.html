@@ -1,0 +1,19 @@
+#{extends 'Realm/template.html' /}
+
+<div id="buildings_list_group">
+	#{if player.preferences.SHOW_CONDENSED_GROUPS}
+		#{include 'Realm/lists/group/_groupsListCondensed.html' /}
+	#{/if}#{else}
+		#{include 'Realm/lists/group/_groupsList.html' /}
+	#{/else}
+		
+	*{ *** Buildings GROUP *** }*
+	<div id="buildings_group_group"></div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/actions.js' /}
+	#{include 'Realm/lists/group/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

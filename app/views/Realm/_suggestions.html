@@ -1,0 +1,45 @@
+
+		<br />
+		<ul style="margin:0;">
+		#{list suggestions, as: 'suggestion'}
+			#{if suggestion.hasLackingGood()}
+				<li class="negativeQuantity">&{'realm.index.suggestion.mustbuild.lack', suggestion.getLackingGoodQuantity(), suggestion.getLackingGoodName(), suggestion.getQuantity(), suggestion.getBuildingName()}</li>
+			#{/if}
+			#{if suggestion.hasExcessGood()}
+				<li class="positiveQuantity">&{'realm.index.suggestion.mustbuild.excess', suggestion.getExcessGoodQuantity(), suggestion.getExcessGoodName(), suggestion.getQuantity(), suggestion.getBuildingName()}</li>
+			#{/if}
+		#{/list}
+		</ul>
+
+		<br />
+		%{
+				HashMap<String,Integer> dft = player.formatTime((int)player.boostCycle);
+				String dres = "";
+				if(dft.get("h") > 0)
+					dres += dft.get("h") + " " + messages.get("time.hours") + " ";
+				if(dft.get("m") > 0)
+					dres += dft.get("m") + " " + messages.get("time.minutes") + " ";
+				if(dft.get("s") > 0)
+					dres += dft.get("s") + " " + messages.get("time.seconds");
+		}%
+		&{'realm.index.suggestion.boost.data', dres, player.boostMultiplier}
+		<ul style="margin:0;">
+		#{list boosts.keySet(), as: 'goodName'}
+			#{if boosts.get(goodName) < 0}
+				<li class="negativeQuantity">&{'realm.index.suggestion.boost.cannot', goodName}</li>
+			#{/if}
+			#{else}
+				%{
+				HashMap<String,Integer> ft = player.formatTime((int)boosts.get(goodName));
+				String res = "";
+				if(ft.get("h") > 0)
+					res += ft.get("h") + " " + messages.get("time.hours") + " ";
+				if(ft.get("m") > 0)
+					res += ft.get("m") + " " + messages.get("time.minutes") + " ";
+				if(ft.get("s") > 0)
+					res += ft.get("s") + " " + messages.get("time.seconds");
+				}%
+				<li class="positiveQuantity">&{'realm.index.suggestion.boost.line', goodName, res}</li>
+			#{/else}
+		#{/list}
+		</ul>

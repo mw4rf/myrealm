@@ -1,0 +1,39 @@
+#{extends "Realm/template.html" /}
+
+	#{form @Realm.addGroup(player.name)}
+	<div class="container-fluid">
+		
+		*{ ***** Header ****** }*
+		<div class="row-fluid">
+			<div class="span4 middle"><h3>&{'nav.realm.add.new.group'}</h3></div>
+		</div>
+		<br />
+	
+		*{ ***** Group Name ****** }*
+		<div class="row-fluid">
+			<div class="span2">&{'realm.index.groups.name'}</div>
+			<div class="span10"><input type="text" name="name" /></div>
+		</div>
+		
+		*{ ***** FG Color ****** }*
+		<br />
+		<div class="row-fluid">
+			<div class="span2">&{'realm.index.groups.color.fg'}</div>
+			<div class="span10"><span class="colorpicker fg"> </span><input type="hidden" name="fgcolor" value="" /></div>
+		</div>
+		
+		*{ ***** BG Color ****** }*
+		<br />
+		<div class="row-fluid">
+			<div class="span2">&{'realm.index.groups.color.bg'}</div>
+			<div class="span10"><span class="colorpicker bg"> </span><input type="hidden" name="bgcolor" value="" /></div>
+		</div>
+		
+		*{ ***** Submit ****** }*
+		<br />
+		<div class="row-fluid">
+			<div class="span2">&nbsp;</div>
+			<div class="span10"><input type="submit" class="btn btn-success" value="&{'form.add'}" /></div>
+		</div>
+	</div>
+	#{/form}

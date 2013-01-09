@@ -1,0 +1,28 @@
+.timer {
+	border: 1px solid #DBDBDB;
+	margin: 0.3em 0 0.2em 0;
+	padding: 0.2em 0.3em 0.2em 0.3em;
+}
+
+.timerName {
+	font-weight: bold;
+}
+
+.timerExpiration {
+
+}
+
+.timerExpired {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.timerExpiresSoon {
+	color: #9F6000;
+	background-color: #FEEFB3;
+}
+
+.timerRunning {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}

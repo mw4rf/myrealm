@@ -1,0 +1,14 @@
+#{extends 'Realm/template.html' /}
+
+#{list ngoods, as:'good'}
+	<span title="#{include 'Realm/_buildingGoodMap.html' /}" class="statslink good hand" good="${good.name}" player="${player.name}">
+		<img src="/public/${good.getImage()}" />
+	</span>
+	&nbsp;
+#{/list}
+
+<div id="productionrelative"></div>
+
+<script type="text/javascript">
+	#{include 'Realm/production/needs/actions.js' /}
+</script>

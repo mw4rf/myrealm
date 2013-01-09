@@ -1,0 +1,47 @@
+*{ ********** Welcome Message ********** }*
+<div class="guildSectionHeader">${guild.name}</div>
+<div id="guildWelcomeMessage" class="guildContainer" guildId="${guild.id}" contenteditable="${contenteditable}">
+	#{if guild.welcomeMessage == null || guild.welcomeMessage.isEmpty()}
+		&{'contenteditable.empty'}
+	#{/if}#{else}
+		${guild.welcomeMessage.raw()}
+	#{/else}
+</div>
+
+
+*{ ********** Wall ********** }*
+<div class="guildSectionHeader"><a href="#" onclick="toggleshow('#guildWallForm'); return false;">&{'guild.wall'}</a></div>
+<div id="guildWallForm" class="guildContainer formContainer" style="display:none;">
+		&{'guild.wall.newas', controllers.Application.getSessionLogin(), controllers.Application.getSessionLogin()} => #{a @Application.index()}&{'login'}#{/a}
+		<br /><textarea id="guildWallMessageContent" style="width:100%;" rows="5"></textarea>
+		<br /><input id="guildWallMessageSubmit" guildId="${guild.id}" type="submit" value="&{'form.add'}" />
+		&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+</div>
+<div id="guildWall" class="guildContainer">
+	#{list wall, as: 'message'}
+		#{include "Guilds/_wallMessage.html" /}
+	#{/list}
+</div>
+
+*{ ********** Last Officer Notes ********** }*
+#{if isOfficer && lastofficernotes.size() > 0}
+	<div class="guildSectionHeader"><a href="#" onclick="toggleshow('#guildOfficerNotesForm'); return false;">&{'guild.members.officer.notes.last'}</a></div>
+	<div id="guildOfficerNotesForm" class="guildContainer formContainer" style="display:none;">
+		#{form @Guilds.addOfficerNote()}
+			&{'guild.wall.newas', controllers.Application.getSessionLogin(), controllers.Application.getSessionLogin()} => #{a @Application.index()}&{'login'}#{/a}
+			<br /><textarea name="content" style="width:100%;" rows="5"></textarea>
+			<br />&{'guild.members.officer.notes.about'}
+			<select name="playerName">
+				#{list guild.members, as: 'membership'}
+					<option value="${membership.player.name}">${membership.player.name}</option>
+				#{/list}
+			</select>
+			<input type="hidden" name="guildTag" value="${guild.tag}" />
+			&nbsp;&nbsp;<input type="submit" value="&{'form.add'}" />
+			&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+		#{/form}
+	</div>
+	#{list lastofficernotes, as:'message'}
+		#{include 'Guilds/_officerNote.html' /}
+	#{/list}
+#{/if}

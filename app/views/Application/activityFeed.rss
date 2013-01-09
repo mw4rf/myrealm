@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>&{'app.name'}</title>
+		<link>${play.Play.configuration.get("application.address").toString()}@{Application.rss(player.name)}</link>
+		<description>${player.name} RSS 2.0 Feed</description>
+		<lastBuildDate>${new Date().format("yyyy-mm-DD'T'hh:mm:ssZ")}</lastBuildDate>
+		
+		#{list actions, as:'a'}
+		
+		<item>
+			<title><![CDATA[${messages.get("${a.name.raw()}", "${a.formatAction(false, false).raw()}").raw()}]]></title>
+			<link><![CDATA[${play.Play.configuration.get("application.address").toString()}@{Realm.index(player.name)}]]></link>
+			<guid><![CDATA[${a.id}]]></guid>
+			<author><![CDATA[&{'header.realm', player.name}]]></author>
+			<pubDate>${a.at.format("yyyy-mm-DD'T'hh:mm:ssZ")}</pubDate>
+			<description><![CDATA[${messages.get("${a.name.raw()}", "${a.formatAction(true, true).raw()}").raw()}]]></description>
+		</item>
+		#{/list}
+	</channel>
+</rss>

@@ -1,0 +1,6 @@
+#{if request.action.equals('Market.boost')}
+	#{a @Market.boosts()}&{'market.boosts.back.public'}#{/a}
+#{/if}
+#{elseif request.action.equals('Market.boosts')}
+	&nbsp;<b>{&{'realm.index.create'}:</b>&nbsp;<a href="#" onclick="toggleshow('#addBoostExchangeForm'); return false;">&{'market.boosts.add.ask'}</a><b>}</b>
+#{/elseif}

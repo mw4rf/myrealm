@@ -1,0 +1,36 @@
+#{extends 'Admin/template.html' /}
+
+<div class="container">
+
+	<table>
+		<tr>
+			<th>#{a @Admin.backup()}Backup DB#{/a}</th>
+			<td>Backup PostgreSQL Database using local script.</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.reloadWorld()}Reload World#{/a}</th>
+			<td>Reloads the World from XML.</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.updateWorld()}Update World#{/a}</th>
+			<td>Compute world statistics : buildings average production time</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.cleanMarket()}Market Cleanup#{/a}</th>
+			<td>Cleanup Market transactions : delete expired boosts exchanges</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.updateGuilds()}Update Guilds#{/a}</th>
+			<td>Update guilds data : set a new random O'Day member</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.takeSnapshots()}Take Realm Snapshots#{/a}</th>
+			<td>Take a snapshot of each realm in the database</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.cleanSnapshots()}Clean Realm Snapshots#{/a}</th>
+			<td>Archive & delete old realm snapshots</td>
+		</tr>
+	</table>
+
+</div>

@@ -1,0 +1,28 @@
+#{extends 'Realm/template.html' /}
+
+*{ Boosts }*
+<div class="headerbg header3">&{'realm.index.items.boosts', player.formatCycleTime()}</div>
+<ul style="list-style-type:none;padding-left:0;margin:0;">
+	#{list boostsRatio, as: 'boost'}
+		#{if boost.getRealQuantity() > 0}
+			<li>
+				<img src="/public/${boost.getImage()}" />
+				<span class="goodItem">
+					<b>${boost.getRealQuantity()} ${boost.getName()}</b>
+					#{if boost.getProductQuantity() > 0}
+						<i>(${boost.getRealProductQuantity()} ${boost.getProductName()})</i>
+					#{/if}
+					(&{'realm.index.items.ratios'}:
+					#{list boost.getGoods(), as: 'good'}
+						#{if good.getRealQuantity() == boost.getRealQuantity()}
+							<span class="negativeQuantity">
+						#{/if}#{else}
+							<span class="positiveQuantity">
+						#{/else}
+						<img src="/public/${good.getImage()}" />${good.getRealQuantity()}</span>
+					#{/list})
+				</span>
+			</li>
+		#{/if}
+	#{/list}
+</ul>

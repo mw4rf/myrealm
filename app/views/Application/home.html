@@ -1,0 +1,243 @@
+#{extends 'main.html' /} #{set title: 'Realm' /}
+<div class="container" style="overflow:hidden;">
+
+*{##################################### LEFT COLUMN #####################################}*
+	<div class="left" style="width: 45%; margin: auto;">
+
+		<table style="width:100%;">
+			<tr>
+			<td style="text-align:center;vertical-align:top;">
+				#{if player != null && player.preferences != null && player.preferences.avatarId != null && !player.preferences.avatarId.isEmpty()}
+					<img src="/public/images/${player.preferences.getAvatar()}" />
+					#{if player.preferences.avatarId.equals("00")}
+						<p>#{a @Application.preferences(player.name)}&{'preferences.avatar.pick'}#{/a}</p>
+					#{/if}
+				#{/if}#{else}
+					<img src="/public/images/avatars/Avatar00.png" />
+					<p>#{a @Application.preferences(player.name)}&{'preferences.avatar.pick'}#{/a}</p>
+				#{/else}
+			</td>
+			<td>
+				*{ *** Realm & Adventures *** }*
+				<div class="bigMenu">
+					#{a @Realm.index(player.name)}&{'navigation.realm', player.name}#{/a}
+					&
+					#{a @Stats.realm(player.name)}&{'stats'}#{/a}
+				</div>
+				<div class="bigMenu">#{a @Adventures.index(player.name)}&{'navigation.adventures', player.name}#{/a}</div>
+				
+				*{ *** Timers *** }*
+				#{if player.name.equals(controllers.Application.getSessionLogin())}
+					<div class="bigMenu">#{a @Timers.index(player.name)}&{'home.timers'}#{/a}</div>
+				#{/if}
+				
+				*{ *** Guild *** }*
+				#{if player.hasGuild()}
+					<div class="bigMenu">&{'guild'}&nbsp;#{a @Guilds.home(player.membership.guild.tag)}${player.membership.guild.name}#{/a}</div>
+				#{/if}
+				
+				*{ *** Market *** }*
+				#{if player.name.equals(controllers.Application.getSessionLogin()) && player.preferences != null && player.preferences.HOME_SHOW_PUBLIC_MENU}
+					<div class="bigPublicMenu">#{a @Application.nextAdventuresList()}&{'adventures.next.list'}#{/a}</div>
+					<div class="bigPublicMenu">#{a @Market.boosts()}&{'market.boosts'}#{/a}</div>
+				#{/if}
+			</td>
+			</tr>
+		</table>
+
+		*{ *** Home Stats *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_STATS}
+			<div class="homestats">#{include "Application/_homeStatsRealm.html" /}</div>
+			<div class="homestats">#{include "Application/_homeStatsAdventures.html" /}</div>
+		#{/if}
+		
+		*{ *** Visits *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_VISITS}
+			<div class="headerbg header3 homecategory">&{'home.stats.visits', player.visits}</div>
+		#{/if}
+		
+		*{ *** Last connection *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_LAST_CONNECTION}
+			<div class="headerbg header3 homecategory">&{'home.stats.lastConnection', player.lastConnection.format()}</div>
+		#{/if}
+		
+		*{ *** Timers *** }*
+		#{if player.timers.size() > 0 && player.preferences != null && player.preferences.HOME_SHOW_TIMERS}
+		<div class="headerbg header3 homecategory">&{'home.timers'}</div>
+		<div class="homeList">
+			#{list player.timers, as:'timer'}
+				%{
+					// Show this timer on home page ?
+					if(player.preferences != null) {
+						if(!player.preferences.TIMERS_SHOW_ON_HOME_TYPE1 && timer.type == 1)
+							continue;
+						else if(!player.preferences.TIMERS_SHOW_ON_HOME_TYPE2 && timer.type == 2)
+							continue;
+						else if(!player.preferences.TIMERS_SHOW_ON_HOME_TYPE3 && timer.type == 3)
+							continue;
+					}
+					// CSS classes according to timer status
+					String timer_classes = "";
+					if(timer.hasExpired())
+						timer_classes += "timerExpired ";
+					else if(timer.doesExpireSoon())
+						timer_classes += "timerExpiresSoon ";
+					else
+						timer_classes += "timerRunning ";
+				}%
+				<div class="homeListItem ${timer_classes}">
+					${timer.name}
+					<span class="homeDate">
+						#{if timer.hasExpired()}
+							&{'timer.has.expired.at'} ${timer.endAt.format()}, &{'timer.has.expired.ago'} ${timer.getTimeAfterExpiration().get("h")} &{'time.hours'} ${timer.getTimeAfterExpiration().get("m")} &{'time.minutes'} ${timer.getTimeAfterExpiration().get("s")} &{'time.seconds'}
+						#{/if}
+						#{else}
+							&{'timer.expires.at'} ${timer.endAt.format()}, &{'timer.expires.in'} ${timer.getTimeBeforeExpiration().get("h")} &{'time.hours'} ${timer.getTimeBeforeExpiration().get("m")} &{'time.minutes'} ${timer.getTimeBeforeExpiration().get("s")} &{'time.seconds'}
+						#{/else}
+					</span>
+				</div>
+			#{/list}
+		</div>
+		#{/if}
+
+		*{ *** Next Adventures *** }*
+		#{if nextAdventures != null && nextAdventures.size() > 0 && player.preferences != null && player.preferences.HOME_SHOW_NEXT_ADVENTURES}
+			<div class="headerbg header3 homecategory">&{'home.next.adventures'}</div>
+			<div class="homeList">
+				#{list nextAdventures, as: 'adventure'}
+					<div class="homeListItem">
+					#{a @Adventures.showAdventure(player.name, adventure.id)}${adventure.name}#{/a} <span class="homeDate">(&{'adventure.next.dates', adventure.dateStart.format(), adventure.dateEnd.format()})</span>
+					</div>
+				#{/list}
+			</div>
+		#{/if}
+
+		*{ *** Last Adventures *** }*
+		#{if lastAdventures != null && lastAdventures.size() > 0 && player.preferences != null && player.preferences.HOME_SHOW_LAST_ADVENTURES}
+			<div class="headerbg header3 homecategory">&{'home.last.adventures'}</div>
+			<div class="homeList">
+				#{list lastAdventures, as: 'adventure'}
+					<div class="homeListItem">
+					#{a @Adventures.showAdventure(player.name, adventure.id)}${adventure.name}#{/a} <span class="homeDate">(&{'adventure.dates', adventure.dateStart.format(), adventure.dateEnd.format()})</span>
+					</div>
+				#{/list}
+			</div>
+		#{/if}
+
+		*{ *** Last buildings *** }*
+		#{if lastBuildings != null && lastBuildings.size() > 0 && player.preferences != null && player.preferences.HOME_SHOW_LAST_BUILDINGS}
+			<div class="headerbg header3 homecategory">&{'home.last.buildings'}</div>
+			<div class="homeList">
+				#{list lastBuildings, as: 'building'}
+					<div class="homeListItem">
+					#{a @Realm.showBuilding(player.name, building.id)}${building.name}#{/a} <span class="homeDate">(&{'realm.building.level'} ${building.level}, &{'realm.building.productionTime'} ${building.formatProductionTime().get("m")} &{'time.minutes'} ${building.formatProductionTime().get("s")} &{'time.seconds'})</span>
+					</div>
+				#{/list}
+			</div>
+		#{/if}
+
+		*{ *** Last comments *** }*
+		#{if lastComments != null && lastComments.size() > 0 && player.preferences != null && player.preferences.HOME_SHOW_LAST_ADVENTURES_COMMENTS}
+			<div class="headerbg header3 homecategory">&{'home.last.comments'}</div>
+			<div class="homeList">
+				#{list lastComments, as: 'comment'}
+					<div class="homeListItem">
+						<div>#{a @Adventures.showAdventure(comment.adventure.player.name, comment.adventure.id)}${comment.adventure.name}#{/a} <span class="homeDate">(${comment.adventure.player.name}) ${comment.publishedAt.format()}</span></div>
+						<div class="homeCommentSummary">${comment.summary(20)}</div>
+					</div>
+				#{/list}
+			</div>
+		#{/if}
+
+
+	</div>
+
+*{##################################### RIGHT COLUMN #####################################}*
+	<div class="right" style="width:54%; margin:auto;">
+	
+		*{ *** Tip *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_TIPS}
+			<div class="headerbg header3">&{'application.tip'}</div>
+			${tip.getTipValue().raw()}
+		#{/if}
+	
+		*{ *** Global Lists *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_PUBLIC_MENU}
+			<div class="headerbg header3">&{'application.list'}</div>
+			<a href="@{Application.playersList}">&{'players.list'}</a>
+			&nbsp;|&nbsp;<a href="@{Application.actionsList}">&{'actions.list'}</a>
+			&nbsp;|&nbsp;<a href="@{Application.adventuresList}">&{'adventures.list'}</a>
+		#{/if}
+		
+		*{ *** PlayerNote *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_NOTA_BENE}
+			<div class="headerbg header3">&{'home.playernote'}</div>
+			%{
+				boolean contenteditable = false;
+				if(player.name.equals(controllers.Application.getSessionLogin()) && controllers.Application.isAuth(player.name))
+					contenteditable = true;
+			}%
+			<div id="playernote" playerName="${player.name}" contenteditable="${contenteditable}">
+				#{if player.note != null}
+					${player.note.content.raw()}
+				#{/if}#{else}
+					&{'home.playernote.null'}
+				#{/else}
+			</div>
+		#{/if}
+
+		*{ *** Activity *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_ACTIVITY}
+			<div class="headerbg header3">
+				&{'home.log'}
+				#{if player.preferences != null && player.preferences.ENABLE_ACTIVITY_FEED}
+					(<a href="${play.Play.configuration.get('application.address').toString()}@{Application.rss(player.name)}">
+						<img src="/public/images/app/rss.png" /> RSS 2.0
+					</a>)
+				#{/if}
+			</div>
+			#{list actions, as: 'action'}
+				<div class="logItem"><span class="homeDate">[${action.at.format()}]</span> ${messages.get("${action.name.raw()}", "${action.formatAction().raw()}").raw()}</div>
+			#{/list}
+			<div class="logItem" style="text-align: center;">#{a @Application.playerActions(player.name)}&{'home.log.more'}#{/a}</div>
+		#{/if}
+
+		*{ *** Friends & Friend Of *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_FRIENDS}
+			<div class="headerbg header3">&{'home.friends'}</div>
+			#{if friends.size() > 0}
+				<div><b>&{'home.friends.yours'}</b>
+				#{list friends, as: 'friend'}
+					#{a @Application.home(friend.name)}${friend.name}#{/a}
+				#{/list}
+				</div>
+			#{/if}
+			#{if friendOf.size() > 0}
+				<div><b>&{'home.friends.of'}</b>
+				#{list friendOf, as: 'friend'}
+					#{a @Application.home(friend.name)}${friend.name}#{/a}
+				#{/list}
+				</div>
+			#{/if}
+		#{/if}
+
+		*{ *** Friends Activity *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_FRIENDS_ACTIVITY}
+			<div class="headerbg header3">&{'home.friends.log'}</div>
+			#{list friendsActions, as: 'action'}
+				<div class="logItem"><span class="homeDate">[${action.at.format()}]</span> <b>${action.player.name}</b> - ${messages.get("${action.name.raw()}", "${action.formatAction().raw()}").raw()}</div>
+			#{/list}
+		#{/if}
+
+		*{ *** Changelog *** }*
+		#{if player.preferences != null && player.preferences.HOME_SHOW_CHANGELOG}
+			<div class="headerbg header3 homecategory">&{'home.changelog'}</div>
+			#{include "Application/_changelog.html" /}
+		#{/if}
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Application/_ajaxActions.js' /}
+</script>

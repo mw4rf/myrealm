@@ -1,0 +1,4 @@
+Id.,&{'realm.building.name.field'},&{'realm.building.level'},&{'realm.building.productionTime'},&{'realm.building.area'},&{'realm.building.enabled'},&{'realm.building.boosted'},&{'realm.building.simulated'},&{'realm.index.building.deposit.quantity'},&{'realm.building.groups'},&{'realm.building.built.at'},&{'realm.building.desc'}
+#{list items:buildings, as:'b'}
+${b.id},${b.name},${b.level},${b.productionTime},${b.area},${b.enabled},${b.boosted},${b.simulated},${b.depositQuantity},#{list b.groups, as:'g'}${g.name} #{/list},"${b.builtAt}","${b.description}"
+#{/list}

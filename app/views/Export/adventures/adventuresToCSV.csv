@@ -1,0 +1,5 @@
+Id.,&{'adventure.name'},&{'adventure.dateStart'},&{'adventure.dateEnd'},&{'adventure.next.owner'},&{'adventure.participants'}
+#{list items:adventures, as:'a'}
+${a.id},${a.name},${a.dateStart.format()},${a.dateEnd.format()},${a.player.name},#{list items:a.participants,as:'p'}${p.name}#{/list}
+
+#{/list}

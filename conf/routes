@@ -1,0 +1,220 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET		/login/{playerName}						Application.login
+GET     /logout/                                Application.logout
+GET     /askpassword/{playerName}               Application.askPassword
+GET     /password/{playerName}                  Application.password
+
+GET		/home/{playerName}						Home.index
+GET		/home/{playerName}/notabene				Home.notabene
+GET		/home/{playerName}/stats				Home.stats
+GET		/home/{playerName}/activity				Home.activity
+GET		/home/{playerName}/friends				Home.friends
+GET		/home/{playerName}/guild				Home.guild
+GET		/home/{playerName}/changelog			Home.changelog
+
+POST	/home/{playerName}/updatenote			Application.updatePlayerNote
+
+GET		/home/{playerName}/friends/remove/{friendName}	Home.removeFriend
+GET		/home/{playerName}/friends/add/{friendName}		Home.addFriend
+
+# LISTS
+
+GET		/list/players							Application.playersList
+GET		/list/actions							Application.actionsList
+GET		/list/adventures						Application.adventuresList
+GET		/list/nextadventures					Application.nextAdventuresList
+
+GET		/actions/{playerName}					Application.playerActions
+GET		/rss/{playerName}						Application.rss
+
+# REALM
+GET		/realm												Application.index
+GET		/realm/{playerName}									Realm.index
+POST	/realm/{playerName}/addgroup						Realm.addGroup
+GET		/realm/{playerName}/addgroupform					Realm.addGroupForm
+GET		/realm/{playerName}/addbuildingform					Realm.addBuildingForm
+POST	/realm/{playerName}/addbuilding						Realm.addBuilding
+POST    /realm/{playerName}/editbuilding/{buildingId}       Realm.editBuilding
+GET		/realm/{playerName}/loadratios						Realm.loadRatios
+GET		/realm/{playerName}/loadratiosforgroup/{groupId}	Realm.loadRatiosForGroup
+
+GET		/realm/{playerName}/list/bytype						Realm.listByType
+GET		/realm/{playerName}/list/byarea						Realm.listByArea
+GET		/realm/{playerName}/list/bygroup					Realm.listByGroup
+GET		/realm/{playerName}/list/stopped					Realm.listStopped
+GET		/realm/{playerName}/list/boosted					Realm.listBoosted
+GET		/realm/{playerName}/list/simulated					Realm.listSimulated
+
+GET		/realm/{playerName}/production/absolute				Realm.showAbsoluteProduction
+GET		/realm/{playerName}/production/relative				Realm.showRelativeProduction
+GET		/realm/{playerName}/production/needs				Realm.showRelativeNeeds
+GET		/realm/{playerName}/production/boosts				Realm.showBoostsProduction
+GET		/realm/{playerName}/production/soldiers				Realm.showSoldiersProduction
+GET		/realm/{playerName}/production/levels				Realm.showGoodsLevels
+
+GET		/realm/{playerName}/calculations/time				Realm.showTimeCalculations
+GET		/realm/{playerName}/calculations/influence			Realm.showInfluenceCalculations
+
+GET		/realm/{playerName}/advices/production				Realm.advicesProduction
+GET		/realm/{playerName}/advices/boosts					Realm.advicesBoosts
+
+POST	/realm/{playerName}/loadstats						Realm.loadStatsForGood
+GET		/realm/{playerName}/getjsonstats/{goodName}			Realm.getJSONStatsForGood
+POST	/realm/{playerName}/buildingstats/{buildingName}	Realm.loadBuildingStats
+
+POST	/realm/{playerName}/buildings/load					Realm.loadBuildings
+POST	/realm/{playerName}/buildings/area					Realm.loadArea
+POST	/realm/{playerName}/buildings/group					Realm.loadGroup
+POST	/realm/{playerName}/buildings/status				Realm.loadStatus
+
+POST	/realm/{playerName}/buildings/globalAction			Realm.globalAction
+
+GET		/realm/{playerName}/buildings/assign/{buildingId}/to/{groupId}		Realm.assignGroup
+GET		/realm/{playerName}/buildings/remove/{buildingId}/from/{groupId}	Realm.removeGroup
+GET		/realm/{playerName}/groups/{groupId}								Realm.showGroup
+POST	/realm/{playerName}/groups/{groupId}/update							Realm.updateGroup
+GET		/realm/{playerName}/groups/{groupId}/delete							Realm.deleteGroup
+GET		/realm/{playerName}/groups/{groupId}/loadratios						Realm.loadRatiosForGroup
+
+GET		/realm/{playerName}/buildings/{buildingId}                      Realm.showBuilding
+GET     /realm/{playerName}/buildings/{buildingId}/delete               Realm.deleteBuilding
+GET     /realm/{playerName}/buildings/{buildingId}/duplicate            Realm.duplicateBuilding
+GET     /realm/{playerName}/buildings/{buildingId}/lvlup                Realm.lvlupBuilding
+GET		/realm/{playerName}/buildings/{buildingId}/validatesimulation	Realm.validateSimulatedBuilding
+GET     /realm/{playerName}/buildings/{buildingId}/setProductionTime    Realm.setProductionTime
+GET     /realm/{playerName}/buildings/{buildingId}/switchenable         Realm.switchEnableBuilding
+GET     /realm/{playerName}/buildings/{buildingId}/switchboost          Realm.switchBoostBuilding
+GET		/realm/{playerName}/buildings/{buildingId}/setDepositQuantity	Realm.setDepositQuantity
+GET		/realm/{playerName}/buildings/{buildingId}/setArea				Realm.setArea
+POST	/realm/{playerName}/buildings/{buildingId}/updateDescription	Realm.updateBuildingDescription
+
+GET		/realm/{playerName}/setcycletime                    Realm.setCycleTime
+GET		/realm/{playerName}/setboostcycle                   Realm.setBoostCycle
+GET		/realm/{playerName}/howmuchtime                    	Realm.howMuchTime
+GET		/realm/{playerName}/howmuchtimespend               	Realm.howMuchTimeSpend
+GET		/realm/{playerName}/howmuchtimeforboost				Realm.howMuchTimeForBoost
+GET		/realm/{playerName}/ratiosimulation                	Realm.ratioSimulation
+GET		/realm/{playerName}/deletesimulation				Realm.deleteSimulation
+GET		/realm/{playerName}/makesuggestions					Realm.makeSuggestions
+
+# STATS
+
+GET		/realm/{playerName}/stats							Stats.realm
+
+# SNAPSHOTS
+
+GET		/snapshots/{playerName}								Snapshots.index
+GET		/snapshots/{snapshotId}/togglelock					Snapshots.toggleLock
+
+# ADVENTURES
+GET		/public/adventures/next								Adventures.nextAdventuresList
+GET     /adventures/{playerName}                            Adventures.index
+GET		/adventures/{playerName}/sort						Adventures.sortedIndex
+GET		/adventures/{playerName}/add						Adventures.add
+POST     /adventures/{playerName}/addadventure               Adventures.addAdventure
+GET     /adventures/{playerName}/{adventureId}   			Adventures.showAdventure
+POST     /adventures/{playerName}/editadventure/{adventureId}   Adventures.editAdventure
+GET		/adventures/{playerName}/deleteadventure/{adventureId}	Adventures.deleteAdventure
+POST	/adventures/{playerName}/addparticipant/{adventureId}	Adventures.addParticipant
+POST	/adventures/{playerName}/removeparticipant/{adventureId}	Adventures.removeParticipant
+POST	/adventures/{playerName}/addcomment/{adventureId}		Adventures.addComment
+POST	/adventures/{playerName}/editcomment/{adventureId}/{commentId}	Adventures.editComment
+
+# TIMERS
+GET		/timers/{playerName}								Timers.index
+GET		/timers/{playerName}/overlay						Timers.overlay
+GET		/timers/{playerName}/overlay/refresh				Timers.overlayRefresh
+
+GET		/timers/{playerName}/form/onduration				Timers.addOnDurationForm
+GET		/timers/{playerName}/form/ondate					Timers.addOnDateForm
+GET		/timers/{playerName}/form/onbuilding				Timers.addOnBuildingForm
+
+
+GET		/timers/{playerName}/deleteexpired					Timers.deleteExpired
+GET		/timers/{playerName}/{timerId}/renew				Timers.renewTimer
+GET		/timers/{playerName}/{timerId}/delete				Timers.deleteTimer
+POST	/timers/{playerName}/addwithduration				Timers.addTimerWithDuration
+POST	/timers/{playerName}/addwithexpiration				Timers.addTimerWithExpiration
+POST	/timers/{playerName}/addonbuilding					Timers.addTimerOnBuilding
+GET		/timers/{playerName}/building/{buildingId}/addtimer/{remainingQuantity}	Timers.addTimerWithDeposit
+GET		/timers/{playerName}/list/{timerType}				Timers.list
+
+# PREFERENCES
+GET     /preferences                                        Application.index
+GET		/preferences/setoverlayposition/{x}/{y}/{h}/{w}		Preferences.setOverlayPosition
+GET		/preferences/resetoverlayposition					Preferences.resetOverlayPosition
+
+GET     /preferences/{playerName}                           Preferences.index
+
+GET		/preferences/{playerName}/display					Preferences.display
+GET		/preferences/{playerName}/account					Preferences.account
+GET		/preferences/{playerName}/avatar					Preferences.avatar
+GET		/preferences/{playerName}/realm						Preferences.realm
+GET		/preferences/{playerName}/cycles					Preferences.cycles
+GET		/preferences/{playerName}/timers					Preferences.timers
+GET		/preferences/{playerName}/data/export				Preferences.export
+GET		/preferences/{playerName}/data/purge				Preferences.purge
+
+POST	/preferences/{playerName}/update						Preferences.update
+
+POST     /preferences/{playerName}/save                     Application.setPreferences
+
+# GUILDS
+GET		/guilds															Guilds.index
+*	/guilds/create/{playerName}										Guilds.createGuild
+GET		/guilds/{guildTag}/officernotes/{playerName}					Guilds.officerNotes
+POST	/guilds/{guildTag}/officernotes/{playerName}/add				Guilds.addOfficerNote
+
+GET		/guilds/{guildTag}												Guilds.home
+GET		/guilds/{guildTag}/events/{eventId}/register/{playerName}		Guilds.registerEvent
+
+GET		/guilds/{guildTag}/admin										Guilds.admin
+POST	/guilds/{guildTag}/admin/confirm/{membershipId}					Guilds.adminConfirmMember
+POST	/guilds/{guildTag}/admin/promote/{membershipId}					Guilds.adminPromoteMember
+POST	/guilds/{guildTag}/admin/demote/{membershipId}					Guilds.adminDemoteMember
+POST	/guilds/{guildTag}/admin/kick/{membershipId}					Guilds.adminKickMember
+POST	/guilds/{guildTag}/admin/links/add								Guilds.adminAddLink
+POST	/guilds/{guildTag}/admin/links/{linkId}/update					Guilds.adminUpdateLink
+GET		/guilds/{guildTag}/admin/links/{linkId}/delete					Guilds.adminDeleteLink
+GET		/guilds/{guildTag}/admin/events/{eventId}/delete				Guilds.adminDeleteEvent
+GET		/guilds/polls/delete/{pollId}									Guilds.adminDeletePoll
+GET		/guilds/polls/options/delete/{optionId}							Guilds.adminDeletePollOption
+
+# MARKET
+GET		/market															Market.index
+GET		/market/boosts													Market.boosts
+GET		/market/boost/{id}												Market.boost
+
+GET		/market/adventures												Market.adventuresPublic
+GET		/market/{playerName}/adventures/sales							Market.adventuresPrivateSales
+GET		/market/{playerName}/adventures/purchases						Market.adventuresPrivatePurchases
+GET		/market/{playerName}/adventures/form							Market.adventuresSale
+POST	/market/{playerName}/adventures/add								Market.adventuresAddSale
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# ADMIN
+GET		/@admin													Admin.index
+
+GET		/admin/bots												controllers.admin.BotsController.index
+GET		/admin/bots/{botId}/start								controllers.admin.BotsController.start
+GET		/admin/bots/{botId}/stop								controllers.admin.BotsController.stop
+
+*		/@admin/{action}										Admin.{action}
+
+#LOG4PLAY
+WS      /logstream                 Log4Play.WebSocket.index
+GET     /@logs                     Log4Play.index
+GET     /public_log4play/          staticDir:public_log4play
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Application error</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>	
+    </head>
+    <body>
+        #{if play.mode.name() == 'DEV'}
+            #{500 exception /}
+        #{/if}
+        #{else}
+            <h1>Oops, an error occured</h1>
+            #{if exception instanceof play.exceptions.PlayException}
+                <p>
+                    This exception has been logged with id <strong>${exception.id}</strong>.
+                </p>
+            #{/if}
+        #{/else}
+        *{ *** REPORT BY MAIL *** }*
+        #{if exception != null && exception instanceof play.exceptions.PlayException}
+        	#{form @Application.exceptionReport()}
+        		<p><input type="submit" value="Send a report" /> (please click only once)</p>
+       		 	<input type="hidden" name="title" value="${exception.getErrorTitle()}" />
+      		  	<input type="hidden" name="description" value="${exception.getErrorDescription()}" />
+      		  	<input type="hidden" name="source" value="${exception.getSourceFile()}" />
+      		  	<input type="hidden" name="line" value="${exception.getLineNumber()}" />
+     	  	#{/form}
+       	#{/if}
+    </body>
+</html>

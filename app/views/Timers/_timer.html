@@ -1,0 +1,49 @@
+#{if timer != null && timer.endAt != null}
+
+%{
+	String classes = "";
+
+	if(timer.hasExpired())
+		classes += "timerExpired ";
+	else if(timer.doesExpireSoon())
+		classes += "timerExpiresSoon ";
+	else
+		classes += "timerRunning ";
+
+}%
+
+<div class="timer ${classes}">
+	<div class="timerName">
+		#{if timer.type == models.players.PlayerTimer.TIMER_ON_BUILDING && timer.building != null}
+			%{
+				HashMap<String,Integer> ptime = timer.building.formatProductionTime();
+				int m = ptime.get("m");
+				int s = ptime.get("s");
+			%}
+			#{a @Realm.showBuilding(timer.player.name, timer.building.id)}${timer.name}#{/a} (&{'realm.building.level'} ${timer.building.level} - &{'realm.building.productionTime'} ${m} &{'time.minutes'} ${s} &{'time.seconds'})
+			 - &{'timer.remainingQuantity'} ${timer.building.calcDepositQuantity()}
+		#{/if}
+		#{else}
+			${timer.name}
+		#{/else}
+	</div>
+	<div class="timerExpiration">
+		#{if timer.hasExpired()}
+			&{'timer.has.expired.at'} ${timer.endAt.format()}, &{'timer.has.expired.ago'} ${timer.getTimeAfterExpiration().get("h")} &{'time.hours'} ${timer.getTimeAfterExpiration().get("m")} &{'time.minutes'} ${timer.getTimeAfterExpiration().get("s")} &{'time.seconds'}
+		#{/if}
+		#{else}
+			&{'timer.expires.at'} ${timer.endAt.format()}, &{'timer.expires.in'} ${timer.getTimeBeforeExpiration().get("h")} &{'time.hours'} ${timer.getTimeBeforeExpiration().get("m")} &{'time.minutes'} ${timer.getTimeBeforeExpiration().get("s")} &{'time.seconds'}
+		#{/else}
+	</div>
+	#{if timer.remind}
+			<div class="homeDate" style="color:red;">&{'timer.with.reminder'}</div>
+	#{/if}
+	<div class="homeDate">
+		#{if timer.type == models.players.PlayerTimer.TIMER_ON_DURATION && timer.hasExpired()}
+			#{a @Timers.renewTimer(timer.player.name, timer.id)}&{'timer.renew', timer.getDuration().toPeriod().getHours(), timer.getDuration().toPeriod().getMinutes()}#{/a}&nbsp;&nbsp;
+		#{/if}
+		#{a @Timers.deleteTimer(timer.player.name, timer.id)}&{'timer.delete'}#{/a}
+	</div>
+</div>
+
+#{/if}

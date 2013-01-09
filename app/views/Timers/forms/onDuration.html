@@ -1,0 +1,61 @@
+#{extends 'Timers/template.html' /}
+
+*{ ********** FORM: ADD NEW TIMER ********** }*
+<div class="container-fluid">
+	<div class="row-fluid">
+	#{form @Timers.addTimerWithDuration(player.name), class:'form-vertical well'}
+		<input type="text" name="name" class="span3" placeholder="&{'timer.name'}" />
+		
+		<label>&{'timer.startAt'}</label>
+		<input type="text" name="startAt" value="${new Date().format()}" class="span3" />
+		
+		<label>&{'timer.duration'}</label>
+		<div class="btn-group">
+			<a class="btn btn-info fillTime" h="0" m="30">30 min</a>
+			<a class="btn btn-info fillTime" h="0" m="45">45 min</a>
+			<a class="btn btn-info fillTime" h="1" m="0">1h</a>
+			<a class="btn btn-info fillTime" h="2" m="0">2h</a>
+			<a class="btn btn-info fillTime" h="3" m="0">3h</a>
+			<a class="btn btn-info fillTime" h="6" m="0">6h</a>
+			<a class="btn btn-info fillTime" h="9" m="0">9h</a>
+			<a class="btn btn-info fillTime" h="12" m="0">12h</a>
+			<a class="btn btn-info fillTime" h="16" m="0">16h</a>
+			<a class="btn btn-info fillTime" h="24" m="0">24h</a>
+			<a class="btn btn-info fillTime" h="32" m="0">32h</a>
+			<a class="btn btn-info fillTime" h="48" m="0">48h</a>
+			<a class="btn btn-info fillTime" h="72" m="0">72h</a>
+			<a class="btn btn-info fillTime" h="168" m="0">1w</a>
+		</div>
+		<br />
+		<input type="text" name="hours" style="width:5em;" value="0" /><span class="help-inline">&{'time.hours'}</span>
+		<input type="text" name="mins" style="width:5em;" class="" value="0" /><span class="help-inline">&{'time.minutes'}</span>
+		
+		<label class="checkbox">
+			<input type="checkbox" name="remind" #{if player.preferences != null && player.preferences.TIMERS_DEFAULT_REMIND_TYPE1}checked#{/if} />
+			&{'timer.remind'}
+		</label>
+		
+		<input type="submit" class="btn btn-success btn-large" value="&{'form.save'}" />
+	#{/form}
+	</div>
+</div>
+
+*{ ********** TIMERS LIST ********** }*
+<div id="durationTimersList">
+	#{list durationTimers, as: 'timer'}
+		#{include "Timers/_timer.html" /}
+	#{/list}
+</div>
+
+<script type="text/javascript">
+	
+	/** 
+	 * Fill the duration input when the user click a preset button
+	 */
+	$('.fillTime').live('click', function() {
+		$('input[name=hours]').val($(this).attr('h'))
+		$('input[name=mins]').val($(this).attr('m'))
+		return
+	})
+
+</script>

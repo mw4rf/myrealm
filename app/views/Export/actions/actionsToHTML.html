@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+	<title>&{'app.name'} &{'preferences.section.export'}: &{'export.actions'}</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>Id.</th>
+				<th>Date</th>
+				<th>Action</th>
+			</tr>
+			#{list items:actions, as:'a'}
+			<tr>
+				<td>${a.id}</td>
+				<td>${a.at}</td>
+				<td>${messages.get("${a.name.raw()}", "${a.formatAction().raw()}").raw()}</td>
+			</tr>
+			#{/list} 
+		</table>
+	</body>
+</html>

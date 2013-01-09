@@ -1,0 +1,359 @@
+#{extends 'main.html' /}
+#{set title: 'Guild Admin' /}
+
+*{ ********** Guild details ********** }*
+<div class="container">
+	<div class="header1">&{'guild.admin'}</div>
+	#{form @Guilds.adminUpdateGuild()}
+	<table>
+		<tr>
+			<td rowspan="5">
+				<div id="guildLogoShow"><img src="/public/images/${guild.getBanner()}" /></div>
+			</td>
+			<td class="middle">&nbsp;</td>
+			<td class="middle"><input type="submit" value="&{'form.save'}" /></td>
+		</tr>
+		<tr>
+			<th>&{'guild.name'}</th>
+			<td class="middle"><input type="text" name="name" value="${guild.name}" /></td>
+		</tr>
+		<tr>
+			<th>&{'guild.tag'}</th>
+			<td class="middle"><input type="text" name="tag" value="${guild.tag}" /></td>
+		</tr>
+		<tr>
+			<th>&{'guild.admin.officers.can.admin'}</th>
+			<td class="middle"><input type="checkbox" name="officersCanAdmin" #{if guild.officersCanAdmin}checked#{/if} /></td>
+		</tr>
+		<tr>
+			<th>&{'guild.banner'}</th>
+			<td class="middle">
+				<select name="banner" id="guildLogosSelect">
+				#{list guilds, as: 'wguild'}
+					<option value="${wguild.id}"#{if guild.bannerId == wguild.id}selected#{/if}>${wguild.name}</option>
+				#{/list}
+			</select>
+			</td>
+		</tr>
+	</table>
+	#{/form}
+</div>
+
+*{ ********** Links *********** }*
+<div class="container">
+	<div class="header1">&{'guild.links'}</div>
+	<table>
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.link.weight'}</th>
+			<th>&{'guild.link.name'}</th>
+			<th>&{'guild.link.link'}</th>
+			<th>&{'guild.link.description'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+		*{ ***** List records ***** }*
+		#{list links, as:'link'}
+		#{form @Guilds.adminUpdateLink(guild.tag, link.id)}
+			<tr>
+				<td class="middle"><input type="text" name="weight" size="3" value="#{if link.weight != null}${link.weight}#{/if}" />
+				<td class="middle"><input type="text" name="name" value="${link.name}" /></td>
+				<td class="middle"><input type="text" name="link" size="40" value="${link.link}" /></td>
+				<td class="middle"><input type="text" name="description" size="60" value="${link.description}" /></td>
+				<th><input type="submit" value="&{'form.save'}"></th>
+				<th>#{a @Guilds.adminDeleteLink(guild.tag, link.id)}&{'guild.link.delete'}#{/a}</th>
+			</tr>
+		#{/form}
+	#{/list}
+	*{ ***** New record ***** }*
+	#{form @Guilds.adminAddLink(guild.tag)}
+		<tr>
+			<th><input type="text" name="weight" size="3" value="1" /></th>
+			<th><input type="text" name="name" value="" /></th>
+			<th><input type="text" name="link" size="40" value="" /></th>
+			<th><input type="text" name="description" size="60" value="" /></th>
+			<th><input type="submit" value="&{'form.add'}"></th>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	#{/form}
+	*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.link.weight'}</th>
+			<th>&{'guild.link.name'}</th>
+			<th>&{'guild.link.link'}</th>
+			<th>&{'guild.link.description'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+*{ ********** Events ********** }*
+<div class="container">
+	<div class="header1">&{'guild.events.header'}</div>
+	<table>
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.events.event'}</th>
+			<th>&{'guild.events.start'}</th>
+			<th>&{'guild.events.end'}</th>
+			<th>&{'guild.events.description'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+		*{ ***** List records ***** }*
+		#{list guild.events, as:'event'}
+			#{form @Guilds.adminUpdateEvent(guild.tag)}
+				<input type="hidden" name="id" value="${event.id}" />
+				<tr>
+					<td class="middle"><input type="text" name="name" value="${event.name}" /></td>
+					<td class="middle"><input type="text" name="startAt" value="${event.startAt.format()}" /></td>
+					<td class="middle"><input type="text" name="endAt" value="${event.endAt.format()}" /></td>
+					<td class="middle"><input type="text" name="description" size="60" value="${event.description}" /></td>
+					<th><input type="submit" value="&{'form.save'}" /></th>
+					<th>#{a @Guilds.adminDeleteEvent(guild.tag, event.id)}&{'guild.events.delete'}#{/a}</th>
+				</tr>
+			#{/form}
+		#{/list}
+		*{ ***** New record ***** }*
+		#{form @Guilds.adminAddEvent(guild.tag)}
+			<tr>
+				<th><input type="text" name="name" /></th>
+				<th><input type="text" name="startAt" value="${new Date().format()}" /></th>
+				<th><input type="text" name="endAt" value="${new Date().format()}" /></th>
+				<th><input type="text" size="60" name="description" /></th>
+				<th><input type="submit" value="&{'form.add'}" /></th>
+				<td class="middle">&nbsp;</td>
+			</tr>
+		#{/form}
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.events.event'}</th>
+			<th>&{'guild.events.start'}</th>
+			<th>&{'guild.events.end'}</th>
+			<th>&{'guild.events.description'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+*{ ********** Polls ********** }*
+<div class="container">
+	<div class="header1">&{'guild.admin.polls.header'}</div>
+	<table>
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.admin.poll.startAt'}</th>
+			<th>&{'guild.admin.poll.endAt'}</th>
+			<th>&{'guild.admin.poll.enable'}</th>
+			<th>&{'guild.admin.poll.question'}</th>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		*{ ***** List polls ***** }*
+		#{list guild.polls, as:'poll'}
+			#{form @Guilds.adminUpdatePoll()}
+			<tr>
+				<td class="middle"><input type="text" name="startAt" value="${poll.startAt.format()}" /></td>
+				<td class="middle"><input type="text" name="endAt" #{if poll.endAt != null}value="${poll.endAt.format()}"#{/if} /></td>
+				<td class="middle"><input type="checkbox" name="enable" #{if poll.enable}checked#{/if} /></td>
+				<td class="middle"><input type="text" name="question" size="60" value="${poll.question}" /></td>
+				<th>
+					<input type="hidden" name="pollId" value="${poll.id}" />
+					<input type="submit" value="&{'form.save'}" />
+				</th>
+				<th>#{a @Guilds.adminDeletePoll(poll.id)}&{'form.remove'}#{/a}</th>
+			</tr>
+			#{/form}
+			*{ ***** List options ***** }*
+			#{list poll.options, as:'option'}
+				#{form @Guilds.adminUpdatePollOption()}
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td class="middle"><input type="text" name="answer" size="60" value="${option.answer}" /></td>
+					<th>
+						<input type="hidden" name="optionId" value="${option.id}" />
+						<input type="submit" value="&{'form.save'}" />
+					</th>
+					<th>#{a @Guilds.adminDeletePollOption(option.id)}&{'form.remove'}#{/a}</th>
+				</tr>
+				#{/form}
+			#{/list}
+			*{ ***** New option ***** }*
+				#{form @Guilds.adminAddPollOption()}
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<th>&{'guild.admin.poll.answer'}</th>
+					<th><input type="text" name="answer" size="60" value="" /></th>
+					<th>
+						<input type="hidden" name="pollId" value="${poll.id}" />
+						<input type="submit" value="&{'form.add'}" />
+					</th>
+					<td>&nbsp;</td>
+				</tr>
+				#{/form}
+		#{/list}
+		*{ ***** New poll ***** }*
+		#{form @Guilds.adminAddPoll()}
+		<tr>
+			<th><input type="text" name="startAt" value="${new Date().format()}" /></th>
+			<th><input type="text" name="endAt" value="${new Date().format()}" /></th>
+			<th><input type="checkbox" name="enable" checked /></th>
+			<th><input type="text" name="question" size="60" value="" /></th>
+			<th>
+				<input type="hidden" name="guildId" value="${guild.id}" />
+				<input type="submit" value="&{'form.add'}" />
+			</th>
+		</tr>
+		#{/form}
+	</table>
+
+</div>
+
+*{ ********** Add New Member ********** }*
+<div class="container">
+	<div class="header1">&{'guild.admin.member.add'}</div>
+	#{form @Guilds.adminAddMember()}
+		&{'guild.admin.member.name'}&nbsp;<input type="text" name="playerName" class="ajax_players_list" />
+		<input type="hidden" name="guildId" value="${guild.id}" />
+		<input type="submit" value="&{'form.add'}" />
+	#{/form}
+</div>
+
+*{ ********** UNconfirmed Members ********** }*
+#{if unconfirmedMembers != null && unconfirmedMembers.size() > 0}
+<div class="container">
+	<div class="header1">&{'guild.admin.member.unconfirmed'}</div>
+	<table>
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.joinedAt'}</th>
+			<th>&{'guild.admin.member.lastConnection'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	#{list unconfirmedMembers, as: 'member'}
+		<tr>
+			<td class="middle">${member.player.name}</td>
+			<td class="middle">${member.joinedAt.format()}</td>
+			<td class="middle">${member.player.lastConnection.format()}</td>
+			<th>#{a @Guilds.adminConfirmMember(guild.tag, member.id)}&{'guild.admin.member.confirm'}#{/a}</th>
+			<th>
+				#{form @Guilds.adminKickMember(guild.tag, member.id)}
+					<input type="submit" value="&{'guild.admin.member.kick'}" />
+					&{'guild.admin.member.kick.reason'}: <input type="text" name="reason" />
+				#{/form}
+			</th>
+		</tr>
+	#{/list}
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.joinedAt'}</th>
+			<th>&{'guild.admin.member.lastConnection'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+#{/if}
+
+*{ ********** Members ********** }*
+<div class="container">
+	<div class="header1">&{'guild.admin.member.current'}</div>
+	<table>
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.rank'}</th>
+			<th>&{'guild.admin.member.joinedAt'}</th>
+			<th>&{'guild.admin.member.lastConnection'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	#{list members, as: 'member'}
+		<tr>
+			<td class="middle">${member.player.name}</td>
+			<td class="middle guildRank${member.rank}">${messages.get('guild.rank.' + member.rank)}</td>
+			<td class="middle">${member.joinedAt.format()}</td>
+			<td class="middle">${member.player.lastConnection.format()}</td>
+			#{if !member.isGuildMaster()}
+			<th>${member.player.name}</th>
+			<th>#{a @Guilds.adminPromoteMember(guild.tag, member.id)}&{'guild.admin.member.promote'}#{/a}</th>
+			<th>#{a @Guilds.adminDemoteMember(guild.tag, member.id)}&{'guild.admin.member.demote'}#{/a}</th>
+			<th>
+				#{form @Guilds.adminKickMember(guild.tag, member.id)}
+					<input type="submit" value="&{'guild.admin.member.kick'}" />
+					&{'guild.admin.member.kick.reason'}: <input type="text" name="reason" />
+				#{/form}
+			</th>
+			#{/if}
+			#{else}
+				<td class="middle">&nbsp;</td>
+				<td class="middle">&nbsp;</td>
+				<td class="middle">&nbsp;</td>
+				<td class="middle">&nbsp;</td>
+			#{/else}
+		</tr>
+	#{/list}
+		*{ ***** Headers ***** }*
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.rank'}</th>
+			<th>&{'guild.admin.member.joinedAt'}</th>
+			<th>&{'guild.admin.member.lastConnection'}</th>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+			<td class="middle">&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+*{ ********** OLD members ********** }*
+<div class="container">
+	<div class="header1">&{'guild.admin.member.old'}</div>
+	<table>
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.kick.yes'}/&{'guild.admin.member.kick.no'}</th>
+			<th>&{'guild.admin.member.kick.joinedAt'}</th>
+			<th>&{'guild.admin.member.kick.leftAt'}</th>
+			<th>&{'guild.admin.member.kick.reason'}</th>
+		</tr>
+		#{list oldMembers, as: 'member'}
+		<tr>
+			<td class="middle">${member.playerName}</td>
+			#{if member.kicked}
+				<td class="middle guildAdminMemberKicked">&{'guild.admin.member.kick.yes'}</td>
+			#{/if}
+			#{else}
+				<td class="middle guildAdminMemberKicked">&{'guild.admin.member.kick.no'}</td>
+			#{/else}
+			<td class="middle">${member.joinedAt.format()}</td>
+			<td class="middle">${member.leftAt.format()}</td>
+			<td class="middle">
+				${member.leftReason}
+			</td>
+		</tr>
+		#{/list}
+		<tr>
+			<th>&{'guild.admin.member.name'}</th>
+			<th>&{'guild.admin.member.kick.yes'}/&{'guild.admin.member.kick.no'}</th>
+			<th>&{'guild.admin.member.kick.joinedAt'}</th>
+			<th>&{'guild.admin.member.kick.leftAt'}</th>
+			<th>&{'guild.admin.member.kick.reason'}</th>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+	#{include 'Guilds/_ajaxActions.js' /}
+</script>

@@ -1,0 +1,40 @@
+#{extends 'Market/template.html' /}
+
+#{form @Market.adventuresAddSale(player.name), class:'well'}
+
+<p class="form-inline">
+	<label>&{'market.adventure.I.sell'}</label>
+	<input type="text" name="itemQuantity" value="1" />
+	
+	<label>&{'market.adventure.item'}</label>
+	<select name="itemName">
+		#{list items:worldAdventures, as:'wadventure'}
+			<option value="${wadventure.name}" imgid="${wadventure.getImage()}">
+				${wadventure.name}
+			</option>
+		#{/list}
+	</select>
+</p>
+
+<p class="form-inline">
+	<label>
+		&{'market.adventure.dates'}
+		&{'market.adventure.from'}
+	</label>
+	<input type="text" name="startAt" value="${new Date().format()}" />
+	
+	<label>&{'market.adventure.to'}</label>
+	<input type="text" name="endAt" value="${new Date().format()}" />
+</p>
+
+<p class="form-vertical">
+	<label>&{'market.adventure.comments'}</label>
+	<textarea name="description" class="span10" rows="3"></textarea>
+</p>
+
+<p class="form-vertical">
+	<input type="hidden" name="playerName" value="${playerName}" />
+	<input type="submit" class="btn btn-large btn-success" value="&{'market.form.sale.add'}" />
+</p>
+	
+#{/form}

@@ -1,0 +1,174 @@
+/** Generic containers **/
+$generic-bg-color: #4E9689; // Generic color for all kind of backgrounds and borders
+$generic-border: 1px solid $generic-bg-color; // Generic border for all kind of containers
+
+/** Page style (html,body) **/
+$page-bg-color: #F4FCE8; // html,body background color
+$page-fg-color: #395752; // html,body foreground color
+$page-bg-image: none; // Page background image
+$page-bg-repeat: none; // Page background image vertical/horizontal mosaic or no repeat
+$page-bg-attachment: inherit; // Page background image behavior when scrolling
+$page-bg-position: inherit; // Page background image position
+
+@import url(http://fonts.googleapis.com/css?family=Nunito);
+$mono-font: 'Nunito', monospace;
+@import url(http://fonts.googleapis.com/css?family=Coustard);
+$page-font: 'Coustard', sans-serif;
+$page-font-size: 0.97em;
+
+/** Page header **/
+$page-header-bg-color: $generic-bg-color; // Top banner (header) background color
+$page-header-fg-color: $page-fg-color; // Top banner (header) foreground color
+$page-header-font-size: 2em; // Top banner (header) font size
+$page-header-font-variant: small-caps; // // Top banner (header) font variant (e.g. small-caps)
+$page-header-font-shadow: gray 1pt 1pt 0.1em; // // Top banner (header) (could be 'none')
+
+/** Navigation menu **/
+$navigation-fg-color: $page-fg-color; // Foreground color -- however, this is often overriden by $link colors
+$navigation-bg-color: $generic-bg-color; // Background color
+$navigation-font: $mono-font; // Font style (e.g. $mono-font, serif, etc.)
+$navigation-main-bg-color: $generic-bg-color; // Main navigation menu (with login/logout links)
+
+/** Links (a tag) **/
+$link-fg-color: #87D69B; // links, active links, visited links foreground color
+$link-bg-color: transparent; // links, active links, visited links background color
+$link-decoration: none; // links, active links, visited links text decoration
+$link-hover-fg-color: #7ED0D6; // mouse over links foreground color
+$link-hover-bg-color: transparent; // mouse over links background color
+$link-hover-decoration: none; // mouse over links text decoration (could be: underline)
+
+/** Logic: Colors **/
+$negative-color: #ff0000; // Color for NEGATIVE quantities and things going wrong (usually some kind of red)
+$positive-color: #17cf17; // Color for POSITIVE quantities and things going well (usually some kind of green)
+$highlight-color: #E9FFFD; // Color for highlighted containers ('Stabilo!' -- usually some kind of yellow)
+
+$color-light-good: #D4FFEB; // Light color for good/active things
+$color-light-average: #F3F4DB; // Light color for normal things
+$color-light-bad: #F7B9D5; // Dark color for bad/broken things
+$color-dark-good: #82D8B0; // Dark color for good/active things
+$color-dark-average: #CCCC99; // Dark color for normal things
+$color-dark-bad: #C82D86; // Light color for bad/broken things
+
+$color-me: $color-dark-good; // Color for the current player
+$color-others: $color-dark-bad; // Color for other players
+$color-involved: $color-dark-average; // Color used when the current player is involved
+
+/** Special containers **/
+$meta-font-size: 0.7em; // Font size for meta-informations, e.g. dates of log entries
+$meta-font: $mono-font; // Font for meta-informations
+$meta-fg-color: #94A9D4; // Font color for meta informations
+
+$summary-font-size: 0.9em; // Font size for summary text, e.g. for forum posts excerpts
+$summary-font: $mono-font; // Font for summary text
+$summary-fg-color: grey; // Font color for summary text
+
+/** Containers: Headers **/
+$header-bg-color: $generic-bg-color; // Background color for header (should be overriden when necessary)
+
+$header-1-fg-color: $page-fg-color; // Level 1 header foreground color
+$header-1-bg-color: $generic-bg-color; // Level 1 header background color
+$header-1-font-size: 1.3em; // Level 1 header font size
+$header-1-font-weight: normal; // Font weight: normal, bold, bolder...
+$header-1-font-variant: small-caps; // Level 1 header font variant (e.g. small caps)
+$header-1-font-shadow: none; // Level 1 header font shadow
+$header-1-border: none; // Level 1 header container border
+$header-1-border-radius: 0.3em; // Level 1 header container border radius (round corners)
+$header-1-text-align: left; // Level 1 header text align: left, center, right
+
+$header-2-fg-color: $page-fg-color; // Level 2 headers foreground color
+$header-2-bg-color: transparent; // Level 2 headers background color
+$header-2-font-size: 1.3em; // Level 2 header font size
+$header-2-font-weight: normal; // Level 2 header Font weight: normal, bold, bolder...
+$header-2-font-variant: none; // Level 2 header font variant (e.g. small caps)
+$header-2-font-shadow: none; // Level 2 header font shadow
+$header-2-border: none; // Level 2 header container border
+$header-2-border-radius: none; // Level 2 header container border radius (round corners)
+$header-2-text-align: left; // Level 2 header text align: left, center, right
+
+$header-3-fg-color: $page-fg-color; // Level 3 headers foreground color
+$header-3-bg-color: none; // Level 3 headers background color
+$header-3-font-size: 1em; // Level 2 header font size
+$header-3-font-weight: bold; // Level 2 header Font weight: normal, bold, bolder...
+$header-3-font-variant: none; // Level 2 header font variant (e.g. small caps)
+$header-3-font-shadow: none; // Level 2 header font shadow
+$header-3-border: none; // Level 2 header container border
+$header-3-border-radius: none; // Level 2 header container border radius (round corners)
+$header-3-text-align: center; // Level 2 header text align: left, center, right
+
+/** Containers: Forms **/
+$form-font-size: 1em; // Font size for common form elements (input, select, etc.)
+$form-container-fg-color: $page-fg-color; // Forms container foreground color
+$form-container-bg-color: $generic-bg-color; // Forms container background color
+$form-container-border: 1px solid $page-fg-color; // Forms container border
+
+/** Containers: Sorting and Building list headers **/
+$sort-container-fg-color: $page-fg-color; // Sorting container foreground color -- mostly overriden by $link
+$sort-container-bg-color: $generic-bg-color; // Sorting container background color
+$sort-container-border: 2px solid #ffffff; // Sorting container border
+
+/** Tables **/
+$table-header-bg-color: $generic-bg-color;
+$table-header-fg-color: $page-fg-color;
+
+/** Tags **/
+$tag-border: 1px solid $generic-bg-color; // Border (with color)
+$tag-bg-color: $page-bg-color; // Background color
+$tag-border-radius: 0.4em; // Border radius for round corners
+
+/** Flash messages (notifications on top of screen) **/
+$flash-border: 1px solid; // Border for ALL flash containers -- the color is the text foreground color (e.g. $flash-xxx-fg-color)
+
+$flash-error-fg-color: $color-dark-bad; // Foreground color for ERROR flash messages
+$flash-error-bg-color: $color-light-bad; // Background color for ERROR flash messages
+
+$flash-info-fg-color: $color-dark-average; // Foreground color for INFO and ADMIN flash messages
+$flash-info-bg-color: $color-light-average; // Background color for INFO and ADMIN flash messages
+
+$flash-success-fg-color: $color-dark-good; // Foreground color for SUCCESS flash messages
+$flash-success-bg-color: $color-light-good; // Background color for SUCCESS flash messages
+
+/** Page: Home **/
+$home-bigmenu-font: $mono-font; // Homepage public & private big menu font
+$home-bigmenu-font-size: 1.3em; // Homepage public & private big menu font size
+$home-bigmenu-border: 1px solid $generic-bg-color; // Homepage public & private big menu border
+$home-bigmenu-private-fg-color: $color-light-good; // Homepage private big menu foreground color
+$home-bigmenu-private-bg-color: $page-bg-color; // Homepage private big menu background color
+$home-bigmenu-public-fg-color: $color-light-average; // Homepage public big menu foreground color
+$home-bigmenu-public-bg-color: $color-dark-average; // Homepage public big menu background color
+
+$home-stats-border: 1px solid $generic-bg-color; // Border for the statistics container
+
+$home-log-item-border: 1px dotted $generic-bg-color; // Log line border
+$home-log-item-font-size: 0.9em; // Log line font size
+
+/** Page: Realm **/
+
+$building-line-fg-color: $page-fg-color; // Building line foreground (font) color
+$building-line-bg-color: transparent; // Building line background color -- will be overriden according to building status
+$building-line-border: none; // Building line border
+$building-line-font: inherit; // Building line font
+$building-line-font-size: 1em; // Building line font size
+$building-line-margins: 0.2em 0 0 0; // Building line outer margins : top, right, bottom, left
+$building-line-padding: 0.2em 0.5em 0.2em 0.5em; // Building line inner margins : top, right, bottom, left
+$building-line-image-size: 18px; // Building line image size (height==width)
+
+// CAUTION: people got used to thoses colors, you shouldn't change them.
+$building-disabled-fg-color: $color-dark-bad; // Disabled/stopped building line foreground color
+$building-disabled-bg-color: $color-light-bad; // Disabled/stopped building line background color
+$building-boosted-fg-color: $color-dark-good; // Boosted building line foreground color
+$building-boosted-bg-color: $color-light-good; // Boosted building line background color
+$building-simulated-fg-color: $color-dark-average; // Simulated building line foreground color
+$building-simulated-bg-color: $color-light-average; // Simulated building line background color
+
+$goods-font: $mono-font; // Font for displaying amounts of resources
+$goods-font-size: 1.2em; // Font size for displaying amouts of resources
+
+$area-cell-border: 2px solid #999999; // Realm areas cell border
+$area-cell-fg-color: $page-fg-color; // Realm areas cell foreground color
+$area-cell-bg-color: #ffffff; // Realm areas cell background color
+$area-cell-hover-fg-color: #ffffff; // Realm area mouse over & selected foreground color
+$area-cell-hover-bg-color: $page-fg-color; // Realm area mouse over & selected background color
+
+
+/** DO NOT EDIT BELOW !! **/
+@import "includes.scss";

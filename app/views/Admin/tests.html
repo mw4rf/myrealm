@@ -1,0 +1,20 @@
+#{extends 'Admin/template.html' /}
+
+<div class="container">
+
+	<table>
+		<tr>
+			<th>#{a @Admin.activityReportTest()}Test Activity Reports#{/a}</th>
+			<td>Sends the activity report by mail to the administrator.</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.mailTest()}Test Mail Configuration#{/a}</th>
+			<td>Test the mailing configuration of the server, and the smtp server configuration and sanity, by sending a dummy e-mail to the administrator.</td>
+		</tr>
+		<tr>
+			<th>#{a @Admin.exceptionTest()}Throw Exception#{/a}</th>
+			<td>Calls a dummy method throwing an ArrayOutOfBoundException to test the exception reporting mechanism.</td>
+		</tr>
+	</table>
+
+</div>

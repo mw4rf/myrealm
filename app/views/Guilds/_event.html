@@ -1,0 +1,26 @@
+	<div class="guildEvent">
+		<span class="guildEventName">${lastEvent.name}</span>
+		<br /><span class="guildInfo">&{'guild.events.start'} ${lastEvent.startAt.format()}</span>
+		<br /><span class="guildInfo">&{'guild.events.end'} ${lastEvent.endAt.format()}</span>
+		<p class="guildInfo">${lastEvent.description.raw()}</p>
+		#{if lastEvent.participants.size() > 0}
+			<p class="guildInfo">
+				&{'guild.events.signedin'}:&nbsp;
+				#{list lastEvent.participants, as:'p'}
+					#{a @Application.home(p.name)}${p.name}#{/a}&nbsp;
+				#{/list}
+			</p>
+		#{/if}
+		#{if isMember}
+			<span class="guildInfo">
+			#{a @Guilds.registerEvent(guild.tag, controllers.Application.getSessionLogin(), lastEvent.id)}
+				#{if !lastEvent.isParticipant(controllers.Application.getSessionLogin())}
+					&{'guild.events.signin'}
+				#{/if}
+				#{else}
+					&{'guild.events.signout'}
+				#{/else}
+			#{/a}
+			</span>
+		#{/if}
+	</div>

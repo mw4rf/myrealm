@@ -1,0 +1,48 @@
+.bigMenu {
+  font-size: $home-bigmenu-font-size;
+  font-family: $home-bigmenu-font;
+  
+  border: $home-bigmenu-border;
+  color: $home-bigmenu-private-fg-color;
+  background-color: $home-bigmenu-private-bg-color;
+  
+  padding: 0.3em 0.3em 0.3em 0.3em; 
+  margin-bottom: 0.3em;
+  
+  text-align: center;
+}
+
+.logItem {
+  border: $home-log-item-border;
+  padding: 0.1em 0.5em 0.1em 0.5em;
+  margin-top: 0.2em;
+  margin-bottom: 0.3em;
+  font-size: $home-log-item-font-size;
+}
+
+.logItem .homeDate {
+  font-size: $meta-font-size;
+}
+
+.left {
+  float:left;
+}
+
+.right {
+  float:right;
+}
+
+.homeCommentSummary {
+  font-family: $summary-font;
+  font-size: $summary-font-size;
+  color: $summary-fg-color;
+}
+
+.homeDate {
+  font-family: $meta-font;
+  font-size: $meta-font-size;
+  color: $meta-fg-color;
+}
+
+.homeListItem {
+}

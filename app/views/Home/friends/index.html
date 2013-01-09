@@ -1,0 +1,69 @@
+#{extends 'Home/template.html' /}
+
+<div class="container-fluid">
+
+	<div class="row-fluid">
+			
+		<div class="span12">
+		
+			*{ *** Add & Remove Friends *** }*
+			<div class="well">
+				
+				<div class="form-horizontal">
+					<label for="addFriend">&{'home.friends.add'}</label>
+					<input type="text" name="addFriend" id="addFriend" class="ajax_players_list" />
+					
+					<input type="hidden" name="playerName" id="playerName" value="${player.name}" />
+					<button type="submit" class="btn btn-success" action="addFriend">
+						<i class="icon-plus-sign icon-white"></i> &{'form.add'}
+					</button>
+				</div>
+				<br />
+				<div class="form-horizontal">
+					<label for="removeFriend">&{'home.friends.remove'}</label>
+					<select id="removeFriend">
+						#{list player.friends, as: 'friend'}
+							<option value="${friend.name}">${friend.name}</option>
+						#{/list}
+					</select>
+					<button type="submit" class="btn btn-danger" action="removeFriend">
+						<i class="icon-minus-sign icon-white"></i> &{'form.remove'}
+					</button>
+				</div>
+				
+			</div>
+			
+			*{ *** Friends List *** }*
+			<div class="well" id="friendsList">
+				<b>&{'home.friends.yours'}</b>
+				#{include 'Home/friends/_list.html' /}
+			</div>
+			
+			*{ *** Friend Of List *** }*
+			<div class="well">
+				<b>&{'home.friends.of'}</b>
+				#{list friendOf, as: 'friend'}
+					<span class="tagItem">#{a @Home.index(friend.name)}${friend.name}#{/a}</span> 
+				#{/list}
+			</div>
+			
+			*{ *** Friends Activity *** }*
+			<div class="headerbg header3">&{'home.friends.log'}</div>
+			<span class="pagination_summary">#{paginate.summary items:actions /}</span>
+			#{paginate.controls items:actions /}
+			#{paginate.list items:actions, as: 'action'}
+					<div class="logItem"><span class="homeDate">[${action.at.format()}]</span> <b>#{a @Home.index(action.player.name)}${action.player.name}#{/a}</b> - ${messages.get("${action.name.raw()}", "${action.formatAction().raw()}").raw()}</div>
+			#{/paginate.list}
+			#{paginate.controls items:actions /}
+
+		</div>
+		
+	
+	</div>
+	
+
+</div>
+
+<script type="text/javascript">
+	#{include 'Home/friends/actions.js' /}
+</script>

@@ -1,0 +1,34 @@
+#{extends 'Adventures/template.html' /}
+#{set title: 'Adventures' /}
+
+*{ New Adventure }*
+<div id="addAdventureFormContainer" class="container-fluid well">
+    #{form @Adventures.addAdventure(player.name), class:'form-vertical'}
+    
+    <label>&{'adventures.index.addadventure'}</label>
+    <select name="name" id="addAdventure_name" onchange="selectAdventureChange(this)">
+                 #{list items:worldAdventures, as:'wadventure'}
+                     <option value="${wadventure.name}" imgid="${wadventure.getImage()}">
+                         ${wadventure.name}
+                     </option>
+                 #{/list}
+    </select>
+    <div id="adventureImage" rowspan="3"><img src="/public/${wadventure.getImage()}" /></div>
+    
+    <label>&{'adventure.dateStart'}</label>
+    <input type="text" size="25" name="dateStart" value="${today.format()}" />
+    
+    <label>&{'adventure.dateEnd'}</label>
+    <input type="text" size="25" name="dateEnd" value="${today.format()}" />
+    
+    
+    <label>&{'adventure.notes'}</label>
+    <textarea class="span10" rows="5" name="notes"></textarea>
+    
+    <br />
+    <input type="submit" class="btn btn-large btn-success" value="&{'form.save'}" />
+#{/form}
+</div>
+
+
+

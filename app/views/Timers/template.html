@@ -1,0 +1,25 @@
+#{extends 'main.html' /}
+#{set title: 'Timers' /}
+
+<!-- Page container -->
+<div class="container-fluid">
+	<div class="row-fluid">
+	
+		<!-- Menu -->
+		<div class="span3">
+			<div class="well sidebar-nav">
+				#{include 'Timers/_menu.html' /}
+			</div>
+			*{ ***** SPECIAL: ajax auto-refresh the timers list ***** }*
+			#{if request.action.equals("Timers.index") && player != null && player.timers.size() > 0}
+				#{include 'Timers/_reload.html' /}
+			#{/if}
+		</div>
+		
+		<!-- Content -->
+		<div class="span9">
+			#{doLayout /}
+		</div>
+	
+	</div>
+</div>

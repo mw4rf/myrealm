@@ -1,0 +1,6 @@
+#{if request.action.equals('Application.preferences') || request.action.equals('Application.playerActions')}
+	<a href="@{Application.home(player.name)}"><< &{'navigation.home'}</a>
+#{/if}
+#{elseif request.action.equals('Application.nextAdventuresList')}
+	<b>{&{'realm.index.create'}:</b> <a href="#" onclick="toggleshow('#addNextAdventure'); return false;">&{'adventures.next.new'}</a><b>}</b>
+#{/elseif}

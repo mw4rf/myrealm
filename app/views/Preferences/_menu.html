@@ -1,0 +1,56 @@
+*{ ***** Preferences menu ***** }*
+
+<ul class="nav nav-list">
+	*{ ***** Account ***** }*
+	<li class="nav-header">&{'nav.preferences.profile'}</li>
+	<li #{if request.action.equals("Preferences.account")} class="active"#{/if}>
+		#{a @Preferences.account(player.name)}
+			<i class="icon-lock#{if request.action.equals("Preferences.account")} icon-white#{/if}"></i> &{'nav.preferences.account'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Preferences.avatar")} class="active"#{/if}>
+		#{a @Preferences.avatar(player.name)}
+			<i class="icon-user#{if request.action.equals("Preferences.avatar")} icon-white#{/if}"></i> &{'nav.preferences.avatar'}
+		#{/a}
+	</li>
+
+	*{ ***** Display ***** }*
+	<li class="nav-header">&{'nav.preferences.display'}</li>
+	<li #{if request.action.equals("Preferences.display")} class="active"#{/if}>
+		#{a @Preferences.display(player.name)}
+			<i class="icon-home#{if request.action.equals("Preferences.display")} icon-white#{/if}"></i> &{'nav.preferences.display.global'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Preferences.realm")} class="active"#{/if}>
+		#{a @Preferences.realm(player.name)}
+			<i class="icon-list#{if request.action.equals("Preferences.realm")} icon-white#{/if}"></i> &{'nav.preferences.realm'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Preferences.timers")} class="active"#{/if}>
+		#{a @Preferences.timers(player.name)}
+			<i class="icon-time#{if request.action.equals("Preferences.timers")} icon-white#{/if}"></i> &{'nav.preferences.timers'}
+		#{/a}
+	</li>
+	
+	*{ ***** Functional ***** }*
+	<li class="nav-header">&{'nav.preferences.functional'}</li>
+	<li #{if request.action.equals("Preferences.cycles")} class="active"#{/if}>
+		#{a @Preferences.cycles(player.name)}
+			<i class="icon-repeat#{if request.action.equals("Preferences.cycles")} icon-white#{/if}"></i> &{'nav.preferences.cycles'}
+		#{/a}
+	</li>
+	
+	*{ ***** Data management ***** }*
+	<li class="nav-header">&{'nav.preferences.data'}</li>
+	<li #{if request.action.equals("Preferences.export")} class="active"#{/if}>
+		#{a @Preferences.export(player.name)}
+			<i class="icon-arrow-left#{if request.action.equals("Preferences.export")} icon-white#{/if}"></i> &{'nav.preferences.export'}
+		#{/a}
+	</li>
+	<li #{if request.action.equals("Preferences.purge")} class="active"#{/if}>
+		#{a @Preferences.purge(player.name)}
+			<i class="icon-fire#{if request.action.equals("Preferences.purge")} icon-white#{/if}"></i> &{'nav.preferences.purge'}
+		#{/a}
+	</li>
+	
+</ul>

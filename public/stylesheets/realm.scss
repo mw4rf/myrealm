@@ -1,0 +1,189 @@
+/* BUILDINGS */
+
+.buildingListHeader {
+  color: $sort-container-fg-color;
+  background-color: $sort-container-bg-color;
+  border: $sort-container-border;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+.buildingListHeaderName {
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.buildingListItem {
+  color: $building-line-fg-color;
+  background-color: $building-line-bg-color;
+  border:$building-line-border;
+  font-family: $building-line-font;
+  font-size: $building-line-font-size;
+  margin: $building-line-margins;
+  padding: $building-line-padding;
+}
+
+.buildingListItem img {
+    width: $building-line-image-size;
+    height: $building-line-image-size;
+    vertical-align: middle;
+}
+
+.buildingGroupLine {
+  cursor:pointer;
+  text-align: center;
+}
+
+.buildingGroupLine img {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.buildingListItem:hover {
+    background-color: $highlight-color;
+}
+
+.buildingDisabled {
+  color: $building-disabled-fg-color;
+  background-color: $building-disabled-bg-color;
+}
+
+.buildingBoosted {
+  color: $building-boosted-fg-color;
+  background-color: $building-boosted-bg-color;
+}
+
+.buildingSimulated {
+  color: $building-simulated-fg-color;
+  background-color: $building-simulated-bg-color;
+}
+
+.buildingGroupLabel {
+  padding: 0.1em 0.5em 0.1em 0.5em;
+  border-radius: 0.3em;
+  font-family: monospace;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.goodItem {
+  font-family: $goods-font;
+  font-size: $goods-font-size;
+}
+
+.spinner {
+  text-align: center;
+}
+
+.buildingDescription {
+  vertical-align: baseline;
+  height: 1em;
+  line-height: 1em;
+  font-size: 0.9em;
+  white-space: nowrap;
+  overflow: hidden;
+  display:block;
+
+  margin-top: 0.2em;
+  font-family: monospace;
+}
+
+/* Areas */
+
+#realmAreaTable {
+  width: 100%;
+  text-align: center;
+}
+
+#realmAreaImagesTable {
+  border: none;
+  padding: 0;
+}
+
+.realmAreaCell {
+}
+
+.realmAreaTextCell {
+  border: $area-cell-border;
+  color: $area-cell-fg-color;
+  background-color: $area-cell-bg-color;
+  padding: 0.5em 0 0.5em 0;
+  cursor: pointer;
+}
+
+.realmAreaTextCell:hover {
+  background-color: $area-cell-hover-bg-color;
+  color: $area-cell-hover-fg-color;
+}
+
+.realmAreaTextCellSelected {
+  background-color: $area-cell-hover-bg-color;
+  color: $area-cell-hover-fg-color;
+}
+
+.realmAreaImageCell {
+  background-color: #ffffff;
+  cursor: pointer;
+  border:0;
+  padding:0;
+  margin:0;
+}
+
+.realmAreaImageCell:hover {
+  background-color: rgb(0, 126, 255);
+}
+
+.realmAreaImageCellSelected {
+  background-color: rgb(0, 126, 255);
+}
+
+/* Ratios */
+
+#productionratios {
+  margin-top : 0.2em;
+}
+
+/** Efficiency **/
+
+.errorEfficiency {
+  background-color: red;
+  color: yellow;
+  text-decoration: blink;
+}
+
+.badEfficiency {
+  color: $color-dark-bad;
+}
+
+.averageEfficiency {
+  color: $color-dark-average;
+}
+
+.goodEfficiency {
+  color: $color-dark-good;
+}
+
+/** 
+ * Stats 
+ */
+#chart_gevolution_legend {
+  font-family: monospace;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+

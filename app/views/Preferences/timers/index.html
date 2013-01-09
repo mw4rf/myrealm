@@ -1,0 +1,68 @@
+#{extends 'Preferences/template.html' /}
+
+*{ ********** TIMERS ********** }*
+<h2>&{'preferences.timers.remind'}</h2>
+<div class="form form-vertical well">
+	<label class="checkbox">
+		<input type="checkbox" name="timers_default_remind_type1" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE1}checked#{/if}/>
+		&{'preferences.timers.default.remind'}
+		&{'timers.on.duration'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="timers_default_remind_type2" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE2}checked#{/if}/>
+		&{'preferences.timers.default.remind'}
+		&{'timers.on.date'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="timers_default_remind_type3" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE3}checked#{/if}/>
+		&{'preferences.timers.default.remind'}
+		&{'timers.on.building'}
+	</label>
+</div>
+
+<h2>&{'preferences.timers.display.overlay'}</h2>
+<div class="form form-vertical well">
+	<label class="checkbox">
+		<input type="checkbox" name="timers_show_on_home_type1" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE1}checked#{/if}/>
+		&{'preferences.timers.show.on.home'}
+		&{'timers.on.duration'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="timers_show_on_home_type2" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE2}checked#{/if}/>
+		&{'preferences.timers.show.on.home'}
+		&{'timers.on.date'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="timers_show_on_home_type3" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE3}checked#{/if}/>
+		&{'preferences.timers.show.on.home'}
+		&{'timers.on.building'}
+	</label>
+	<hr />
+	<label class="select">
+		&{'preferences.timers.overlay.opacity'}
+		<select name="timers_overlay_opacity" class="submittable">
+			%{ for(int i = 0 ; i <= 100 ; i = i+5) { %}
+				#{if player.preferences.TIMERS_OVERLAY_OPACITY == i}
+					<option value="${i}" selected>${i}%</option>
+				#{/if}#{else}
+					<option value="${i}">${i}%</option>
+				#{/else}
+			%{ } }%
+		</select>
+	</label>
+	<a class="btn btn-small btn-warning" style="color:white;" href="@{Preferences.resetOverlayPosition()}">&{'preferences.timers.overlay.reset'}</a>
+</div>
+
+#{if player.preferences.hasMailAddress()}
+<h2>&{'preferences.timers.mail'}</h2>
+<div class="form form-vertical well">
+	<label class="checkbox">
+		<input type="checkbox" name="mail_notify_timers_expiring" #{if player.preferences.MAIL_NOTIFY_TIMERS_EXPIRING}checked#{/if}/>
+		&{'preferences.mail.timers.expiring'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="mail_notify_timers_expired" #{if player.preferences.MAIL_NOTIFY_TIMERS_EXPIRED}checked#{/if}/>
+		&{'preferences.mail.timers.expired'}
+	</label>
+</div>
+#{/if}

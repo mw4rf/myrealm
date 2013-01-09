@@ -1,0 +1,35 @@
+<html>
+<body>
+<table>
+	<tr>
+		<th colspan="2">&{'app.name'}</th>
+	</tr>
+	<tr>
+		<th>Server started since</th>
+		<th>Uptime</th>
+	</tr>
+	<tr>
+		<td>${startedSince.toDate().format()}</td>
+		<td>${uptime.getDays()}d ${uptime.getHours()}h ${uptime.getMinutes()}m ${uptime.getSeconds()}s</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th colspan="3">Database Tables Statistics</th>
+	</tr>
+	<tr>
+		<th>Entity</th>
+		<th>Count</th>
+		<th>Size</th>
+	</tr>
+	#{list tables.keySet(), as: 'key'}
+	<tr>
+		<td>${tables.get(key)}</td>
+		<td>${tableCount.get(key)}</td>
+		<td>${tableSize.get(key)}</td>
+	</tr>
+	#{/list}
+</table>
+</body>
+</html>

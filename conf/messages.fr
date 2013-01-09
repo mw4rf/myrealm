@@ -1,0 +1,914 @@
+app.name = MyRealm
+
+admin.message = <b>[Message Système]</b>
+contenteditable.empty = Cliquez ici pour modifier ce texte !
+
+header.app = MyRealm
+header.realm = Royaume de %s
+header.home = Page d'accueil de %s
+header.adventures = Aventures de %s
+header.timers = Alarmes de %s
+header.market = Marché public
+
+loading.text = Chargement en cours...
+help = Aide
+help.link = <a href="%s" target="_blank" class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
+help.link.small = <a href="%s" target="_blank" class="btn btn-info btn-mini"><i class="icon-info-sign icon-white"></i></a>
+logout = Déconnexion
+login = Accueil/Connexion
+you.are = Vous êtes
+can.write = Modifications autorisées
+cannot.write = Modifications interdites.
+profile.signin = <i>Si vous n'avez pas encore de compte, il sera créé. Utilisez le même pseudo que dans le jeu <b>(attention aux majuscules/minuscules !)</b></i>
+password = Mot de passe
+username = Nom d'utilisateur
+password.safe = NB: votre mot de passe est transmis en clair sur Internet, mais il <b>n'est pas</b> stocké sur nos serveurs.
+password.send.new = J'ai oublié mon mot de passe, envoyez m'en un nouveau par e-mail.
+password.send.new.done = Un nouveau mot de passe vous a été envoyé à <b>%s</b>.
+profile.home = Page d'accueil de %s
+spinner = Veuillez patienter...
+error = Erreur
+stats = Statistiques
+stats.of = Statistiques du royaume de %s
+snapshots = Instantanés
+snapshots.of = Instantanés du royaume de %s
+quick.search = Recherche rapide
+
+index.stats.tables = MyRealm est utilisé par <b>%s joueurs</b> disposant de <b>%s bâtiments</b> et de <b>%s alarmes</b>, qui ont réalisé <b>%s aventures</b> et <b>%s actions</b>. MyRealm est également utilisé par <b>%s guildes</b> totalisant <b>%s membres</b>.
+
+dialog.title = Confirmation requise
+dialog.content = Êtes-vous sûr de vouloir faire cela ?
+dialog.final = Êtes-vous sûr ? Cette opération est <b>irréversible</b>.
+
+dialog.format.help = <b>Gras</b>: &lt;b&gt;texte&lt/b&gt;<br /><i>Italique</i>: &lt;i&gt;texte&lt/i&gt;<br /><u>Souligné</u>: &lt;u&gt;texte&lt/u&gt;<br /> <s>Barré</s>&lt;s&gt;texte&lt/s&gt;<br />Images: &lt;img src='http://www.site.com/image.jpg' /&gt;<br /><span style='color:red;background-color:yellow'>Couleurs</span>: &lt;span style='color:red;background-color:yellow;'&gt;texte&lt;/span&gt;
+dialog.format.link = Aide formatage du texte
+
+flash.success.welcome = Connexion réussie. Bienvenue, %s !
+flash.success.logout = Vous êtes à présent déconnecté.
+flash.success.preferences.saved = Préférences enregistrées avec succès.
+flash.success.building.add = <b>%s</b> ajouté.
+flash.success.building.update = <b>%s</b> mis(e) à jour avec succès.
+flash.success.building.delete = <b>%s</b> supprimé(e).
+flash.success.group.add = Groupe <b>%s</b> créé avec succès !
+flash.success.group.edit = Groupe <b>%s</b> modifié avec succès !
+flash.success.group.delete = Groupe supprimé avec succès
+flash.success.adventure.add = <b>%s</b> s'est lancé(e) dans une nouvelle aventure : <b>%s</b> !
+flash.success.adventure.update = Aventure modifiée avec succès.
+flash.success.adventure.delete = Aventure <b>%s</b> supprimée.
+flash.success.simulation.delete = Les bâtiments simulés ont été supprimés avec succès.
+flash.success.guild.join = Vous avez rejoint la guilde <b>%s</b> !
+flash.success.guild.leave = Vous avez quitté la guilde <b>%s</b> !
+flash.success.officer.note.added = Note officier ajoutée !
+flash.success.timer.added = Alarme <b>%s</b> ajoutée avec succès
+flash.success.timer.cleaned = Alarmes expirées supprimées avec succès
+flash.success.timer.renewed = Alarme <b>%s</b> renouvelée avec succès
+flash.success.timer.deleted = Alarme supprimée avec succès
+flash.success.market.adventure.add = Offre de vente ajoutée avec succès
+flash.success.market.adventure.delete = Offre de vente supprimée
+flash.success.market.adventure.buy = Offre d'achat de <b>%s</b> enregistrée
+flash.success.market.adventure.accept = Vente conclue avec <b>%s</b> !
+flash.success.market.adventure.reject = Vente avec <b>%s</b> refusée !
+flash.success.market.adventure.withdraw = Acceptation retirée avec succès
+
+flash.error.validation = <b>Erreur de validation du formulaire.</b> Veuillez recommencer en remplissant tous les champs requis avec des valeurs appropriés.
+flash.error.auth = Une erreur s'est produite. Veuillez vous reconnecter et réessayer.
+flash.error.badpassword = Le mot de passe entré n'est pas le bon pour le joueur %s. Veuillez réessayer.
+flash.error.guild.join = Vous ne pouvez pas rejoindre la guilde <b>%s</b> car vous êtes déjà membre de la guilde <b>%s</b>
+flash.error.null.building = Le bâtiment que vous tentez de charger n'existe pas.
+flash.error.timer.deleted = Échec lors de la suppression de l'alarme.
+flash.error.market.must.login = Vous devez vous connecter pour accéder au marché.
+flash.error.stats.none.realm = Vous devez ajouter des bâtiments à votre royaume pour obtenir des statistiques. Celles-ci sont calculées chaque jour, à minuit, si vous avec utilisé MyRealm pendant la journée. Ajoutez donc quelques bâtiments, et revenez voir demain !
+flash.error.timer.already.exist = Le bâtiment sélectionné possède déjà une alarme, vous devez la supprimer avant de pouvoir en ajouter une nouvelle.
+
+flash.info.reload = <b>Certaines données ont changé.</b> Vous devriez recharger la page pour actualiser les calculs.
+flash.info.new.user = Utilisateur <b>%s</b> créé. Vous pouvez commencer par ajouter vos bâtiments à votre royaume, puis vos aventures !
+flash.info.empty.realm = Vous n'avez pas encore de bâtiment dans votre royaume. Cliquez sur <i><b>Nouveau bâtiment</b></i> dans le menu ci-dessus, et commencez à ajouter des bâtiments à votre royaume.
+flash.info.guild.create = Vous avez créé la guilde <b>%s</b> !
+flash.info.market.must.login = Vous pouvez voir les offres publiques, mais vous devez vous connecter pour vendre et acheter.
+
+ajax.login.ok = Vous êtes à présent identifié. Veuillez recharger la page.
+ajax.login.failed = Échec d'identification. Veuillez recharger la page et essayer à nouveau.
+
+time.days = jours
+time.hours = heures
+time.minutes = min
+time.seconds = sec
+
+form.save = Enregistrer
+form.update = Mettre à jour
+form.connect = Connexion
+form.calc = Calculer
+form.add = Ajouter
+form.remove = Supprimer
+form.join = Rejoindre
+form.save.and.continue = Enregistrer & créer le profil
+form.vote = Voter !
+form.search = Rechercher
+form.export = Exporter
+form.show = Afficher
+form.change = Modifier
+form.create = Créer
+
+sorting = Critères de tri
+sort.by = Trier par
+sort.asc = Ordre croissant
+sort.desc = Ordre décroissant
+sort.on = par
+
+show.only = Voir seulement
+show.all.adventures = TOUTES
+show.only.adventures = Ses propres aventures
+show.only.participations = Ses participations
+show.only.the.x.last = les %s dernières
+show.label.adventure = (nom)
+show.label.selforp = (joueur)
+show.label.number = (nombre)
+
+date.format = (format: jj/mm/aaaa)
+
+validation.required = Vous devez remplir <b>%s</b>
+validation.future = La date <b>%s</b> doit se situer dans le futur
+validation.range = La valeur de <b>%s</b> doit être comprise entre <b>%s</b> et <b>%s</b>
+validation.min = La valeur de <b>%s</b> doit être <i>supérieure</i> à <b>%s</b>
+validation.max = La valeur de <b>%s</b> doit être <i>inférieure</i> à <b>%s</b>
+
+validation.required.realm.building.name = Vous devez choisir le <b>type</b> de bâtiment !
+validation.required.realm.building.level = Vous devez choisir le <b>niveau</b> du bâtiment !
+validation.required.realm.building.productionTimeMinutes = Vous devez indiquer le <b>temps de production</b> du bâtiment (champ des <b>minutes</b>) !
+validation.required.realm.building.productionTimeSeconds = Vous devez indiquer le <b>temps de production</b> du bâtiment (champ des <b>secondes</b>) !
+validation.required.adventures.name = Vous devez choisir le <b>nom</b> de l'aventure !
+validation.required.adventures.dateStart = Vous devez choisir une <b>date de début</b> valide !
+validation.future.adventures.dateStart = Vous ne pouvez proposer que des aventures futures ! La <b>date de début</b> doit donc être dans le futur.
+validation.required.adventures.dateEnd = Vous devez choisir une <b>date de fin</b> valide !
+validation.future.adventures.dateEnd = Vous ne pouvez proposer que des aventures futures ! La <b>date de fin</b> doit donc être dans le futur.
+validation.required.guild.name = Le <b>nom</b> de la guilde ne doit pas être vide.
+validation.required.guild.tag = Le <b>tag</b> de la guilde ne doit pas être vide.
+validation.guild.tag.already.exist = Une guilde avec ce tag existe déjà. Choisissez un tag différent.
+validation.guild.name.already.exist = Une guilde avec ce nom existe déjà. Choisissez un nom différent.
+
+application.tip = Le saviez-vous ?
+application.list = Données globales
+players.list = Liste des joueurs
+adventures.list = Liste des aventures
+adventures.next.new = Nouvelle proposition d'aventure
+adventures.next.list = Propositions d'aventure
+adventures.next.none = Il n'y a actuellement aucune proposition d'aventure disponible.
+actions.list = Liste des événements
+
+navigation.home = Retour à l'accueil
+navigation.realm.index = Retour au Royaume
+navigation.adventures.index = Retour aux Aventures
+navigation.realm = Royaume de %s
+navigation.adventures = Aventures de %s
+navigation.timers = Alarmes de %s
+
+application.player.new = Création du profil <i>%s</i>
+application.player.new.info = Votre profil, <b>%s</b>, n'existe pas encore. Il sera créé lorsque vous aurez rempli et validé le formulaire ci-dessous.
+application.player.new.pass = Mot de passe
+application.player.new.pass.warning = ATTENTION ! Si vous laissez le champ "Mot de passe" vide, votre profil ne sera pas protégé, et <b>n'importe qui pourra le modifier</b>. Vous devriez <b>vraiment</b> utiliser un mot de passe.
+application.player.new.pass.info = - Si vous ne souhaitez pas utiliser de mot de passe pour le moment, vous pourrez en définir un plus tard, dans les <i>Préférences</i> de votre profil.<br />- Votre mot de passe est transmis en clair sur le réseau lorsque vous envoyez le formulaire d'identification, mais il <b>n'est pas</b> stocké sur nos serveurs.<br />- Si vous cochez la case <i>"Se souvenir de moi sur cet ordinateur"</i>, votre mot de passe sera stocké sur votre ordinateur sous forme <b>chiffrée</b>, grâce à un algorithme de chiffrement à sens unique <i>(impossible de revenir à l'original à partir du mot de passe chiffré)</i>.
+application.player.new.pass.remember = Se souvenir de moi sur cet ordinateur <i>(recommandé)</i>
+
+home.stats.visits = Votre profil a été visité <b>%s</b> fois !
+home.stats.lastConnection = Dernière connexion le <b>%s</b>
+home.stats.realm.buildings_count = Il y a <b>%s</b> bâtiments dans ce royaume !
+home.stats.adventures.adventures_count = %s a accompli <b>%s</b> aventures, et fut l'invité(e) de <b>%s</b> d'entre-elles !
+home.stats.adventures.comments_count = %s a publié <b>%s</b> commentaires d'aventure
+home.log = Activité
+home.log.more = Voir toute l'activité
+home.log.title = Activité de %s
+home.last.adventures = Dernières aventures
+home.next.adventures = Aventures futures et invitations
+home.last.comments = Derniers commentaires sur les aventures
+home.last.buildings = Derniers bâtiments construits
+home.changelog = Changelog
+home.previous = Versions précédentes
+home.playernote = Nota Bene
+home.playernote.null = Cliquez ici pour créer note.
+home.timers = Alarmes
+
+home.friends = Amis
+home.friends.yours = Vos amis sont
+home.friends.of = Vous êtes l'ami de
+home.friends.log = Activité des amis
+home.friends.add = Ajouter un ami
+home.friends.remove = Supprimer un ami
+
+home.guild.stat.join = Vous avez rejoint cette guilde le <b>%s</b>
+home.guild.stat.rank = Votre grade est <b>%s</b>
+
+
+realm.index.display = Affichage
+realm.index.display.fold = Tout Replier
+realm.index.display.unfold = Tout Déplier
+
+realm.index.create = Créer
+realm.index.addbuilding = Nouveau bâtiment
+realm.index.addgroup = Nouveau groupe
+realm.index.buildings = Liste des bâtiments par type
+realm.index.buildings.area = Liste des bâtiments par secteur
+realm.index.buildings.group = Liste des bâtiments par groupe
+realm.index.production = Production absolue
+realm.index.production.stats = Consommation relative
+realm.index.production.stats.label = Répartition de la consommation de <b>%s</b> par type de bâtiment
+realm.index.goodsbalance = (chaque %s)
+realm.index.goodsbalance.negative = Ressources en déficit
+realm.index.goodsbalance.positive = Ressources en excédent
+realm.index.goodsbalance.produced = Ressources produites
+realm.index.goodsbalance.needed = Ressources dépensées
+
+realm.index.set = Définir
+realm.index.cycletime = Cycle de production
+realm.index.cycletime.short = ∆t
+realm.index.boostcycle = Cycle de fortification
+realm.index.boostpower = Multiplicateur du fortifiant
+
+realm.index.buildings.simulated = Simulation de bâtiments
+realm.index.buildings.simulated.validate = Transformer en bâtiment réel
+realm.index.buildings.simulated.ratio.excess = Excédent de ressources (simulation)
+realm.index.buildings.simulated.ratio.deficit = Déficit de ressources (simulation)
+realm.index.buildings.simulated.ratio.produced = Ressources produites (simulation)
+realm.index.buildings.simulated.ratio.needed = Ressources dépensées (simulation)
+realm.index.simulations.deleteall = Supprimer les bâtiments simulés
+realm.index.simulations.deleteall.confirmation = Êtes-vous sûr(e) de vouloir supprimer tous les bâtiments simulés ? La suppression est définitive.
+realm.index.buildings.disabled = Bâtiments désactivés
+realm.index.buildings.disabled.gain = Ressources perdues (qui ne seront pas produites)
+realm.index.buildings.disabled.loss = Ressources gagnées (qui ne seront pas dépensées)
+realm.index.buildings.boosted = Bâtiments fortifiés
+realm.index.buildings.boosted.gain = Surplus de production grâce aux fortifiants <b><i>(multiplicateur x%s)</i></b>
+
+realm.index.groups.name = Nom du groupe
+realm.index.groups.color.fg = Couleur du texte
+realm.index.groups.color.bg = Couleur du fond
+realm.index.groups.createdAt = Création
+realm.index.groups.updatedAt = Dernière modif.
+realm.index.groups.size = Nombre de bâtiments
+
+realm.index.calculations = Calculs
+realm.index.calculations.how_much_time = Combien de temps pour produire
+realm.index.calculations.how_much_time_result = Il faudra <b><i>%s heures %s min %s sec</i></b> pour <i><u>obtenir</u></i> <b>%s %s</b>
+realm.index.calculations.how_much_time_spend = Combien de temps pour dépenser
+realm.index.calculations.how_much_time_spend_result = Il faudra <b><i>%s heures %s min %s sec</i></b> pour <i><u>dépenser</u></i> <b>%s %s</b>
+realm.index.calculations.boosts = Combien de temps pour produire les ressources pour fabriquer
+realm.index.calculations.boosts_result = Il faudra <b><i>%s heures %s min %s sec</i></b> pour obtenir les ressources nécessaires pour fabriquer <b>%s %s</b>
+realm.index.calculations.boosts_line = Il faudra <b><i>%s heures %s min %s sec</i></b> pour produire <b>%s %s</b>
+realm.index.calculations.boosts_lack = Vous êtes en déficit de <b>%s</b> ! Vous devrez en acheter pour fabriquer des <b>%s</b>
+realm.index.calculations.boosts_fail = Vous ne produisez pas toutes les ressources nécessaires pour fabriquer des <b>%s</b>
+realm.index.calculations.boosts_product = Vous produirez ainsi <b>%s %s</b>
+
+realm.index.ratio_simulation = Quelle influence aurai(en)t
+realm.index.ratio_simulation.influence = Influence
+realm.index.ratio_simulation.real = Prod. actuelle
+realm.index.ratio_simulation.future = Prod. future
+
+realm.index.items = Production unitaire
+realm.index.items.ratios = Ratio
+realm.index.items.boosts = Fortifiants pouvant être produits en %s
+realm.index.items.armies = Armées pouvant être formées <u>en utilisant du pain</u> en %s
+
+realm.showbuilding.editbuilding = Modifier le bâtiment
+realm.showbuilding.deletebuilding = Supprimer le bâtiment
+realm.showbuilding.needs = Ressources consommées
+realm.showbuilding.production = Ressources produites
+realm.showbuilding.bycycle = Par cycle
+realm.showbuilding.otherbuildings = Bâtiments similaires
+realm.showbuilding.snapshots = Historique du bâtiment
+
+realm.snapshot.locked = Cet <i>instantané</i> est verrouillé : il ne sera pas supprimé lors du nettoyage automatique le premier jour de chaque mois.
+realm.snapshot.lock = Verrouiller
+realm.snapshot.unlock = Déverrouiller
+
+realm.snapshot.takenAt = Pris le
+realm.snapshot.buildings.count = Bâtiments
+realm.snapshot.buildings.stopped.count = À l'arrêt
+realm.snapshot.buildings.enabled.count = En marche 
+realm.snapshot.buildings.boosted.count = Fortifiés
+realm.snapshot.buildings.simulated.count =  Simulés
+realm.snapshot.goods.count = Ressources
+realm.snapshot.goods.produced.count = Produites
+realm.snapshot.goods.needed.count = Dépensées
+realm.snapshot.goods.excess.count = En excès
+realm.snapshot.goods.deficit.count = En déficit
+
+realm.good.needed.by = Consommé par
+realm.good.produced.by = Produit par
+
+realm.area.0 = 0 (inconnu)
+realm.area.1 = 1 (Sud/Ouest - Mairie)
+realm.area.2 = 2 (Sud/Milieu - Mines d'or)
+realm.area.3 = 3 (Sud/Est - Albert le Borgne)
+realm.area.4 = 4 (Milieu/Ouest)
+realm.area.5 = 5 (Milieu/Milieu)
+realm.area.6 = 6 (Milieu/Est - Chuck)
+realm.area.7 = 7 (Nord/Ouest - Le Putois)
+realm.area.8 = 8 (Nord/Milieu - Dents d'Acier)
+realm.area.9 = 9 (Nord/Est - Marie)
+
+realm.building.name.field = Nom
+realm.building.id = Ordre de création
+realm.building.name = Bâtiment
+realm.building.level = Niveau
+realm.building.productionTime = Temps de production
+realm.building.productionTime.tooltip = Le temps de production renseigné par défaut est le temps de production moyen des bâtiments de ce type que possèdent les utilisateurs de MyRealm. Laissez la valeur par défaut dans le cas d'une simulation, mais remplacez-la par le véritable temps de production si vous avez construit le bâtiment dans le jeu.
+realm.building.simulated = Simulation ?
+realm.building.simulated.tooltip = Utilisez la simulation pour déterminer les conséquences sur votre production des bâtiments que vous prévoyez de construire dans le futur. Les bâtiments simulés ont vocation à être supprimés rapidement.
+realm.building.enabled = Actif ?
+realm.building.boosted = Fortifié ?
+realm.building.area = Secteur
+realm.building.groups = Groupes
+realm.building.group = Groupe
+realm.building.group.assign = Ajouter au groupe
+realm.building.group.remove = Retirer du groupe
+realm.building.area.none = Bâtiments assignés à aucun secteur
+realm.building.desc = Description
+realm.building.built.at = Date de création
+realm.index.building.details = Détails
+realm.index.building.delete = Supprimer
+realm.index.building.delete.confirmation = Êtes-vous sûr(e) de vouloir supprimer le bâtiment <b>%s</b> ?
+realm.index.building.duplicate = Dupliquer le bâtiment
+realm.index.building.duplicate.simulated = Créer un bâtiment simulé avec les caractéristiques de ce bâtiment
+realm.index.building.lvlup = Augmenter niveau
+realm.index.building.switch.enable = Reprendre la production
+realm.index.building.switch.disable = Mettre la production en pause
+realm.index.building.switch.boost = Booster le bâtiment
+realm.index.building.switch.unboost = Arrêter le boost du bâtiment
+realm.index.building.subtotal = Total
+realm.index.building.deposit.quantity = Quantité dans le dépôt
+realm.index.building.deposit.add.timer = Ajouter une Alarme sur ce bâtiment
+
+realm.index.building.efficiency = Efficacité
+realm.index.building.efficiency.error = <b>ATTENTION !</b> - Le temps de production de ce bâtiment est erroné, veuillez vérifier le temps de production exact dans le jeu.
+realm.index.building.efficiency.bad = <b>Incide d'efficacité %s</b> - Ce bâtiment n'est pas rentable, il est trop éloigné des entrepôts ou des dépôts.
+realm.index.building.efficiency.average = <b>Incide d'efficacité %s</b> - Ce bâtiment n'est pas très rentable, vous pourriez le rapprocher d'un entrepôt ou d'un dépôt pour améliorer son temps de production.
+realm.index.building.efficiency.good = <b>Indice d'efficacité %s</b> - Ce bâtiment est rentable, son temps de production est optimal.
+
+realm.index.suggestions = Conseils de construction
+realm.index.suggestions.make = Calculer les conseils de construction
+realm.index.suggestion.mustbuild.lack = Vous avez un déficit de <b>%s %s</b> et devriez donc construire ou améliorer <b>%s %s</b>.
+realm.index.suggestion.mustbuild.excess = Vous avez un excédent de <b>%s %s</b> et pouvez donc construire ou améliorer <b>%s %s</b>.
+
+realm.index.suggestion.boost.data = Pour compenser votre déficit sur une période de <b>%s</b>, en utilisant des fortifiants <b>x%s</b> :
+realm.index.suggestion.boost.line = Fortifiez votre chaîne de production de <b>%s</b> pendant <b>%s</b>
+realm.index.suggestion.boost.cannot = Le déficit en <b>%s</b> est trop important pour être comblé avec des fortifiants !
+
+realm.index.building.count.stopped = Bâtiments arrêtés
+realm.index.building.count.boosted = Bâtiments fortifiés
+realm.index.building.count.simulated = Bâtiments simulés
+realm.index.building.count.no.area = Bâtiments sans secteur
+realm.index.building.count.deposit = Bâtiments dotés d'un dépôt
+realm.index.building.count.all = Bâtiments dans ce royaume
+
+realm.levels.total = Total Bâtiments
+realm.levels.all = Total Production
+realm.levels.boosted = Total Fortification
+realm.levels.stopped = Total Arrêtés
+realm.levels.simulated = Total Simulés
+
+realm.global.actions.buildings.all = Pour tous les bâtiments affichés
+realm.global.actions.buildings.selected = Pour les bâtiments sélectionnés
+
+realm.global.actions.boost = Fortifier
+realm.global.actions.unboost = Ne plus fortifier
+realm.global.actions.stop = Arrêter la production
+realm.global.actions.start = Démarrer la production
+realm.global.actions.simulated.mark.as = Convertir en bâtiment simulé
+realm.global.actions.simulated.validate = Convertir en bâtiment réel
+realm.global.actions.simulated.duplicate = Dupliquer en tant que bâtiment simulé
+realm.global.actions.level.up = Augmenter d'un niveau
+realm.global.actions.level.down = Baisser d'un niveau
+realm.global.actions.level.set = Définir le niveau
+realm.global.actions.area.set = Définir le secteur
+realm.global.actions.group.add = Ajouter au groupe
+realm.global.actions.group.remove = Retirer du groupe
+
+realm.global.actions.submit = Effectuer l'action
+realm.global.actions.callback = Action effectuée. Merci de <b>recharger</b> la liste afin de la mettre à jour.
+
+stats.header.buildings = Bâtiments
+stats.header.goods = Ressources
+stats.plot.buildings.legend.count = Nombre de bâtiments
+stats.plot.buildings.legend.average.level = Niveau moyen des bâtiments
+stats.plot.buildings.legend.stopped = Bâtiments arrêtés
+stats.plot.buildings.legend.boosted = Bâtiments fortifiés
+stats.plot.goods.legend.production = Production
+stats.plot.goods.legend.needs = Consommation
+stats.plot.goods.legend.ratio = Ratio
+
+adventures.index.addadventure = Nouvelle aventure
+adventures.index.noadventure = Pas encore d'aventure à afficher !
+
+adventures.sort.name.asc = Nom (A->Z)
+adventures.sort.name.desc = Nom (Z->A)
+adventures.sort.dateStart.asc = Date de début (0->1)
+adventures.sort.dateStart.desc = Date de début (1->0)
+adventures.sort.dateEnd.asc = Date de fin(0->1)
+adventures.sort.dateEnd.desc = Date de fin (1->0)
+
+adventure.name = Nom de l'aventure
+adventure.dates = Aventure commencée le <b>%s</b> et terminée le <b>%s</b>
+adventure.next.dates = <b>Début prévu le %s</b> et fin prévue le %s
+adventure.notes = Notes & commentaires
+adventure.edit = Editer l'aventure
+adventure.delete = Supprimer l'aventure
+adventure.delete.confirmation = Êtes-vous sûr(e) de vouloir supprimer l'aventure <b>%s</b> et tous les messages associés ?
+adventure.dateStart = Date de début
+adventure.dateEnd = Date de fin
+adventure.participant.addremove = Ajouter/Retirer des participants
+adventure.participant.add = Ajouter un participant
+adventure.participant.remove = Retirer un participant
+adventure.participants = Participants
+adventure.next.participants = Joueurs inscrits
+adventure.participations = Participations
+adventure.owner = Invité par
+adventure.next.owner = Aventure proposée par
+adventure.players.max = %s joueurs
+
+adventure.comments.newas = Nouveau commentaire par <b>%s</b> -- Vous n'êtes pas %s ?
+adventure.comments.save = Ajouter commentaire
+adventure.comments.meta = Commentaire de %s, le %s
+adventure.comments.edit = modifier
+adventure.comments.mustlogin = Vous devez vous connecter pour poster des commentaires.
+adventure.comments.link = lien
+
+timer.name = Nom
+timer.description = Description
+timer.startAt = Date de début
+timer.endAt = Date de fin
+timer.duration = Durée
+timer.remind = Rappel ?
+timer.remainingQuantity = Quantité restante dans le dépôt
+timer.building = Bâtiment
+timer.expires.at = Expire le
+timer.expires.in = soit dans
+timer.has.expired.at = A expiré le
+timer.has.expired.ago = soit il y a
+timer.with.reminder = avec Rappel
+timer.renew = Renouveler l'Alarme pour %sh %smin.
+timer.delete = Supprimer l'Alarme
+timer.show = Détails de l'Alarme
+timers.add.onduration = Ajouter une Alarme avec une durée
+timers.add.onexpiration = Ajouter une Alarme avec une date d'expiration
+timers.add.onbuilding = Ajouter une Alarme sur un bâtiment
+timers.delete.expired = Supprimer les Alarmes expirées
+timers.on.duration = Alarmes sur la durée
+timers.on.date = Alarmes à telle date
+timers.on.building = Alarmes à l'épuisement d'un dépôt
+timer.will.expire = L'Alarme <b>%s</b> va bientôt expirer, dans %s heures %s minutes %s secondes
+timer.has.expired = L'Alarme <b>%s</b> a expiré il y a %s heures %s minutes %s secondes
+timers.autoreload = Rafraîchissement périodique
+timers.autoreload.on = ON
+timers.autoreload.off = OFF
+timers.autoreload.next = Prochaine mise-à-jour dans
+
+preferences = Préférences
+preferences.section.account = Compte/Sécurité
+preferences.section.home = Page d'accueil du profil
+preferences.section.realm = Royaume (Bâtiments et production)
+preferences.section.timers = Alarmes
+preferences.section.export = Exportation
+preferences.section.line = Ligne de bâtiment
+preferences.section.groups = Groupes de bâtiments
+preferences.show_addbuilding = Montrer le formulaire <b>Nouveau bâtiment</b>  sur la page du royaume <i>(défaut: non)</i>
+preferences.enable_security = Protéger le compte avec ce mot de passe
+preferences.password = Mot de passe
+preferences.authcookie = Se rappeler de moi sur cet ordinateur <i>(ne fonctionne que si le compte est protégé avec un mot de passe)</i>
+preferences.buildings_list = Afficher la liste statique de tous les bâtiments sur la page du royaume <i>(défaut: non, liste dynamique par type de bâtiment)</i>
+preferences.areas.image.map = Afficher des images plutôt que du texte pour identifier les secteurs de l'île <i>(défaut: non)</i>
+preferences.areas.show = Afficher la liste des bâtiments <b>par secteur</b> <i>(défaut: oui)</i>
+preferences.areas.unfold = Déplier la section <b>Liste des bâtiments par secteur</b> <i>(défaut: non)</i>
+preferences.groups.show = Afficher la liste des bâtiments <b>par groupe</b> <i>(défaut: oui)</i>
+preferences.groups.unfold = Déplier la section <b>Liste des bâtiments par groupe</b> <i>(défaut: non)</i>
+preferences.show.advises = Afficher la section <b>Conseils de construction</b> sur la page du royaume <i>(défaut: oui)</i>
+preferences.show.calculations = Afficher la section <b>Calculs</b> sur la page du royaume <i>(défaut: oui)</i>
+preferences.show.buildings.boosted = Afficher la section <b>Bâtiments fortifiés</b> <i>(défaut: oui -- sinon: bâtiments fortifiés dans la liste de tous les bâtiments)</i>
+preferences.show.buildings.disabled = Afficher la section <b>Bâtiments arrêtés</b> <i>(défaut: oui -- sinon: bâtiments arrêtés dans la liste de tous les bâtiments)</i>
+preferences.show.buildings.simulated = Afficher la section <b>Bâtiments simulés</b> <i>(défaut: oui -- sinon: bâtiments simulés dans la liste de tous les bâtiments)</i>
+preferences.show.units = Afficher la section <b>Production unitaire</b> (fortifiants et soldats) <i>(défaut: oui)</i>
+preferences.show.production.relative = Afficher la section <b>Consommation relative</b> <i>(défaut: oui)</i>
+preferences.show.building.description.in.list = Afficher la description des bâtiments dans la liste des bâtiments <i>(défaut: non)</i>
+preferences.show.choice = Choix des sections à afficher <i>(désactiver ces options permet d'accélérer le chargement de la page)</i>
+preferences.folding.type = Modalités d'affichage <i>(aucune incidence sur les performances)</i>
+preferences.folding.production = Déplier la section <b>Production</b> <i>(défaut: oui)</i>
+preferences.folding.buildings_list = Déplier la section <b>Liste des bâtiments par type</b> <i>(défaut: oui)</i>
+preferences.folding.calculations = Déplier la section <b>Calculs</b> <i>(défaut: non)</i>
+preferences.folding.advises = Déplier la section <b>Conseils de production</b> <i>(défaut: non)</i>
+preferences.folding.units = Déplier la section <b>Production unitaire</b> <i>(défaut: non)</i>
+preferences.folding.buildings.boosted = Déplier la section des <b>bâtiments fortifiés</b> <i>(défaut: non)</i>
+preferences.folding.buildings.disabled = Déplier la section des <b>bâtiments désactivés</b> <i>(défaut: non)</i>
+preferences.folding.buildings.simulated = Déplier la section des <b>bâtiments simulés</b> <i>(défaut: non)</i>
+preferences.folding.production.relative = Déplier la section <b>Consommation relative</b> <i>(défault: oui)</i>
+preferences.sorting = Critères de tri des bâtiments
+preferences.buildings.list.type.sort = Critère de tri par défaut de la liste des bâtiments <b>par type</b>
+preferences.buildings.list.area.sort = Critère de tri par défaut de la liste des bâtiments <b>par secteur</b>
+preferences.buildings.list.group.sort = Critère de tri par défaut de la liste des bâtiments <b>par groupe</b>
+preferences.buildings.list.boosted.sort = Critère de tri par défaut de la liste des bâtiments <b>fortifiés</b>
+preferences.buildings.list.stopped.sort = Critère de tri par défaut de la liste des bâtiments <b>à l'arrêt</b>
+preferences.buildings.list.simulated.sort = Critère de tri par défaut de la liste des bâtiments <b>simulés</b>
+preferences.avatar = Avatar
+preferences.avatar.pick = Choisissez votre avatar
+preferences.customstyle = Thème graphique du logiciel
+preferences.timers.default.remind = Activer le rappel par défaut pour les
+preferences.timers.show.on.home = Afficher dans le cadre de rappel les
+preferences.timers.overlay.opacity = Opacité du cadre des rappels
+preferences.timers.overlay.reset = Réinitialiser la taille et la position du cadre des rappels
+preferences.timers.remind = Rappels
+preferences.timers.display.overlay = Cadre de rappel
+preferences.timers.mail = E-mails de rappel
+preferences.realm.options = Accessibilité & comportement du logiciel
+preferences.enable.level.loop = Augmenter le niveau d'un bâtiment de niveau 5 le fait redescendre au niveau 1 (sinon: augmentation de niveau impossible au delà de 5) <i>(défaut: non)</i>
+preferences.mail.timers.expiring = Notifier par e-mail les alarmes avec rappel qui <b>vont bientôt</b> expirer
+preferences.mail.timers.expired = Notifier par e-mail les alarmes avec rappel qui <b>ont récemment</b> expiré
+preferences.mail = Adresse e-mail
+preferences.enable.activity.feed = Activer la diffusion de l'activité dans un flux RSS
+preferences.home.show.public.menu = Afficher les liens vers les pages publiques de MyRealm <i>(défaut: oui)</i>
+preferences.home.show.stats = Afficher le nombre de bâtiments et d'aventures <i>(défaut: oui)</i>
+preferences.home.show.visits = Afficher le nombre de visites reçues <i>(défaut: oui)</i>
+preferences.home.show.last.connection = Afficher la date et l'heure de la dernière connexion <i>(défaut: oui)</i>
+preferences.home.show.timers = Afficher la section <b>Alarmes</b> (si non vide) <i>(défaut: oui)</i>
+preferences.home.show.next.adventures = Afficher la section <b>Aventures futures et propositions d'aventures</b> (si non vide) <i>(défaut: oui)</i>
+preferences.home.show.last.adventures = Afficher la section <b>Dernières aventures</b> (si non vide) <i>(défaut: oui)</i>
+preferences.home.show.last.adventures.comments = Afficher la section <b>Derniers commentaires sur les aventures</b> (si non vide) <i>(défaut: oui)</i>
+preferences.home.show.last.buildings = Afficher la section <b>Derniers bâtiments construits</b> (si non vide) <i>(défaut: oui)</i>
+preferences.home.show.nota.bene = Afficher la section <b>Nota Bene</b> <i>(défaut: oui)</i>
+preferences.home.show.activity = Afficher la section <b>Activité</b> <i>(défaut: oui)</i>
+preferences.home.show.friends = Afficher la section <b>Amis</b> <i>(défaut: oui)</i>
+preferences.home.show.friends.activity = Afficher la section <b>Activité des amis</b> <i>(défaut: oui)</i>
+preferences.home.show.changelog = Afficher la section <b>Changelog</b> <i>(défaut: oui)</i>
+preferences.home.show.tips = Afficher la section <b>Astuces</b> <i>(défaut: oui)</i>
+preferences.do.not.track = Mode invisible <i>(Exclut le profil des statistiques Google Analytics)</i>
+preferences.line.show.groups = Afficher les groupes (sinon: cliquer sur le bouton détails pour les afficher) <i>(défaut: non)</i>
+preferences.line.show.description = Afficher la description (sinon: cliquer sur le bouton détails pour l'afficher) <i>(défaut: non)</i>
+preferences.line.show.deposit = Afficher la quantité dans le dépôt (sinon: cliquer sur le bouton détails pour l'afficher) <i>(défaut: oui)</i>
+preferences.groups.list.condensed = Afficher une liste condensée/simplifiée des groupes <i>(par défaut: non, liste complète)</i>
+preferences.display.flash = Messages d'alerte et d'information
+preferences.display.show.tips = Afficher les messages <i>"Le saviez-vous ?"</i> sur la page d'accueil <i>(défaut: oui)</i>
+preferences.purge.realm = Supprimer les %s <b>bâtiments</b> du royaume
+preferences.purge.snapshots = Supprimer les %s <b>instantanés</b> du royaume
+preferences.purge.adventures = Supprimer les %s <b>aventures</b>
+
+export.form.export = Données à exporter
+export.form.format = Format
+export.form.media = Méthode
+export.buildings = Bâtiments
+export.adventures = Aventures
+export.actions = Actions
+export.format.csv = CSV
+export.format.tsv = TSV
+export.format.xml = XML
+export.format.html = HTML
+export.media.screen = Afficher à l'écran
+export.media.file = Fichier à télécharger
+
+guilds.list = Liste des guildes
+guild = Guilde
+guild.name = Nom complet
+guild.tag = Tag (sans les crochets)
+guild.banner = Bannière de la guilde
+guild.members.list = Liste des %s membres
+guild.wall = Mur
+guild.wall.newas = Nouveau message par <b>%s</b> -- Vous n'êtes pas %s ?
+guild.recruitment.status = Le recrutement est
+guild.recruitment.opened = <b>ouvert</b>
+guild.recruitment.closed = <b>fermé</b>
+guild.recruitment.policy = Politique de Recrutement
+guild.members.oday = Membre du jour
+guild.members.oday.stats = %s possède %s bâtiments, a réalisé %s aventures, et s'est connecté pour la dernière fois le %s
+guild.website = Site Web
+guild.website.empty = Cliquez ici pour entrer l'adresse de votre site Web.
+guild.join = Rejoindre la guilde
+guild.member.of = Vous êtes membre de la guilde <b>%s</b>
+guild.leave = Quitter cette guilde
+guild.create = Créer une nouvelle guilde
+guild.create.name = Nom de la guilde
+guild.create.tag = Tag de la guilde (sans les crochets)
+guild.members.officer.page = notes officiers
+guild.members.officer.page.title = Notes des Officiers
+guild.members.officer.page.new.note = Nouvelle Note
+guild.members.officer.notes.about = Note à propos de
+guild.poll = Sondage
+guild.poll.must.connect = Vous devez être connecté(e) et membre de la guilde pour voter.
+guild.poll.none = Aucun sondage pour l'instant.
+guild.poll.total = Total: %s votes
+guild.links = Liens de Guilde
+guild.link.weight = Position
+guild.link.name = Nom
+guild.link.link = Lien
+guild.link.description = Description
+guild.link.add = Ajouter un lien
+guild.link.delete = Supprimer
+
+guild.events.event = Événement
+guild.events.header = Événements
+guild.events.signin = S'inscrire
+guild.events.signout = Se désinscrire
+guild.events.start = Début le
+guild.events.end = Fin le
+guild.events.description = Description
+guild.events.signedin = Participants
+guild.events.delete = Supprimer
+
+guild.admin = Administration de la guilde
+guild.admin.member.name = Nom
+guild.admin.member.promote = Promouvoir
+guild.admin.member.demote = Rétrograder
+guild.admin.member.confirm = Confirmer
+guild.admin.member.kick = Exclure
+guild.admin.member.kick.reason = Motif
+guild.admin.member.kick.yes = Renvoyé
+guild.admin.member.kick.no = Parti
+guild.admin.member.kick.joinedAt = Arrivée
+guild.admin.member.kick.leftAt = Départ
+guild.admin.member.rank = Grade/Rang
+guild.admin.member.joinedAt = Membre depuis le
+guild.admin.member.lastConnection = Dernière connexion le
+guild.admin.officers.can.admin = Les officiers peuvent administrer la guilde
+
+guild.admin.member.add = Ajouter manuellement des membres
+guild.admin.member.unconfirmed = Membres à confirmer
+guild.admin.member.current = Membres actuels
+guild.admin.member.old = Anciens membres
+guild.admin.member.between = Membre entre le %s et le %s
+
+guild.admin.polls.header = Sondages
+guild.admin.poll.question = Question
+guild.admin.poll.answers = Options
+guild.admin.poll.answer = Option
+guild.admin.poll.startAt = Début
+guild.admin.poll.endAt = Fin
+guild.admin.poll.enable = Actif ?
+
+guild.members.officer.notes.last = Dernières notes des officiers
+guild.members.officer.notes.note.by = Note par <b>%s</b>
+guild.members.officer.notes.note.about = à propos de <b>%s</b>
+guild.members.officer.notes.note.time = le %s
+guild.members.officer.notes.view = Voir la note
+guild.members.officer.back.to.guild = Retour sur la page d'accueil de la guilde
+guild.members.officer.must.auth = Vous êtes officier de cette guilde, et avez donc accès aux notes des officiers sur les membres, ainsi qu'à certains paramètres de configuration de la guilde inaccessibles aux membres normaux. Cependant, votre profil n'est pas protégé par un mot de passe, et peut être utilisé par n'importe qui, ce qui représente un risque de sécurité pour la guilde et l'ensemble de ses officiers. Pour avoir accès à cette page, vous devez donc : soit demander à ne plus être officier, soit protéger votre profil à l'aide d'un mot de passe.
+
+guild.sorting.rank = Rang/Grade
+guild.sorting.last.connection = Date de dernière visite
+guild.sorting.alpha = Ordre alphabétique
+guild.sorting.join.date = Date d'inscription
+
+guild.rank.4 = Chef de guilde
+guild.rank.3 = Officier
+guild.rank.2 = Membre distingué
+guild.rank.1 = Membre
+
+market.public = Marché Public
+market.own = Mon Marché
+market.boosts = Échange de fortifiants
+market.adventures = Échange d'aventures
+
+market.adventure.I.sell = Je vends
+market.adventure.seller = vendue(s) par <b>%s</b>
+market.adventure.item = aventures
+market.adventure.dates = l'offre sera valable
+market.adventure.from = du
+market.adventure.to = au
+market.adventure.comments = Prix/Observations
+market.adventure.offer.status = État
+market.adventure.offer.no.buyer = Aucun acheteur
+market.adventure.offer.buyer = Acheteur
+market.adventure.offer.buyers = Acheteurs
+market.adventure.offer.date = Offre d'achat envoyée le
+market.adventure.offer.sold.date = Réponse du vendeur donnée le
+market.adventure.offer.sold.yes = Vente conclue
+market.adventure.offer.sold.no = Refusée par le vendeur
+market.adventure.offer.sold.waiting = En attente de la réponse du vendeur
+market.adventure.offer.remaining = restante(s)
+
+market.adventure.offer.accept = Accepter
+market.adventure.offer.reject = Refuser
+market.adventure.offer.withdraw = Retirer
+
+market.comments = Commentaires
+
+market.form.sale.add = Ajouter l'offre de vente
+
+market.details = Détails de l'offre
+market.details.exchange = Détails de l'échange
+market.buy = Acheter
+market.forum = discussion
+
+market.boosts.back.public = << Retour au marché public
+market.boosts.add.ask = Nouvelle demande de fortification
+market.boosts.add.counterpart = Demander en contrepartie à <b>%s</b> de placer
+market.boosts.new = Je voudrais
+market.boosts.on = sur mes
+market.boosts.at = le
+market.boost.must.build.before = Vous devez construire des bâtiments dans votre royaume avant de pouvoir participer aux échanges de fortifiants.
+
+market.boosts.submit.ask = Envoyer la demande
+market.boosts.submit.do = Accepter l'échange
+market.boosts.submit.withdraw = Annuler l'échange
+market.boost.submit.done = Échange effectué
+
+market.boosts.my.requests = Mes demandes de fortification
+market.boosts.my.offers = Mes engagements de fortification
+
+market.boost.status.published = Demande publiée
+market.boost.status.accepted = Demande acceptée
+market.boost.status.done = Échange effectué
+market.boost.status.expired = Demande expirée
+
+market.boost.details = Détails
+market.boost.status = État
+market.boost.receiver = Destinataire
+market.boost.giver = Offrant
+market.boost.quantity = Quantité
+market.boost.name = Fortifiant
+market.boost.building = Bâtiments
+market.boost.date = Date
+market.boost.comments = Messages
+
+log.realm.add_building = Nouveau bâtiment: %s
+log.realm.building.edit = Bâtiment modifié: %s
+log.realm.delete_building = Bâtiment supprimé: %s
+log.realm.delete_simulated_buildings = Bâtiments simulés supprimés
+log.realm.set_cycletime = Définition du temps du cycle de production
+log.realm.building.boost_off = Fin de la fortification: %s
+log.realm.building.boost_on = Fortification: %s
+log.realm.building.disable = Bâtiment désactivé: %s
+log.realm.building.enable = Bâtiment activé: %s
+log.realm.building.lvlup = Bâtiment amélioré: %s
+log.realm.building.set_production_time = Changement du temps de production de %s
+log.realm.building.set_deposit_quantity = Définition de la quantité dans le dépôt pour %s
+log.realm.building.set.area = Changement du secteur de %s
+
+log.realm.group.add = Nouveau groupe de bâtiments ajouté: %s
+log.realm.group.edit = Groupe de bâtiments %s modifié
+log.realm.group.delete = Groupe de bâtiments supprimé
+
+log.realm.calculation.hmt = Calcul <i>Combien de temps pour produire X ?</i>
+log.realm.calculation.hmts = Calcul <i>Combien de temps pour défenser X ?</i>
+log.realm.calculation.hmtfb = Calcul <i>Combien de temps pour produire tel Fortifiant/Objet ?</i>
+log.realm.calculation.rs = Calcul <i>d'influence d'un nouveau bâtiment</i>
+
+log.adventures.add_adventure = Nouvelle aventure: %s
+log.adventures.edit_adventure = Aventure modifiée: %s
+log.adventures.delete_adventure = Aventure supprimée : %s
+log.adventures.add_participant = Nouveau participant à %s
+log.adventures.remove_participant = Participant à %s retiré
+log.adventures.join = Rejoint l'aventure <b>%s</b>
+log.adventures.leave = Quitte l'aventure <b>%s</b>
+log.adventures.add_comment = Nouveau commentaire (%s)
+log.adventures.edit_comment = Modification d'un commentaire (%s)
+
+log.friends.add = <b>%s</b> est désormais de vos amis
+log.friends.remove = <b>%s</b> n'est plus de vos amis
+
+log.guild.join = Rejoint la guilde <b>%s</b>
+log.guild.leave = Quitte la guilde <b>%s</b>
+log.guild.create = Crée la guilde <b>%s</b>
+log.guild.wallmessage = Écrit sur le mur de la guilde <b>%s</b>
+
+log.timers.add = Alarme <b>%s</b> ajoutée
+log.timers.renew = Alarme <b>%s</b> renouvelée
+log.timers.clean = Alarmes expirées supprimées
+log.timers.delete = Alarme supprimée
+
+log.market.adventure.add = Offre de vente %s ajoutée
+log.market.adventure.delete = Offre de vente %s supprimée
+log.market.adventure.buy = Offre d'achat %s émise
+log.market.adventure.accept = Offre d'achat %s acceptée
+log.market.adventure.reject = Offre d'achat %s refusée
+log.market.adventure.withdraw = Retrait de la vente %s
+
+log.snapshot.taken = Prise d'un instantané du royaume
+log.snapshot.locked = Instantané verrouillé
+log.snapshot.unlocked = Instantané déverrouillé
+log.snapshot.cleanup = Nettoyage des intantanés du royaume
+
+irc.bad.syntax = Désolé, %s, je ne comprends pas. Envoyez-moi HELP pour obtenir de l'aide.
+irc.no.such.player = Utilisateur %s non trouvé. Utilisez s.v.p. le même nick sur IRC que votre nom d'utilisateur dans SHO.
+irc.no.timer = Aucune Alarme active.
+irc.timer.details = %s : expire le %s, soit dans %s heures %s minutes %s secondes
+irc.timer.will.expire = %s va bientôt expirer, dans %s heures %s minutes %s secondes
+irc.timer.has.expired = %s a expiré il y a %s heures %s minutes %s secondes
+irc.timer.report.private = Voilà, %s ! J'envoie ma réponse en privé.
+irc.timer.answer.info = Voici les innformations sur vos Alarmes, %s:
+irc.timer.answer.exp = Voici les Alarmes expirant dans les %s prochaines minutes:
+irc.timer.answer.exp.no = Aucune de vos Alarmes n'expire dans les %s prochaines minutes.
+irc.timer.answer.exp.count = %s: %s Alarmes arrivent à expiration dans les %s prochaines minutes.
+irc.timer.help = Voici un peu d'aide. Je suis un bot lié aux Alarmes du logiciel de gestion MyRealm. Ajoutez des alarmes depuis le logiciel, et utilisez-moi pour les consulter. Pour me parler, envoyez-moi un message privé : /msg %s COMMANDE. La COMMANDE peut être : INFO pour afficher la liste de toutes les Alarmes ; EXPIRE X pour afficher les alarmes arrivant à expiratin d'ici X minutes.
+
+irc.message.list = Vous avez %s nouveaux messages !
+irc.message.sent = Ok ! Message envoyé !
+irc.message.from = Message de %s envoyé le %s
+
+
+mail.subject.timer.expiring = Une alarme va bientôt expirer
+mail.body.timer.expiring = Votre alarme %s va expirer le %s. 
+
+mail.subject.timer.expired = Une alarme a expiré
+mail.body.timer.expired = Votre alarme %s a expiré à %s.
+
+mail.subject.password.new = Nouveau mot de passe
+mail.body.password.new = Un nouveau mot de passe a été généré pour votre compte MyRealm
+
+
+nav.home = Accueil
+nav.realm = Royaume
+nav.timers = Alarmes
+nav.adventures = Aventures
+nav.guild = Guilde
+nav.market = Marché
+nav.preferences = Préférences
+nav.logout = Déconnexion
+
+nav.realm.add = Ajouter
+nav.realm.add.new.building = Nouveau bâtiment
+nav.realm.add.new.group = Nouveau groupe
+
+nav.realm.show = Afficher les bât.
+nav.realm.show.by.type = Liste par <b>type</b>
+nav.realm.show.by.area = Liste par <b>secteur</b>
+nav.realm.show.by.group = Liste par <b>groupe</b>
+
+nav.realm.manage = Gérer les bât.
+nav.realm.manage.stopped = Bât. à l'arrêt
+nav.realm.manage.boosted = Bât. fortifiés
+nav.realm.manage.simulated = Bât. simulés
+
+nav.realm.production.goods = Prod. de ressources
+nav.realm.production.absolute = Prod. absolue
+nav.realm.production.relative = Prod. relative
+nav.realm.production.needs = Conso. relative
+
+nav.realm.production.levels = Niveaux
+nav.realm.production.units = Production unitaire
+nav.realm.production.boosts = Fortifiants & Objets
+nav.realm.production.soldiers = Unités de combat
+
+nav.realm.calculations = Calculs
+nav.realm.calculations.time = Calculs de temps
+nav.realm.calculations.influence = Calculs d'influence
+
+nav.realm.stats = Statistiques
+nav.realm.stats.buildings.count = Niveau des bât.
+nav.realm.stats.buildings.status = Statut des bât.
+nav.realm.stats.production = Historique de prod.
+
+nav.realm.advices = Conseils
+nav.realm.advices.production = Construction
+nav.realm.advices.boosts = Fortification
+
+nav.realm.snapshots = Instantanés
+nav.realm.snapshots.list = Liste/Gestion
+
+nav.timers.index = Liste des alarmes
+nav.timers.clean = Nettoyer
+nav.timers.clean.expired = Supprimer les alarmes expirées
+nav.timers.add = Créer
+nav.timers.add.on.duration = Alarme sur la durée
+nav.timers.add.on.date = Alarme avec une date de fin
+nav.timers.add.on.building = Alarme à l'épuisement d'un dépôt
+
+nav.home.header = Royaume de %s
+nav.home.index = Accueil
+nav.home.stats = Statistiques
+nav.home.activity = Activité
+nav.home.notabene = Bloc-Notes
+nav.home.changelog = Changelog
+
+nav.home.social = Social
+nav.home.friends = Amis
+nav.home.guild = Guilde
+
+nav.home.public = Pages publiques
+nav.home.public.players = Liste des joueurs
+nav.home.public.adventures = Liste des aventures
+nav.home.public.actions = Liste d'activité
+
+nav.adventures.list = Liste des aventures
+nav.adventures.add = Nouvelle aventure
+nav.adventures.show.form.edit = Modifier l'aventure
+nav.adventures.show.form.participants = Ajouter/Retirer des Participants
+nav.adventures.next = Propositions d'aventures
+
+nav.preferences.profile = Préférences du profil
+nav.preferences.account = Compte & Sécurité
+nav.preferences.avatar = Avatar
+
+nav.preferences.display = Préférences d'affichage
+nav.preferences.display.global = Paramètres généraux
+nav.preferences.realm = Section <b>Royaume</b>
+nav.preferences.timers = Section <b>Alarmes</b>
+
+nav.preferences.functional = Préférences fonctionnelles
+nav.preferences.cycles = Durée des cycles
+
+nav.preferences.data = Gestion des données
+nav.preferences.export = Exportation
+
+nav.preferences.purge = Suppression
+
+nav.market.index = Accueil du marché
+nav.market.adventures = Marché aux Aventures
+nav.market.public = Marché aux Aventures
+nav.market.private.sales = Mes Ventes
+nav.market.private.purchases = Mes Achats
+nav.market.new = Nouvelle offre
+
+

@@ -1,0 +1,37 @@
+#{extends 'Preferences/template.html' /}
+
+<h2>&{'preferences.section.export'}</h2>
+
+
+*{ *** Export *** }*
+<div class="form form-vertical">
+	#{form @Export.export()}
+		<label class="select">&{'export.form.export'}</label>
+		<select name="data">
+			<option value="buildings">&{'export.buildings'}</option>
+			<option value="adventures">&{'export.adventures'}</option>
+			<option value="actions">&{'export.actions'}</option>
+		</select>
+		
+		<label class="select">&{'export.form.format'}</label>
+		<select name="format">
+			<option value="CSV">&{'export.format.csv'}</option>
+			<option value="TSV">&{'export.format.tsv'}</option>
+			<option value="XML">&{'export.format.xml'}</option>
+			<option value="HTML">&{'export.format.html'}</option>
+		</select>
+		
+		<label class="select">&{'export.form.media'}</label>
+		<select name="screen">
+			<option value="true">&{'export.media.screen'}</option>
+			<option value="false">&{'export.media.file'}</option>
+		</select>
+		
+		<input type="hidden" name="playerId" value="${player.id}" />
+		<br />
+		<button type="submit" class="btn btn-primary">
+		<i class="icon-download icon-white"></i> &{'form.export'}
+		</button>
+		&{'help.link', "http://settlers.valhalla.fr/wiki/myrealm/preferences/export"}
+	#{/form}
+</div>

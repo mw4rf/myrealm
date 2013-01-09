@@ -1,0 +1,24 @@
+#{list timers, as:'timer'}
+	%{
+	String classes = "";
+
+	if(timer.hasExpired())
+		classes += "timerExpired ";
+	else if(timer.doesExpireSoon())
+		classes += "timerExpiresSoon ";
+	else
+		classes += "timerRunning ";
+	}%
+	<div class="${classes} container-fluid">
+		<div class="row-fluid highlightable">
+			<div class="span8">${timer.name}</div>
+			<div class="span4" style="text-align:right;">
+				#{if timer.hasExpired()}
+					(${timer.getTimeAfterExpiration().get("h")}:${timer.getTimeAfterExpiration().get("m")}:${timer.getTimeAfterExpiration().get("s")})
+				#{/if}#{else}
+					(${timer.getTimeBeforeExpiration().get("h")}:${timer.getTimeBeforeExpiration().get("m")}:${timer.getTimeBeforeExpiration().get("s")})
+				#{/else}
+			</div>
+		</div>
+	</div>
+#{/list}

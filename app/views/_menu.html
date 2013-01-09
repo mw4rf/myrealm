@@ -1,0 +1,97 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</a> 
+			
+			<span class="brand">
+				*{ ***** Avatar ***** }*
+				#{if player != null && player.preferences != null && player.preferences.AVATARID != null && !player.preferences.AVATARID.isEmpty()}
+					<img src="/public/images/${player.preferences.getAvatar()}" style="position:absolute; top:0; left:0; height:100%;" />
+				#{/if}#{else}
+					<img src="/public/images/avatars/Avatar00.png" style="position:absolute; top:0; left:0; height:100%;" />
+				#{/else}
+				<span style="margin-left:1em;">&{'app.name'}</span>				
+			</span>
+			
+			<div class="nav-collapse">
+				<ul class="nav">
+					
+					*{ ***** Index/Home ***** }*
+					#{if player != null}
+						<li #{if request.controller.equals("Home")} class="active"#{/if}>#{a @Home.index(player.name)}<i class="icon-home icon-white"></i> &{'nav.home'}#{/a}</li>
+					#{/if}#{else}
+						<li #{if request.controller.equals("Home")} class="active"#{/if}>#{a @Application.index()}<i class="icon-home icon-white"></i> &{'nav.home'}#{/a}</li>
+					#{/else}
+					
+					*{ ***** Realm ***** }*
+					#{if player != null}
+						<li #{if request.controller.equals("Realm")} class="active"#{/if}>#{a @Realm.index(player.name)}<i class="icon-tasks icon-white"></i> &{'nav.realm'}#{/a}</li>
+					#{/if}
+					
+					*{ ***** Timers ***** }*
+					#{if player != null}
+						<li #{if request.controller.equals("Timers")} class="active"#{/if}>#{a @Timers.index(player.name)}<i class="icon-time icon-white"></i> &{'nav.timers'}#{/a}</li>
+					#{/if}
+					
+					*{ ***** Adventures ***** }*
+					#{if player != null}
+						<li #{if request.controller.equals("Adventures")} class="active"#{/if}>#{a @Adventures.index(player.name)}<i class="icon-globe icon-white"></i> &{'nav.adventures'}#{/a}</li>
+					#{/if}
+					
+					*{ ***** Market ***** }*
+					
+					#{if player != null}
+						<li #{if request.controller.equals("Market")} class="active"#{/if}>#{a @Market.index()}<i class="icon-shopping-cart icon-white"></i> &{'nav.market'}#{/a}</li>
+					#{/if}
+					
+					
+					
+					*{ ***** Guild ***** }*
+					#{if player != null && player.hasGuild()}
+						<li #{if request.controller.equals("Guilds")} class="active"#{/if}>#{a @Guilds.home(player.membership.guild.tag)}<i class="icon-adjust icon-white"></i> &{'nav.guild'}#{/a}</li>
+					#{/if}
+					
+					*{ ***** Preferences ***** }*
+					#{if player != null}
+						<li #{if request.action.equals("Preferences.index")} class="active"#{/if}>#{a @Preferences.index(player.name)}<i class="icon-wrench icon-white"></i> &{'nav.preferences'}#{/a}</li>
+					#{/if}
+					
+					*{ ***** ADMIN ***** }*
+					#{if controllers.Application.isAdmin(controllers.Application.getSessionLogin())}
+						<li #{if request.controller.equals("Admin")} class="active"#{/if}>
+							<a href="/@admin" target="_blank"><span style="color:red;">
+								<i class="icon-cog icon-white"></i> Admin.
+							</span></a>
+						</li>
+    				#{/if}
+    				
+    				*{ ***** HELP ***** }*
+    				<li>
+    					<a href="http://settlers.valhalla.fr/wiki/myrealm/" target="_blank">
+    						<i class="icon-question-sign icon-white"></i> &{'help'}
+    					</a>
+    				</li>
+					
+				</ul>
+				
+				#{if !controllers.Application.getSessionLogin().equalsIgnoreCase("anonymous")}
+				<p class="navbar-text pull-right">
+					&{'you.are'}
+    				#{if controllers.Guilds.hasGuild(controllers.Application.getSessionLogin())}
+    					[#{a @Guilds.home(controllers.Guilds.getPlayerGuild(controllers.Application.getSessionLogin()).tag)}${controllers.Guilds.getPlayerGuild(controllers.Application.getSessionLogin()).tag}#{/a}]&nbsp;#{a @Application.home(controllers.Application.getSessionLogin())}${controllers.Application.getSessionLogin()}#{/a}
+    				#{/if}#{else}
+    					#{a @Application.home(controllers.Application.getSessionLogin())}${controllers.Application.getSessionLogin()}#{/a}
+    				#{/else}
+					 | #{a @Application.logout()}&{'nav.logout'}#{/a}
+				</p>
+				#{/if}
+			</div><!--/.nav-collapse -->
+
+		</div>
+	</div>
+</div>

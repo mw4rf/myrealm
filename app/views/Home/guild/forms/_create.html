@@ -1,0 +1,10 @@
+<h3>&{'guild.create'}</h3>
+
+#{form @Guilds.createGuild(), class:'form form-inline well'}
+	<input type="hidden" name="playerName" value="${player.name}" />
+	<label>&{'guild.name'}</label>
+	<input type="text" name="guildName" value="" />
+	<label>&{'guild.tag'}</label>
+	<input type="text" name="guildTag" value="" />
+	<input type="submit" class="btn btn-success" value="&{'form.create'}" />
+#{/form}

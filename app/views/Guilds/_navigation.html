@@ -1,0 +1,3 @@
+#{if request.action.equals('Guilds.officerNotes') || request.action.equals('Guilds.admin')}
+	<a href="@{Guilds.home(guild.tag)}"><< &{'guild.members.officer.back.to.guild'}</a>
+#{/if}

@@ -1,0 +1,5 @@
+self: play -> log4play 0.5
+
+require:
+    - play
+    - play -> betterlogs 1.0

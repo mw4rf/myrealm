@@ -1,0 +1,75 @@
+*{ *********** SALE OFFER ********** }*
+#{if offer.sale.isAdventure()}
+<div class="container-fluid well">
+	%{
+		String tdclass = "";
+		if(offer.sale.isSeller(controllers.Application.getSessionLogin()))
+			tdclass = "ownSale";
+		else if(offer.sale.isBuyer(controllers.Application.getSessionLogin()))
+			if(!offer.sale.getOffer(controllers.Application.getSessionLogin()).hasAnswer())
+				tdclass = "offerStatusWaiting";
+			else if(offer.sale.getOffer(controllers.Application.getSessionLogin()).sold)
+				tdclass = "offerStatusAccepted";
+			else
+				tdclass = "offerStatusRejected";
+	}%
+	
+	<div class="row-fluid">
+		
+		*{ ***** Adventure Image ***** }*
+		<div class="span2 ${tdclass} middle">
+			<img src="/public/${offer.sale.getWorldAdventure().getImage()}" />
+			<p>#{a @Market.adventureDetails(offer.sale.id), class:'btn btn-mini'}<i class="icon-eye-open"></i> &{'market.details'}#{/a}</p>
+		</div>
+		
+		*{ ***** Adventure Details ***** }*
+		<div class="span10">
+		
+			*{***** Seller *****}*
+			<div class="row-fluid">
+			
+				<div class="span6">
+					<b><i>${offer.sale.itemName}</i></b>
+					#{a @Home.index(offer.sale.seller.name)}&{'market.adventure.seller', offer.sale.seller.name}#{/a}	
+				</div>
+				
+				<div class="span6 right">
+					&{'market.adventure.from'} ${offer.sale.startAt.format()} &{'market.adventure.to'} ${offer.sale.endAt.format()}
+				</div>
+			
+			</div>
+			
+			*{***** Comments/Price *****}*
+			<div class="row-fluid">
+				
+				<p class="span12">
+					${offer.sale.description.raw()}
+				</p>
+				
+			</div>
+			
+			*{***** Status *****}*
+			<div class="row-fluid">
+			
+				<div class="span12">
+				
+					#{if tdclass.equals("offerStatusWaiting")}
+						<span class="offerStatusWaiting">&{'market.adventure.offer.sold.waiting'}</span>
+					#{/if}
+					#{elseif tdclass.equals("offerStatusAccepted")}
+						<span class="offerStatusAccepted">&{'market.adventure.offer.sold.yes'}</span>
+					#{/elseif}
+					#{elseif td.equals("offerStatusRejected")}
+						<span class="offerStatusRejected">&{'market.adventure.offer.sold.no'}</span>
+					#{/elseif}
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+	</div>
+	
+</div>
+#{/if}

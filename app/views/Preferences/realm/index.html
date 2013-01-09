@@ -1,0 +1,171 @@
+#{extends 'Preferences/template.html' /}
+
+
+
+<h2>&{'preferences.sorting'}</h2>
+<div class="form form-inline well">
+
+	<p>
+	    <label>&{'preferences.buildings.list.type.sort'}</label>
+	    <select name="buildings_list_type_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+		<label class="radio">
+			<input type="radio" name="buildings_list_type_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_TYPE_ORDER == null || player.preferences.BUILDINGS_LIST_TYPE_ORDER.equals("ASC") }checked#{/if} />
+			&{'sort.asc'}
+		</label>
+		
+		<label class="radio">
+			<input type="radio" name="buildings_list_type_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_TYPE_ORDER.equals("DESC")}checked#{/if} />
+			&{'sort.desc'}
+		</label>
+	</p>
+
+	<p>
+		<label>&{'preferences.buildings.list.area.sort'}</label>
+	    <select name="buildings_list_area_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_area_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_AREA_ORDER == null || player.preferences.BUILDINGS_LIST_AREA_ORDER.equals("ASC") }checked#{/if} />
+	   		&{'sort.asc'}
+	    </label>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_area_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_AREA_ORDER.equals("DESC")}checked#{/if} />
+	    	&{'sort.desc'}
+	    </label>
+	</p>
+
+	<p>
+		<label>&{'preferences.buildings.list.group.sort'}</label>
+	    <select name="buildings_list_group_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+	    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_group_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_GROUP_ORDER == null || player.preferences.BUILDINGS_LIST_GROUP_ORDER.equals("ASC") }checked#{/if} />
+	    	&{'sort.asc'}
+	    </label>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_group_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_GROUP_ORDER.equals("DESC")}checked#{/if} />
+	    	&{'sort.desc'}
+	    </label>
+	</p>
+	
+		<p>
+		<label>&{'preferences.buildings.list.boosted.sort'}</label>
+	    <select name="buildings_list_boosted_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+	    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_BOOSTED_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_boosted_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_BOOSTED_ORDER == null || player.preferences.BUILDINGS_LIST_BOOSTED_ORDER.equals("ASC") }checked#{/if} />
+	    	&{'sort.asc'}
+	    </label>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_boosted_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_BOOSTED_ORDER.equals("DESC")}checked#{/if} />
+	    	&{'sort.desc'}
+	    </label>
+	</p>
+	
+	<p>
+		<label>&{'preferences.buildings.list.stopped.sort'}</label>
+	    <select name="buildings_list_stopped_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+	    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_STOPPED_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_stopped_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_STOPPED_ORDER == null || player.preferences.BUILDINGS_LIST_STOPPED_ORDER.equals("ASC") }checked#{/if} />
+	    	&{'sort.asc'}
+	    </label>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_stopped_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_STOPPED_ORDER.equals("DESC")}checked#{/if} />
+	    	&{'sort.desc'}
+	    </label>
+	</p>
+	
+	<p>
+		<label>&{'preferences.buildings.list.simulated.sort'}</label>
+	    <select name="buildings_list_simulated_sort" class="submittable">
+	    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+	    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+	    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+	    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+	    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+	    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_SIMULATED_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+	    </select>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_simulated_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_SIMULATED_ORDER == null || player.preferences.BUILDINGS_LIST_SIMULATED_ORDER.equals("ASC") }checked#{/if} />
+	    	&{'sort.asc'}
+	    </label>
+	    
+	    <label class="radio">
+	    	<input type="radio" name="buildings_list_simulated_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_SIMULATED_ORDER.equals("DESC")}checked#{/if} />
+	    	&{'sort.desc'}
+	    </label>
+	</p>
+	
+</div>
+
+<h2>&{'preferences.realm.options'}</h2>
+<div class="form form-inline well">
+	<label class="checkbox">
+		<input type="checkbox" name="building_level_loop" #{if player.preferences.BUILDING_LEVEL_LOOP}checked#{/if}/>
+		&{'preferences.enable.level.loop'}
+	</label>
+</div>
+
+<h2>&{'preferences.section.line'}</h2>
+<div class="form well">
+	<label class="checkbox">
+		<input type="checkbox" name="line_show_groups" #{if player.preferences.LINE_SHOW_GROUPS}checked#{/if}/>
+		&{'preferences.line.show.groups'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="line_show_description" #{if player.preferences.LINE_SHOW_DESCRIPTION}checked#{/if}/>
+		&{'preferences.line.show.description'}
+	</label>
+	<label class="checkbox">
+		<input type="checkbox" name="line_show_deposit" #{if player.preferences.LINE_SHOW_DEPOSIT}checked#{/if}/>
+		&{'preferences.line.show.deposit'}
+	</label>
+</div>
+
+<h2>&{'preferences.section.groups'}</h2>
+<div class="form well">
+	<label class="checkbox">
+		<input type="checkbox" name="show_condensed_groups" #{if player.preferences.SHOW_CONDENSED_GROUPS}checked#{/if}/>
+		&{'preferences.groups.list.condensed'}
+	</label>
+
+</div>

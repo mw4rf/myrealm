@@ -1,0 +1,40 @@
+	%{
+		String bgclass = "";
+		if(comment.author.equals(comment.adventure.player.name)) {
+			bgclass = "adventure_self";
+		} else if(comment.adventure.isParticipant(comment.author)) {
+			bgclass = "adventure_participation";
+		} else {
+			bgclass = "";
+		}
+		
+		// Display div ?
+		if(display == null || display.isEmpty())
+			String display = "block";		
+	}%
+
+<div id="comment_${comment.id}" class="row-fluid comment ${bgclass}" style="display:${display};">
+	<a name="${comment.id}"></a>
+	#{if comment.getAuthorAsPlayer().preferences != null}
+		<img class="comment_avatar" src="/public/images/${comment.getAuthorAsPlayer().preferences.getAvatar()}" />
+	#{/if}#{else}
+		<img class="comment_avatar" src="/public/images/avatars/Avatar00.png" />
+	#{/else}
+	<div class="comment_meta">
+		&{'adventure.comments.meta', comment.author, comment.publishedAt.format()} 
+		(<a href="@{Adventures.showAdventure(comment.adventure.player.name, comment.adventure.id)}#${comment.id}" title="@{Adventures.showAdventure(comment.adventure.player.name, comment.adventure.id)}#${comment.id}">&{'adventure.comments.link'}</a>)
+		
+		*{ Show "edit" link for post author }*
+		#{if comment.author.equals(controllers.Application.getSessionLogin()) && canWrite}
+			(<a href="#" onclick="toggleshow('#comment_text_${comment.id}'); toggleshow('#comment_edit_${comment.id}'); return false;">&{'adventure.comments.edit'}</a>)
+		#{/if}
+	</div>
+	<div class="comment_text" id="comment_text_${comment.id}">${comment.content.raw().nl2br()}</div>
+	
+	<div style="display:none;" id="comment_edit_${comment.id}">
+		
+			<br /><textarea style="width:100%;" rows="15" name="text" id="comment_area_${comment.id}">${comment.content.raw()}</textarea>
+			<br /><input type="submit" value="&{'form.update'}" onclick="adventures_editcomment('${comment.id}'); return false;" />
+		
+	</div>
+</div>

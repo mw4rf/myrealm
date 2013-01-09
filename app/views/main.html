@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+    #{set 'moreScripts'}
+    	#{script 'jquery-ui-1.8.16.custom.min.js' /}
+    	#{script 'jpicker-1.1.6.min.js' /}
+		#{script 'main.js' /}
+		#{script 'actions_player.js' /}
+		#{script 'actions_buildings.js' /}
+		#{script 'actions_adventures.js' /}
+		#{script 'actions_guilds.js' /}
+		#{script 'jquery.qtip.min.js' /}
+		#{script 'tooltips.js' /}
+		#{script 'flot/jquery.flot.min.js' /}
+		#{script 'flot/jquery.flot.pie.min.js' /}
+		#{script 'flot/jquery.flot.crosshair.min.js' /}
+		#{script 'bootstrap-alert.js' /}
+	#{/set}
+
+	#{set 'moreStyles'}
+		#{stylesheet 'jquery.qtip.min.css' /}
+		#{stylesheet 'smoothness/jquery-ui-1.8.16.custom.css' /}
+		#{stylesheet 'pagination.css' /}
+		#{stylesheet 'jPicker.css' /}
+		#{stylesheet 'jPicker-1.1.6.min.css' /}
+	#{/set}
+
+<html>
+    <head>
+        <title>
+        	&{'app.name'} - #{get 'title' /}
+        	#{if player != null} - ${player.name}#{/if}
+        	#{if guild != null} - ${guild.name}#{/if}
+        </title>
+        <meta charset="${_response_encoding}">
+        <script src="@{'/public/javascripts/jquery-1.6.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/bootstrap/js/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        
+        #{get 'moreStyles' /}      
+        <link rel="stylesheet" media="screen" href="@{'public/bootstrap/css/bootstrap.min.css'}" type="text/css">
+        <link rel="stylesheet" media="screen" href="@{'public/stylesheets/themes/default.scss'}" type="text/css">
+        
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+            
+    	*{ ********** Activity RSS Feed ********** }*
+    	#{if player != null && player.preferences != null && player.preferences.ENABLE_ACTIVITY_FEED}
+    		        <link rel="alternate" type="application/rss+xml" title="${play.Play.configuration.get('application.name').toString()} RSS 2.0 - &{'header.realm', player.name}" href="${play.Play.configuration.get('application.address').toString()}@{Application.rss(player.name)}">
+    	#{/if}
+    	
+    	*{ ***** Google Analytics ***** }*
+		#{if player == null || player.preferences == null || !player.preferences.DO_NOT_TRACK}
+		<script type="text/javascript">
+  			var _gaq = _gaq || [];
+  			_gaq.push(['_setAccount', '${play.Play.configuration.get("google.analytics.key").toString()}']);
+  			_gaq.push(['_trackPageview']);
+  			(function() {
+    			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  			})();
+		</script>
+		#{/if}
+    </head>
+    <body>
+
+        *{ ********** AUTH USER FROM COOKIE, IS COOKIE EXISTS ********** }*
+        %{controllers.Application.authFromCookie()}%
+
+    	*{ ********** MAIN CONTENT INCLUSION ********** }*
+    	#{include '_menu.html' /}
+    	#{include 'flash/_adminMessage.html' /}
+    	#{include 'flash/_flash.html' /}
+    	#{include 'flash/_timersReminders.html' /}
+    	#{doLayout /}
+
+    	*{ ********** MODAL DIALOGS ********** }*
+    	<div id="dialog" title="&{'dialog.title'}" style="display:none;">&{'dialog.content'}</div>
+    	
+    	<div id="loading" class="loading-hidden">
+    		&{'loading.text'}<br />
+    		<img src="/public/images/app/spinner.gif" />
+    	</div>
+    	
+    	#{if player != null && player.name != null && player.preferences != null && controllers.Timers.showOverlay(player)}
+    	<div	id="timers-overlay" 
+    			class="draggable resizable" 
+    			style="opacity:${player.preferences.getOverlayOpacity()};
+    					right:${controllers.Preferences.getOverlayPosition("x")};
+    					bottom:${controllers.Preferences.getOverlayPosition("y")};
+    					height:${controllers.Preferences.getOverlayPosition("h")};
+    					width:${controllers.Preferences.getOverlayPosition("w")};">
+    		<div id="overlay-container"><iframe id="overlay-frame" src="@{Timers.overlay(player.name)}"></iframe></div>
+    	</div>
+    	#{/if}
+
+    </body>
+
+	#{get 'moreScripts' /}
+	
+	<script type="text/javascript">
+		#{include 'globalActions.js' /}
+	</script>
+
+</html>

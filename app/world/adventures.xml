@@ -1,0 +1,47 @@
+<World>
+	<!-- Vanilla Adventures -->
+    <adventure imgid="bounty_hunter" name="Chasseur de primes" players="1" difficulty="1" days="3"></adventure>
+    <adventure imgid="traitors" name="Traîtres" players="1" difficulty="4" days="4"></adventure>
+    <adventure imgid="the_dark_priests" name="Les Prêtres du Mal" players="2" difficulty="3" days="2"></adventure>
+    <adventure imgid="stealing_from_the_rich" name="Voler aux riches" players="2" difficulty="4" days="4"></adventure>
+    <adventure imgid="stealing_from_the_rich" name="Voler aux pauvres" players="2" difficulty="4" days="4"></adventure>
+    <adventure imgid="sons_of_the_veld" name="Les fils des steppes" players="2" difficulty="6" days="0"></adventure>
+    <adventure imgid="the_nords" name="Les nordiques" players="2" difficulty="6" days="8"></adventure>
+    <adventure imgid="the_black_knights" name="Les chevaliers noirs" players="3" difficulty="9" days="0"></adventure>
+    <adventure imgid="the_dark_brotherhood" name="La funèbre confrérie" players="3" difficulty="9" days="0"></adventure>
+    <adventure imgid="the_island_of_the_pirates" name="L'île des pirates" players="1" difficulty="3" days="2"></adventure>
+    <adventure imgid="outlaws" name="Hors-la-loi" players="1" difficulty="4" days="4"></adventure>
+    <adventure imgid="secluded_experiments" name="Expériences interdites" players="3" difficulty="9" days="0"></adventure>
+    <adventure imgid="witch_of_the_swamp" name="La sorcière du marais" players="1" difficulty="3" days="2"></adventure>
+    <adventure imgid="motherlove" name="Amour maternel" players="2" difficulty="7" days="2"></adventure>
+    <adventure imgid="horseback" name="À Cheval" players="1" difficulty="2" days="2"></adventure>
+    <adventure imgid="victor_the_vicious" name="Victor le Vicieux" players="3" difficulty="8" days="8"></adventure>
+    <adventure imgid="old_friends" name="Vieux Amis" players="1" difficulty="4" days="2"></adventure>
+    <!-- New Adventures (spring 2012) -->
+    <adventure imgid="a_night_to_remember" name="Une soirée mémorable" players="1" difficulty="1" days="1"></adventure>
+    <adventure imgid="bandit_nest" name="Nid de bandits" players="1" difficulty="5" days="2"></adventure>
+    <adventure imgid="surprise_attack" name="Attaque surprise" players="2" difficulty="6" days="4"></adventure>
+    <adventure imgid="roaring_bull" name="Taureau rugissant" players="3" difficulty="9" days="5"></adventure>
+    <adventure imgid="gunpowder" name="Poudre à canon" players="3" difficulty="5" days="4"></adventure>
+    <adventure imgid="mad_henry" name="Marie la sauvage" players="1" difficulty="7" days="2"></adventure>
+    <!-- Event: Christmas -->
+    <adventure imgid="event_xmass" name="Sauvez Noël" players="1" difficulty="4" days="2"></adventure>
+    <!-- Event: Easter -->
+    <adventure imgid="event_easter_1" name="Pâques 1" players="1" difficulty="1" days="2"></adventure>
+    <adventure imgid="event_easter_2" name="Pâques 2" players="1" difficulty="2" days="2"></adventure>
+    <adventure imgid="event_easter_3" name="Pâques 3" players="1" difficulty="3" days="2"></adventure>
+    <adventure imgid="event_easter_4" name="Pâques 4" players="1" difficulty="4" days="2"></adventure>
+    <adventure imgid="event_easter_5" name="Pâques 5" players="1" difficulty="5" days="2"></adventure>
+    <adventure imgid="event_easter_6" name="Pâques 6" players="1" difficulty="6" days="2"></adventure>
+    <adventure imgid="event_easter_7" name="Pâques 7" players="1" difficulty="7" days="2"></adventure>
+    <adventure imgid="event_easter_8" name="Pâques 8" players="1" difficulty="8" days="2"></adventure>
+    <adventure imgid="event_easter_9" name="Pâques 9" players="1" difficulty="9" days="2"></adventure>
+    <adventure imgid="event_easter_10" name="Pâques 10" players="1" difficulty="10" days="2"></adventure>
+     <!-- Event: Foot -->
+    <adventure imgid="event_foot_1" name="Foot 1" players="1" difficulty="4" days="2"></adventure>
+    <adventure imgid="event_foot_2" name="Foot 2" players="1" difficulty="4" days="2"></adventure>
+    <adventure imgid="event_foot_3" name="Foot 3" players="1" difficulty="5" days="2"></adventure>
+    <adventure imgid="event_foot_4" name="Foot 4" players="1" difficulty="5" days="2"></adventure>
+    <adventure imgid="event_foot_5" name="Foot 5" players="1" difficulty="6" days="2"></adventure>
+    <adventure imgid="event_foot_6" name="Foot 6" players="1" difficulty="6" days="2"></adventure>
+</World>

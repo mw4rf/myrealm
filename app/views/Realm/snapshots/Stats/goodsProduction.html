@@ -1,0 +1,184 @@
+#{extends 'Realm/template.html' /}
+
+<div id="chart_gprod" player="${player.name}" class="chart"></div>
+
+<div style="width:95%; overflow:hidden;">
+	<div style="float:left; width: 30%;"><div id="chart_gprod_legend" style="float:right;"></div></div>
+	<div style="float:right; margin:auto; width: 70%;">
+		<div id="chart_gevolution_legend"></div>
+		<div id="chart_gevolution" class="chart"></div>
+	</div>
+</div>
+
+<script id="source" language="javascript" type="text/javascript">
+function showTooltip(x, y, contents) {
+	$('<div id="tooltip">' + contents + '</div>').css( {
+    	position: 'absolute',
+    	display: 'none',
+    	top: y + 5,
+    	left: x + 5,
+    	border: '1px solid #fdd',
+    	padding: '2px',
+    	'background-color': '#fee',
+    	opacity: 0.80
+	}).appendTo("body").fadeIn(200);
+}
+/**
+ * goods production overall
+ */
+var doChart = (function () {
+	var options = {
+			grid: {
+				hoverable: true, clickable: true
+			},
+	        series: {
+	            bars: { show: true, fill: true, horizontal:false, barWidth:0.8, lineWidth:1 },
+	            points: { type: "x" }
+	        },
+	        legend: { 
+	        			noColumns: 3, 
+	        			position: "se", 
+	        			container: $("#chart_gprod_legend"),
+	        			labelFormatter: function(label, series) {
+	        				    return '<a href="#" class="chart_gprod_loader" good="'+label+'">' + label + '</a>';
+	        			}
+	        		},
+	        crosshair: { mode: "y" },
+	        xaxis: { },
+	        yaxis: { }
+	    };
+    
+    var placeholder = $("#chart_gprod"); 
+    var dataProduced = [];
+    var dataNeeded = [];
+    $.getJSON("@{Stats.getJSONGoodsProduction(player.name)}", function(map){
+     	
+    		var all = []
+    		var i = 0;
+    		$.each(map, function (index, g) {
+    			if(g.produced > 0 || g.needed < 0) {
+        			/**
+        			// Produced & Needed SIDE BY SIDE
+    				all.push( { 'label': g.name, 'data': [ [i, g.produced],[i+1, -g.needed] ] } )
+        			i=i+2
+        			*/
+        			
+        			// Produced ABOVE Needed
+        			all.push( { 'label': g.name, 'data': [ [i, g.produced],[i, g.needed] ] } )
+        			i++
+        		
+    			}
+    		})
+    	
+    	// Draw the plot
+        $.plot(placeholder, all, options);
+    	
+    	// ---------------------------------
+    	// Add tooltip to the plot
+    	var previousPoint = null;
+        placeholder.bind("plothover", function (event, pos, item) {
+            //$("#x").text(pos.x.toFixed(2));
+            //$("#y").text(pos.y.toFixed(2));
+
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex; 
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2);
+                    var y = item.datapoint[1].toFixed(2);
+                    var d = new Date();
+                    d.setTime(x);
+                    showTooltip(item.pageX, item.pageY, item.series.label + " : " + y + " (" + d.toDateString() + ")");
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+        });
+    });
+    
+    /**
+     * Ajax loader for evolution chart, bound on overall chart labels
+     */
+    
+  	// Bind AJAX function on the chart
+    $(placeholder).bind("plotclick", function (event, pos, item) {
+    	var good = item.series.label
+    	return ajaxLoadEvolution(good)
+    });
+    
+    // Bind AJAX function on the chart legend
+    $(".chart_gprod_loader").live('click', function() {
+    	var good = $(this).attr("good")
+    	return ajaxLoadEvolution(good)
+    });
+    
+    /**
+     * JS function to get the data from the server and build the evolution chart
+     */
+    var loadGoodEvolutionChartAction = #{jsAction @Stats.getJSONGoodEvolution(':playerName', ':goodName') /}
+    function ajaxLoadEvolution(good) {    	
+    	var player = $("#chart_gprod").attr("player")
+    	// Evolution chart options
+    	var options_evol = {
+			grid: {
+				hoverable: true, clickable: true
+			},
+	        series: {
+	            lines: { show: true },
+	            points: { show: true }
+	        },
+	        legend: { noColumns: 3, position: "se" },
+	        xaxis: { mode: "time", timeformat: "%d/%m" },
+	        yaxis: { position:"right" }
+	    };
+    	// get data as json, build the chart / ajax call
+    	$.getJSON(loadGoodEvolutionChartAction({playerName:player, goodName:good}), function(map){
+    		 // Set variables for series
+    		 var dataProd = []
+    		 var dataNeed = []
+    		 var dataRatio = []
+    		 // Fill data
+        	 $.each(map.produced, function(index, p){
+             	dataProd.push([p.name,p.value]);
+    		 });
+        	 $.each(map.needed, function(index, n){
+              	dataNeed.push([n.name,n.value]);
+     		 });
+        	 $.each(map.ratio, function(index, r){
+              	dataRatio.push([r.name,r.value]);
+     		 });
+    		 // Load evolution chart
+        	 $.plot($("#chart_gevolution"), 
+        			 [ { label: "&{'stats.plot.goods.legend.production'}", data: dataProd, yaxis: 1 },
+                       { label: "&{'stats.plot.goods.legend.needs'}", data: dataNeed, yaxis: 1},
+                       { label: "&{'stats.plot.goods.legend.ratio'}", data: dataRatio, yaxis: 1},
+             		 ], options_evol);
+    		 // Set the legend with good name
+    		 $("#chart_gevolution_legend").html(good)
+         	// ---------------------------------
+         	// Add tooltip to the plot
+			// the showTooltip() function has already be defined at this point
+         	$("#chart_gevolution").bind("plothover", function (event, pos, item) {
+                 if (item) {
+                     if (previousPoint != item.dataIndex) {
+                         previousPoint = item.dataIndex; 
+                         $("#tooltip").remove();
+                         var x = item.datapoint[0].toFixed(2);
+                         var y = item.datapoint[1].toFixed(2);
+                         var d = new Date();
+                         d.setTime(x);
+                         showTooltip(item.pageX, item.pageY, item.series.label + " : " + y + " (" + d.toDateString() + ")");
+                     }
+                 } else {
+                     $("#tooltip").remove();
+                     previousPoint = null;            
+                 }
+             }); 
+    	});
+    	return false; // prevents scrolling up
+     } // end ajaxLoadEvolution()
+});
+//Draw the chart
+doChart()
+</script>

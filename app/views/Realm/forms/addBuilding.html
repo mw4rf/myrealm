@@ -1,0 +1,131 @@
+#{extends 'Realm/template.html' /}
+
+    #{form @Realm.addBuilding(player.name)}
+    
+    <div class="container-fluid">
+    
+    	*{ ***** Header ****** }*
+		<div class="row-fluid">
+			<div class="span12 middle"><h3>&{'nav.realm.add.new.building'}</h3></div>
+		</div>
+		<br />
+		
+		*{ ***** Building Type ***** }*
+		<div class="row-fluid">
+			<div class="span4 right">&{'realm.building.name'}</div>
+			<div class="span4">
+				<select name="name" id="buildingCombo">
+                    #{list items:worldBuildings, as:'wbuilding'}
+                    <option averagePT="${wbuilding.getAverageProductionTime()}" value="${wbuilding.name}" imgid="${wbuilding.getImage()}">
+                        ${wbuilding.name}
+                    </option>
+                    #{/list}
+                </select>
+			</div>
+			<div class="span4"><span id="buildingImage"></span></div>
+		</div>
+		
+		*{ ***** Area ***** }*
+		<div class="row-fluid">
+			<div class="span4 right">&{'realm.building.area'}</div>
+			<div class="span8">
+				<select name="area" id="addBuilding_area">
+                	<option value="0" selected>&{'realm.area.0'}</option>
+                    <option value="1">&{'realm.area.1'}</option>
+                    <option value="2">&{'realm.area.2'}</option>
+                    <option value="3">&{'realm.area.3'}</option>
+                    <option value="4">&{'realm.area.4'}</option>
+                    <option value="5">&{'realm.area.5'}</option>
+                    <option value="6">&{'realm.area.6'}</option>
+                    <option value="7">&{'realm.area.7'}</option>
+                    <option value="8">&{'realm.area.8'}</option>
+                    <option value="9">&{'realm.area.9'}</option>
+                </select>
+			</div>
+		</div>
+		
+		*{ ***** Level ***** }*
+		<div class="row-fluid">
+			<div class="span4 right">&{'realm.building.level'}</div>
+			<div class="span8">
+				<select name="level" id="addBuilding_level">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+			</div>
+		</div>
+		
+		*{ ***** Production Time ***** }*
+		<div class="row-fluid">
+			<div class="span4 right"><span class="hand" title="&{'realm.building.productionTime.tooltip'}">&{'realm.building.productionTime'}</span></div>
+			<div class="span8">
+				<input type="text" name="productionTimeMinutes" id="addBuilding_productionTimeMinutes" size="3" />&{'time.minutes'}
+                <input type="text" name="productionTimeSeconds" id="addBuilding_productionTimeSeconds" size="2" />&{'time.seconds'}
+			</div>
+		</div>
+		
+		*{ ***** Description ***** }*
+		<div class="row-fluid">
+			<div class="span4 right">&{'realm.building.desc'}</div>
+			<div class="span8">
+				<textarea name="description" id="addBuilding_description" style="width:100%;"></textarea>
+			</div>
+		</div>
+		
+		*{ ***** Groups ***** }*
+		#{if player.groups.size() > 0}
+		<div class="row-fluid">
+			<div class="span4 right">&{'realm.building.groups'}</div>
+			<div class="span8">
+				<select name="groups[]" multiple>
+               	#{list player.groups, as:'group'}
+               		<option value="${group.id}">${group.name}</option>
+               	#{/list}
+               </select>
+			</div>
+		</div>
+		#{/if}
+		
+		*{ ***** Simulation ***** }*
+		<div class="row-fluid">
+			<div class="span4 right">&nbsp;</div>
+			<div class="span8">
+				<input type="checkbox" name="simulated" />
+				<a href="#" title="&{'realm.building.simulated.tooltip'}" class="info">&{'realm.building.simulated'}</a>
+			</div>
+		</div>
+		
+		*{ ***** Submit ***** }*
+		<br />
+		<div class="row-fluid">
+			<div class="span4 right">&nbsp;</div>
+			<div class="span8">
+				<input type="hidden" name="playerName" id="addBuilding_playerName" value="${player.name}" />
+                <input type="submit" class="btn btn-success" value="&{'form.save'}" id="addBuildingButton" />
+			</div>
+		</div>
+		
+	</div>
+    
+    #{/form}
+ 
+	<script type="text/javascript">
+	 /**
+	 * Dynamically show the image of the building selected in the combobox, and fill production time.
+	 */
+	$("#buildingCombo").live('change', function() {
+		var select = $(this).find('option:selected')
+		// Set image
+		var imgid = "/public/" + select.attr("imgid")
+		$('#buildingImage').html("<img align=\"middle\" src=\"" + imgid + "\" />")
+		// Set average production time
+		var apt = select.attr("averagePT");
+		var min = Math.floor(apt / 60);
+		var sec = apt - min * 60;
+		$("input[name='productionTimeMinutes']").val(min)
+		$("input[name='productionTimeSeconds']").val(sec)
+	})
+	</script>

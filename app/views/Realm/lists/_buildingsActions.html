@@ -1,0 +1,97 @@
+
+
+<div id="globalActionContainer" class="container-fluid sortContainer">
+
+	<div class="row-fluid form form-inline">
+	
+		<div class="span12">
+			<select name="allOrSelected">
+				<option value="all">&{'realm.global.actions.buildings.all'}</option>
+				<option value="selected">&{'realm.global.actions.buildings.selected'}</option>
+			</select>		
+			
+			<select name="globalAction">
+				<option value="none" selected>     </option><!-- save me from click frenzy -->
+				<option value="boost">&{'realm.global.actions.boost'}</option>
+				<option value="unboost">&{'realm.global.actions.unboost'}</option>
+				<option value="stop">&{'realm.global.actions.stop'}</option>
+				<option value="start">&{'realm.global.actions.start'}</option>
+				<option value="simulate">&{'realm.global.actions.simulated.mark.as'}</option>
+				<option value="validate-simulated">&{'realm.global.actions.simulated.validate'}</option>
+				<option value="duplicate-simulated">&{'realm.global.actions.simulated.duplicate'}</option>
+				<option value="up-level">&{'realm.global.actions.level.up'}</option>
+				<option value="down-level">&{'realm.global.actions.level.down'}</option>
+				<option value="set-level">&{'realm.global.actions.level.set'}</option>
+				<option value="set-area">&{'realm.global.actions.area.set'}</option>
+				<option value="add-to-group">&{'realm.global.actions.group.add'}</option>
+				<option value="remove-from-group">&{'realm.global.actions.group.remove'}</option>
+			</select>
+			
+			<span id="globalOptionContainer" style="display:none;">
+				<input type="text" name="globalOption" size="10" />
+			</span>
+			
+			<input id="globalActionSubmit" type="submit" class="btn btn-info" value="&{'realm.global.actions.submit'}"/>
+		
+		</div>
+	
+	</div>
+
+</div>
+<div id="globalActionCallback" class="alert alert-success" style="display:none;">
+			&{'realm.global.actions.callback'}
+</div>
+
+<script type="text/javascript">
+	var buildingsGlobalActions = #{jsAction @Realm.globalAction(':playerName') /}
+
+	/**
+	* Switch show/hide the text field for options
+	*/
+	$("select[name='globalAction']").live('change', function(event) {
+		var action = $(this).find(':selected').val()
+		if(action == "none")
+			return;
+		if(action == "set-level" || action == "set-area" || action == "add-to-group" || action == "remove-from-group")
+			$("#globalOptionContainer").show()
+		else
+			$("#globalOptionContainer").hide()
+	})
+	
+	/** 
+	* Submit form (AJAX)
+	*/
+	$("#globalActionSubmit").live('click', function(event) {
+		var playerName = "${player.name}"
+		var allOrSelected = $("select[name='allOrSelected']").find(':selected').val()
+		var action = $("select[name='globalAction']").find(':selected').val()
+		var option = $("input[name='globalOption']").val()
+		var buildings = [] // array
+		
+		// Save me from click frenzy
+		if(action == "none")
+			return;
+		
+		// Get all buildings or selected buildings, store their ID in an array
+		var lines = $(".buildingLine")
+		for(var i = 0 ; i < lines.length ; i++) {
+			var buildingId = $(lines[i]).attr('buildingId')
+			// Selected lines only
+			if( ( allOrSelected == "selected" && $(lines[i]).hasClass('highlight') ) || allOrSelected == "all")
+				buildings.push(buildingId)
+		}
+		
+		// Disable submit button
+		//$(this).prop('disabled', true)
+		
+		// Ajax query
+		$.post(buildingsGlobalActions({playerName: playerName}), {action:action, option:option, buildings:buildings}, function(data) {
+			// callback
+			//$("#globalActionContainer").fadeOut()
+			$("#globalActionCallback").fadeIn()
+		})
+		
+	})
+	
+
+</script>

@@ -1,0 +1,24 @@
+<Adventures>
+	#{list items:adventures, as:'a'}
+	<adventure id="${a.id}">
+		<properties>
+			<property name="name" value="${a.name}"></property>
+			<property name="dateStart" value="${a.dateStart}"></property>
+			<property name="dateEnd" value="${a.dateEnd}"></property>
+			<property name="owner" value="${a.player.name}"></property>
+		</properties>
+		<participants>
+			#{list items:a.participants, as:'p'}
+			<participant name="${p.name}"></participant>
+			#{/list} 
+			<participant name="${a.player.name}"></participant>
+		</participants>
+		<notes><![CDATA[${a.notes}]]></notes>
+		<comments>
+			#{list items:a.comments,as:'c'}
+			<comment id="${c.id}" author="${c.author}" pubDate="${c.publishedAt}"><![CDATA[${c.content}]]></comment>
+			#{/list} 
+		</comments>
+	</adventure>
+	#{/list}
+</Adventures>

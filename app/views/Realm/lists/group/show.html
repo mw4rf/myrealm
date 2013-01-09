@@ -1,0 +1,38 @@
+#{extends 'Realm/template.html' /}
+
+<div class="container header1">${group.name}</div>
+
+*{ ********** UPDATE FORM ********** }*
+<div id="updateGroupFormContainer">
+	#{form @Realm.updateGroup(player.name, group.id), class:'form well'}
+		<label>&{'realm.index.groups.name'}</label>
+		<input type="text" name="name" value="${group.name}" />
+		
+		<label>&{'realm.index.groups.color.fg'}</label>
+		<input type="text" class="colorpicker" #{if group.fgcolor != null}style="background-color:#${group.fgcolor};"#{/if} name="fgcolor" value="#{if group.fgcolor != null}${group.fgcolor}#{/if}" />
+		
+		<label>&{'realm.index.groups.color.bg'}</label>
+		<input type="text" class="colorpicker" #{if group.bgcolor != null}style="background-color:#${group.bgcolor};"#{/if} name="bgcolor" value="#{if group.bgcolor != null}${group.bgcolor}#{/if}" />
+		<br />
+		<input type="submit" class="btn btn-success btn-large" value="&{'form.update'}" />
+		#{a @Realm.deleteGroup(player.name, group.id), class:'btn btn-danger btn-mini'}&{'form.remove'}#{/a}
+	#{/form}
+</div>
+
+*{ ********** ratios ********** }*
+
+<div id="productionratios" player="${group.player.name}" page="group" groupId="${group.id}" style="overflow:hidden;" class="container">
+	#{include 'Realm/production/_list.html' /}
+</div>
+
+*{ ********** Buildings ********** }*
+<div id="buildings_group_group" class="container">
+	#{list group.buildings, as: 'building'}
+		#{include 'Realm/lists/_buildingLine.html' /}
+	#{/list}
+</div>
+
+<script type="text/javascript">
+	#{include 'Realm/lists/group/actions.js' /}
+	#{include 'Realm/lists/lineActions.js' /}
+</script>

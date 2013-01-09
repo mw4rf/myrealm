@@ -1,0 +1,93 @@
+
+<div class="container-fluid">
+
+#{paginate.list items:adventures, as:'adventure'}
+	%{
+		String advType = "";
+		if(adventure.player.name.equals(player.name)) {
+			advType = "adventure_self";
+		} else {
+			advType = "adventure_participation";
+		}
+	}%	
+	
+
+	<div class="row-fluid">
+	
+		*{** Adventure Picture **}*
+		<div class="span2">
+			<img src="/public/${adventure.getImage()}" />
+		</div>
+		
+		*{** Adventure Name & Dates **}*
+		<div class="span4">
+			<table>
+				<tr>
+					<td colspan="2" class="${advType}">
+						#{a @Adventures.showAdventure(player.name, adventure.id)}${adventure.name}#{/a}
+					</td>
+				</tr>
+				<tr>
+					<td>&{'adventure.dateStart'}</td>
+					<td>${adventure.dateStart.format()}</td>
+				</tr>
+				<tr>
+					<td>&{'adventure.dateEnd'}</td>
+					<td>${adventure.dateEnd.format()}</td>
+				</tr>
+			</table>
+		</div>
+		
+		*{** Adventure Participants **}*
+		<div class="span6">
+				<div class="row-fluid">
+					<div class="span12">
+						<table>
+							<tr>
+								<td>
+									#{if !adventure.player.name.equals(player.name)}
+										&{'adventure.owner'}
+									#{/if}
+								</td>
+								<td>
+									#{if adventure.participants.size() > 0}
+										&{'adventure.participants'}
+									#{/if}
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									#{if !adventure.player.name.equals(player.name)}
+										<span class="label label-success" style="padding-bottom: 1px;">
+											#{a @Adventures.index(adventure.player.name)}
+												${adventure.player.name}
+											#{/a}
+										</span>
+									#{/if}
+								</td>
+								
+								<td>
+									#{if adventure.participants.size() > 0}
+										#{list adventure.participants, as: 'participant'}
+											<span class="label label-info" style="margin-right: 0.3em; padding-bottom: 1px;">
+												#{a @Adventures.index(participant.name)}
+													${participant.name}
+												#{/a}
+											</span>
+										#{/list}
+									#{/if}
+								</td>
+							</tr>
+							
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
+#{/paginate.list}
+
+<span class="pagination_summary">#{paginate.summary items:adventures /}</span>
+#{paginate.controls items:adventures /}
+
+</div>

@@ -1,0 +1,94 @@
+#{extends 'Market/template.html' /}
+#{set title: 'Market' /}
+
+*{ *********** SALE OFFER ********** }*
+<div class="container-fluid">
+		#{include 'Market/adventures/public/_adventureSale.html' /}
+</div>
+
+*{ *********** SALE ACCEPTATIONS ********** }*
+#{if sale.offers.size() > 0}
+<div class="container-fluid">
+	<table class="table table-striped">
+		<tr>
+			<th class="adventureOfferCell">&nbsp;</th>
+			<th class="adventureOfferCell">&{'market.adventure.offer.status'}</th>
+			<th class="adventureOfferCell">&{'market.adventure.offer.buyer'}</th>
+			<th class="adventureOfferCell">&{'market.adventure.offer.date'}</th>
+			<th class="adventureOfferCell">&{'market.adventure.offer.sold.date'}</th>
+		</tr>
+		#{list sale.offers, as: 'offer'}
+			%{
+				String classes = "";
+				String label = "";
+				if(!offer.hasAnswer()) {
+					classes = "offerStatusWaiting";
+					label = messages.get("market.adventure.offer.sold.waiting");
+				} else if(offer.sold) {
+					classes = "offerStatusAccepted";
+					label = messages.get("market.adventure.offer.sold.yes");
+				} else {
+					classes = "offerStatusRejected";
+					label = messages.get("market.adventure.offer.sold.no");
+				}
+			}%
+			
+			<tr>
+				<td class="adventureOfferCell">
+					*{ *** User is seller *** }*
+					#{if offer.sale.isSeller(controllers.Application.getSessionLogin())}
+						*{ ** Show links only if not already accepted/rejected ** }*
+						#{if !offer.hasAnswer()}
+							#{a @Market.acceptAdventureOffer(offer.id), class:'btn btn-success'}&{'market.adventure.offer.accept'}#{/a}
+							#{a @Market.rejectAdventureOffer(offer.id), class:'btn btn-danger'}&{'market.adventure.offer.reject'}#{/a}
+						#{/if}
+					#{/if}
+					*{ *** User is buyer *** }*
+					#{elseif offer.buyer.name.equals(controllers.Application.getSessionLogin()) && !offer.sold}
+						#{a @Market.withdrawAdventureOffer(offer.id), class:'btn btn-warning'}&{'market.adventure.offer.withdraw'}#{/a}
+					#{/elseif}
+				</td>
+				<td class="adventureOfferCell ${classes}">
+					*{ *** Offer status *** }*
+					${label}
+				</td>
+				<td class="adventureOfferCell">
+					#{a @Home.index(offer.buyer.name)}${offer.buyer.name}#{/a}
+				</td>
+				<td class="adventureOfferCell">
+					#{if offer.madeAt != null}
+						${offer.madeAt.format()}
+					#{/if}
+				</td>
+				<td class="adventureOfferCell">
+					#{if offer.hasAnswer()}
+						${offer.answeredAt.format()}
+					#{/if}
+				</td>
+			</tr>
+		#{/list}
+	</table>
+</div>
+#{/if}
+
+*{ ********** MESSAGES ********** }*
+<div class="guildSectionHeader container-fluid">&{'market.comments'}</div>
+
+#{if comments != null && comments.size() > 0}
+<div id="guildWall" class="guildContainer container-fluid">
+	#{list comments, as: 'message'}
+		#{include "Market/_comment.html" /}
+		<br />
+	#{/list}
+</div>
+#{/if}
+
+<div id="commentsForm" class="well form middle">
+	#{form @Market.addComment()}
+		&{'guild.wall.newas', controllers.Application.getSessionLogin(), controllers.Application.getSessionLogin()} => #{a @Application.index()}&{'login'}#{/a}
+		<br /><textarea name="comment" class="span12" rows="5"></textarea>
+		<input type="hidden" name="saleId" value="${sale.id}" />
+		<br /><input type="submit" value="&{'form.add'}" class="btn btn-success btn-large span4" />
+		&nbsp;&nbsp;(<a href="#" message="${messages.get('dialog.format.help').escape()}" class="infoLink" dialog-type="html" dialog-title="&{'dialog.format.link'}" dialog-height="300" dialog-width="600">&{'dialog.format.link'}</a>)
+	#{/form}
+</div>

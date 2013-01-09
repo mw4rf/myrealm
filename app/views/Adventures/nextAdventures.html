@@ -1,0 +1,11 @@
+#{extends 'Adventures/template.html' /}
+
+*{ Adventures List }*
+#{if player.getAllAdventures().size() > 0}
+<div id="adventures_list">
+     #{include 'Adventures/_adventuresList.html' /}
+</div>
+#{/if}
+#{else}
+    <div class="container">&{'adventures.index.noadventure'}</div>
+#{/else}

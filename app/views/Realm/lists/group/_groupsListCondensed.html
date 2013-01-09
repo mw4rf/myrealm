@@ -1,0 +1,13 @@
+#{if player.groups.size() > 0}
+			#{list player.groups, as: 'group'}
+				%{
+					String fgc = "";
+					if(group.fgcolor != null && !group.fgcolor.isEmpty())
+						fgc = "color:#" + group.fgcolor + ";"
+					String bgc = "";
+					if(group.bgcolor != null && !group.bgcolor.isEmpty())
+						bgc = "background-color:#" + group.bgcolor + ";"
+				}%
+				<span class="label buildingGroupLabel realmGroupCell" style="${fgc}${bgc};margin-right:0.3em;" groupId="${group.id}" player="${player.name}">${group.name} (${group.buildings.size()})</span> 
+			#{/list}
+#{/if}

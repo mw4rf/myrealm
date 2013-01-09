@@ -1,0 +1,42 @@
+#{extends 'Timers/template.html' /}
+
+*{ ********** FORM: ADD NEW TIMER ********** }*
+<div class="container-fluid">
+	<div class="row-fluid">
+	#{form @Timers.addTimerOnBuilding(player.name), class:'form-vertical well'}		
+		<label class="select">&{'timer.building'}</label>
+		<select name="buildingId">
+			#{list buildings, as: 'building'}
+				%{
+					// Building already has a timer: continue
+					if(building == null || building.timer != null)
+						continue;
+					// Get production time
+					HashMap<String,Integer> t = building.formatProductionTime();
+					int min = t.get("m");
+					int sec = t.get("s");
+				}%
+				<option value="${building.id}">${building.name} (&{'realm.building.area'} ${building.area} - &{'realm.building.level'} ${building.level} - &{'realm.building.productionTime'} ${min} &{'time.minutes'} ${sec} &{'time.seconds'})</option>
+			#{/list}
+		</select>
+		
+		<label>&{'timer.remainingQuantity'}</label>
+		<input type="text" name="remainingQuantity" size="5" />
+		
+		
+		<label class="checkbox">
+			<input type="checkbox" name="remind" #{if player.preferences != null && player.preferences.TIMERS_DEFAULT_REMIND_TYPE1}checked#{/if} />
+			&{'timer.remind'}
+		</label>
+		
+		<input type="submit" class="btn btn-success btn-large" value="&{'form.save'}" />
+	#{/form}
+	</div>
+</div>
+
+*{ ********** TIMERS LIST ********** }*
+<div id="dateTimersList">
+	#{list dateTimers, as: 'timer'}
+		#{include "Timers/_timer.html" /}
+	#{/list}
+</div>

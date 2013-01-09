@@ -1,0 +1,52 @@
+<linefeed />
+<table>
+	
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<th class="headerbg">&{'realm.index.ratio_simulation.real'}</th>
+		<th class="headerbg">&{'realm.index.ratio_simulation.influence'}</th>
+		<th class="headerbg">&{'realm.index.ratio_simulation.future'}</th>
+	</tr>
+	
+	#{list goods, as: 'good'}
+	<tr>
+		
+		*{ *** Good image *** }*
+		<td><img valign="middle" src="/public/${good.getImage()}" /></td>
+		
+		*{ *** Good name *** }*
+		<td>${good.getName()}</td>
+		
+		*{ *** Current ratio *** }*
+			#{if currentGoods.get(good.getName()) > 0}
+				<td align="middle" class="positiveQuantity">
+			#{/if}#{else}
+				<td align="middle" class="negativeQuantity">
+			#{/else}
+					${currentGoods.get(good.getName())}
+				</td>
+				
+		*{ *** Building influence *** }*
+	
+			#{if good.getRealQuantity() > 0}
+				<td align="middle" class="positiveQuantity">
+			#{/if}#{else}
+				<td align="middle" class="negativeQuantity">
+			#{/else}
+					${good.getRealQuantity()}
+				</td>
+				
+		*{ *** Future ratio *** }*
+			#{if futureGoods.get(good.getName()) > 0}
+				<td align="middle" class="positiveQuantity">
+			#{/if}#{else}
+				<td align="middle" class="negativeQuantity">
+			#{/else}
+					${futureGoods.get(good.getName())}
+				</td>
+	</tr>		
+	#{/list}
+	
+
+</table>

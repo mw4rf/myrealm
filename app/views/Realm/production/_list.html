@@ -1,0 +1,66 @@
+*{ ********** PRODUCTION ********** }*
+<div class="container-fluid">
+	
+	*{ Production Ratio }*
+	<div class="row-fluid">
+	
+		*{ Production: Positive quantities }*
+		<div class="span3">
+			<div class="label label-info">&{'realm.index.goodsbalance.produced'}</div>
+   	    	<table>
+   	        #{list items:pgoods, as:'good'}
+   	        	#{if good.getRealQuantity() >= 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+		
+		*{ Production: Negative quantities }*
+		<div class="span3">
+		   	<div class="label label-warning">&{'realm.index.goodsbalance.needed'}</div>
+   	    	<table>
+   	        #{list items:ngoods, as:'good'}
+   	        	#{if good.getRealQuantity() < 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+		
+		*{ Ratio: Positive quantities }*
+		<div class="span3">
+			<div class="label label-success">&{'realm.index.goodsbalance.positive'}</div>
+   	    	<table>
+   	        #{list items:goods, as:'good'}
+   	        	#{if good.getRealQuantity() >= 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+		
+		*{ Ratio: Negative quantities }*
+		<div class="span3">
+		   	<div class="label label-danger">&{'realm.index.goodsbalance.negative'}</div>
+   	    	<table>
+   	        #{list items:goods, as:'good'}
+   	        	#{if good.getRealQuantity() < 0}
+   	            	<tr>
+   	            	<td>#{include 'Realm/_goodItem.html' /}</td>
+   	            	</tr>
+   	        	#{/if}
+   	    	#{/list}
+   	    	</table>
+		</div>
+	
+	</div>
+
+
+</div>

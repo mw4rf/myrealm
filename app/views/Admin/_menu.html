@@ -1,0 +1,24 @@
+
+<ul style="list-style-type:none;">
+
+	<li />#{a @Admin.index()}Admin Index#{/a}
+	<li /><b>Software</b>
+	<li /><a href="/@logs" target="_blank">Production Logs</a>
+		<li />#{a @Admin.greetings()}Greeting#{/a}
+		<li />#{a @Admin.messages()}Admin Messages#{/a}
+		<li />#{a @Admin.ircbots()}IRC Bots#{/a}
+	<li /><b>Jobs</b>
+		<li />#{a @Admin.jobs()}Cronjobs launchers#{/a}
+		<li />#{a @Admin.tests()}Tests#{/a}
+	<li /><b>Public Pages</b>
+		<li />#{a @Application.playersList()}&{'players.list'}#{/a}
+		<li />#{a @Application.actionsList()}&{'actions.list'}#{/a}
+		<li />#{a @Application.adventuresList()}&{'adventures.list'}#{/a}
+		<li />#{a @Application.nextAdventuresList()}&{'adventures.next.list'}#{/a}
+	<li /><b>Database</b>
+		<li /><a href="http://app.valhalla.fr/phppgadmin/" target="_blank">PostgreSQL Admin</a>
+		<li />#{a @Admin.safeDeleteForm()}Safely Delete Records#{/a}
+	<li /><b>Database Tables</b>
+		<li />#{a @Admin.players()}Players#{/a}
+		<li />#{a @Admin.playerTimers()}PlayerTimers#{/a}
+</ul>

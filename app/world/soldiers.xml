@@ -1,0 +1,48 @@
+<Soldiers>
+
+	<soldier name="Recrue" imgid="01">
+		<good name="Bière" quantity="5" />
+		<good name="Épées de bronze" quantity="10" />
+	</soldier>
+
+	<soldier name="Archer" imgid="02">
+		<good name="Bière" quantity="10" />
+		<good name="Arcs" quantity="10" />
+	</soldier>
+
+	<soldier name="Milicien" imgid="03">
+		<good name="Bière" quantity="10" />
+		<good name="Épées de fer" quantity="10" />
+	</soldier>
+
+	<soldier name="Cavalier" imgid="04">
+		<good name="Bière" quantity="30" />
+		<good name="Cheval" quantity="40" />
+	</soldier>
+
+	<soldier name="Archer à arc long" imgid="05">
+		<good name="Bière" quantity="20" />
+		<good name="Arcs longs" quantity="10" />
+	</soldier>
+
+	<soldier name="Soldat" imgid="06">
+		<good name="Bière" quantity="15" />
+		<good name="Épées d'acier" quantity="10" />
+	</soldier>
+
+	<soldier name="Arbalétrier" imgid="07">
+		<good name="Bière" quantity="50" />
+		<good name="Arbalètes" quantity="10" />
+	</soldier>
+
+	<soldier name="Soldat d'élite" imgid="08">
+		<good name="Bière" quantity="50" />
+		<good name="Épée de Damas" quantity="10" />
+	</soldier>
+
+	<soldier name="Canonnier" imgid="09">
+		<good name="Bière" quantity="50" />
+		<good name="Canons" quantity="10" />
+	</soldier>
+
+</Soldiers>

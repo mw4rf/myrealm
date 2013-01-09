@@ -1,0 +1,33 @@
+#{extends 'Preferences/template.html' /}
+
+*{ ********** Production cycle duration ********** }*
+<h2>&{'realm.index.cycletime'} &{'help.link', "http://settlers.valhalla.fr/wiki/myrealm/realm/productioncycle"}</h2>
+#{form @Realm.setCycleTime(player.name), class:'well form form-inline'}
+    <input type="text" style="width:10%;" name="productionTimeDays" value="${pc.getDays()}" /> <label>&{'time.days'}</label>
+    <input type="text" style="width:10%;" name="productionTimeHours" value="${pc.getHours()}" /> <label>&{'time.hours'}</label>
+    <input type="text" style="width:10%;" name="productionTimeMinutes" value="${pc.getMinutes()}" /> <label>&{'time.minutes'}</label>
+    <input type="text" style="width:10%;" name="productionTimeSeconds" value="${pc.getSeconds()}" /> <label>&{'time.seconds'}</label>
+    <input type="submit" class="btn btn-success" value="&{'form.save'}" />
+#{/form}
+
+*{ ********** Boost cycle ********** }*
+<h2>&{'realm.index.boostcycle'} &{'help.link', "http://settlers.valhalla.fr/wiki/myrealm/realm/boostcycle"}</h2>
+#{form @Realm.setBoostCycle(player.name), class:'well form-inline'}
+    <select name="hours">
+    	<option value="1" #{if player.boostCycle == 3600}selected#{/if}>1 &{'time.hours'}</option>
+    	<option value="2" #{if player.boostCycle == 2*3600}selected#{/if}>2 &{'time.hours'}</option>
+    	<option value="3" #{if player.boostCycle == 3*3600}selected#{/if}>3 &{'time.hours'}</option>
+    	<option value="6" #{if player.boostCycle == 6*3600}selected#{/if}>6 &{'time.hours'}</option>
+    	<option value="12" #{if player.boostCycle == 12*3600}selected#{/if}>12 &{'time.hours'}</option>
+    	<option value="24" #{if player.boostCycle == 24*3600}selected#{/if}>24 &{'time.hours'}</option>
+    	<option value="48" #{if player.boostCycle == 48*3600}selected#{/if}>48 &{'time.hours'}</option>
+    	<option value="72" #{if player.boostCycle == 72*3600}selected#{/if}>72 &{'time.hours'}</option>
+    </select>
+    &{'realm.index.boostpower'} :
+    <select name="multiplier">
+    	<option value="2" #{if player.boostMultiplier == 2}selected#{/if}>x2</option>
+    	<option value="3" #{if player.boostMultiplier == 3}selected#{/if}>x3</option>
+    	<option value="4" #{if player.boostMultiplier == 4}selected#{/if}>x4</option>
+    </select>
+    <input type="submit" class="btn btn-success" value="&{'form.save'}" />
+#{/form}

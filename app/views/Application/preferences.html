@@ -1,0 +1,287 @@
+#{extends 'main.html' /}
+#{set title:'Preferences' /}
+
+*{ *** Friends *** }*
+<div class="container formContainer">
+	<h2>&{'home.friends'}</h2>
+	<div>
+		<label for="addFriend">&{'home.friends.add'}</label>:
+		<input type="text" name="addFriend" id="addFriend" class="ajax_players_list" />
+		<input type="hidden" name="playerName" id="playerName" value="${player.name}" />
+		<input type="submit" value="&{'form.add'}" onclick="addFriend()" />
+		&nbsp;--&nbsp;
+		<label for="removeFriend">&{'home.friends.remove'}</label>:
+		<select id="removeFriend">
+			#{list player.friends, as: 'friend'}
+				<option value="${friend.name}">${friend.name}</option>
+			#{/list}
+		</select>
+		<input type="submit" value="&{'form.remove'}" onclick="removeFriend()" />
+	</div>
+	<p id="friendsList">
+		#{include 'Application/_preferencesFriendsList.html' /}
+	</p>
+</div>
+
+*{ *** Guilds *** }*
+<div class="container formContainer">
+	<h2>&{'guild'}</h2>
+	*{ ** First case : player doesn't have a guild : offer to create or join ** }*
+	#{if !player.hasGuild()}
+		#{form @Guilds.joinGuild()}
+			<label for="joinGuild">&{'guild.join'}</label>:
+			<input type="hidden" name="playerName" value="${player.name}" />
+			<select name="guildId" id="joinGuild" />
+				#{if guilds.size() > 0}
+					#{list guilds, as: 'guild'}
+						<option value="${guild.id}">[${guild.tag}] ${guild.name}</option>
+					#{/list}
+				#{/if}
+			</select>
+			<input type="submit" value="&{'form.join'}" />
+		#{/form}
+		<br />
+		#{form @Guilds.createGuild(player.name)}
+			<label for="guildName">&{'guild.create'}</label>:
+			<label for="guildName">&{'guild.name'}</label>:
+			<input type="text" name="guildName" />
+			<label for="guildTag">&{'guild.tag'}</label>:
+			<input type="text" name="guildTag" />
+			<input type="hidden" name="playerName" value="${player.name}" />
+			<input type="submit" value="&{'form.save'}" />
+		#{/form}
+	#{/if}
+	*{ ** Second case : player has guild ** }*
+	#{else}
+		&{'guild.member.of', '[' + player.membership.guild.tag + '] ' + player.membership.guild.name}
+		#{form @Guilds.leaveGuild(player.name)}
+			<input type="submit" value="&{'guild.leave'}" />
+		#{/form}
+	#{/else}
+</div>
+
+*{ *** Preferences *** }*
+<div class="container formContainer">
+<h2>&{'preferences'}</h2>
+#{form @Application.setPreferences(player.name)}
+	<h2><input type="submit" value="&{'form.save'}" /></h2>
+
+	%{ String selected = ""; }%
+
+    <h3>&{'preferences.section.account'}</h3>
+
+    *{ ********** PROFILE/SECURITY ********** }*
+    %{
+        String selected1 = "";
+        if(player.preferences.ENABLE_SECURITY)
+            selected1 = "checked"
+
+        String selected2 = "";
+        if(player.preferences.AUTH_COOKIE)
+            selected2 = "checked"
+    }%
+    <p>
+        <input type="checkbox" name="enable_security" ${selected1}/>&{'preferences.enable_security'}
+        <input type="text" name="password" />
+        <br /><input type="checkbox" name="auth_cookie" ${selected2}/>&{'preferences.authcookie'}
+        *{ ***** do not track ***** }*
+    	<br /><input type="checkbox" name="do_not_track" #{if player.preferences.DO_NOT_TRACK}checked#{/if} />&{'preferences.do.not.track'} &{'help.link.small', "http://settlers.valhalla.fr/wiki/myrealm/preferences/mode_invisible"}
+    </p>
+    
+    *{ ****** e-mail ***** }*
+    #{if player.name.equals(controllers.Application.getSessionLogin())}
+    <p>
+    	&{'preferences.mail'}: <input type="text" name="email" value="${player.preferences.email}" />
+    </p>
+    #{/if}
+	
+	*{ ***** Custom CSS Style ***** }*
+    &{'preferences.customstyle'}
+    <select name="customstyle">
+    	#{list customstyles, as:'style'}
+    		#{if player.preferences != null && player.preferences.customstyle.equals(style.getName())}
+    			<option value="${style.getName()}" selected>${style.getName()}</option>
+    		#{/if}#{else}
+    			<option value="${style.getName()}">${style.getName()}</option>
+    		#{/else}
+    	#{/list}
+    </select>
+
+    *{ ********** AVATAR ********** }*
+    <br />
+    <div style="overflow:hidden;">
+    <h3>&{'preferences.avatar'}
+    <select name="avatarId" id="avatarId" onchange="selectAvatarChange(this); return false;">
+    	#{list avatars, as: 'avatar'}
+    		#{if avatar.getId().equals(player.preferences.avatarId)}
+    			<option imgid="${avatar.getImage()}" value="${avatar.getId()}" selected>${avatar.getName()}</option>
+    		#{/if}#{else}
+    			<option imgid="${avatar.getImage()}" value="${avatar.getId()}">${avatar.getName()}</option>
+    		#{/else}
+    	#{/list}
+    </select>
+    </h3>
+    	<div id="avatar">
+    		<img src="/public/images/${player.preferences.getAvatar()}" />
+    	</div>
+    </div>
+    
+    *{ ****** Enable RSS feed ***** }*
+    <p>
+    	<input type="checkbox" name="enable_activity_feed" #{if player.preferences.ENABLE_ACTIVITY_FEED}checked#{/if} />
+    	&{'preferences.enable.activity.feed'} : <b>${play.Play.configuration.get("application.address").toString()}@{Application.rss(player.name)}</b>
+    </p>
+	
+	*{ ********** HOME  ********** }*
+	<h3>&{'preferences.section.home'}</h3>
+	
+	<p>&{'preferences.show.choice'}</p>
+	
+	<input type="checkbox" name="home_show_public_menu" #{if player.preferences.HOME_SHOW_PUBLIC_MENU}checked#{/if} />&{'preferences.home.show.public.menu'}
+	<br /><input type="checkbox" name="home_show_stats" #{if player.preferences.HOME_SHOW_STATS}checked#{/if} />&{'preferences.home.show.stats'}
+	<br /><input type="checkbox" name="home_show_visits" #{if player.preferences.HOME_SHOW_VISITS}checked#{/if} />&{'preferences.home.show.visits'}
+	<br /><input type="checkbox" name="home_show_last_connection" #{if player.preferences.HOME_SHOW_LAST_CONNECTION}checked#{/if} />&{'preferences.home.show.last.connection'}
+	<br /><input type="checkbox" name="home_show_timers" #{if player.preferences.HOME_SHOW_TIMERS}checked#{/if} />&{'preferences.home.show.timers'}
+	<br /><input type="checkbox" name="home_show_next_adventures" #{if player.preferences.HOME_SHOW_NEXT_ADVENTURES}checked#{/if} />&{'preferences.home.show.next.adventures'}
+	<br /><input type="checkbox" name="home_show_last_adventures" #{if player.preferences.HOME_SHOW_LAST_ADVENTURES}checked#{/if} />&{'preferences.home.show.last.adventures'}
+	<br /><input type="checkbox" name="home_show_last_adventures_comments" #{if player.preferences.HOME_SHOW_LAST_ADVENTURES_COMMENTS}checked#{/if} />&{'preferences.home.show.last.adventures.comments'}
+	<br /><input type="checkbox" name="home_show_last_buildings" #{if player.preferences.HOME_SHOW_LAST_BUILDINGS}checked#{/if} />&{'preferences.home.show.last.buildings'}
+	<br /><input type="checkbox" name="home_show_nota_bene" #{if player.preferences.HOME_SHOW_NOTA_BENE}checked#{/if} />&{'preferences.home.show.nota.bene'}
+	<br /><input type="checkbox" name="home_show_activity" #{if player.preferences.HOME_SHOW_ACTIVITY}checked#{/if} />&{'preferences.home.show.activity'}
+	<br /><input type="checkbox" name="home_show_friends" #{if player.preferences.HOME_SHOW_FRIENDS}checked#{/if} />&{'preferences.home.show.friends'}
+	<br /><input type="checkbox" name="home_show_friends_activity" #{if player.preferences.HOME_SHOW_FRIENDS_ACTIVITY}checked#{/if} />&{'preferences.home.show.friends.activity'}
+	<br /><input type="checkbox" name="home_show_changelog" #{if player.preferences.HOME_SHOW_CHANGELOG}checked#{/if} />&{'preferences.home.show.changelog'}
+	<br /><input type="checkbox" name="home_show_tips" #{if player.preferences.HOME_SHOW_TIPS}checked#{/if} />&{'preferences.home.show.tips'}
+	
+	
+    *{ ********** REALM ********** }*
+
+    <h3>&{'preferences.section.realm'}</h3>
+
+    <p>&{'preferences.show.choice'}</p>
+
+    <input type="checkbox" name="show_addbuilding" #{if player.preferences.SHOW_ADDBUILDING}checked#{/if} />&{'preferences.show_addbuilding'}
+    <br /><input type="checkbox" name="show_all_buildings" #{if player.preferences.SHOW_ALL_BUILDINGS}checked#{/if}/>&{'preferences.buildings_list'}
+    <br /><input type="checkbox" name="show_areas" #{if player.preferences.SHOW_AREAS}checked#{/if}/>&{'preferences.areas.show'}
+    <br /><input type="checkbox" name="show_groups" #{if player.preferences.SHOW_GROUPS}checked#{/if}/>&{'preferences.groups.show'}
+    <br /><input type="checkbox" name="areas_image_map" #{if player.preferences.AREAS_IMAGE_MAP}checked#{/if}/>&{'preferences.areas.image.map'}
+    <br /><input type="checkbox" name="show_building_description_in_list" #{if player.preferences.SHOW_BUILDING_DESCRIPTION_IN_LIST}checked#{/if}/>&{'preferences.show.building.description.in.list'}
+    <br /><input type="checkbox" name="show_production_relative" #{if player.preferences.SHOW_PRODUCTION_RELATIVE}checked#{/if}/>&{'preferences.show.production.relative'}
+    <br /><input type="checkbox" name="show_advises" #{if player.preferences.SHOW_ADVISES}checked#{/if}/>&{'preferences.show.advises'}
+    <br /><input type="checkbox" name="show_calculations" #{if player.preferences.SHOW_CALCULATIONS}checked#{/if}/>&{'preferences.show.calculations'}
+    <br /><input type="checkbox" name="show_units" #{if player.preferences.SHOW_UNITS}checked#{/if}/>&{'preferences.show.units'}
+    <br /><input type="checkbox" name="show_buildings_disabled" #{if player.preferences.SHOW_BUILDINGS_DISABLED}checked#{/if}/>&{'preferences.show.buildings.disabled'}
+    <br /><input type="checkbox" name="show_buildings_boosted" #{if player.preferences.SHOW_BUILDINGS_BOOSTED}checked#{/if}/>&{'preferences.show.buildings.boosted'}
+    <br /><input type="checkbox" name="show_buildings_simulated" #{if player.preferences.SHOW_BUILDINGS_SIMULATED}checked#{/if}/>&{'preferences.show.buildings.simulated'}
+
+    <p>&{'preferences.folding.type'}</p>
+
+    <input type="checkbox" name="unfold_production" #{if player.preferences.UNFOLD_PRODUCTION}checked#{/if}/>&{'preferences.folding.production'}
+    <br /><input type="checkbox" name="unfold_production_relative" #{if player.preferences.UNFOLD_PRODUCTION_RELATIVE}checked#{/if}/>&{'preferences.folding.production.relative'}
+    <br /><input type="checkbox" name="unfold_buildings" #{if player.preferences.UNFOLD_BUILDINGS}checked#{/if}/>&{'preferences.folding.buildings_list'}
+    <br /><input type="checkbox" name="unfold_areas" #{if player.preferences.UNFOLD_AREAS}checked#{/if}/>&{'preferences.areas.unfold'}
+    <br /><input type="checkbox" name="unfold_groups" #{if player.preferences.UNFOLD_GROUPS}checked#{/if}/>&{'preferences.groups.unfold'}
+    <br /><input type="checkbox" name="unfold_advises" #{if player.preferences.UNFOLD_ADVISES}checked#{/if}/>&{'preferences.folding.advises'}
+    <br /><input type="checkbox" name="unfold_calculations" #{if player.preferences.UNFOLD_CALCULATIONS}checked#{/if}/>&{'preferences.folding.calculations'}
+    <br /><input type="checkbox" name="unfold_units" #{if player.preferences.UNFOLD_UNITS}checked#{/if}/>&{'preferences.folding.units'}
+    <br /><input type="checkbox" name="unfold_buildings_disabled" #{if player.preferences.UNFOLD_BUILDINGS_DISABLED}checked#{/if}/>&{'preferences.folding.buildings.disabled'}
+    <br /><input type="checkbox" name="unfold_buildings_boosted" #{if player.preferences.UNFOLD_BUILDINGS_BOOSTED}checked#{/if}/>&{'preferences.folding.buildings.boosted'}
+    <br /><input type="checkbox" name="unfold_buildings_simulated" #{if player.preferences.UNFOLD_BUILDINGS_SIMULATED}checked#{/if}/>&{'preferences.folding.buildings.simulated'}
+
+    <p>&{'preferences.sorting'}</p>
+
+    &{'preferences.buildings.list.type.sort'}
+    <select name="buildings_list_type_sort">
+    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_TYPE_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+    </select>
+	<input type="radio" name="buildings_list_type_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_TYPE_ORDER == null || player.preferences.BUILDINGS_LIST_TYPE_ORDER.equals("ASC") }checked#{/if} />&{'sort.asc'}
+	<input type="radio" name="buildings_list_type_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_TYPE_ORDER.equals("DESC")}checked#{/if} />&{'sort.desc'}
+	<br />
+
+	&{'preferences.buildings.list.area.sort'}
+    <select name="buildings_list_area_sort">
+    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_AREA_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+    </select>
+    <input type="radio" name="buildings_list_area_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_AREA_ORDER == null || player.preferences.BUILDINGS_LIST_AREA_ORDER.equals("ASC") }checked#{/if} />&{'sort.asc'}
+	<input type="radio" name="buildings_list_area_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_AREA_ORDER.equals("DESC")}checked#{/if} />&{'sort.desc'}
+	<br />
+
+	&{'preferences.buildings.list.group.sort'}
+    <select name="buildings_list_group_sort">
+    	<option value="ID" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("ID")}selected#{/if}>&{'realm.building.id'}</option>
+    	<option value="PRODUCTIONTIME" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("PRODUCTIONTIME")}selected#{/if}>&{'realm.building.productionTime'}</option>
+    	<option value="LEVEL" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("LEVEL")}selected#{/if}>&{'realm.building.level'}</option>
+    	<option value="NAME" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("NAME")}selected#{/if}>&{'realm.building.name.field'}</option>
+    	<option value="AREA" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("AREA")}selected#{/if}>&{'realm.building.area'}</option>
+    	<option value="EFFICIENCY" #{if player.preferences.BUILDINGS_LIST_GROUP_SORT.equals("EFFICIENCY")}selected#{/if}>&{'realm.index.building.efficiency'}</option>
+    </select>
+    <input type="radio" name="buildings_list_group_order" value="ASC" #{if player.preferences.BUILDINGS_LIST_GROUP_ORDER == null || player.preferences.BUILDINGS_LIST_GROUP_ORDER.equals("ASC") }checked#{/if} />&{'sort.asc'}
+	<input type="radio" name="buildings_list_group_order" value="DESC" #{if player.preferences.BUILDINGS_LIST_GROUP_ORDER.equals("DESC")}checked#{/if} />&{'sort.desc'}
+
+	<p>&{'preferences.realm.options'}</p>
+
+	<input type="checkbox" name="building_level_loop" #{if player.preferences.BUILDING_LEVEL_LOOP}checked#{/if}/>&{'preferences.enable.level.loop'}
+
+
+	*{ ********** TIMERS ********** }*
+
+	<h3>&{'preferences.section.timers'}</h3>
+
+	<input type="checkbox" name="timers_default_remind_type1" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE1}checked#{/if}/>&{'preferences.timers.default.remind'} &{'timers.on.duration'}
+	<br /><input type="checkbox" name="timers_default_remind_type2" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE2}checked#{/if}/>&{'preferences.timers.default.remind'} &{'timers.on.date'}
+	<br /><input type="checkbox" name="timers_default_remind_type3" #{if player.preferences.TIMERS_DEFAULT_REMIND_TYPE3}checked#{/if}/>&{'preferences.timers.default.remind'} &{'timers.on.building'}
+	<br />
+	<br /><input type="checkbox" name="timers_show_on_home_type1" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE1}checked#{/if}/>&{'preferences.timers.show.on.home'} &{'timers.on.duration'}
+	<br /><input type="checkbox" name="timers_show_on_home_type2" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE2}checked#{/if}/>&{'preferences.timers.show.on.home'} &{'timers.on.date'}
+	<br /><input type="checkbox" name="timers_show_on_home_type3" #{if player.preferences.TIMERS_SHOW_ON_HOME_TYPE3}checked#{/if}/>&{'preferences.timers.show.on.home'} &{'timers.on.building'}
+	<br />
+	<br /><input type="checkbox" name="mail_notify_timers_expiring" #{if player.preferences.MAIL_NOTIFY_TIMERS_EXPIRING}checked#{/if}/>&{'preferences.mail.timers.expiring'}
+	<br /><input type="checkbox" name="mail_notify_timers_expired" #{if player.preferences.MAIL_NOTIFY_TIMERS_EXPIRED}checked#{/if}/>&{'preferences.mail.timers.expired'}
+
+    <h2><input type="submit" value="&{'form.save'}" /></h2>
+#{/form}
+</div>
+
+*{ *** Export *** }*
+<div class="container formContainer">
+	<h2>&{'preferences.section.export'}&{'help.link', "http://settlers.valhalla.fr/wiki/myrealm/preferences/export"}</h2>
+	<div>
+	#{form @Export.export()}
+		<label for="data">&{'export.form.export'}</label>:
+		<select name="data">
+			<option value="buildings">&{'export.buildings'}</option>
+			<option value="adventures">&{'export.adventures'}</option>
+			<option value="actions">&{'export.actions'}</option>
+		</select>
+		
+		<label for="format">&{'export.form.format'}</label>:
+		<select name="format">
+			<option value="CSV">&{'export.format.csv'}</option>
+			<option value="TSV">&{'export.format.tsv'}</option>
+			<option value="XML">&{'export.format.xml'}</option>
+			<option value="HTML">&{'export.format.html'}</option>
+		</select>
+		
+		<label for="screen">&{'export.form.media'}</label>:
+		<select name="screen">
+			<option value="true">&{'export.media.screen'}</option>
+			<option value="false">&{'export.media.file'}</option>
+		</select>
+		
+		<input type="hidden" name="playerId" value="${player.id}" />
+		<input type="submit" value="&{'form.export'}" />
+	#{/form}
+	</div>
+</div>
+
+<script type="text/javascript">
+	#{include 'Application/_ajaxActions.js' /}
+</script>

@@ -1,0 +1,14 @@
+<h3>
+	&{'guild.member.of', '[' + player.membership.guild.tag + '] ' + player.membership.guild.name}
+</h3>
+
+<p>
+	<ul class="unstyled">
+		<li>&{'home.guild.stat.join', player.membership.joinedAt.format()}</li>
+		<li>&{'home.guild.stat.rank', messages.get('guild.rank.' + player.membership.rank)}</li>
+	</ul>
+</p>
+
+#{form @Guilds.leaveGuild(player.name), class:'well'}
+	<input type="submit" class="btn btn-danger" value="&{'guild.leave'}" />
+#{/form}

@@ -1,0 +1,64 @@
+<Boosts>
+
+    <boost name="Assiette de poisson" product_name="" product_quantity="" isboost="true" imgid="01">
+        <good name="Poisson" quantity="10" />
+    </boost>
+
+    <boost name="Gros sandwich" product_name="" product_quantity="" isboost="true" imgid="02">
+        <good name="Poisson" quantity="40" />
+        <good name="Pain" quantity="20" />
+    </boost>
+
+    <boost name="Panier de tata Irma" product_name="" product_quantity="" isboost="true" imgid="03">
+        <good name="Poisson" quantity="120" />
+        <good name="Pain" quantity="60" />
+        <good name="Saucisses" quantity="20" />
+    </boost>
+
+    <boost name="Aliment pour poisson" product_name="dépôt Poisson" product_quantity="100" isboost="false" imgid="04">
+    	<good name="Pain" quantity="10" />
+    </boost>
+
+    <boost name="Musc de cerf" product_name="dépôt Viande" product_quantity="100" isboost="false" imgid="05">
+    	<good name="Eau" quantity="20" />
+    	<good name="Poisson" quantity="30" />
+    </boost>
+
+    <boost name="Ceinture à outils" product_name="Outils" product_quantity="50" isboost="false" imgid="06">
+    	<good name="Planches de sapin" quantity="150" />
+    	<good name="Pierres" quantity="150" />
+    </boost>
+
+    <boost name="Porte de bois dur" product_name="Planches de feuillu" product_quantity="50" isboost="false" imgid="07">
+    	<good name="Planches de sapin" quantity="250" />
+    </boost>
+
+    <boost name="Bloc de marbre isolé" product_name="Marbre" product_quantity="50" isboost="false" imgid="08">
+    	<good name="Pierres" quantity="250" />
+    </boost>
+
+    <boost name="Settler voyageur" product_name="Settler" product_quantity="1" isboost="false" imgid="09">
+    	<good name="Pain" quantity="25" />
+    </boost>
+
+    <boost name="Famille de voyageurs" product_name="Settler" product_quantity="5" isboost="false" imgid="10">
+    	<good name="Pain" quantity="125" />
+    </boost>
+
+    <boost name="Bandits à la retraite" product_name="Settler" product_quantity="25" isboost="false" imgid="11">
+    	<good name="Pain" quantity="625" />
+    </boost>
+
+    <boost name="Tiges d'échafaudage" product_name="Épées de fer" product_quantity="10" isboost="false" imgid="12">
+    	<good name="Épées de bronze" quantity="500" />
+    </boost>
+
+    <boost name="Chope de bière blonde" product_name="Pièces" product_quantity="10" isboost="false" imgid="13">
+    	<good name="Bière" quantity="1000" />
+    </boost>
+
+    <boost name="Arcs longs usés" product_name="Arcs longs" product_quantity="10" isboost="false" imgid="14">
+    	<good name="Arcs" quantity="500" />
+    </boost>
+
+</Boosts>

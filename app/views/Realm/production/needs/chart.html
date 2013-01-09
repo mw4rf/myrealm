@@ -1,0 +1,77 @@
+<div class="buildingListHeader">
+	&{'realm.index.production.stats.label', goodName}
+</div>
+<div style="width:100%">
+	<div id="plot_placeholder" style="float: left; width: 49%; height: 400px;"></div>
+	<div id="info_placeholder" style="float: right; width:50%;"></div>
+</div>
+
+
+<script type="text/javascript">
+var loadBuildingStatsAction = #{jsAction @Realm.loadBuildingStats(':playerName') /}
+
+/**
+ * Get JSON data w/ an AJAX request and draw the chart
+ */
+var doChart = (function () {
+	var data = [];
+    var plot_placeholder = $("#plot_placeholder");
+    var info_placeholder = $("#info_placeholder");
+    $.getJSON("@{Realm.getJSONStatsForGood(player.name, goodName)}", function(map){
+
+    	// Fill data
+    	var index = 0;
+    	$.each(map, function(index, map){
+            //data.push([map.name,map.value]);
+            data.push({label:map.name, data:[[index,map.value]]})
+            index++
+        });
+
+    	// Plot options
+        var options = {
+        		series: {
+               		pie: {
+               				show: true,
+               				autoScale: true,
+               				fillOpacity: 1,
+               				radius: 3/4,
+               				tilt: 1, // oval : 1/2 ; round : 1
+                            label: {
+                                show: true,
+                                radius: 3/4,
+                                formatter: function(label, series){
+                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+                                },
+                                background: {
+                                    opacity: 0.5,
+                                    color: '#000'
+                                }
+                            }
+               		}
+        		},
+           		legend: {
+           			show:false
+           		},
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+           };
+
+        // Draw
+        $.plot(plot_placeholder, data, options);
+
+        // Ajax on click
+        $(plot_placeholder).bind("plotclick", function (event, pos, item) {
+        	var buildingName = data[item.seriesIndex].label
+        	var playerName = "${player.name}"
+            $.post(loadBuildingStatsAction({playerName: playerName}), {buildingName: buildingName}, function(data) {
+        			$(info_placeholder).html(data)
+        	})
+        });
+
+    });
+});
+// Call the function to draw the chart
+doChart()
+</script>

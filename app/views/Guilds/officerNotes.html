@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title: 'Guilds' /}
+
+<div class="container guildSectionHeader">
+	#{a @Application.home(player.name)}${player.name}#{/a}
+	<br />
+	&{'guild.members.officer.page.title'}
+</div>
+
+#{list notes, as:'message'}
+	#{include "Guilds/_officerNote.html" /}
+#{/list}
+
+<div class="container formContainer">
+	#{form @Guilds.addOfficerNote(guild.tag, player.name)}
+		&{'guild.members.officer.page.new.note'}
+		<br /><textarea name="content" style="width:100%;" rows="5"></textarea>
+		<br /><input id="submitnote" type="submit" value="&{'form.add'}" />
+	#{/form}
+</div>

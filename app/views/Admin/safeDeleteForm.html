@@ -1,0 +1,15 @@
+#{extends 'Admin/template.html' /}
+<div class="header1">Safe Delete</div>
+
+#{form @Admin.safeDeleteAction()}
+	Delete record id
+	<input type="text" size="10" name="id" />
+	from table
+	<select name="table">
+		<option value="player">Player</option>
+		<option value="playertimer">PlayerTimer</option>
+		<option value="building">Building (force only)</option>
+	</select>
+	<input type="checkbox" name="force" />Force (unsafe) ?
+	<input type="submit" value="Delete" />
+#{/form}

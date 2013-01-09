@@ -1,0 +1,49 @@
+%{
+	String classes = "";
+	String label = "";
+	if(!offer.hasAnswer()) {
+		classes = "offerStatusWaiting";
+		label = messages.get("market.adventure.offer.sold.waiting");
+	} else if(offer.sold) {
+		classes = "offerStatusAccepted";
+		label = messages.get("market.adventure.offer.sold.yes");
+	} else {
+		classes = "offerStatusRejected";
+		label = messages.get("market.adventure.offer.sold.no");
+	}
+}%
+
+<tr>
+	<td class="adventureOfferCell">
+		*{ *** User is seller *** }*
+		#{if offer.sale.isSeller(controllers.Application.getSessionLogin())}
+			*{ ** Show links only if not already accepted/rejected ** }*
+			#{if !offer.hasAnswer()}
+				#{a @Market.acceptAdventureOffer(offer.id)}&{'market.adventure.offer.accept'}#{/a}
+				&nbsp;|&nbsp;
+				#{a @Market.rejectAdventureOffer(offer.id)}&{'market.adventure.offer.reject'}#{/a}
+			#{/if}
+		#{/if}
+		*{ *** User is buyer *** }*
+		#{elseif offer.buyer.name.equals(controllers.Application.getSessionLogin())}
+			#{a @Market.withdrawAdventureOffer(offer.id)}&{'market.adventure.offer.withdraw'}#{/a}
+		#{/elseif}
+	</td>
+	<td class="adventureOfferCell ${classes}">
+		*{ *** Offer status *** }*
+		${label}
+	</td>
+	<td class="adventureOfferCell">
+		${offer.buyer.name}
+	</td>
+	<td class="adventureOfferCell">
+		#{if offer.madeAt != null}
+			${offer.madeAt.format()}
+		#{/if}
+	</td>
+	<td class="adventureOfferCell">
+		#{if offer.hasAnswer()}
+			${offer.answeredAt.format()}
+		#{/if}
+	</td>
+</tr>
