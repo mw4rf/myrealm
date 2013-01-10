@@ -102,7 +102,9 @@ public class Timers extends Controller {
     
 	public static boolean showOverlay(Player p) {
 		try {
-			if(p == null && p.preferences == null)
+			if(p == null)
+				return false;
+			if(p.preferences == null)
 				return false;
 			if(PlayerTimer.getTimersByType(p, PlayerTimer.TIMER_ON_DURATION).size() > 0 && p.preferences.TIMERS_SHOW_ON_HOME_TYPE1)
 				return true;
