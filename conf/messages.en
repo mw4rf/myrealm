@@ -3,7 +3,7 @@ app.name = MyRealm
 admin.message = <b>[System Message]</b>
 contenteditable.empty = Click here to edit this text !
 
-header.app = SettlersHelperOnline
+header.app = MyRealm
 header.realm = %s Realm
 header.home = %s Home
 header.adventures = %s Adventures
