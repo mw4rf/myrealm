@@ -260,6 +260,9 @@
   	<building imgid="gem_pit" name="Puits aux gemmes" basetime="600" expires="true">
   	  <good name="Pierre précieuse" imgid="gem" quantity="1" />
   	</building>
-
+  	
+	<building imgid="deer_stalker" name="Cabane du traqueur de cerfs" basetime="480" expires="false">
+  	  <good name="Viande" imgid="23" quantity="1" />
+  	</building>
 
 </World>
