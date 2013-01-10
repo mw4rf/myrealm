@@ -89,6 +89,7 @@ public class SnapshotCleaner extends Job<String> {
 		Cache.set("JobStatus_" + uuid + "_current", "Locking old snapshots");
 		try {
 			List<RealmSnapshot> toBeLocked = new ArrayList<RealmSnapshot>(lockmap.values());
+			int dumper = 0;
 			for(int i = 0 ; i < toBeLocked.size() ; i++) {
 				RealmSnapshot sn = toBeLocked.get(i);
 				sn.locked = true;
@@ -101,9 +102,12 @@ public class SnapshotCleaner extends Job<String> {
 				// Commit & flush DB
 				// This is VERY important. If we don't do that, the server will break !!
 				RealmSnapshot.em().persist(sn);
-				RealmSnapshot.em().getTransaction().commit();
-				RealmSnapshot.em().getTransaction().begin();
-				
+				// But as it needs a lot a resources, we'll do it every 10 loops only
+				if(dumper % 10 == 0 || toBeLocked.size() - dumper < 11 ) {
+					RealmSnapshot.em().getTransaction().commit();
+					RealmSnapshot.em().getTransaction().begin();
+				}
+				dumper++;	
 			}
 		} catch(Exception e) {;}
 		
@@ -126,6 +130,7 @@ public class SnapshotCleaner extends Job<String> {
 		// Delete old snapshots
 		int total = pids.size();
 		int count;
+		int dumper = 0;
 		for(count = 0 ; count < total ; count++) {
 			RealmSnapshot toDel = RealmSnapshot.findById(pids.get(count));
 			String realmName = toDel.player.name;			
@@ -142,15 +147,22 @@ public class SnapshotCleaner extends Job<String> {
 			Logger.info(inlog);
 			// Commit & flush DB
 			// This is VERY important. If we don't do that, the server will break !!
-			// Commit & flush DB
-			// This is VERY important. If we don't do that, the server will break !!
-			RealmSnapshot.em().getTransaction().commit();
-			RealmSnapshot.em().getTransaction().begin();
+			// But as it needs a lot a resources, we'll do it every 10 loops only
+			if(dumper % 10 == 0 || total - dumper < 11 ) {
+				RealmSnapshot.em().getTransaction().commit();
+				RealmSnapshot.em().getTransaction().begin();
+			}
+			dumper++;
 		}
 		// return
 		return "Snapshot job: " + count + " realms processed.";
 	}
 	
+	/**
+	 * Removes orphan records in the database, after deleting snapshots.
+	 * This method is deprecated because Play framework and PostgreSQL can handle that on their own.
+	 * @return
+	 */
 	@Deprecated
 	public String cleanRemains() {
 		String result = "";
