@@ -1,4 +1,5 @@
-
+##############
+syntax: regex
 
 # temporary files
 \.tmp$

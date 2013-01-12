@@ -55,7 +55,7 @@ public class Admin extends Controller {
 	@Before
 	public static void checkAdmin() {
 		if(!Application.isAdmin()) {
-			Logger.warn("Illegal attemps to access Admin area");
+			Logger.warn("Illegal attempts to access Admin area");
 			Controller.notFound();
 		} else {
 			Logger.info("Admin action performed");
