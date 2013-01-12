@@ -27,7 +27,7 @@ syntax: regex
 \.iml$
 \.ipr$
 \.iws$
-^\.idea/$
+^\.idea/.*$
 
 # NetBeans
 /nbproject/.*$
@@ -46,3 +46,6 @@ server.pid
 db/*
 application.conf
 TODO
+
+#backups
+*.sql.gz
